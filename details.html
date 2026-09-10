@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Model Details</title>
+
+    <style>
+        /* =========================================================
+           RESET
+           ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+
+            font-family:
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background:
+                linear-gradient(135deg,
+                    #f7faff 0%,
+                    #f2f6fb 100%);
+
+            color: #1e293b;
+
+            padding: 24px 28px;
+
+        }
+
+
+        /* =========================================================
+           PAGE HEADER
+           ========================================================= */
+
+        .page-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .page-header-left {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 5px;
+
+        }
+
+
+        .page-title {
+
+            font-size: 32px;
+
+            font-weight: 700;
+
+            color: #172b4d;
+
+            letter-spacing: -0.5px;
+
+        }
+
+
+        .page-subtitle {
+
+            font-size: 14px;
+
+            color: #718096;
+
+        }
+
+
+        .page-header-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+        }
+
+
+        /* =========================================================
+           ACTIVE STATUS
+           ========================================================= */
+
+        .active-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            background: #e4f8ee;
+
+            color: #16805c;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+        }
+
+
+        .active-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            background: #24a36b;
+
+            border-radius: 50%;
+
+        }
+
+
+        /* =========================================================
+           BACK BUTTON
+           ========================================================= */
+
+        .back-btn {
+
+            border: none;
+
+            background: #0a6ed1;
+
+            color: white;
+
+            padding: 10px 18px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            font-weight: 600;
+
+            transition: 0.2s;
+
+        }
+
+        .kpi-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, .7);
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            font-size: 20px;
+        }
+
+        .back-btn:hover {
+
+            background: #085caf;
+
+        }
+
+        /* =========================================================
+           HERO AREA
+           ========================================================= */
+        .hero-section {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* =========================================================
+           MODEL SUMMARY CARD
+           ========================================================= */
+        .summary-card {
+            background: linear-gradient(135deg,
+                    #f7faff 0%,
+                    #f3f5ff 100%);
+            border: 1px solid #e9efff;
+            border-radius: 18px;
+            padding: 22px;
+            min-height: 140px;
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, .03);
+            position: relative;
+            overflow: hidden;
+        }
+
+
+        .model-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #eef3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+
+        .model-label {
+            font-size: 12px;
+            color: #7b87a6;
+            margin-bottom: 4px;
+        }
+
+        .model-value {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .tabs-container {
+
+            display: flex;
+
+            gap: 40px;
+
+            background: white;
+
+            padding: 18px 22px;
+
+            border-radius: 16px 16px 0 0;
+
+            border-bottom: 1px solid #edf2f7;
+
+            margin-bottom: 12px;
+        }
+
+        .tab {
+
+            color: #64748b;
+
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .tab.active {
+
+            color: #3b82f6;
+
+            font-weight: 600;
+
+            border-bottom: 2px solid #3b82f6;
+
+            padding-bottom: 10px;
+        }
+
+       
+
+        .model-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+
+        .model-name {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #183b78;
+
+        }
+
+
+        .model-details {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr 1.4fr;
+
+            gap: 20px;
+
+        }
+
+
+        .model-detail {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 4px;
+
+        }
+
+
+        .model-detail-label {
+
+            font-size: 12px;
+
+            color: #64748b;
+
+        }
+
+
+        .model-detail-value {
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            color: #162b4d;
+
+        }
+
+
+        /* =========================================================
+           KPI CARDS
+           ========================================================= */
+
+        .kpi-card {
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            min-height: 150px;
+
+            border: 1px solid #e8edf5;
+
+            box-shadow:
+                0 5px 18px rgba(30, 50, 80, 0.05);
+
+        }
+
+
+        .kpi-card.programs {
+
+            background: #f4f7ff;
+
+        }
+
+
+        .kpi-card.warranty {
+
+            background: #effcf5;
+
+        }
+
+
+        .kpi-card.setup {
+
+            background: #f7f3ff;
+
+        }
+
+
+        .kpi-card.orders {
+
+            background: #fff8f0;
+
+        }
+
+
+        .kpi-label {
+
+            font-size: 13px;
+
+            color: #536987;
+
+            font-weight: 600;
+
+            margin-bottom: 27px;
+
+        }
+
+
+        .kpi-value {
+
+            font-size: 38px;
+
+            line-height: 1;
+
+            font-weight: 700;
+
+            color: #24457c;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .kpi-description {
+
+            font-size: 12px;
+
+            color: #718096;
+
+        }
+
+
+        /* =========================================================
+           OVERVIEW CONTAINER
+           ========================================================= */
+
+        .overview-container {
+
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border: 1px solid #e6ebf2;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 18px rgba(30, 50, 80, 0.05);
+
+        }
+
+
+        .overview-heading {
+
+            font-size: 17px;
+
+            font-weight: 700;
+
+            color: #243b5a;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .overview-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+
+        }
+
+
+        /* =========================================================
+           INFORMATION CARDS
+           ========================================================= */
+
+        .info-card {
+
+            border: 1px solid #e7edf5;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+        }
+
+
+        .info-header {
+
+            padding: 15px 17px;
+
+            border-bottom: 1px solid #edf1f5;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+        }
+
+
+        .general-header {
+
+            background: #f3f7ff;
+
+            color: #3167a9;
+
+        }
+
+
+        .config-header {
+
+            background: #f3fbf7;
+
+            color: #328268;
+
+        }
+
+
+        .availability-header {
+
+            background: #f7f3ff;
+
+            color: #7657b5;
+
+        }
+
+
+        .info-body {
+
+            padding: 7px 17px 10px 17px;
+
+        }
+
+
+        .info-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 12px 0;
+
+            border-bottom: 1px solid #f0f3f6;
+
+            font-size: 13px;
+
+        }
+
+
+        .info-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .info-label {
+
+            color: #596b82;
+
+        }
+
+
+        .info-value {
+
+            color: #243b5a;
+
+            font-weight: 600;
+
+            text-align: right;
+
+        }
+
+
+        /* =========================================================
+           STATUS PILLS
+           ========================================================= */
+
+        .status-yes {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 52px;
+
+            padding: 5px 10px;
+
+            border-radius: 14px;
+
+            background: #dcf8e9;
+
+            color: #16805c;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .status-no {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            min-width: 52px;
+
+            padding: 5px 10px;
+
+            border-radius: 14px;
+
+            background: #fde8e8;
+
+            color: #c94b4b;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+        }
+
+
+        .status-neutral {
+
+            color: #64748b;
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1200px) {
+
+            .hero-section {
+
+                grid-template-columns:
+                    2fr 1fr 1fr;
+
+            }
+
+            .overview-grid {
+
+                grid-template-columns: 1fr 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            body {
+
+                padding: 16px;
+
+            }
+
+            .page-header {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+
+                gap: 15px;
+
+            }
+
+            .page-header-right {
+
+                width: 100%;
+
+                justify-content: space-between;
+
+            }
+
+            .hero-section {
+
+                grid-template-columns: 1fr;
+
+            }
+
+            .overview-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================================
+         PAGE HEADER
+         ========================================================= -->
+
+    <div class="page-header">
+
+        <div class="page-header-left">
+
+            <h1 class="page-title">
+                Model Details
+            </h1>
+
+            <p class="page-subtitle">
+                View overall information and status for the selected model
+            </p>
+
+        </div>
+
+
+        <div class="page-header-right">
+
+            <span class="active-badge">
+
+                <span class="active-dot"></span>
+
+                Active
+
+            </span>
+
+
+            <button class="back-btn" onclick="goBackToDashboard()">
+
+                ← Back To Dashboard
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         DATA AREA
+         ========================================================= -->
+
+    <div id="details">
+
+        <div class="loading">
+            Loading...
+        </div>
+
+    </div>
+
+    <script>
+
+        function goBackToDashboard() {
+            history.back();
+        }
+
+        function iconValue(value) {
+
+            return value === "X"
+                ? '<span class="status-yes">YES</span>'
+                : '<span class="status-no">NO</span>';
+        }
+
+        async function loadDetails() {
+
+            const params =
+                new URLSearchParams(window.location.search);
+
+            const matnr =
+                params.get("matnr");
+
+            const country =
+                params.get("country");
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/model?model=${matnr}&country=${country}`
+                    );
+
+                const data =
+                    await response.json();
+
+                console.log(data);
+
+                const r =
+                    data.d.results[0];
+                const programCount = [
+                    r.Amazondart,
+                    r.Brrefresh,
+                    r.Barracuda,
+                    r.Bplus
+                ].filter(x => x === "X").length;
+
+                const warrantyCount = [
+                    r.StandardWarranty,
+                    r.ExtendedWarranty,
+                    r.BarracudaWarranty
+                ].filter(x => x === "X").length;
+
+                const orderCount = [
+                    r.BackupOrder,
+                    r.DrumOrder,
+                    r.WasteToner,
+                    r.BeltUnit,
+                    r.Claimorder
+                ].filter(x => x === "X").length;
+
+                document.getElementById("details").innerHTML = `
+
+<div class="hero-section">
+
+    <div class="summary-card">
+
+        <div class="model-main">
+
+            <div class="model-icon">
+                📦
+            </div>
+
+            <div>
+
+                <div class="model-label">
+                    Model
+                </div>
+
+                <div class="model-name">
+                    ${r.Matnr}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="model-details">
+
+            <div class="model-detail">
+                <div class="model-detail-label">
+                    Country
+                </div>
+
+                <div class="model-detail-value">
+                    ${r.Country}
+                </div>
+            </div>
+
+            <div class="model-detail">
+                <div class="model-detail-label">
+                    EAN
+                </div>
+
+                <div class="model-detail-value">
+                    ${r.Ean11 || "-"}
+                </div>
+            </div>
+
+            <div class="model-detail">
+                <div class="model-detail-label">
+                    Cross Plant Material
+                </div>
+
+                <div class="model-detail-value">
+                    ${r.CrossplantMaterial || "-"}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="kpi-card programs">
+        <div class="kpi-icon">📦</div>
+        <div class="kpi-label">
+            Programs
+        </div>
+
+        <div class="kpi-value">
+            ${programCount}
+        </div>
+
+        <div class="kpi-description">
+            Available
+        </div>
+
+    </div>
+
+    <div class="kpi-card warranty">
+        <div class="kpi-icon">🛡️</div>
+        <div class="kpi-label">
+            Warranty
+        </div>
+
+        <div class="kpi-value">
+            ${warrantyCount}
+        </div>
+
+        <div class="kpi-description">
+            Available
+        </div>
+
+    </div>
+
+    <div class="kpi-card setup">
+        <div class="kpi-icon">⚙️</div>
+        <div class="kpi-label">
+            Setup
+        </div>
+
+        <div class="kpi-value">
+            2
+        </div>
+
+        <div class="kpi-description">
+            Configured
+        </div>
+
+    </div>
+
+    <div class="kpi-card orders">
+        <div class="kpi-icon">📝</div>
+        <div class="kpi-label">
+            Orders
+        </div>
+
+        <div class="kpi-value">
+            ${orderCount}
+        </div>
+
+        <div class="kpi-description">
+            Active
+        </div>
+
+    </div>
+
+</div>
+<div class="tabs-container">
+
+    <div class="tab active">
+        Overview
+    </div>
+
+    <div class="tab">
+        Programs
+    </div>
+
+    <div class="tab">
+        Warranty
+    </div>
+
+    <div class="tab">
+        Order Setup
+    </div>
+
+    <div class="tab">
+        Pricing Setup
+    </div>
+
+    <div class="tab">
+        Status
+    </div>
+
+</div>
+<div class="overview-container">
+
+    <div class="overview-heading">
+        Overview
+    </div>
+
+    <div class="overview-grid">
+
+        <div class="info-card">
+
+            <div class="info-header general-header">
+               ℹ️ General Information
+            </div>
+
+            <div class="info-body">
+
+                <div class="info-row">
+                    <span class="info-label">Model</span>
+                    <span class="info-value">${r.Matnr}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Country</span>
+                    <span class="info-value">${r.Country}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">EAN</span>
+                    <span class="info-value">${r.Ean11}</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Cross Plant Material</span>
+                    <span class="info-value">${r.CrossplantMaterial || "-"}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="info-card">
+
+            <div class="info-header config-header">
+               ⚡ Quick Status
+            </div>
+
+            <div class="info-body">
+
+                <div class="info-row">
+                    <span class="info-label">Programs</span>
+                    <span class="status-yes">${programCount} Available</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Warranty</span>
+                    <span class="status-yes">${warrantyCount} Available</span>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">Orders</span>
+                    <span class="status-yes">${orderCount} Active</span>
+                </div>
+
+                <div class="info-row">
+
+                    <span class="info-label">
+                         Overall Status
+                    </span>
+
+                <span class="status-yes">
+                  Active
+                </span>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="info-card">
+
+            <div class="info-header availability-header">
+              ⭐ Highlights
+            </div>
+
+            <div class="info-body">
+
+                <div class="info-row">
+                    <span class="info-label">
+                    Model is ready for launch
+                    </span>
+
+                    ${iconValue(r.StandardWarranty)}
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">
+                       Warranty coverage available
+                    </span>
+
+                    ${iconValue(r.ExtendedWarranty)}
+                </div>
+
+                <div class="info-row">
+                    <span class="info-label">
+                        Cross plant material not assigned
+                    </span>
+
+                    ${iconValue(r.Bplus)}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
+
+            }
+            catch (error) {
+
+                console.error(error);
+
+                document.getElementById("details").innerHTML =
+                    `<div>Error : ${error.message}</div>`;
+            }
+        }
+        function iconValue(value) {
+
+            return value === "X"
+                ? '<span class="status-yes">YES</span>'
+                : '<span class="status-no">NO</span>';
+
+        }
+
+        loadDetails();
+
+    </script>
+
+</body>
+
+</html>
