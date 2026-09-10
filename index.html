@@ -495,68 +495,58 @@
             <!-- Dashboard -->
 
             <div id="dashboard" class="page active">
+                <div id="dashboardContent">
+                    <h1>Dashboard</h1>
 
-                <h1>Dashboard</h1>
+                    <div class="stats-grid">
 
-                <div class="stats-grid">
+                        <div class="stat-card total">
+                            <h2>120</h2>
+                            <p>Total Models</p>
+                        </div>
 
-                    <div class="stat-card total">
-                        <h2>120</h2>
-                        <p>Total Models</p>
+                        <div class="stat-card success">
+                            <h2>97</h2>
+                            <p>Completed</p>
+                        </div>
+
+                        <div class="stat-card warning">
+                            <h2>18</h2>
+                            <p>Pending</p>
+                        </div>
+
+                        <div class="stat-card danger">
+                            <h2>5</h2>
+                            <p>Issues</p>
+                        </div>
                     </div>
+                    <div class="search-card">
 
-                    <div class="stat-card success">
-                        <h2>97</h2>
-                        <p>Completed</p>
-                    </div>
+                        <div class="form-group">
 
-                    <div class="stat-card warning">
-                        <h2>18</h2>
-                        <p>Pending</p>
-                    </div>
+                            <label>Model</label>
 
-                    <div class="stat-card danger">
-                        <h2>5</h2>
-                        <p>Issues</p>
+                            <input type="text" id="model">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Country</label>
+
+                            <input type="text" id="country">
+
+                        </div>
+
+                        <button class="search-btn" onclick="searchModel()">
+                            Search
+                        </button>
+
                     </div>
                 </div>
-                <div class="search-card">
-
-                    <div class="form-group">
-
-                        <label>Model</label>
-
-                        <input type="text" id="model">
-
-                    </div>
-
-                    <div class="form-group">
-
-                        <label>Country</label>
-
-                        <input type="text" id="country">
-
-                    </div>
-
-                    <button class="search-btn" onclick="searchModel()">
-                        Search
-                    </button>
-
-                </div>
-
-
+                <div id="detailsContent"></div>
             </div>
-            <div id="modelReport" class="page">
 
-                <h1>Model Report</h1>
-
-                <div id="modelReportContent">
-
-                    Select a model to view report
-
-                </div>
-
-            </div>
 
             <!-- New Model -->
             <!-- 
@@ -758,12 +748,9 @@
 
                 // window.location.href =
                 //     `details.html?matnr=${firstRecord.Matnr}&country=${firstRecord.Country}`;
-                showPage(
-                    "modelReport",
-                    document.querySelectorAll(".menu-item")[1]
-                );
 
-                loadModelReport(firstRecord);
+
+                loadModelDetails(firstRecord);
 
             }
             catch (error) {
@@ -772,36 +759,26 @@
                     error.message;
             }
         }
-        function loadModelReport(r) {
+        function loadModelDetails(r) {
 
             document.getElementById(
-                "modelReportContent"
+                "dashboardContent"
+            ).style.display = "none";
+
+            document.getElementById(
+                "detailsContent"
             ).innerHTML = `
 
-<div class="report-card">
-
-    <h2>${r.Matnr}</h2>
-
-    <div class="report-grid">
-
-        <div>
-            <label>Country</label>
-            <p>${r.Country}</p>
-        </div>
-
-        <div>
-            <label>EAN</label>
-            <p>${r.Ean11 || "-"}</p>
-        </div>
-
-        <div>
-            <label>Cross Plant Material</label>
-            <p>${r.CrossplantMaterial || "-"}</p>
-        </div>
-
-    </div>
-
-</div>
+<iframe
+    src="details.html?matnr=${r.Matnr}&country=${r.Country}"
+    width="100%"
+    height="1400px"
+    style="
+        border:none;
+        border-radius:18px;
+        background:white;
+    ">
+</iframe>
 
 `;
 
