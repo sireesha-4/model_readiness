@@ -9,8 +9,7 @@ const PORT = 3000;
 // =============================
 // CONFIG
 // =============================
-const ODATA_URL =
-    "https://vhbnubsdci.rise.brother.com:44300/sap/opu/odata/sap/ZTEST_OD_SRV/";
+const ODATA_URL = "https://vhbnubsdci.rise.brother.com:44300/sap/opu/odata/sap/ZTEST_OD_SRV/";
 
 app.use(express.json());
 
@@ -134,6 +133,80 @@ app.get("/api/model", async (req, res) => {
     }
 });
 
+// ======================================================
+        // MODEL REPORT API
+        // ======================================================
+
+        app.get("/api/models", async (req, res) => {
+
+            try {
+
+                if (!req.session.sapAuth) {
+                    return res.status(401).json({
+                        error: "Please login first"
+                    });
+                }
+
+                const modelInput =
+                    req.query.model || "";
+
+                const country =
+                    req.query.country || "";
+
+                const models =
+                    modelInput
+                        .split(",")
+                        .map(x => x.trim())
+                        .filter(x => x);
+
+                let finalResults = [];
+
+                for (const model of models) {
+
+                    const filter =
+                        `$filter=Matnr eq '${model}' and Country eq '${country}'`;
+
+                    const url =
+                        `${ODATA_URL}Model_detailsSet?${filter}&$format=json`;
+
+                    console.log(url);
+
+                    const response =
+                        await axios.get(
+                            url,
+                            {
+                                headers: {
+                                    Authorization: req.session.sapAuth,
+                                    Accept: "application/json",
+                                    "sap-client": "800"
+                                }
+                            }
+                        );
+
+                    const rows =
+                        response.data?.d?.results || [];
+
+                    finalResults.push(...rows);
+                }
+
+                res.json({
+                    d: {
+                        results: finalResults
+                    }
+                });
+
+            }
+            catch (error) {
+
+                console.log(error.response?.data);
+                console.log(error.message);
+
+                res.status(500).json({
+                    error: error.message
+                });
+            }
+
+        });
 // =============================
 // app.get("/logout", (req, res) => {
 //     req.session.destroy();

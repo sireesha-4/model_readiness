@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Model Details</title>
-
     <style>
-        /* =========================================================
-           RESET
-           ========================================================= */
-
         * {
             margin: 0;
             padding: 0;
@@ -23,721 +20,703 @@
         }
 
         body {
-
-            font-family:
-                "Segoe UI",
-                Arial,
-                sans-serif;
-
-            background:
-                linear-gradient(135deg,
-                    #f7faff 0%,
-                    #f2f6fb 100%);
-
-            color: #1e293b;
-
-            padding: 24px 28px;
-
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b1220;
+            color: #e2e8f0;
+            padding: 22px 24px;
+            overflow-x: hidden;
         }
 
-
-        /* =========================================================
-           PAGE HEADER
-           ========================================================= */
-
+        /* HEADER */
         .page-header {
-
             display: flex;
-
             justify-content: space-between;
-
-            align-items: center;
-
-            margin-bottom: 22px;
-
+            align-items: flex-start;
+            margin-bottom: 18px;
         }
-
-
-        .page-header-left {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 5px;
-
-        }
-
 
         .page-title {
-
-            font-size: 38px;
-
+            font-size: 24px;
             font-weight: 700;
-
-            color: #172b4d;
-
-            letter-spacing: -0.5px;
-
+            color: #f1f5f9;
+            letter-spacing: -0.4px;
         }
-
 
         .page-subtitle {
-
-            font-size: 14px;
-
-            color: #718096;
-
+            font-size: 12.5px;
+            color: #94a3b8;
+            margin-top: 3px;
         }
 
-
-        .page-header-right {
-
+        .header-actions {
             display: flex;
-
             align-items: center;
-
-            gap: 14px;
-
+            gap: 10px;
         }
-
-
-        /* =========================================================
-           ACTIVE STATUS
-           ========================================================= */
 
         .active-badge {
-
             display: inline-flex;
-
             align-items: center;
-
-            gap: 7px;
-
-            background: #e4f8ee;
-
-            color: #16805c;
-
-            padding: 8px 15px;
-
+            gap: 6px;
+            height: 30px;
+            padding: 0 12px;
             border-radius: 20px;
-
-            font-size: 13px;
-
+            background: #064e3b;
+            color: #6ee7b7;
+            font-size: 11.5px;
             font-weight: 600;
-
+            border: 1px solid #065f46;
         }
-
 
         .active-dot {
-
-            width: 8px;
-
-            height: 8px;
-
-            background: #24a36b;
-
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-
+            background: #10b981;
         }
-
-
-        /* =========================================================
-           BACK BUTTON
-           ========================================================= */
 
         .back-btn {
-
             border: none;
-
-            background: #0a6ed1;
-
-            color: white;
-
-            padding: 10px 18px;
-
-            border-radius: 7px;
-
-            font-size: 13px;
-
-            cursor: pointer;
-
+            height: 32px;
+            padding: 0 14px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: #ffffff;
+            font-size: 12px;
             font-weight: 600;
-
-            transition: 0.2s;
-
+            cursor: pointer;
+            transition: 0.18s ease;
         }
-
-        .kpi-icon {
-
-            width: 56px;
-            height: 56px;
-
-            border-radius: 50%;
-
-            font-size: 26px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin-bottom: 20px;
-        }
-
 
         .back-btn:hover {
-
-            background: #085caf;
-
+            background: #1d4ed8;
         }
 
+        /* HERO */
         /* =========================================================
-           HERO AREA
-           ========================================================= */
-        .hero-section {
+   DETAILS HERO – Premium Target Match
+========================================================= */
+        .details-hero {
             display: grid;
-            grid-template-columns: 4fr 1.25fr 1.25fr 1.25fr 1.25fr;
-            gap: 16px;
+            grid-template-columns: 340px 1fr;
+            /* slightly wider left column */
+            gap: 28px;
+            background: linear-gradient(145deg, #162238 0%, #1a2a42 100%);
+            border: 1px solid #243b55;
+            border-radius: 20px;
+            padding: 24px 28px;
+            /* reduced padding so image can grow */
             margin-bottom: 20px;
-        }
-
-        /* =========================================================
-           MODEL SUMMARY CARD
-           ========================================================= */
-        .summary-card {
-
-            background: linear-gradient(135deg,
-                    #F1F5FF 0%,
-                    #EEE9FF 100%);
-            border: 1px solid #E8EEF7;
-
-            min-height: 220px;
-
-            padding: 32px;
-        }
-
-        .model-main {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 20px;
-
-            margin-bottom: 25px;
-        }
-
-        .model-header-text {
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: center;
-        }
-
-        .model-icon {
-
-            width: 90px;
-            height: 90px;
-
-            min-width: 72px;
-
-            border-radius: 50%;
-
-            background: #EEF4FF;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 42px;
-        }
-
-
-
-        .model-label {
-            font-size: 16px;
-            color: #7B87A6;
-            margin-bottom: 2px;
-        }
-
-        .model-name {
-            font-size: 40px;
-            font-weight: 700;
-            color: #183B78;
-        }
-
-        .model-value {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1e3a8a;
-        }
-
-        .tabs-container {
-
-            display: flex;
-
-            gap: 40px;
-
-            background: white;
-
-            padding: 10px 18px;
-
-            border-radius: 16px 16px 0 0;
-
-            border-bottom: 1px solid #edf2f7;
-
-            margin-bottom: 12px;
-        }
-
-        .tab {
-
-            color: #64748b;
-
-            cursor: pointer;
-
-            font-size: 13px;
-        }
-
-        .tab.active {
-
-            color: #3b82f6;
-
-            font-weight: 600;
-
-            border-bottom: 2px solid #3b82f6;
-
-            padding-bottom: 10px;
-        }
-
-
-
-        .model-title {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .model-details {
-
-            display: flex;
-
-            align-items: center;
-
-            margin-top: 25px;
-            gap: 50px;
-
-        }
-
-        .model-detail {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            min-width: 190px;
-
-            padding-right: 35px;
-
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             position: relative;
+            overflow: hidden;
         }
 
-        .model-detail:not(:last-child)::after {
-
+        .details-hero::before {
             content: "";
-
             position: absolute;
-
-            right: 15px;
-
-            top: 50%;
-
-            transform: translateY(-50%);
-
-            width: 1px;
-
-            height: 35px;
-
-            background: #E7EDF7;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 70%);
+            pointer-events: none;
         }
 
-
-        .model-detail-label {
-
-            font-size: 15px;
-
-            color: #64748b;
-
+        .hero-image-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            /* remove inner background */
+            border: none;
+            /* remove inner border */
+            border-radius: 0;
+            padding: 0;
+            /* no padding – image can touch edges */
+            height: 100%;
         }
 
-        .detail-icon {
-
-            font-size: 24px;
-
-            color: #5A78D6;
-
-            width: 22px;
-            margin-right: 8px;
-            text-align: center;
+        .hero-printer {
+            width: 100%;
+            max-width: 310px;
+            /* almost fills the 340px column */
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.45));
         }
 
-
-        .model-detail-value {
-
-            font-size: 24px;
-
-            font-weight: 600;
-
-            color: #162b4d;
-
+        .hero-info-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-
-        /* =========================================================
-           KPI CARDS
-           ========================================================= */
-
-        .kpi-card {
-
-            border-radius: 16px;
-
-            padding: 22px;
-
-            min-height: 165px;
-
-            border: 1px solid #e8edf5;
-
-            box-shadow:
-                0 5px 18px rgba(30, 50, 80, 0.05);
-
+        .hero-label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .kpi-card.programs {
-            background: #CEDBFF;
-            border-color: #AFC2F8;
-        }
-
-        .kpi-card.warranty {
-            background: #D3EEDF;
-            border-color: #A9D9BF;
-        }
-
-        .kpi-card.setup {
-            background: #E4D8F6;
-            border-color: #C8B5EB;
-        }
-
-        .kpi-card.orders {
-            background: #F5E0CC;
-            border-color: #E5C19C;
-        }
-
-
-        .kpi-label {
-
-            font-size: 16px;
-
-            color: #4A5B7C;
-
-            font-weight: 600;
-
-            margin-bottom: 22px;
-
-        }
-
-
-        .kpi-value {
-
+        .hero-model-name {
             font-size: 42px;
             font-weight: 700;
-
-            color: #183B78;
-
-            margin-bottom: 6px;
+            color: #f1f5f9;
+            letter-spacing: -1.2px;
+            line-height: 1.1;
+            margin-bottom: 8px;
         }
 
+        .hero-model-subtitle {
+            font-size: 16px;
+            font-weight: 500;
+            color: #cbd5e1;
+            margin-bottom: 10px;
+        }
 
-        .kpi-description {
+        .hero-description {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.5;
+            max-width: 520px;
+            margin-bottom: 22px;
+        }
 
-            font-size: 15px;
+        .feature-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
-            color: #5F6F89;
-
+        .feature-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(15, 28, 46, 0.7);
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 13px;
+            color: #e2e8f0;
             font-weight: 500;
         }
 
+        .feature-badge i {
+            color: #60a5fa;
+            font-size: 14px;
+        }
+
+     /* KPI Grid inside Hero */
+.details-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.details-kpi {
+    background: rgba(15, 28, 46, 0.7);
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.details-kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Colored left accent */
+.details-kpi::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+}
+
+.details-kpi.programs::before { background: #2563eb; }
+.details-kpi.warranty::before { background: #14b8a6; }
+.details-kpi.setup::before    { background: #8b5cf6; }
+.details-kpi.orders::before   { background: #f59e0b; }
+
+/* Icons */
+.details-kpi-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.details-kpi.programs .details-kpi-icon {
+    background: rgba(37, 99, 235, 0.18);
+    color: #60a5fa;
+}
+.details-kpi.warranty .details-kpi-icon {
+    background: rgba(20, 184, 166, 0.18);
+    color: #2dd4bf;
+}
+.details-kpi.setup .details-kpi-icon {
+    background: rgba(139, 92, 246, 0.18);
+    color: #a78bfa;
+}
+.details-kpi.orders .details-kpi-icon {
+    background: rgba(245, 158, 11, 0.18);
+    color: #fbbf24;
+}
+
+.details-kpi-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.details-kpi-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #94a3b8;
+    margin-bottom: 2px;
+}
+
+.details-kpi-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.1;
+}
+
+.details-kpi-desc {
+    font-size: 11px;
+    color: #64748b;
+    margin-top: 1px;
+}
+
+        /* Image */
+        @media (max-width: 1100px) {
+            .details-hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 24px;
+            }
+
+            .hero-image-area {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                /* remove inner background */
+                border: none;
+                /* remove inner border */
+                border-radius: 0;
+                padding: 0;
+                /* no padding */
+                margin-bottom: 16px;
+            }
+
+            .hero-info-area {
+                align-items: center;
+            }
+
+            .hero-description {
+                max-width: 100%;
+            }
+
+            .feature-badges {
+                justify-content: center;
+            }
+
+          .details-kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+            .hero-printer {
+                max-width: 280px;
+                /* still large */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .details-kpi-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-model-name {
+                font-size: 32px;
+            }
+
+            .hero-printer {
+                width: 100%;
+                max-width: 240px;
+                height: auto;
+                object-fit: contain;
+                filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.5));
+            }
+        }
 
 
-        /* =========================================================
-           OVERVIEW CONTAINER
-           ========================================================= */
+        /* TABS */
+        .tabs-wrapper {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+        }
 
-        .overview-container {
+        .tabs {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 2px;
+        }
 
-            background: #ffffff;
+        .tab {
+            height: 48px;
+            padding: 0 14px;
+            border: none;
+            background: transparent;
+            color: #94a3b8;
+            font-family: inherit;
+            font-size: 12.5px;
+            font-weight: 500;
+            white-space: nowrap;
+            cursor: pointer;
+            position: relative;
+        }
 
-            border-radius: 16px;
+        .tab:hover {
+            color: #60a5fa;
+        }
 
-            border: 1px solid #e6ebf2;
+        .tab.active {
+            color: #60a5fa;
+            font-weight: 600;
+        }
 
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            left: 12px;
+            right: 12px;
+            bottom: 0;
+            height: 2.5px;
+            border-radius: 2px 2px 0 0;
+            background: #3b82f6;
+        }
+
+        /* CONTENT */
+        .content-container {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
             padding: 18px;
-
-            box-shadow:
-                0 5px 18px rgba(30, 50, 80, 0.05);
-
+            min-height: 280px;
         }
 
-
-        .overview-heading {
-
-            font-size: 17px;
-
+        .content-title {
+            font-size: 18px;
             font-weight: 700;
-
-            color: #243b5a;
-
-            margin-bottom: 18px;
-
+            color: #f1f5f9;
+            margin-bottom: 3px;
         }
 
+        .content-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 16px;
+        }
 
+        /* OVERVIEW */
         .overview-grid {
-
             display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
+            grid-template-columns: 1.1fr 1fr 1.1fr;
             gap: 12px;
-
         }
-
-
-        /* =========================================================
-           INFORMATION CARDS
-           ========================================================= */
 
         .info-card {
-
-            border: 1px solid #e7edf5;
-
-            border-radius: 13px;
-
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
             overflow: hidden;
-
-            background: #ffffff;
-            min-height: 240px;
         }
-
 
         .info-header {
-
-            padding: 15px 17px;
-
-            border-bottom: 1px solid #edf1f5;
-
-            font-size: 14px;
-
-            font-weight: 700;
-
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 14px;
+            border-bottom: 1px solid #1e293b;
+            font-size: 12.5px;
+            font-weight: 600;
         }
-
 
         .general-header {
-            background: #F2F8FF;
-            color: #2371D8;
+            background: #1e293b;
+            color: #60a5fa;
         }
 
-        .config-header {
-            background: #EEFDF6;
-            color: #0E8A59;
+        .status-header {
+            background: #1e293b;
+            color: #34d399;
         }
 
-        .availability-header {
-            background: #F6F0FF;
-            color: #7B56D9;
+        .highlight-header {
+            background: #1e293b;
+            color: #a78bfa;
         }
-
 
         .info-body {
-
-            padding: 7px 17px 10px 17px;
-
+            padding: 4px 14px 6px;
         }
-
 
         .info-row {
-
             display: flex;
-
-            justify-content: space-between;
-
             align-items: center;
-
-            padding: 12px 0;
-
-            border-bottom: 1px solid #f0f3f6;
-
-            font-size: 13px;
-
+            justify-content: space-between;
+            min-height: 38px;
+            gap: 12px;
+            border-bottom: 1px solid #1e293b;
         }
-
 
         .info-row:last-child {
-
             border-bottom: none;
-
         }
-
 
         .info-label {
-
-            color: #596b82;
-
+            font-size: 12px;
+            color: #94a3b8;
         }
-
 
         .info-value {
-
-            color: #243b5a;
-
+            font-size: 12.5px;
             font-weight: 600;
-
+            color: #e2e8f0;
             text-align: right;
-
         }
 
-
-        /* =========================================================
-           STATUS PILLS
-           ========================================================= */
-
+        /* STATUS PILLS */
         .status-yes {
-
-            background: #D9F5E5;
-
-            color: #0E8A59;
-
-            border-radius: 16px;
-
-            padding: 6px 14px;
-
-            font-size: 12px;
-
-            font-weight: 700;
-        }
-
-        .overview-heading {
-            font-size: 32px;
-            font-weight: 700;
-            color: #183B78;
-            margin-bottom: 4px;
-        }
-
-        .overview-subtitle {
-            font-size: 14px;
-            color: #7B87A6;
-            margin-bottom: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            padding: 3px 9px;
+            border-radius: 20px;
+            background: #064e3b;
+            color: #6ee7b7;
+            font-size: 10.5px;
+            font-weight: 600;
         }
 
         .status-no {
-
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
-            min-width: 52px;
-
-            padding: 5px 10px;
-
-            border-radius: 14px;
-
-            background: #fde8e8;
-
-            color: #c94b4b;
-
-            font-size: 11px;
-
-            font-weight: 700;
-
+            min-width: 42px;
+            padding: 3px 9px;
+            border-radius: 20px;
+            background: #450a0a;
+            color: #fca5a5;
+            font-size: 10.5px;
+            font-weight: 600;
         }
-
 
         .status-neutral {
-
-            color: #64748b;
-
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 42px;
+            padding: 3px 9px;
+            border-radius: 20px;
+            background: #1e293b;
+            color: #94a3b8;
+            font-size: 10.5px;
+            font-weight: 600;
         }
 
+        /* HIGHLIGHTS */
+        .highlight-row {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            border-bottom: 1px solid #1e293b;
+        }
 
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
+        .highlight-row:last-child {
+            border-bottom: none;
+        }
 
+        .highlight-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: #cbd5e1;
+        }
+
+        .check {
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #064e3b;
+            color: #6ee7b7;
+            font-size: 9px;
+            font-weight: 700;
+        }
+
+        /* DATA SECTIONS */
+        .data-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .data-card {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .data-card-header {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 14px;
+            background: #1e293b;
+            border-bottom: 1px solid #334155;
+            color: #e2e8f0;
+            font-size: 12.5px;
+            font-weight: 600;
+        }
+
+        .data-card-body {
+            padding: 4px 14px;
+        }
+
+        .data-row {
+            min-height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .data-row:last-child {
+            border-bottom: none;
+        }
+
+        .data-label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .data-value {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #e2e8f0;
+            text-align: right;
+        }
+
+        /* LOADING / ERROR */
+        .loading {
+            padding: 60px 20px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13.5px;
+        }
+
+        .error-card {
+            padding: 16px;
+            border-radius: 10px;
+            background: #450a0a;
+            border: 1px solid #7f1d1d;
+            color: #fca5a5;
+            font-size: 13px;
+        }
+
+        .error-title {
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 1200px) {
-
             .hero-section {
+                grid-template-columns: minmax(300px, 2.5fr) repeat(4, minmax(110px, 1fr));
+            }
 
-                grid-template-columns:
-                    2fr 1fr 1fr;
+            .model-name {
+                font-size: 22px;
+            }
+        }
 
+        @media (max-width: 1000px) {
+            .hero-section {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .summary-card {
+                grid-column: span 2;
             }
 
             .overview-grid {
-
-                grid-template-columns: 1fr 1fr;
-
+                grid-template-columns: 1fr;
             }
 
+            .data-section {
+                grid-template-columns: 1fr;
+            }
         }
 
-
-        @media (max-width: 800px) {
-
+        @media (max-width: 700px) {
             body {
-                background: #EEF3F8;
-                padding: 16px;
-
+                padding: 14px;
             }
 
             .page-header {
-
                 flex-direction: column;
-
-                align-items: flex-start;
-
-                gap: 15px;
-
-            }
-
-            .page-header-right {
-
-                width: 100%;
-
-                justify-content: space-between;
-
+                gap: 12px;
             }
 
             .hero-section {
-
                 grid-template-columns: 1fr;
-
             }
 
-            .overview-grid {
-
-                grid-template-columns: 1fr;
-
+            .summary-card {
+                grid-column: auto;
             }
 
+            .model-details {
+                grid-template-columns: 1fr;
+            }
+
+            .model-detail:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid #334155;
+                padding-bottom: 8px;
+            }
         }
     </style>
 
@@ -749,11 +728,11 @@
 
     <!-- =========================================================
          PAGE HEADER
-         ========================================================= -->
+    ========================================================= -->
 
     <div class="page-header">
 
-        <div class="page-header-left">
+        <div class="page-title-area">
 
             <h1 class="page-title">
                 Model Details
@@ -766,13 +745,15 @@
         </div>
 
 
-        <div class="page-header-right">
+        <div class="header-actions">
 
             <span class="active-badge">
 
                 <span class="active-dot"></span>
 
-                Active
+                <span id="headerStatus">
+                    Active
+                </span>
 
             </span>
 
@@ -788,399 +769,1255 @@
     </div>
 
 
+
     <!-- =========================================================
-         DATA AREA
-         ========================================================= -->
+         DYNAMIC CONTENT
+    ========================================================= -->
 
     <div id="details">
 
         <div class="loading">
-            Loading...
+            Loading model details...
         </div>
 
     </div>
 
+
+
     <script>
 
-     function goBackToDashboard() {
+        /* =========================================================
+           BACK TO DASHBOARD
+        ========================================================= */
 
-    parent.document.getElementById(
-        "topHeader"
-    ).style.display = "flex";
+        function goBackToDashboard() {
 
-    parent.document.getElementById(
-        "dashboardContent"
-    ).style.display = "block";
+            const topHeader =
+                parent.document.getElementById("topHeader");
 
-    parent.document.getElementById(
-        "detailsContent"
-    ).innerHTML = "";
-}
+            const dashboardContent =
+                parent.document.getElementById("dashboardContent");
+
+            const detailsContent =
+                parent.document.getElementById("detailsContent");
+
+
+            if (topHeader) {
+
+                topHeader.style.display = "flex";
+
+            }
+
+
+            if (dashboardContent) {
+
+                dashboardContent.style.display = "block";
+
+            }
+
+
+            if (detailsContent) {
+
+                detailsContent.innerHTML = "";
+
+            }
+
+        }
+
+
+
+        /* =========================================================
+           SAP X / EMPTY VALUE
+        ========================================================= */
 
         function iconValue(value) {
 
-            return value === "X"
-                ? '<span class="status-yes">YES</span>'
-                : '<span class="status-no">NO</span>';
+            if (value === "X") {
+
+                return `
+                    <span class="status-yes">
+                        YES
+                    </span>
+                `;
+
+            }
+
+            return `
+                <span class="status-no">
+                    NO
+                </span>
+            `;
+
         }
+
+
+
+        /* =========================================================
+           SAFE VALUE
+        ========================================================= */
+
+        function safeValue(value) {
+
+            if (
+                value === undefined ||
+                value === null ||
+                value === ""
+            ) {
+
+                return "-";
+
+            }
+
+            return value;
+
+        }
+
+
+
+        /* =========================================================
+           COUNT X VALUES
+        ========================================================= */
+
+        function countEnabled(values) {
+
+            return values.filter(
+                value => value === "X"
+            ).length;
+
+        }
+
+
+
+        /* =========================================================
+           LOAD SAP MODEL DETAILS
+        ========================================================= */
 
         async function loadDetails() {
 
             const params =
-                new URLSearchParams(window.location.search);
+                new URLSearchParams(
+                    window.location.search
+                );
+
 
             const matnr =
                 params.get("matnr");
 
+
             const country =
                 params.get("country");
+
 
             try {
 
                 const response =
                     await fetch(
-                        `/api/model?model=${matnr}&country=${country}`
+                        `/api/model?model=${encodeURIComponent(matnr || "")}&country=${encodeURIComponent(country || "")}`
                     );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `SAP backend returned HTTP ${response.status}`
+                    );
+
+                }
+
 
                 const data =
                     await response.json();
 
-                console.log(data);
+
+                console.log(
+                    "SAP OData Response:",
+                    data
+                );
+
+
+                /*
+                 * KEEPING YOUR EXISTING ODATA STRUCTURE
+                 */
+
+                const results =
+                    data &&
+                        data.d &&
+                        Array.isArray(data.d.results)
+                        ? data.d.results
+                        : [];
+
+
+                if (results.length === 0) {
+
+                    throw new Error(
+                        "No model details were returned from SAP."
+                    );
+
+                }
+
 
                 const r =
-                    data.d.results[0];
-                const programCount = [
-                    r.Amazondart,
-                    r.Brrefresh,
-                    r.Barracuda,
-                    r.Bplus
-                ].filter(x => x === "X").length;
+                    results[0];
 
-                const warrantyCount = [
-                    r.StandardWarranty,
-                    r.ExtendedWarranty,
-                    r.BarracudaWarranty
-                ].filter(x => x === "X").length;
 
-                const orderCount = [
-                    r.BackupOrder,
-                    r.DrumOrder,
-                    r.WasteToner,
-                    r.BeltUnit,
-                    r.Claimorder
-                ].filter(x => x === "X").length;
+                /* =====================================================
+                   DYNAMIC COUNTS
+                ===================================================== */
 
-                document.getElementById("details").innerHTML = `
+                const programCount =
+                    countEnabled([
+                        r.Amazondart,
+                        r.Brrefresh,
+                        r.Barracuda,
+                        r.Bplus
+                    ]);
 
-<div class="hero-section">
 
-    <div class="summary-card">
+                const warrantyCount =
+                    countEnabled([
+                        r.StandardWarranty,
+                        r.ExtendedWarranty,
+                        r.BarracudaWarranty
+                    ]);
 
-        <div class="model-main">
 
-            <div class="model-icon">
-                🖨️
-            </div>
+                const orderCount =
+                    countEnabled([
+                        r.BackupOrder,
+                        r.DrumOrder,
+                        r.WasteToner,
+                        r.BeltUnit,
+                        r.Claimorder
+                    ]);
 
-            <div>
-                <div class="model-label">
-                    Model
+
+                /*
+                 * Setup is calculated from the SAP setup/order
+                 * configuration values instead of hard-coding "2".
+                 */
+
+                const setupCount =
+                    countEnabled([
+                        r.BackupOrder,
+                        r.DrumOrder,
+                        r.WasteToner,
+                        r.BeltUnit,
+                        r.Claimorder
+                    ]);
+
+
+                /* =====================================================
+                   STATUS
+                ===================================================== */
+
+                const overallStatus =
+                    safeValue(
+                        r.Status ||
+                        r.OverallStatus ||
+                        r.ModelStatus
+                    );
+
+
+                /*
+                 * If SAP does not provide one of these fields,
+                 * we do NOT invent data.
+                 */
+
+                const displayStatus =
+                    overallStatus === "-"
+                        ? "Available"
+                        : overallStatus;
+
+
+                document.getElementById(
+                    "headerStatus"
+                ).textContent =
+                    displayStatus;
+
+
+
+                /* =====================================================
+                   RENDER PAGE
+                ===================================================== */
+
+                document.getElementById(
+                    "details"
+                ).innerHTML = `
+
+
+                    <!-- =============================================
+                         HERO
+                    ============================================== -->
+<!-- HERO + KPI -->
+<!-- HERO + KPI (combined) -->
+<div class="details-hero">
+    <!-- Left: Large Printer -->
+    <div class="hero-image-area">
+        <img src="printer.png" alt="Printer" class="hero-printer">
+    </div>
+
+    <!-- Right: Model Info + KPIs -->
+    <div class="hero-info-area">
+        <div class="hero-label">MODEL DETAILS</div>
+        <div class="hero-model-name">${safeValue(r.Matnr)}</div>
+        <div class="hero-model-subtitle">Wireless Monochrome Laser Multi-Function Printer</div>
+        <div class="hero-description">
+            Compact, efficient and reliable monochrome laser printing with wireless connectivity, duplex printing and scan/copy/fax capabilities.
+        </div>
+
+        <!-- KPI CARDS now inside the hero (yellow area) -->
+        <div class="details-kpi-grid">
+            <div class="details-kpi programs">
+                <div class="details-kpi-icon"><i class="fas fa-box"></i></div>
+                <div class="details-kpi-content">
+                    <div class="details-kpi-label">Programs</div>
+                    <div class="details-kpi-value">${programCount}</div>
+                    <div class="details-kpi-desc">Available</div>
                 </div>
+            </div>
 
-                <div class="model-name">
-                    ${r.Matnr}
+            <div class="details-kpi warranty">
+                <div class="details-kpi-icon"><i class="fas fa-shield-alt"></i></div>
+                <div class="details-kpi-content">
+                    <div class="details-kpi-label">Warranty</div>
+                    <div class="details-kpi-value">${warrantyCount}</div>
+                    <div class="details-kpi-desc">Available</div>
                 </div>
             </div>
 
-        </div>
-
-       <div class="model-details">
-
-    <div class="model-detail">
-
-        <span class="detail-icon">🌐</span>
-
-        <div>
-            <div class="model-detail-label">
-                Country
+            <div class="details-kpi setup">
+                <div class="details-kpi-icon"><i class="fas fa-cog"></i></div>
+                <div class="details-kpi-content">
+                    <div class="details-kpi-label">Setup</div>
+                    <div class="details-kpi-value">${setupCount}</div>
+                    <div class="details-kpi-desc">Configured</div>
+                </div>
             </div>
 
-            <div class="model-detail-value">
-                ${r.Country}
+            <div class="details-kpi orders">
+                <div class="details-kpi-icon"><i class="fas fa-file-alt"></i></div>
+                <div class="details-kpi-content">
+                    <div class="details-kpi-label">Orders</div>
+                    <div class="details-kpi-value">${orderCount}</div>
+                    <div class="details-kpi-desc">Active</div>
+                </div>
             </div>
         </div>
-
     </div>
-
-    <div class="model-detail">
-
-        <span class="detail-icon">📊</span>
-
-        <div>
-            <div class="model-detail-label">
-                EAN
-            </div>
-
-            <div class="model-detail-value">
-                ${r.Ean11 || "-"}
-            </div>
-        </div>
-
-    </div>
-
-    <div class="model-detail">
-
-        <span class="detail-icon">🔗</span>
-
-        <div>
-            <div class="model-detail-label">
-                Cross Plant Material
-            </div>
-
-            <div class="model-detail-value">
-                ${r.CrossplantMaterial || "-"}
-            </div>
-        </div>
-
-    </div>
-
 </div>
 
 
-    </div>
+                    <!-- =============================================
+                         TABS
+                    ============================================== -->
 
-    <div class="kpi-card programs">
-        <div class="kpi-icon">📦</div>
-        <div class="kpi-label">
-            Programs
-        </div>
+                    <div class="tabs-wrapper">
 
-        <div class="kpi-value">
-            ${programCount}
-        </div>
+                        <div class="tabs">
 
-        <div class="kpi-description">
-            Available
-        </div>
 
-    </div>
+                            <button
+                                class="tab active"
+                                data-tab="overview">
 
-    <div class="kpi-card warranty">
-        <div class="kpi-icon">🛡️</div>
-        <div class="kpi-label">
-            Warranty
-        </div>
+                                ▣ Overview
 
-        <div class="kpi-value">
-            ${warrantyCount}
-        </div>
+                            </button>
 
-        <div class="kpi-description">
-            Available
-        </div>
 
-    </div>
+                            <button
+                                class="tab"
+                                data-tab="programs">
 
-    <div class="kpi-card setup">
-        <div class="kpi-icon">⚙️</div>
-        <div class="kpi-label">
-            Setup
-        </div>
+                                ▦ Programs
 
-        <div class="kpi-value">
-            2
-        </div>
+                            </button>
 
-        <div class="kpi-description">
-            Configured
-        </div>
 
-    </div>
+                            <button
+                                class="tab"
+                                data-tab="warranty">
 
-    <div class="kpi-card orders">
-        <div class="kpi-icon">📝</div>
-        <div class="kpi-label">
-            Orders
-        </div>
+                                ♢ Warranty
 
-        <div class="kpi-value">
-            ${orderCount}
-        </div>
+                            </button>
 
-        <div class="kpi-description">
-            Active
-        </div>
 
-    </div>
+                            <button
+                                class="tab"
+                                data-tab="orders">
 
-</div>
-<div class="tabs-container">
+                                🛒 Order Setup
 
-    <div class="tab active">
-        Overview
-    </div>
+                            </button>
 
-    <div class="tab">
-        Programs
-    </div>
 
-    <div class="tab">
-        Warranty
-    </div>
+                            <button
+                                class="tab"
+                                data-tab="pricing">
 
-    <div class="tab">
-        Order Setup
-    </div>
+                                ◇ Pricing Setup
 
-    <div class="tab">
-        Pricing Setup
-    </div>
+                            </button>
 
-    <div class="tab">
-        Status
-    </div>
 
-</div>
-<div class="overview-container">
+                            <button
+                                class="tab"
+                                data-tab="status">
 
-    <div class="overview-heading">
-        Overview
-    </div>
-<div class="overview-subtitle">
+                                〽 Status
 
-Key information and readiness status for this model.
+                            </button>
 
-</div>
-    <div class="overview-grid">
 
-        <div class="info-card">
+                        </div>
 
-            <div class="info-header general-header">
-               ℹ️ General Information
-            </div>
+                    </div>
 
-            <div class="info-body">
 
-                <div class="info-row">
-                    <span class="info-label">Model</span>
-                    <span class="info-value">${r.Matnr}</span>
-                </div>
 
-                <div class="info-row">
-                    <span class="info-label">Country</span>
-                    <span class="info-value">${r.Country}</span>
-                </div>
+                    <!-- =============================================
+                         TAB CONTENT
+                    ============================================== -->
 
-                <div class="info-row">
-                    <span class="info-label">EAN</span>
-                    <span class="info-value">${r.Ean11}</span>
-                </div>
+                    <div
+                        id="tabContent"
+                        class="content-container">
 
-                <div class="info-row">
-                    <span class="info-label">Cross Plant Material</span>
-                    <span class="info-value">${r.CrossplantMaterial || "-"}</span>
-                </div>
 
-            </div>
+                        <!-- OVERVIEW -->
 
-        </div>
+                        <div
+                            id="overviewTab"
+                            class="tab-panel">
 
-        <div class="info-card">
+                            <div class="content-title">
+                                Overview
+                            </div>
 
-            <div class="info-header config-header">
-               ⚡ Quick Status
-            </div>
+                            <div class="content-subtitle">
+                                Key information and readiness status for this model.
+                            </div>
 
-            <div class="info-body">
 
-                <div class="info-row">
-                    <span class="info-label">Programs</span>
-                    <span class="status-yes">${programCount} Available</span>
-                </div>
+                            <div class="overview-grid">
 
-                <div class="info-row">
-                    <span class="info-label">Warranty</span>
-                    <span class="status-yes">${warrantyCount} Available</span>
-                </div>
 
-                <div class="info-row">
-                    <span class="info-label">Orders</span>
-                    <span class="status-yes">${orderCount} Active</span>
-                </div>
+                                <!-- GENERAL -->
 
-                <div class="info-row">
+                                <div class="info-card">
 
-                    <span class="info-label">
-                         Overall Status
-                    </span>
+                                    <div class="info-header general-header">
+                                        ℹ General Information
+                                    </div>
 
-                <span class="status-yes">
-                  Active
-                </span>
 
-                </div>
-            </div>
+                                    <div class="info-body">
 
-        </div>
 
-        <div class="info-card">
+                                        <div class="info-row">
 
-            <div class="info-header availability-header">
-              ⭐ Highlights
-            </div>
+                                            <span class="info-label">
+                                                Model
+                                            </span>
 
-            <div class="info-body">
+                                            <span class="info-value">
+                                                ${safeValue(r.Matnr)}
+                                            </span>
 
-                <div class="info-row">
-                    <span class="info-label">
-                   ✅ Model is ready for launch
-                    </span>
+                                        </div>
 
-                   
-                </div>
 
-                <div class="info-row">
-                    <span class="info-label">
-                     ✅  Warranty coverage available
-                    </span>
+                                        <div class="info-row">
 
-                    
-                </div>
+                                            <span class="info-label">
+                                                Country
+                                            </span>
 
-                <div class="info-row">
-                    <span class="info-label">
-                     ✅   Cross plant material not assigned
-                    </span>
+                                            <span class="info-value">
+                                                ${safeValue(r.Country)}
+                                            </span>
 
-                   
-                </div>
+                                        </div>
 
-            </div>
 
-        </div>
+                                        <div class="info-row">
 
-    </div>
+                                            <span class="info-label">
+                                                EAN
+                                            </span>
 
-</div>
+                                            <span class="info-value">
+                                                ${safeValue(r.Ean11)}
+                                            </span>
 
-`;
+                                        </div>
+
+
+                                        <div class="info-row">
+
+                                            <span class="info-label">
+                                                Cross Plant Material
+                                            </span>
+
+                                            <span class="info-value">
+                                                ${safeValue(r.CrossplantMaterial)}
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- QUICK STATUS -->
+
+                                <div class="info-card">
+
+                                    <div class="info-header status-header">
+                                        ⚡ Quick Status
+                                    </div>
+
+
+                                    <div class="info-body">
+
+
+                                        <div class="info-row">
+
+                                            <span class="info-label">
+                                                Programs
+                                            </span>
+
+                                            <span class="status-yes">
+                                                ${programCount} Available
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="info-row">
+
+                                            <span class="info-label">
+                                                Warranty
+                                            </span>
+
+                                            <span class="status-yes">
+                                                ${warrantyCount} Available
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="info-row">
+
+                                            <span class="info-label">
+                                                Orders
+                                            </span>
+
+                                            <span class="status-yes">
+                                                ${orderCount} Active
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="info-row">
+
+                                            <span class="info-label">
+                                                Overall Status
+                                            </span>
+
+                                            <span class="status-yes">
+                                                ${displayStatus}
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <!-- HIGHLIGHTS -->
+
+                                <div class="info-card">
+
+                                    <div class="info-header highlight-header">
+                                        ★ Highlights
+                                    </div>
+
+
+                                    <div class="info-body">
+
+
+                                        <div class="highlight-row">
+
+                                            <span class="highlight-text">
+
+                                                <span class="check">
+                                                    ✓
+                                                </span>
+
+                                                Model information available
+
+                                            </span>
+
+                                            <span class="status-yes">
+                                                YES
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="highlight-row">
+
+                                            <span class="highlight-text">
+
+                                                <span class="check">
+                                                    ✓
+                                                </span>
+
+                                                Warranty configuration
+
+                                            </span>
+
+                                            ${warrantyCount > 0
+                        ? `<span class="status-yes">YES</span>`
+                        : `<span class="status-no">NO</span>`
+                    }
+
+                                        </div>
+
+
+                                        <div class="highlight-row">
+
+                                            <span class="highlight-text">
+
+                                                <span class="check">
+                                                    ✓
+                                                </span>
+
+                                                Cross plant material
+
+                                            </span>
+
+                                            ${r.CrossplantMaterial
+                        ? `<span class="status-yes">YES</span>`
+                        : `<span class="status-neutral">-</span>`
+                    }
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PROGRAMS -->
+
+                        <div
+                            id="programsTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                            <div class="content-title">
+                                Programs
+                            </div>
+
+                            <div class="content-subtitle">
+                                Program configuration maintained for this model in SAP.
+                            </div>
+
+
+                            <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        📦 Program Configuration
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Amazon Dart
+                                            </span>
+
+                                            ${iconValue(r.Amazondart)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                BR Refresh
+                                            </span>
+
+                                            ${iconValue(r.Brrefresh)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Barracuda
+                                            </span>
+
+                                            ${iconValue(r.Barracuda)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Brother Plus
+                                            </span>
+
+                                            ${iconValue(r.Bplus)}
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- WARRANTY -->
+
+                        <div
+                            id="warrantyTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                            <div class="content-title">
+                                Warranty
+                            </div>
+
+                            <div class="content-subtitle">
+                                Warranty availability and duration returned from SAP.
+                            </div>
+
+
+                            <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        🛡 Warranty Configuration
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Standard Warranty
+                                            </span>
+
+                                            ${iconValue(r.StandardWarranty)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Extended Warranty
+                                            </span>
+
+                                            ${iconValue(r.ExtendedWarranty)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Barracuda Warranty
+                                            </span>
+
+                                            ${iconValue(r.BarracudaWarranty)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Standard Warranty Length
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.StandardWarrantyLength)}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Extended Warranty Length
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.ExtendedWarrantyLength)}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Barracuda Warranty Length
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.BarracudaWarrantyLength)}
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- ORDER SETUP -->
+
+                        <div
+                            id="ordersTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                            <div class="content-title">
+                                Order Setup
+                            </div>
+
+                            <div class="content-subtitle">
+                                Order-related configuration maintained for the selected model.
+                            </div>
+
+
+                            <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        🛒 Order Configuration
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Backup Order
+                                            </span>
+
+                                            ${iconValue(r.BackupOrder)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Drum Order
+                                            </span>
+
+                                            ${iconValue(r.DrumOrder)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Waste Toner
+                                            </span>
+
+                                            ${iconValue(r.WasteToner)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Belt Unit
+                                            </span>
+
+                                            ${iconValue(r.BeltUnit)}
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Claim Order
+                                            </span>
+
+                                            ${iconValue(r.Claimorder)}
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- PRICING -->
+
+                        <div
+                            id="pricingTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                            <div class="content-title">
+                                Pricing Setup
+                            </div>
+
+                            <div class="content-subtitle">
+                                Pricing configuration returned by SAP for this model.
+                            </div>
+
+
+                            <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        ◇ Pricing Configuration
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                B1 Price Setup
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.B1PriceSetup)}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                BR Price Setup
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.BrPriceSetup)}
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- STATUS -->
+
+                        <div
+                            id="statusTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                            <div class="content-title">
+                                Status
+                            </div>
+
+                            <div class="content-subtitle">
+                                Distribution and model status information returned from SAP.
+                            </div>
+
+
+                            <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        〽 Model Status
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Distribution Chain Status
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.DistributionChainStatus)}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Cross Distribution Status
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(r.CrossDistributionStatus)}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Overall Model Status
+                                            </span>
+
+                                            <span class="data-value">
+                                                ${safeValue(
+                        r.Status ||
+                        r.OverallStatus ||
+                        r.ModelStatus
+                    )}
+                                            </span>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+
+                /* =====================================================
+                   TAB SWITCHING
+                ===================================================== */
+
+                setupTabs();
 
             }
+
             catch (error) {
 
-                console.error(error);
+                console.error(
+                    "Model details error:",
+                    error
+                );
 
-                document.getElementById("details").innerHTML =
-                    `<div>Error : ${error.message}</div>`;
+
+                document.getElementById(
+                    "details"
+                ).innerHTML = `
+
+                    <div class="error-card">
+
+                        <div class="error-title">
+                            Unable to load model details
+                        </div>
+
+                        ${safeValue(error.message)}
+
+                    </div>
+
+                `;
+
             }
-        }
-        function iconValue(value) {
-
-            return value === "X"
-                ? '<span class="status-yes">YES</span>'
-                : '<span class="status-no">NO</span>';
 
         }
+
+
+
+        /* =========================================================
+           TAB FUNCTION
+        ========================================================= */
+
+        function setupTabs() {
+
+            const tabs =
+                document.querySelectorAll(
+                    ".tab"
+                );
+
+
+            const panels = {
+
+                overview:
+                    document.getElementById(
+                        "overviewTab"
+                    ),
+
+                programs:
+                    document.getElementById(
+                        "programsTab"
+                    ),
+
+                warranty:
+                    document.getElementById(
+                        "warrantyTab"
+                    ),
+
+                orders:
+                    document.getElementById(
+                        "ordersTab"
+                    ),
+
+                pricing:
+                    document.getElementById(
+                        "pricingTab"
+                    ),
+
+                status:
+                    document.getElementById(
+                        "statusTab"
+                    )
+
+            };
+
+
+            tabs.forEach(
+                tab => {
+
+                    tab.addEventListener(
+                        "click",
+                        function () {
+
+
+                            tabs.forEach(
+                                t =>
+                                    t.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                            this.classList.add(
+                                "active"
+                            );
+
+
+                            Object.values(
+                                panels
+                            ).forEach(
+                                panel => {
+
+                                    if (panel) {
+
+                                        panel.style.display =
+                                            "none";
+
+                                    }
+
+                                }
+                            );
+
+
+                            const selectedTab =
+                                this.dataset.tab;
+
+
+                            if (
+                                panels[selectedTab]
+                            ) {
+
+                                panels[selectedTab]
+                                    .style.display =
+                                    "block";
+
+                            }
+
+                        }
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* =========================================================
+           START
+        ========================================================= */
 
         loadDetails();
 
