@@ -786,359 +786,388 @@
                 grid-column: auto;
             }
         }
-/* =========================================================
+
+        /* =========================================================
    MODEL REPORT – Premium Dark Theme
 ========================================================= */
-.report-header {
-    margin-bottom: 20px;
-}
+        .report-header {
+            margin-bottom: 20px;
+        }
 
-.report-header h1 {
-    font-size: 22px;
-    font-weight: 700;
-    color: #f1f5f9;
-    margin-bottom: 4px;
-}
+        .report-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
 
-.report-header p {
-    font-size: 13px;
-    color: #94a3b8;
-}
+        .report-header p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
 
-.report-search-card {
-    background: #162238;
-    border: 1px solid #243b55;
-    border-radius: 16px;
-    padding: 20px 22px;
-    margin-bottom: 20px;
-    display: flex;
-    gap: 14px;
-    align-items: end;
-    flex-wrap: wrap;
-}
+        .report-search-card {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 16px;
+            padding: 20px 22px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 14px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
 
-.report-search-card .form-field {
-    flex: 1;
-    min-width: 180px;
-}
+        .report-search-card .form-field {
+            flex: 1;
+            min-width: 180px;
+        }
 
-.report-search-card label {
-    display: block;
-    font-size: 12px;
-    color: #94a3b8;
-    margin-bottom: 6px;
-}
+        .report-search-card label {
+            display: block;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
 
-.report-search-card input {
-    width: 100%;
-    padding: 11px 14px;
-    background: #0f1c2e;
-    border: 1px solid #334155;
-    border-radius: 10px;
-    color: #e2e8f0;
-    font-size: 13.5px;
-    outline: none;
-}
+        .report-search-card input {
+            width: 100%;
+            padding: 11px 14px;
+            background: #0f1c2e;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 13.5px;
+            outline: none;
+        }
 
-.report-search-card input:focus {
-    border-color: #2563eb;
-}
+        .report-search-card input:focus {
+            border-color: #2563eb;
+        }
 
-.report-search-actions {
-    display: flex;
-    gap: 10px;
-}
+        .report-search-actions {
+            display: flex;
+            gap: 10px;
+        }
 
-.btn-search {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 11px 20px;
-    border-radius: 10px;
-    font-weight: 600;
-    font-size: 13.5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .btn-search {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.btn-search:hover { background: #1d4ed8; }
+        .btn-search:hover {
+            background: #1d4ed8;
+        }
 
-.btn-reset {
-    background: transparent;
-    color: #94a3b8;
-    border: 1px solid #334155;
-    padding: 11px 18px;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 13.5px;
-    cursor: pointer;
-}
+        .btn-reset {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13.5px;
+            cursor: pointer;
+        }
 
-.btn-reset:hover {
-    background: rgba(255,255,255,0.05);
-    color: #e2e8f0;
-}
+        .btn-reset:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
+        }
 
-.report-summary {
-    font-size: 14px;
-    color: #94a3b8;
-    margin-bottom: 16px;
-}
+        .report-summary {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 16px;
+        }
 
-.report-summary strong {
-    color: #f1f5f9;
-}
+        .report-summary strong {
+            color: #f1f5f9;
+        }
 
-/* Model Cards Grid */
-.model-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-    gap: 16px;
-    margin-bottom: 20px;
-}
+        /* Model Cards Grid */
+        .model-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+            margin-bottom: 20px;
+        }
 
-.report-model-card {
-    background: #162238;
-    border: 1px solid #243b55;
-    border-radius: 16px;
-    padding: 18px 18px 16px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+        .report-model-card {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 16px;
+            padding: 18px 18px 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
-.report-model-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-}
+        .report-model-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+        }
 
-/* Top row */
-.card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-}
+        /* Top row */
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
 
-.card-identity {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        .card-identity {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-.printer-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: rgba(59, 130, 246, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #60a5fa;
-    font-size: 16px;
-}
+        .printer-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(59, 130, 246, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #60a5fa;
+            font-size: 16px;
+        }
 
-.card-model-name {
-    font-size: 17px;
-    font-weight: 700;
-    color: #f1f5f9;
-    line-height: 1.2;
-}
+        .card-model-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #f1f5f9;
+            line-height: 1.2;
+        }
 
-.card-country {
-    font-size: 12px;
-    color: #94a3b8;
-    margin-top: 3px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+        .card-country {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 3px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-/* Status badge */
-.status-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 11.5px;
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 20px;
-}
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
 
-.status-badge.ready {
-    background: rgba(20, 184, 166, 0.15);
-    color: #2dd4bf;
-}
+        .status-badge.ready {
+            background: rgba(20, 184, 166, 0.15);
+            color: #2dd4bf;
+        }
 
-.status-badge.review {
-    background: rgba(245, 158, 11, 0.15);
-    color: #fbbf24;
-}
+        .status-badge.review {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+        }
 
-.status-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: currentColor;
-}
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
 
-/* Metrics */
-.card-metrics {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 16px;
-}
+        /* Metrics */
+        .card-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
 
-.metric-line {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 13px;
-}
+        .metric-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
 
-.metric-label {
-    color: #94a3b8;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        .metric-label {
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
 
-.metric-value {
-    font-weight: 600;
-    color: #e2e8f0;
-}
+        .metric-value {
+            font-weight: 600;
+            color: #e2e8f0;
+        }
 
-.progress-track {
-    height: 4px;
-    background: #1e293b;
-    border-radius: 4px;
-    overflow: hidden;
-    margin-top: -4px;
-}
+        .progress-track {
+            height: 4px;
+            background: #1e293b;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: -4px;
+        }
 
-.progress-fill {
-    height: 100%;
-    border-radius: 4px;
-}
+        .progress-fill {
+            height: 100%;
+            border-radius: 4px;
+        }
 
-.progress-fill.green { background: #14b8a6; }
-.progress-fill.blue  { background: #3b82f6; }
-.progress-fill.amber { background: #f59e0b; }
+        .progress-fill.green {
+            background: #14b8a6;
+        }
 
-/* View Details button – outline style like target */
-.view-details-btn {
-    width: 100%;
-    background: transparent;
-    color: #94a3b8;
-    border: 1px solid #334155;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 13px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.2s ease;
-}
+        .progress-fill.blue {
+            background: #3b82f6;
+        }
 
-.view-details-btn:hover {
-    background: rgba(255,255,255,0.05);
-    color: #e2e8f0;
-    border-color: #475569;
-}
+        .progress-fill.amber {
+            background: #f59e0b;
+        }
 
-/* Consolidated Report Toggle */
-.report-toggle {
-    background: #162238;
-    border: 1px solid #243b55;
-    border-radius: 12px;
-    padding: 14px 18px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    margin-bottom: 12px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #e2e8f0;
-}
+        /* View Details button – outline style like target */
+        .view-details-btn {
+            width: 100%;
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
 
-.report-toggle:hover {
-    background: #1a2a42;
-}
+        .view-details-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e2e8f0;
+            border-color: #475569;
+        }
 
-#reportTableSection {
-    background: #162238;
-    border: 1px solid #243b55;
-    border-radius: 16px;
-    padding: 18px;
-    margin-bottom: 20px;
-}
+        /* Consolidated Report Toggle */
+        .report-toggle {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #e2e8f0;
+        }
 
-.table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
+        .report-toggle:hover {
+            background: #1a2a42;
+        }
 
-.table-header h2 {
-    font-size: 16px;
-    color: #f1f5f9;
-    margin-bottom: 2px;
-}
+        #reportTableSection {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 20px;
+        }
 
-.table-header p {
-    font-size: 12px;
-    color: #94a3b8;
-}
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
 
-.export-btn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 9px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
+        .table-header h2 {
+            font-size: 16px;
+            color: #f1f5f9;
+            margin-bottom: 2px;
+        }
 
-.report-table-wrapper {
-    overflow-x: auto;
-}
+        .table-header p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
 
-.report-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 12.5px;
-}
+        .export-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
 
-.report-table th {
-    background: #0f1c2e;
-    color: #94a3b8;
-    font-weight: 600;
-    padding: 10px 12px;
-    text-align: left;
-    white-space: nowrap;
-    border-bottom: 1px solid #243b55;
-}
+        .report-table-wrapper {
+            overflow-x: auto;
+        }
 
-.report-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid #1e293b;
-    color: #e2e8f0;
-    white-space: nowrap;
-}
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
 
-.yes-icon { color: #2dd4bf; font-weight: 700; }
-.no-icon  { color: #fb7185; font-weight: 700; }
+        .report-table th {
+            background: #0f1c2e;
+            color: #94a3b8;
+            font-weight: 600;
+            padding: 10px 12px;
+            text-align: Center;
+            white-space: nowrap;
+            border-bottom: 1px solid #243b55;
+            font-size: 13px;
+        }
+
+        .report-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #1e293b;
+            color: #e2e8f0;
+            white-space: nowrap;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .yes-icon {
+            color: #2dd4bf;
+            font-weight: 700;
+            font-size: 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .no-icon {
+            color: #fb7185;
+            font-weight: 700;
+            font-size: 15px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -1321,99 +1350,108 @@
                 <div id="detailsContent"></div>
             </div>
 
-         <div id="modelReport" class="page">
-    <div class="report-header">
-        <h1>Model Report</h1>
-        <p>Search and analyze model readiness validation results.</p>
-    </div>
+            <div id="modelReport" class="page">
+                <div class="report-header">
+                    <h1>Model Report</h1>
+                    <p>Search and analyze model readiness validation results.</p>
+                </div>
 
-    <!-- Search -->
-    <div class="report-search-card">
-        <div class="form-field">
-            <label>Model</label>
-            <input type="text" id="reportModelSearch" placeholder="e.g. DCPL2550DW,MFCJ1010DW">
-        </div>
-        <div class="form-field">
-            <label>Country</label>
-            <input type="text" id="reportCountrySearch" placeholder="e.g. US">
-        </div>
-        <div class="report-search-actions">
-            <button class="btn-search" onclick="loadModelReport()">
-                <i class="fas fa-search"></i> Search
-            </button>
-            <button class="btn-reset" onclick="resetModelReport()">
-                <i class="fas fa-undo"></i> Reset
-            </button>
-        </div>
-    </div>
+                <!-- Search -->
+                <div class="report-search-card">
+                    <div class="form-field">
+                        <label>Model</label>
+                        <input type="text" id="reportModelSearch" placeholder="e.g. DCPL2550DW,MFCJ1010DW">
+                    </div>
+                    <div class="form-field">
+                        <label>Country</label>
+                        <input type="text" id="reportCountrySearch" placeholder="e.g. US">
+                    </div>
+                    <div class="report-search-actions">
+                        <button class="btn-search" onclick="loadModelReport()">
+                            <i class="fas fa-search"></i> Search
+                        </button>
+                        <button class="btn-reset" onclick="resetModelReport()">
+                            <i class="fas fa-undo"></i> Reset
+                        </button>
+                    </div>
+                </div>
 
-    <div class="report-summary">
-        <span id="modelCount">0 Models Found</span>
-    </div>
+                <div class="report-summary">
+                    <span id="modelCount">0 Models Found</span>
+                </div>
 
-    <!-- Cards Grid -->
-    <div id="modelCards" class="model-cards"></div>
+                <!-- Cards Grid -->
+                <div id="modelCards" class="model-cards"></div>
 
-    <!-- Toggle -->
-    <div class="report-toggle" onclick="toggleReportTable()">
-        <span><i class="fas fa-table"></i> View Consolidated Report</span>
-        <span id="toggleIcon">▼</span>
-    </div>
+                <!-- Toggle -->
+                <div class="report-toggle" onclick="toggleReportTable()">
+                    <span><i class="fas fa-table"></i> View Consolidated Report</span>
+                    <span id="toggleIcon">▼</span>
+                </div>
 
-    <!-- Table Section -->
-    <div id="reportTableSection" style="display:none">
-        <div class="table-header">
-            <div>
-                <h2>Consolidated Model Report</h2>
-                <p>Complete validation information for selected models</p>
+                <!-- Table Section -->
+                <div id="reportTableSection" style="display:none">
+                    <div class="table-header">
+                        <div>
+                            <h2>Consolidated Model Report</h2>
+                            <p>Complete validation information for selected models</p>
+                        </div>
+                        <button class="export-btn" onclick="exportModelReport()">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </button>
+                    </div>
+
+                    <div class="report-table-wrapper">
+                        <table class="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Country</th>
+                                    <th>EAN</th>
+                                    <th>Standard Warranty</th>
+                                    <th>Standard Duration</th>
+                                    <th>Extended Warranty</th>
+                                    <th>Extended Duration</th>
+                                    <th>Brother Care</th>
+                                    <th>Brother Care Duration</th>
+                                    <th>Barracuda Warranty</th>
+                                    <th>Barracuda Duration</th>
+                                    <th>Brother Plus Warranty</th>
+                                    <th>Amazon Dart</th>
+                                    <th>BR Refresh</th>
+                                    <th>Barracuda</th>
+                                    <th>Brother Plus</th>
+                                    <th>Cross Plant Material</th>
+                                    <th>Distribution Status</th>
+                                    <th>Chain Status</th>
+                                    <th>B1 Price Setup</th>
+                                    <th>BR Price Setup</th>
+                                    <th>Drum Order</th>
+                                    <th>Waste Toner</th>
+                                    <th>Belt Unit</th>
+                                    <th>Claim Order</th>
+                                </tr>
+                            </thead>
+                            <tbody id="reportTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <button class="export-btn" onclick="exportModelReport()">
-                <i class="fas fa-file-excel"></i> Export Excel
-            </button>
-        </div>
-
-        <div class="report-table-wrapper">
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th>Model</th>
-                        <th>Country</th>
-                        <th>EAN</th>
-                        <th>Standard Warranty</th>
-                        <th>Standard Duration</th>
-                        <th>Extended Warranty</th>
-                        <th>Extended Duration</th>
-                        <th>Brother Care</th>
-                        <th>Brother Care Duration</th>
-                        <th>Barracuda Warranty</th>
-                        <th>Barracuda Duration</th>
-                        <th>Brother Plus Warranty</th>
-                        <th>Amazon Dart</th>
-                        <th>BR Refresh</th>
-                        <th>Barracuda</th>
-                        <th>Brother Plus</th>
-                        <th>Cross Plant Material</th>
-                        <th>X Distribution Status</th>
-                        <th>D Chain Status</th>
-                        <th>B1 Price Setup</th>
-                        <th>BR Price Setup</th>
-                        <th>Drum Order</th>
-                        <th>Waste Toner</th>
-                        <th>Belt Unit</th>
-                        <th>Claim Order</th>
-                    </tr>
-                </thead>
-                <tbody id="reportTableBody"></tbody>
-            </table>
-        </div>
-    </div>
-</div>
             <!-- Model Setup Page (placeholder) -->
             <div id="newModel" class="page">
-                <div class="placeholder-page">
-                    <h1>Model Setup</h1>
-                    <p>Create / Edit Model UI will appear here.</p>
-                </div>
+                <iframe src="modelsetup.html" style=" 
+
+                    width:100%; 
+
+                  height:calc(100vh - 70px); 
+
+                    border:none; 
+
+                    border-radius:18px; 
+
+                    background:transparent;">
+
+                </iframe>
             </div>
             <div id="modelChange" class="page">
                 <div class="placeholder-page">
@@ -1518,12 +1556,17 @@
                 const response = await fetch(`/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`);
                 const data = await response.json();
                 const results = data.d?.results;
-                if (!results || results.length === 0) {
-                    document.getElementById("result").innerHTML = `<div class="no-data">No data found</div>`;
+                // const record = data.d;
+
+                if (!record) {
+                    document.getElementById("result").innerHTML =
+                        '<div class="no-data">No data found</div>';
                     return;
                 }
+
+                // loadModelDetails(record);
                 const firstRecord = results[0];
-                loadModelDetails(firstRecord);
+
             } catch (error) {
                 document.getElementById("result").innerHTML = `<div class="no-data">${error.message || "Search failed"}</div>`;
             }
@@ -1538,11 +1581,23 @@
                     height="1400px"
                     style="border:none; border-radius:18px; background:transparent;">
                 </iframe>
+
+
             `;
         }
+        const createdModel =
+
+            JSON.parse(
+                localStorage.getItem(
+
+                    "createdModel"
+
+                ) || "{}"
+
+            );
 
         // Model Report Functions
-         async function loadModelReport() {
+        async function loadModelReport() {
 
             try {
 
@@ -1567,8 +1622,68 @@
 
                 const data = await response.json();
 
-                const results =
+                // const results =
+                //     data.d?.results || [];
+                let results =
+
                     data.d?.results || [];
+
+
+
+                if (createdModel.matnr) {
+
+
+
+                    results.unshift({
+
+
+                        Matnr:
+
+                            createdModel.matnr,
+
+
+
+                        Country:
+
+                            createdModel.country,
+
+
+
+                        Ean11:
+
+                            createdModel.ean11,
+
+
+
+                        StandardWarranty:
+                            createdModel.standardWarranty,
+
+
+
+                        Amazondart:
+
+                            createdModel.amazondart,
+
+
+
+                        DrumOrder:
+
+                            createdModel.drumOrder,
+
+
+
+                        Claimorder:
+
+                            createdModel.claimOrder
+
+
+
+                    });
+
+
+
+                }
+
 
                 document.getElementById(
                     "modelCount"
@@ -1586,20 +1701,20 @@
         }
 
         function buildCards(results) {
-    document.getElementById("modelCards").innerHTML = results.map(r => {
-        const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
-        const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BarracudaWarranty].filter(x => x === "X").length;
-        const orders   = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit, r.Claimorder].filter(x => x === "X").length;
-        const pricing  = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
+            document.getElementById("modelCards").innerHTML = results.map(r => {
+                const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
+                const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BarracudaWarranty].filter(x => x === "X").length;
+                const orders = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit, r.Claimorder].filter(x => x === "X").length;
+                const pricing = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
 
-        const status = warranty >= 2 ? "Ready" : "Review";
+                const status = warranty >= 2 ? "Ready" : "Review";
 
-        const progPct = Math.round((programs / 4) * 100);
-        const warrPct = Math.round((warranty / 3) * 100);
-        const ordPct  = Math.round((orders / 5) * 100);
-        const pricPct = Math.round((pricing / 2) * 100);
+                const progPct = Math.round((programs / 4) * 100);
+                const warrPct = Math.round((warranty / 3) * 100);
+                const ordPct = Math.round((orders / 5) * 100);
+                const pricPct = Math.round((pricing / 2) * 100);
 
-        return `
+                return `
         <div class="report-model-card">
             <!-- Header -->
             <div class="card-top">
@@ -1652,8 +1767,8 @@
                 <i class="fas fa-eye"></i> View Details
             </button>
         </div>`;
-    }).join("");
-}
+            }).join("");
+        }
         function buildReportTable(results) {
 
             // ADD THESE 4 LINES HERE
@@ -1738,7 +1853,7 @@
 
                 }).join("");
         }
-        
+
         function resetModelReport() {
 
             document.getElementById(
@@ -1886,7 +2001,7 @@
             );
         }
     </script>
-     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </body>
 
 </html>

@@ -95,11 +95,13 @@ app.get("/api/model", async (req, res) => {
         const model = req.query.model;
         const country = req.query.country;
 
-        const filter =
-            `$filter=Matnr eq '${model}' and Country eq '${country}'`;
+        // const filter =
+        //     `$filter=Matnr eq '${model}' and Country eq '${country}'`;
+
+        const requestedFields = `Matnr='${model}',Country='${country}'`;
 
         const url =
-            `${ODATA_URL}Model_detailsSet?${filter}&$format=json`;
+            `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
 
         console.log("Calling:");
         console.log(url);
