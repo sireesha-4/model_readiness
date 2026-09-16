@@ -1549,28 +1549,60 @@
         }
         loadSearchValues();
 
+        // async function searchModel() {
+        //     const model = document.getElementById("model").value.trim();
+        //     const country = document.getElementById("country").value.trim();
+        //     try {
+        //         const response = await fetch(`/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`);
+        //         const data = await response.json();
+        //         const results = data.d?.results;
+        //         // const record = data.d;
+
+        //         if (!record) {
+        //             document.getElementById("result").innerHTML =
+        //                 '<div class="no-data">No data found</div>';
+        //             return;
+        //         }
+
+        //         // loadModelDetails(record);
+        //         const firstRecord = results[0];
+
+        //     } catch (error) {
+        //         document.getElementById("result").innerHTML = `<div class="no-data">${error.message || "Search failed"}</div>`;
+        //     }
+        // }
+
         async function searchModel() {
+
+            console.log("Search button clicked");
+
             const model = document.getElementById("model").value.trim();
             const country = document.getElementById("country").value.trim();
+
+            console.log("Model:", model);
+            console.log("Country:", country);
+
             try {
-                const response = await fetch(`/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`);
+                const response = await fetch(
+                    `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+                );
+
+                console.log("API called");
+
                 const data = await response.json();
+
+                console.log("Response:", data);
                 const results = data.d?.results;
-                // const record = data.d;
 
-                if (!record) {
-                    document.getElementById("result").innerHTML =
-                        '<div class="no-data">No data found</div>';
-                    return;
-                }
-
-                // loadModelDetails(record);
+                console.log(results);
                 const firstRecord = results[0];
-
+                console.log(firstRecord);
+                loadModelDetails(firstRecord);
             } catch (error) {
-                document.getElementById("result").innerHTML = `<div class="no-data">${error.message || "Search failed"}</div>`;
+                console.error(error);
             }
         }
+
 
         function loadModelDetails(r) {
             document.getElementById("dashboardContent").style.display = "none";
@@ -1584,6 +1616,8 @@
 
 
             `;
+            console.log("loadModelDetails called");
+            console.log(r);
         }
         const createdModel =
 
@@ -1739,7 +1773,6 @@
             ).innerHTML =
 
                 results.map(r => {
-
                     const status =
                         (
                             r.StandardWarranty === "X" ||
@@ -1953,8 +1986,6 @@
             );
         }
         function loadCreatedModelReport() {
-
-
 
             const model =
 

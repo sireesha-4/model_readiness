@@ -1,2249 +1,1132 @@
 const modelData = {};
-
 let currentStep = 1;
-
-
 
 loadStep();
 
-
-
-function loadStep() {
-
-
+function loadStep(){
 
     document.getElementById(
-
         "stepText"
-
     ).innerHTML =
-
-        `Step ${currentStep} of 6`;
-
-
+    `Step ${currentStep} of 6`;
 
     document
+    .querySelectorAll(".step")
+    .forEach((step,index)=>{
 
-        .querySelectorAll(".step")
+        step.classList.remove(
+            "active",
+            "completed"
+        );
 
-        .forEach((step, index) => {
+        const circle =
+            step.querySelector(".circle");
 
+        if(index + 1 < currentStep){
 
-
-            step.classList.remove(
-
-                "active",
-
+            step.classList.add(
                 "completed"
-
             );
 
+            circle.innerHTML =
+                "✓";
+        }
+        else{
 
+            circle.innerHTML =
+                (index + 1);
+        }
 
-            const circle =
+        if(index + 1 === currentStep){
 
-                step.querySelector(".circle");
-
-
-
-            if (index + 1 < currentStep) {
-
-
-
-                step.classList.add(
-
-                    "completed"
-
-                );
-
-
-
-                circle.innerHTML =
-
-                    "✓";
-
-            }
-
-            else {
-
-
-
-                circle.innerHTML =
-
-                    (index + 1);
-
-            }
-
-
-
-            if (index + 1 === currentStep) {
-
-
-
-                step.classList.add(
-
-                    "active"
-
-                );
-
-            }
-
-        });
-
-
+            step.classList.add(
+                "active"
+            );
+        }
+    });
 
     const area =
-
         document.getElementById(
-
             "contentArea"
-
         );
 
+    if(currentStep === 1){
 
+    area.innerHTML = `
 
-    if (currentStep === 1) {
+    <div class="card">
 
+        <h3>Material Information</h3>
 
+        <div class="grid">
 
-        area.innerHTML = ` 
+            <div class="form-group">
+                <label>Material Number *</label>
+                <input
+    type="text"
+    id="matnr"
+    value="${modelData.matnr || ''}"
+    placeholder="DCPL2550DW">
+            </div>
 
- 
+            <div class="form-group">
+                <label>Country *</label>
+                <select id="country">
+    <option ${modelData.country==="US"?"selected":""}>US</option>
+    <option ${modelData.country==="CA"?"selected":""}>CA</option>
+    <option ${modelData.country==="UK"?"selected":""}>UK</option>
+    <option ${modelData.country==="JP"?"selected":""}>JP</option>
+</select>
+            </div>
+
+            <div class="form-group">
+                <label>EAN *</label>
+                <input
+    type="text"
+    id="ean11"
+    value="${modelData.ean11 || ''}">
+
+            </div>
+
+            <div class="form-group">
+                <label>Cross Plant Material</label>
+                <input type="text"
+                       id="crossplant">
+            </div>
+
+            <div class="form-group">
+                <label>Material Type</label>
+                <input type="text"
+                       id="mtart">
+            </div>
+
+            <div class="form-group">
+                <label>Material Group</label>
+                <input type="text"
+                       id="matkl">
+            </div>
+
+            <div class="form-group">
+                <label>Base Unit</label>
+                <input type="text"
+                       id="meins">
+            </div>
+
+            <div class="form-group">
+                <label>Division</label>
+                <input type="text"
+                       id="spart">
+            </div>
+
+        </div>
+
+        <div class="btn-row">
+
+            <div></div>
+
+            <button
+                class="btn next"
+                onclick="nextStep()">
+
+                Next →
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+    if(currentStep === 2){
+
+    area.innerHTML = `
+
+    <div class="card">
+
+        <h3>Price Setup</h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>B1 Price Setup</label>
+                <select id="b1price">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>BR Price Setup</label>
+                <select id="brprice">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Condition Type</label>
+                <input
+                    type="text"
+                    id="kschl"
+                    placeholder="PR00">
+            </div>
+
+            <div class="form-group">
+                <label>Currency</label>
+                <select id="konwa">
+                    <option>USD</option>
+                    <option>CAD</option>
+                    <option>EUR</option>
+                    <option>JPY</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Price Amount</label>
+                <input
+                    type="number"
+                    id="kbetr"
+                    placeholder="199.99">
+            </div>
+
+            <div class="form-group">
+                <label>Price Unit</label>
+                <input
+                    type="number"
+                    id="kpein"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit Of Measure</label>
+                <input
+                    type="text"
+                    id="kmein"
+                    placeholder="EA">
+            </div>
+
+            <div class="form-group">
+                <label>Price Group</label>
+                <input
+                    type="text"
+                    id="kondm">
+            </div>
+
+            <div class="form-group">
+                <label>Valid From</label>
+                <input
+                    type="date"
+                    id="datab">
+            </div>
+
+            <div class="form-group">
+                <label>Valid To</label>
+                <input
+                    type="date"
+                    id="datbi">
+            </div>
+
+        </div>
+
+        <div class="btn-row">
+
+            <button
+                class="btn back"
+                onclick="backStep()">
+
+                ← Back
+
+            </button>
+
+            <button
+                class="btn next"
+                onclick="nextStep()">
+
+                Next →
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+    if(currentStep === 3){
+
+    area.innerHTML = `
+
+    <div class="card">
+
+        <h3>Warranty Setup</h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>Standard Warranty</label>
+                <select id="standardWarranty">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="standardLength"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+                <select id="standardUnit">
+                    <option>YR</option>
+                    <option>MON</option>
+                </select>
+            </div>
+
+            <div></div>
+
+            <div class="form-group">
+                <label>Extended Warranty</label>
+                <select id="extendedWarranty">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="extendedLength"
+                    placeholder="2">
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+                <select id="extendedUnit">
+                    <option>YR</option>
+                    <option>MON</option>
+                </select>
+            </div>
+
+            <div></div>
+
+            <div class="form-group">
+                <label>Brother Care Warranty</label>
+                <select id="brotherCareWarranty">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="brotherCareLength"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+                <select id="brotherCareUnit">
+                    <option>YR</option>
+                    <option>MON</option>
+                </select>
+            </div>
+
+            <div></div>
+
+            <div class="form-group">
+                <label>Barracuda Warranty</label>
+                <select id="barracudaWarranty">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="barracudaLength"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+                <select id="barracudaUnit">
+                    <option>YR</option>
+                    <option>MON</option>
+                </select>
+            </div>
+
+            <div></div>
+
+            <div class="form-group">
+                <label>Brother Plus Warranty</label>
+                <select id="brotherPlusWarranty">
+                    <option value="">Select</option>
+                    <option value="X">Enabled</option>
+                    <option value="">Disabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Length</label>
+                <input
+                    type="number"
+                    id="brotherPlusLength"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit</label>
+                <select id="brotherPlusUnit">
+                    <option>YR</option>
+                    <option>MON</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="btn-row">
+
+            <button
+                class="btn back"
+                onclick="backStep()">
+
+                ← Back
+
+            </button>
+
+            <button
+                class="btn next"
+                onclick="nextStep()">
+
+                Next →
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+   if(currentStep === 4){
+
+    area.innerHTML = `
+
+    <div class="card">
+
+        <h3>Compatibility & Programs</h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>Amazon Dart</label>
+                <select id="amazondart">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>BR Refresh</label>
+                <select id="brrefresh">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Barracuda Program</label>
+                <select id="barracuda">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Brother Plus</label>
+                <select id="bplus">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <h3 style="margin-top:20px;">
+            Distribution Configuration
+        </h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>X Distribution Status</label>
+                <select id="xdistr">
+                    <option value="">Inactive</option>
+                    <option value="X">Active</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>D Chain Status</label>
+                <select id="dchain">
+                    <option value="">Inactive</option>
+                    <option value="X">Active</option>
+                </select>
+            </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <h3 style="margin-top:20px;">
+            Consumables Compatibility
+        </h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>Supported Drum</label>
+                <input
+                    type="text"
+                    id="drumModel"
+                    placeholder="DR-730">
+            </div>
+
+            <div class="form-group">
+                <label>Supported Toner</label>
+                <input
+                    type="text"
+                    id="tonerModel"
+                    placeholder="TN-760">
+            </div>
+
+            <div class="form-group">
+                <label>Belt Unit</label>
+                <input
+                    type="text"
+                    id="beltModel"
+                    placeholder="BU-223CL">
+            </div>
+
+            <div class="form-group">
+                <label>Waste Toner Box</label>
+                <input
+                    type="text"
+                    id="wasteModel"
+                    placeholder="WT-223CL">
+            </div>
+
+        </div>
+
+        <div class="btn-row">
+
+            <button
+                class="btn back"
+                onclick="backStep()">
+
+                ← Back
+
+            </button>
+
+            <button
+                class="btn next"
+                onclick="nextStep()">
+
+                Next →
+
+            </button>
+
+        </div>
+
+    </div>
+
+    `;
+}
+
+  if(currentStep === 5){
+
+    area.innerHTML = `
+
+    <div class="card">
+
+        <h3>Order Types & Final Configuration</h3>
+
+        <div class="grid">
+
+            <div class="form-group">
+                <label>Backup Order</label>
+                <select id="backupOrder">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Drum Order</label>
+                <select id="drumOrder">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Waste Toner</label>
+                <select id="wasteToner">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Belt Unit</label>
+                <select id="beltUnit">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Claim Order</label>
+                <select id="claimOrder">
+                    <option value="">Disabled</option>
+                    <option value="X">Enabled</option>
+                </select>
+            </div>
+
+        </div>
+
+        <hr class="section-divider">
+
+        <h3 style="margin-top:20px;">
+            Review Summary
+        </h3>
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <h4>Model Information</h4>
+
+                <p>
+                    Verify material,
+                    country and EAN
+                    before saving.
+                </p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h4>Pricing</h4>
+
+                <p>
+                    Verify pricing
+                    configuration and
+                    validity dates.
+                </p>
+
+            </div>
+
+            <div class="summary-card">
+
+                <h4>Warranty</h4>
+
+                <p>
+                    Verify all warranty
+                    programs and durations.
+                </p>
 
-    <div class="card"> 
+            </div>
 
- 
+            <div class="summary-card">
 
-        <h3>Material Information</h3> 
+                <h4>Programs</h4>
 
- 
+                <p>
+                    Verify Amazon Dart,
+                    BR Refresh,
+                    Barracuda and
+                    Brother Plus.
+                </p>
 
-        <div class="grid"> 
+            </div>
 
- 
+        </div>
 
-            <div class="form-group"> 
+        <div class="btn-row">
 
-                <label>Material Number *</label> 
+    <button
+        class="btn back"
+        onclick="backStep()">
 
-                <input 
+        ← Back
 
-    type="text" 
+    </button>
 
-    id="matnr" 
+    <button
+        class="btn next"
+        onclick="nextStep()">
 
-    value="${modelData.matnr || ''}" 
+        Review →
 
-    placeholder="DCPL2550DW"> 
+    </button>
 
-            </div> 
+</div>
 
- 
+    </div>
 
-            <div class="form-group"> 
+    `;
+}
 
-                <label>Country *</label> 
+if(currentStep === 6){
 
-                <select id="country"> 
+    area.innerHTML = `
 
-    <option ${modelData.country === "US" ? "selected" : ""}>US</option> 
+    <div class="card">
 
-    <option ${modelData.country === "CA" ? "selected" : ""}>CA</option> 
+        <h3>
+            Review & Create Model
+        </h3>
 
-    <option ${modelData.country === "UK" ? "selected" : ""}>UK</option> 
+        <div class="review-grid">
 
-    <option ${modelData.country === "JP" ? "selected" : ""}>JP</option> 
+            <div class="review-card">
 
-</select> 
+                <h4>Model Information</h4>
 
-            </div> 
+                <p>
+                    Material :
+                    ${modelData.matnr || "-"}
+                </p>
 
- 
+                <p>
+                    Country :
+                    ${modelData.country || "-"}
+                </p>
 
-            <div class="form-group"> 
+                <p>
+                    EAN :
+                   ${modelData.ean11 || "-"}
+                </p>
 
-                <label>EAN *</label> 
+            </div>
 
-                <input 
+            <div class="review-card">
 
-    type="text" 
+                <h4>Pricing</h4>
 
-    id="ean11" 
+                <p>
+                    B1 Pricing Configured
+                </p>
 
-    value="${modelData.ean11 || ''}"> 
+            </div>
 
- 
+            <div class="review-card">
 
-            </div> 
+                <h4>Warranty</h4>
 
- 
+                <p>
+                    Warranty Details Added
+                </p>
 
-            <div class="form-group"> 
+            </div>
 
-                <label>Cross Plant Material</label> 
+            <div class="review-card">
 
-                <input type="text" 
+                <h4>Programs</h4>
 
-                       id="crossplant"> 
+                <p>
+                    Compatibility Configured
+                </p>
 
-            </div> 
+            </div>
 
- 
+        </div>
 
-            <div class="form-group"> 
+        <div class="btn-row">
 
-                <label>Material Type</label> 
+            <button
+                class="btn back"
+                onclick="backStep()">
 
-                <input type="text" 
+                ← Back
 
-                       id="mtart"> 
+            </button>
 
-            </div> 
+            <button
+                class="btn save"
+                onclick="showSuccessPage()">
 
- 
+                Create Model
 
-            <div class="form-group"> 
+            </button>
 
-                <label>Material Group</label> 
+        </div>
 
-                <input type="text" 
+    </div>
+    `;
+}
 
-                       id="matkl"> 
+const progress =
 
-            </div> 
+(
+    (currentStep - 1)
+    / 5
+)
+* 100;
 
- 
+const progressBar =
+    document.getElementById(
+        "wizardProgress"
+    );
 
-            <div class="form-group"> 
+if(progressBar){
 
-                <label>Base Unit</label> 
-
-                <input type="text" 
-
-                       id="meins"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Division</label> 
-
-                <input type="text" 
-
-                       id="spart"> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-            <div></div> 
-
- 
-
-            <button 
-
-                class="btn next" 
-
-                onclick="nextStep()"> 
-
- 
-
-                Next → 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
-    }
-
-
-
-    if (currentStep === 2) {
-
-
-
-        area.innerHTML = ` 
-
- 
-
-    <div class="card"> 
-
- 
-
-        <h3>Price Setup</h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>B1 Price Setup</label> 
-
-                <select id="b1price"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>BR Price Setup</label> 
-
-                <select id="brprice"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Condition Type</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="kschl" 
-
-                    placeholder="PR00"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Currency</label> 
-
-                <select id="konwa"> 
-
-                    <option>USD</option> 
-
-                    <option>CAD</option> 
-
-                    <option>EUR</option> 
-
-                    <option>JPY</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Price Amount</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="kbetr" 
-
-                    placeholder="199.99"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Price Unit</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="kpein" 
-
-                    placeholder="1"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit Of Measure</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="kmein" 
-
-                    placeholder="EA"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Price Group</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="kondm"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Valid From</label> 
-
-                <input 
-
-                    type="date" 
-
-                    id="datab"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Valid To</label> 
-
-                <input 
-
-                    type="date" 
-
-                    id="datbi"> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-            <button 
-
-                class="btn back" 
-
-                onclick="backStep()"> 
-
- 
-
-                ← Back 
-
- 
-
-            </button> 
-
- 
-
-            <button 
-
-                class="btn next" 
-
-                onclick="nextStep()"> 
-
- 
-
-                Next → 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
-    }
-
-
-
-    if (currentStep === 3) {
-
-
-
-        area.innerHTML = ` 
-
- 
-
-    <div class="card"> 
-
- 
-
-        <h3>Warranty Setup</h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Standard Warranty</label> 
-
-                <select id="standardWarranty"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Length</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="standardLength" 
-
-                    placeholder="1"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit</label> 
-
-                <select id="standardUnit"> 
-
-                    <option>YR</option> 
-
-                    <option>MON</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div></div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Extended Warranty</label> 
-
-                <select id="extendedWarranty"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Length</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="extendedLength" 
-
-                    placeholder="2"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit</label> 
-
-                <select id="extendedUnit"> 
-
-                    <option>YR</option> 
-
-                    <option>MON</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div></div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Brother Care Warranty</label> 
-
-                <select id="brotherCareWarranty"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Length</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="brotherCareLength" 
-
-                    placeholder="1"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit</label> 
-
-                <select id="brotherCareUnit"> 
-
-                    <option>YR</option> 
-
-                    <option>MON</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div></div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Barracuda Warranty</label> 
-
-                <select id="barracudaWarranty"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Length</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="barracudaLength" 
-
-                    placeholder="1"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit</label> 
-
-                <select id="barracudaUnit"> 
-
-                    <option>YR</option> 
-
-                    <option>MON</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div></div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Brother Plus Warranty</label> 
-
-                <select id="brotherPlusWarranty"> 
-
-                    <option value="">Select</option> 
-
-                    <option value="X">Enabled</option> 
-
-                    <option value="">Disabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Length</label> 
-
-                <input 
-
-                    type="number" 
-
-                    id="brotherPlusLength" 
-
-                    placeholder="1"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Unit</label> 
-
-                <select id="brotherPlusUnit"> 
-
-                    <option>YR</option> 
-
-                    <option>MON</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-            <button 
-
-                class="btn back" 
-
-                onclick="backStep()"> 
-
- 
-
-                ← Back 
-
- 
-
-            </button> 
-
- 
-
-            <button 
-
-                class="btn next" 
-
-                onclick="nextStep()"> 
-
- 
-
-                Next → 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
-    }
-
-
-
-    if (currentStep === 4) {
-
-
-
-        area.innerHTML = ` 
-
- 
-
-    <div class="card"> 
-
- 
-
-        <h3>Compatibility & Programs</h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Amazon Dart</label> 
-
-                <select id="amazondart"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>BR Refresh</label> 
-
-                <select id="brrefresh"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Barracuda Program</label> 
-
-                <select id="barracuda"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Brother Plus</label> 
-
-                <select id="bplus"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <hr class="section-divider"> 
-
- 
-
-        <h3 style="margin-top:20px;"> 
-
-            Distribution Configuration 
-
-        </h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>X Distribution Status</label> 
-
-                <select id="xdistr"> 
-
-                    <option value="">Inactive</option> 
-
-                    <option value="X">Active</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>D Chain Status</label> 
-
-                <select id="dchain"> 
-
-                    <option value="">Inactive</option> 
-
-                    <option value="X">Active</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <hr class="section-divider"> 
-
- 
-
-        <h3 style="margin-top:20px;"> 
-
-            Consumables Compatibility 
-
-        </h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Supported Drum</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="drumModel" 
-
-                    placeholder="DR-730"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Supported Toner</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="tonerModel" 
-
-                    placeholder="TN-760"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Belt Unit</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="beltModel" 
-
-                    placeholder="BU-223CL"> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Waste Toner Box</label> 
-
-                <input 
-
-                    type="text" 
-
-                    id="wasteModel" 
-
-                    placeholder="WT-223CL"> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-            <button 
-
-                class="btn back" 
-
-                onclick="backStep()"> 
-
- 
-
-                ← Back 
-
- 
-
-            </button> 
-
- 
-
-            <button 
-
-                class="btn next" 
-
-                onclick="nextStep()"> 
-
- 
-
-                Next → 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
-    }
-
-
-
-    if (currentStep === 5) {
-
-
-
-        area.innerHTML = ` 
-
- 
-
-    <div class="card"> 
-
- 
-
-        <h3>Order Types & Final Configuration</h3> 
-
- 
-
-        <div class="grid"> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Backup Order</label> 
-
-                <select id="backupOrder"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Drum Order</label> 
-
-                <select id="drumOrder"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Waste Toner</label> 
-
-                <select id="wasteToner"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Belt Unit</label> 
-
-                <select id="beltUnit"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-            <div class="form-group"> 
-
-                <label>Claim Order</label> 
-
-                <select id="claimOrder"> 
-
-                    <option value="">Disabled</option> 
-
-                    <option value="X">Enabled</option> 
-
-                </select> 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <hr class="section-divider"> 
-
- 
-
-        <h3 style="margin-top:20px;"> 
-
-            Review Summary 
-
-        </h3> 
-
- 
-
-        <div class="summary-grid"> 
-
- 
-
-            <div class="summary-card"> 
-
- 
-
-                <h4>Model Information</h4> 
-
- 
-
-                <p> 
-
-                    Verify material, 
-
-                    country and EAN 
-
-                    before saving. 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="summary-card"> 
-
- 
-
-                <h4>Pricing</h4> 
-
- 
-
-                <p> 
-
-                    Verify pricing 
-
-                    configuration and 
-
-                    validity dates. 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="summary-card"> 
-
- 
-
-                <h4>Warranty</h4> 
-
- 
-
-                <p> 
-
-                    Verify all warranty 
-
-                    programs and durations. 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="summary-card"> 
-
- 
-
-                <h4>Programs</h4> 
-
- 
-
-                <p> 
-
-                    Verify Amazon Dart, 
-
-                    BR Refresh, 
-
-                    Barracuda and 
-
-                    Brother Plus. 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-    <button 
-
-        class="btn back" 
-
-        onclick="backStep()"> 
-
- 
-
-        ← Back 
-
- 
-
-    </button> 
-
- 
-
-    <button 
-
-        class="btn next" 
-
-        onclick="nextStep()"> 
-
- 
-
-        Review → 
-
- 
-
-    </button> 
-
- 
-
-</div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
-    }
-
-
-
-    if (currentStep === 6) {
-
-
-
-        area.innerHTML = ` 
-
- 
-
-    <div class="card"> 
-
- 
-
-        <h3> 
-
-            Review & Create Model 
-
-        </h3> 
-
- 
-
-        <div class="review-grid"> 
-
- 
-
-            <div class="review-card"> 
-
- 
-
-                <h4>Model Information</h4> 
-
- 
-
-                <p> 
-
-                    Material : 
-
-                    ${modelData.matnr || "-"} 
-
-                </p> 
-
- 
-
-                <p> 
-
-                    Country : 
-
-                    ${modelData.country || "-"} 
-
-                </p> 
-
- 
-
-                <p> 
-
-                    EAN : 
-
-                   ${modelData.ean11 || "-"} 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="review-card"> 
-
- 
-
-                <h4>Pricing</h4> 
-
- 
-
-                <p> 
-
-                    B1 Pricing Configured 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="review-card"> 
-
- 
-
-                <h4>Warranty</h4> 
-
- 
-
-                <p> 
-
-                    Warranty Details Added 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-            <div class="review-card"> 
-
- 
-
-                <h4>Programs</h4> 
-
- 
-
-                <p> 
-
-                    Compatibility Configured 
-
-                </p> 
-
- 
-
-            </div> 
-
- 
-
-        </div> 
-
- 
-
-        <div class="btn-row"> 
-
- 
-
-            <button 
-
-                class="btn back" 
-
-                onclick="backStep()"> 
-
- 
-
-                ← Back 
-
- 
-
-            </button> 
-
- 
-
-            <button 
-
-                class="btn save" 
-
-                onclick="showSuccessPage()"> 
-
- 
-
-                Create Model 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
-    `;
-
-    }
-
-
-
-    const progress =
-
-
-
-        (
-
-            (currentStep - 1)
-
-            / 5
-
-        )
-
-        * 100;
-
-
-
-    const progressBar =
-
-        document.getElementById(
-
-            "wizardProgress"
-
-        );
-
-
-
-    if (progressBar) {
-
-
-
-        progressBar.style.width =
-
-            progress + "%";
-
-
-
-    }
-
-
+    progressBar.style.width =
+        progress + "%";
 
 }
 
+}
 
-
-function nextStep() {
-
-
+function nextStep(){
 
     saveCurrentStepData();
 
-
-
-    if (currentStep < 6) {
-
-
+    if(currentStep < 6){
 
         currentStep++;
 
-
-
         loadStep();
 
-
-
     }
-
 }
 
 
+function backStep(){
 
-function backStep() {
-
-
-
-    if (currentStep > 1) {
-
-
+    if(currentStep > 1){
 
         currentStep--;
 
-
-
         loadStep();
-
     }
-
-
 
 }
 
+function saveCurrentStepData(){
 
-
-function saveCurrentStepData() {
-
-
-
-    if (currentStep === 1) {
-
-
+    if(currentStep === 1){
 
         modelData.matnr =
-
             document.getElementById("matnr")?.value || "";
 
-
-
         modelData.country =
-
             document.getElementById("country")?.value || "";
 
-
-
         modelData.ean11 =
-
             document.getElementById("ean11")?.value || "";
 
-
-
         modelData.crossplant =
-
             document.getElementById("crossplant")?.value || "";
-
     }
 
-
-
-    if (currentStep === 2) {
-
-
+    if(currentStep === 2){
 
         modelData.price =
-
             document.getElementById("kbetr")?.value || "";
 
-
-
         modelData.currency =
-
             document.getElementById("konwa")?.value || "";
-
     }
 
-
-
-    if (currentStep === 3) {
-
-
+    if(currentStep === 3){
 
         modelData.standardWarranty =
-
             document.getElementById("standardWarranty")?.value || "";
 
-
-
         modelData.extendedWarranty =
-
             document.getElementById("extendedWarranty")?.value || "";
-
     }
 
-
-
-    if (currentStep === 4) {
-
-
+    if(currentStep === 4){
 
         modelData.amazondart =
-
             document.getElementById("amazondart")?.value || "";
 
-
-
         modelData.brrefresh =
-
             document.getElementById("brrefresh")?.value || "";
-
     }
 
-
-
-    if (currentStep === 5) {
-
-
+    if(currentStep === 5){
 
         modelData.drumOrder =
-
             document.getElementById("drumOrder")?.value || "";
 
-
-
         modelData.claimOrder =
-
             document.getElementById("claimOrder")?.value || "";
-
     }
-
 }
 
-
-
-async function saveModel() {
-
-
+async function saveModel(){
 
     const payload = {
 
-
-
         Matnr:
-
             document.getElementById("matnr")?.value || "",
 
-
-
         Country:
-
             document.getElementById("country")?.value || "",
 
-
-
         Ean11:
-
             document.getElementById("ean11")?.value || "",
 
-
-
         CrossplantMaterial:
-
             document.getElementById("crossplant")?.value || "",
 
-
-
         B1priceSetup:
-
             document.getElementById("b1price")?.value || "",
 
-
-
         BrpriceSetup:
-
             document.getElementById("brprice")?.value || "",
 
-
-
         StandardWarranty:
-
             document.getElementById("standardWarranty")?.value || "",
 
-
-
         ExtendedWarranty:
-
             document.getElementById("extendedWarranty")?.value || "",
 
-
-
         BrothercareWarranty:
-
             document.getElementById("brotherCareWarranty")?.value || "",
 
-
-
         BarracudaWarranty:
-
             document.getElementById("barracudaWarranty")?.value || "",
 
-
-
         BrotherplusWarranty:
-
             document.getElementById("brotherPlusWarranty")?.value || "",
 
-
-
         Amazondart:
-
             document.getElementById("amazondart")?.value || "",
 
-
-
         Brrefresh:
-
             document.getElementById("brrefresh")?.value || "",
 
-
-
         Barracuda:
-
             document.getElementById("barracuda")?.value || "",
 
-
-
         Bplus:
-
             document.getElementById("bplus")?.value || "",
 
-
-
         BackupOrder:
-
             document.getElementById("backupOrder")?.value || "",
 
-
-
         DrumOrder:
-
             document.getElementById("drumOrder")?.value || "",
 
-
-
         WasteToner:
-
             document.getElementById("wasteToner")?.value || "",
 
-
-
         BeltUnit:
-
             document.getElementById("beltUnit")?.value || "",
 
-
-
         Claimorder:
-
             document.getElementById("claimOrder")?.value || ""
-
-
 
     };
 
-
-
     console.log(payload);
 
-
-
     alert(
-
         "Model Data Ready For SAP POST"
-
     );
 
-
-
 }
 
 
-
-function showSuccessPage() {
-
-
+function showSuccessPage(){
 
     document.querySelector(
+    ".stepper"
+).style.display =
+"none";
 
-        ".stepper"
-
-    ).style.display =
-
-        "none";
-
-
-
-    document.getElementById(
-
-        "stepText"
-
-    ).style.display =
-
-        "none";
-
-
+document.getElementById(
+    "stepText"
+).style.display =
+"none";
 
     document.getElementById(
-
         "contentArea"
+    ).innerHTML = `
 
-    ).innerHTML = ` 
+    <div class="success-card">
 
- 
+    <div class="success-animation">
 
-    <div class="success-card"> 
+    <span class="confetti c1">✦</span>
+    <span class="confetti c2">●</span>
+    <span class="confetti c3">◆</span>
+    <span class="confetti c4">✦</span>
 
- 
+    <span class="confetti c5">●</span>
+    <span class="confetti c6">◆</span>
+    <span class="confetti c7">✦</span>
+    <span class="confetti c8">●</span>
 
-        <div class="success-animation"> 
+    <div class="success-icon">
+        ✓
+    </div>
 
- 
+</div>
 
-    <span class="confetti c1">✦</span> 
+        <h2>
+   Model Created Successfully!
+</h2>
 
-    <span class="confetti c2">●</span> 
+<p>
 
-    <span class="confetti c3">◆</span> 
+Model
 
-    <span class="confetti c4">✦</span> 
+<strong>${modelData.matnr}</strong>
 
- 
+created for
 
-    <div class="success-icon"> 
+<strong>${modelData.country}</strong>
 
- 
+</p>
 
-        ✓ 
+        <div class="success-buttons">
 
- 
+           <button
+class="btn next"
+onclick="toggleCreatedModelDetails()">
 
-    </div> 
+View Created Model
 
- 
+</button>
 
-</div> 
 
- 
+            <button
+                class="btn save"
+                onclick="location.reload()">
 
-        <h2> 
+                Create Another Model
 
-   Model Created Successfully! 
+            </button>
 
-</h2> 
+        </div>
 
- 
+        
 
-<p> 
+        <div id="createdModelPanel"
+     class="created-model-panel"
+     style="display:none">
 
- 
+    <div class="detail-card">
+        <h3>Model Information</h3>
 
-Model 
+        <p><b>Model :</b> ${modelData.matnr || "-"}</p>
+        <p><b>Country :</b> ${modelData.country || "-"}</p>
+        <p><b>EAN :</b> ${modelData.ean11 || "-"}</p>
+        <p><b>Cross Plant :</b> ${modelData.crossplant || "-"}</p>
+    </div>
 
- 
+    <div class="detail-card">
+        <h3>Pricing</h3>
 
-<strong>${modelData.matnr}</strong> 
+        <p><b>Price :</b>
+        ${modelData.price || "-"} ${modelData.currency || ""}</p>
 
- 
+        <p><b>B1 Price :</b>
+        ${modelData.b1price || "-"}</p>
 
-created for 
+        <p><b>BR Price :</b>
+        ${modelData.brprice || "-"}</p>
+    </div>
 
- 
+    <div class="detail-card">
+        <h3>Warranty</h3>
 
-<strong>${modelData.country}</strong> 
+        <p><b>Standard :</b>
+        ${modelData.standardWarranty || "-"}</p>
 
- 
+        <p><b>Extended :</b>
+        ${modelData.extendedWarranty || "-"}</p>
+    </div>
 
-</p> 
+    <div class="detail-card">
+        <h3>Programs</h3>
 
- 
+        <p><b>Amazon Dart :</b>
+        ${modelData.amazondart || "-"}</p>
 
-        <div class="success-buttons"> 
+        <p><b>BR Refresh :</b>
+        ${modelData.brrefresh || "-"}</p>
+    </div>
 
- 
+    <div class="detail-card">
+        <h3>Order Types</h3>
 
-           <button 
+        <p><b>Drum Order :</b>
+        ${modelData.drumOrder || "-"}</p>
 
-class="btn next" 
+        <p><b>Claim Order :</b>
+        ${modelData.claimOrder || "-"}</p>
+    </div>
 
-onclick="toggleCreatedModelDetails()"> 
+</div>
 
- 
+           
 
-View Created Model 
+        </div>
 
- 
+    </div>
 
-</button> 
-
- 
-
-            <button 
-
-                class="btn save" 
-
-                onclick="location.reload()"> 
-
- 
-
-                Create Another Model 
-
- 
-
-            </button> 
-
- 
-
-        </div> 
-
- 
-
-         
-
- 
-
-        <div id="createdModelPanel" 
-
-     class="created-model-panel" 
-
-     style="display:none"> 
-
- 
-
-    <div class="detail-card"> 
-
-        <h3>Model Information</h3> 
-
- 
-
-        <p><b>Model :</b> ${modelData.matnr || "-"}</p> 
-
-        <p><b>Country :</b> ${modelData.country || "-"}</p> 
-
-        <p><b>EAN :</b> ${modelData.ean11 || "-"}</p> 
-
-        <p><b>Cross Plant :</b> ${modelData.crossplant || "-"}</p> 
-
-    </div> 
-
- 
-
-    <div class="detail-card"> 
-
-        <h3>Pricing</h3> 
-
- 
-
-        <p><b>Price :</b> 
-
-        ${modelData.price || "-"} ${modelData.currency || ""}</p> 
-
- 
-
-        <p><b>B1 Price :</b> 
-
-        ${modelData.b1price || "-"}</p> 
-
- 
-
-        <p><b>BR Price :</b> 
-
-        ${modelData.brprice || "-"}</p> 
-
-    </div> 
-
- 
-
-    <div class="detail-card"> 
-
-        <h3>Warranty</h3> 
-
- 
-
-        <p><b>Standard :</b> 
-
-        ${modelData.standardWarranty || "-"}</p> 
-
- 
-
-        <p><b>Extended :</b> 
-
-        ${modelData.extendedWarranty || "-"}</p> 
-
-    </div> 
-
- 
-
-    <div class="detail-card"> 
-
-        <h3>Programs</h3> 
-
- 
-
-        <p><b>Amazon Dart :</b> 
-
-        ${modelData.amazondart || "-"}</p> 
-
- 
-
-        <p><b>BR Refresh :</b> 
-
-        ${modelData.brrefresh || "-"}</p> 
-
-    </div> 
-
- 
-
-    <div class="detail-card"> 
-
-        <h3>Order Types</h3> 
-
- 
-
-        <p><b>Drum Order :</b> 
-
-        ${modelData.drumOrder || "-"}</p> 
-
- 
-
-        <p><b>Claim Order :</b> 
-
-        ${modelData.claimOrder || "-"}</p> 
-
-    </div> 
-
- 
-
-</div> 
-
- 
-
-            
-
- 
-
-        </div> 
-
- 
-
-    </div> 
-
- 
-
-    `;
-
+    `;
 }
 
-
-
-function toggleCreatedModelDetails() {
-
-
+function toggleCreatedModelDetails(){
 
     const panel =
-
         document.getElementById(
-
             "createdModelPanel"
-
         );
 
-
-
     panel.style.display =
-
         panel.style.display === "none"
-
-            ? "grid"
-
-            : "none";
-
-
+        ? "grid"
+        : "none";
 
 }
 
 
+function goDashboard(){
 
-function goDashboard() {
-
-
-
-    if (window.parent.showPage) {
-
-
+    if(window.parent.showPage){
 
         window.parent.showPage(
-
             "dashboard"
-
         );
-
     }
-
-} 
+}

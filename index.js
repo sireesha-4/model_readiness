@@ -82,7 +82,8 @@ app.post("/login", async (req, res) => {
 // =============================
 
 app.get("/api/model", async (req, res) => {
-
+console.log("===== /api/model Triggered =====");
+console.log(req.query);
     try {
 
         if (!req.session.sapAuth) {
@@ -99,9 +100,10 @@ app.get("/api/model", async (req, res) => {
         //     `$filter=Matnr eq '${model}' and Country eq '${country}'`;
 
         const requestedFields = `Matnr='${model}',Country='${country}'`;
-
+                             
         const url =
             `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
+            
 
         console.log("Calling:");
         console.log(url);
