@@ -1621,81 +1621,35 @@
                     );
 
                 const data = await response.json();
-
                 // const results =
                 //     data.d?.results || [];
                 let results =
-
                     data.d?.results || [];
-
-
-
                 if (createdModel.matnr) {
-
-
-
                     results.unshift({
-
-
                         Matnr:
-
                             createdModel.matnr,
-
-
-
                         Country:
-
                             createdModel.country,
-
-
-
                         Ean11:
-
                             createdModel.ean11,
-
-
-
                         StandardWarranty:
                             createdModel.standardWarranty,
-
-
-
                         Amazondart:
-
                             createdModel.amazondart,
-
-
-
                         DrumOrder:
-
                             createdModel.drumOrder,
-
-
-
                         Claimorder:
-
                             createdModel.claimOrder
-
-
-
                     });
-
-
-
                 }
-
-
                 document.getElementById(
                     "modelCount"
                 ).innerHTML =
                     `📋 Search Results : ${results.length} Models`;
-
                 buildCards(results);
-
                 buildReportTable(results);
-
             } catch (error) {
-
                 alert(error.message);
             }
         }
@@ -1793,9 +1747,7 @@
                         )
                             ? "Ready"
                             : "Review";
-
                     return `
- 
         <tr>
  
         <td>${r.Matnr || "-"}</td>
@@ -2000,6 +1952,74 @@
                 "active-menu"
             );
         }
+        function loadCreatedModelReport() {
+
+
+
+            const model =
+
+                JSON.parse(
+
+                    localStorage.getItem(
+
+                        "createdModel"
+
+                    ) || "{}"
+
+                );
+
+
+
+            if (!model.matnr) {
+
+                return;
+
+            }
+
+
+
+            buildCards([{
+
+                Matnr: model.matnr,
+
+                Country: model.country,
+
+                Ean11: model.ean11,
+
+                StandardWarranty: model.standardWarranty,
+
+                Amazondart: model.amazondart
+
+            }]);
+
+
+
+            buildReportTable([{
+
+                Matnr: model.matnr,
+
+                Country: model.country,
+
+                Ean11: model.ean11,
+
+                StandardWarranty: model.standardWarranty,
+
+                Amazondart: model.amazondart
+
+            }]);
+
+
+
+            document.getElementById(
+
+                "modelCount"
+
+            ).innerHTML =
+
+                "1 Model Found";
+
+        }
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </body>
