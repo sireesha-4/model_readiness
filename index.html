@@ -22,39 +22,116 @@
         }
 
         /* ========== LOGIN ========== */
-        #loginSection {
+        /* #loginSection {
             display: flex;
             height: 100vh;
+            background: #061224;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Soft background glow 
+        #loginSection::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+            top: -150px;
+            left: -100px;
+            pointer-events: none;
+        }
+
+        #loginSection::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
+            bottom: -100px;
+            right: -50px;
+            pointer-events: none;
         }
 
         .login-left {
-            width: 42%;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: white;
+            width: 45%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 80px 70px;
+            padding: 60px 70px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .login-logo {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .login-brand-text {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f1f5f9;
+            letter-spacing: -0.5px;
+        }
+
+        .login-brand-text span {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            color: #94a3b8;
+            margin-top: 2px;
         }
 
         .welcome {
             font-size: 13px;
+            color: #94a3b8;
             margin-bottom: 8px;
-            opacity: 0.8;
+            /* margin-bottom: 8px;
+            opacity: 0.8; 
         }
 
         .login-left h1 {
             font-size: 36px;
-            margin-bottom: 10px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            color: #f1f5f9;
+            margin-bottom: 10px;
+            letter-spacing: -0.8px;
         }
 
         .subtitle {
-            margin-bottom: 36px;
             font-size: 15px;
-            opacity: 0.8;
+            color: #94a3b8;
+            margin-bottom: 36px;
         }
+
+        /* Glass card for the form 
+        .login-form-card {
+            background: rgba(22, 34, 56, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 28px 26px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+        }
+
 
         .login-left input {
             width: 100%;
@@ -63,8 +140,18 @@
             border: 1px solid #334155;
             border-radius: 10px;
             font-size: 14px;
-            background: #1e293b;
+            background: rgba(15, 28, 46, 0.7);
             color: #e2e8f0;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .login-left input:focus {
+            border-color: #2563eb;
+        }
+
+        .login-left input::placeholder {
+            color: #64748b;
         }
 
         .login-left input::placeholder {
@@ -76,27 +163,297 @@
             padding: 13px;
             border: none;
             border-radius: 10px;
-            background: #2563eb;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
             color: white;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
             transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
         }
 
         .login-btn:hover {
-            background: #1d4ed8;
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-1px);
         }
 
         #loginMessage {
             margin-top: 16px;
             color: #fca5a5;
             font-size: 13px;
+            text-align: center;
         }
 
         .login-right {
             flex: 1;
-            background: #0f172a;
+            background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-right-content {
+            text-align: center;
+            color: #94a3b8;
+            max-width: 320px;
+        }
+
+        .login-right-content i {
+            font-size: 64px;
+            color: #3b82f6;
+            opacity: 0.25;
+            margin-bottom: 20px;
+        }
+
+        .login-right-content h3 {
+            font-size: 20px;
+            color: #e2e8f0;
+            margin-bottom: 8px;
+        }
+
+        .login-right-content p {
+            font-size: 13.5px;
+            line-height: 1.5;
+        } */
+
+        /* ========== PREMIUM LOGIN PAGE – Exact Match ========== */
+        #loginSection {
+            display: flex;
+            height: 100vh;
+            background: #0a1628;
+            /* deeper, closer to the image background */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Soft glows – reduced intensity so they don’t fight the image */
+        #loginSection::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(30, 80, 180, 0.13) 0%, transparent 70%);
+            top: -200px;
+            left: -150px;
+            pointer-events: none;
+        }
+
+        #loginSection::after {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(20, 100, 180, 0.08) 0%, transparent 70%);
+            bottom: -120px;
+            right: -80px;
+            pointer-events: none;
+        }
+
+        /* LEFT – Form */
+        .login-left {
+            width: 48%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-form-card {
+            width: 100%;
+            max-width: 460px;
+            padding: 48px 42px;
+            border-radius: 22px;
+            background: rgba(15, 28, 46, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            /* Soft lighting / glow around the card */
+            box-shadow:
+                0 0 0 1px rgba(96, 165, 250, 0.08),
+                0 20px 50px rgba(0, 0, 0, 0.45),
+                0 0 40px rgba(37, 99, 235, 0.15),
+                0 0 80px rgba(37, 99, 235, 0.08);
+        }
+
+        .login-logo-box {
+            width: 150px;
+            min-width: 160px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(15, 28, 46, 0.78));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 16px;
+            margin: 0 auto 20px;
+            /* box-shadow:
+               0 4px 12px rgba(37, 99, 235, 0.35),
+               0 0 18px rgba(59, 130, 246, 0.25); */
+        }
+
+        .brother-logo-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.15;
+        }
+
+        .brother-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            align-items: center;
+            letter-spacing: -0.6px;
+        }
+
+        .brother-tagline {
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            letter-spacing: 0.4px;
+        }
+
+        .login-form-card h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 8px;
+        }
+
+        .login-form-card .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12.5px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 14px 14px 14px 44px;
+            background: rgba(10, 20, 35, 0.85);
+            border: 1px solid #334155;
+            border-radius: 11px;
+            color: #e2e8f0;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #2563eb;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            font-weight: 600;
+            font-size: 15.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 22px rgba(37, 99, 235, 0.4);
+        }
+
+        .login-btn:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+        }
+
+        #loginMessage {
+            margin-top: 14px;
+            text-align: center;
+            color: #fca5a5;
+            font-size: 13px;
+        }
+
+        /* RIGHT – Larger Image */
+        .login-right {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 50px 20px 20px;
+            position: relative;
+            z-index: 1;
+            background: #0a1628;
+            /* match page background */
+        }
+
+        .printer-showcase {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 700px;
+            background: transparent;
+        }
+
+        .printer-image {
+            width: 100%;
+            max-width: 680px;
+            height: auto;
+            object-fit: contain;
+            /* Softens the hard edges of the image background */
+            mix-blend-mode: lighten;
+            /* try this first */
+            /* OR use the alternative below if lighten is too strong */
+        }
+
+        /* Hide floating badges (already in image) */
+        .floating-badge,
+        .printer-glow {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            #loginSection {
+                flex-direction: column;
+            }
+
+            .login-left {
+                width: 100%;
+                padding: 40px 20px;
+            }
+
+            .login-right {
+                display: none;
+            }
         }
 
         /* ========== APP LAYOUT ========== */
@@ -208,6 +565,7 @@
             margin-top: auto;
             padding: 14px 14px 22px;
             z-index: 2;
+            position: relative;
         }
 
         .sidebar-logout-btn {
@@ -1174,7 +1532,7 @@
 <body>
 
     <!-- LOGIN -->
-    <div id="loginSection">
+    <!-- <div id="loginSection">
         <div class="login-left">
             <div class="welcome">Welcome To</div>
             <h1>Model Setup</h1>
@@ -1187,6 +1545,55 @@
             <p id="loginMessage"></p>
         </div>
         <div class="login-right"></div>
+    </div> -->
+    <!-- LOGIN -->
+    <!-- LOGIN -->
+    <div id="loginSection">
+        <!-- LEFT: Form -->
+        <div class="login-left">
+            <div class="login-form-card">
+                <div class="login-logo-box">
+                    <div class="brother-logo-text">
+                        <span class="brother-name">brother</span>
+                        <span class="brother-tagline">at your side</span>
+                    </div>
+                </div>
+                <h1>Model Setup</h1>
+                <p class="subtitle">Sign in to configure your Brother device.</p>
+
+                <form onsubmit="login(); return false;">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="username" placeholder="Enter your username" autocomplete="username">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" placeholder="Enter your password"
+                                autocomplete="current-password">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn">
+                        Sign In <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+
+                <p id="loginMessage"></p>
+            </div>
+        </div>
+
+        <!-- RIGHT: Printer Image -->
+        <div class="login-right">
+            <div class="printer-showcase">
+                <img src="loginimage1.png" alt="Brother Printer" class="printer-image">
+            </div>
+        </div>
     </div>
 
     <!-- APPLICATION -->
