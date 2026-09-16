@@ -969,30 +969,18 @@
                 );
 
 
-                /*
-                 * KEEPING YOUR EXISTING ODATA STRUCTURE
-                 */
-
-                const results =
+                const r =
                     data &&
-                        data.d &&
-                        Array.isArray(data.d.results)
-                        ? data.d.results
-                        : [];
+                        data.d
+                        ? data.d
+                        : null;
 
-
-                if (results.length === 0) {
+                if (!r) {
 
                     throw new Error(
                         "No model details were returned from SAP."
                     );
-
                 }
-
-
-                const r =
-                    results[0];
-
 
                 /* =====================================================
                    DYNAMIC COUNTS
@@ -1064,8 +1052,6 @@
                 ).textContent =
                     displayStatus;
 
-
-
                 /* =====================================================
                    RENDER PAGE
                 ===================================================== */
@@ -1073,7 +1059,6 @@
                 document.getElementById(
                     "details"
                 ).innerHTML = `
-
 
                     <!-- =============================================
                          HERO
@@ -1136,7 +1121,6 @@
     </div>
 </div>
 
-
                     <!-- =============================================
                          TABS
                     ============================================== -->
@@ -1144,7 +1128,6 @@
                     <div class="tabs-wrapper">
 
                         <div class="tabs">
-
 
                             <button
                                 class="tab active"
@@ -1154,57 +1137,37 @@
 
                             </button>
 
-
                             <button
                                 class="tab"
                                 data-tab="programs">
-
                                 ▦ Programs
-
                             </button>
-
 
                             <button
                                 class="tab"
                                 data-tab="warranty">
-
                                 ♢ Warranty
-
                             </button>
-
 
                             <button
                                 class="tab"
                                 data-tab="orders">
-
                                 🛒 Order Setup
-
                             </button>
-
 
                             <button
                                 class="tab"
                                 data-tab="pricing">
-
                                 ◇ Pricing Setup
-
                             </button>
-
 
                             <button
                                 class="tab"
                                 data-tab="status">
-
                                 〽 Status
-
                             </button>
-
-
                         </div>
-
                     </div>
-
-
 
                     <!-- =============================================
                          TAB CONTENT
@@ -1213,7 +1176,6 @@
                     <div
                         id="tabContent"
                         class="content-container">
-
 
                         <!-- OVERVIEW -->
 
@@ -1229,9 +1191,7 @@
                                 Key information and readiness status for this model.
                             </div>
 
-
                             <div class="overview-grid">
-
 
                                 <!-- GENERAL -->
 
@@ -1241,9 +1201,7 @@
                                         ℹ General Information
                                     </div>
 
-
                                     <div class="info-body">
-
 
                                         <div class="info-row">
 
@@ -1254,9 +1212,7 @@
                                             <span class="info-value">
                                                 ${safeValue(r.Matnr)}
                                             </span>
-
                                         </div>
-
 
                                         <div class="info-row">
 
@@ -1267,12 +1223,9 @@
                                             <span class="info-value">
                                                 ${safeValue(r.Country)}
                                             </span>
-
                                         </div>
 
-
                                         <div class="info-row">
-
                                             <span class="info-label">
                                                 EAN
                                             </span>
@@ -1280,13 +1233,9 @@
                                             <span class="info-value">
                                                 ${safeValue(r.Ean11)}
                                             </span>
-
                                         </div>
                                     </div>
-
                                 </div>
-
-
 
                                 <!-- QUICK STATUS -->
 
@@ -1296,12 +1245,9 @@
                                         ⚡ Quick Status
                                     </div>
 
-
                                     <div class="info-body">
 
-
                                         <div class="info-row">
-
                                             <span class="info-label">
                                                 Programs
                                             </span>
@@ -1312,7 +1258,6 @@
 
                                         </div>
 
-
                                         <div class="info-row">
 
                                             <span class="info-label">
@@ -1322,12 +1267,9 @@
                                             <span class="status-yes">
                                                 ${warrantyCount} Available
                                             </span>
-
                                         </div>
 
-
                                         <div class="info-row">
-
                                             <span class="info-label">
                                                 Orders
                                             </span>
@@ -1335,12 +1277,9 @@
                                             <span class="status-yes">
                                                 ${orderCount} Active
                                             </span>
-
                                         </div>
 
-
                                         <div class="info-row">
-
                                             <span class="info-label">
                                                 Overall Status
                                             </span>
@@ -1348,32 +1287,21 @@
                                             <span class="status-yes">
                                                 ${displayStatus}
                                             </span>
-
                                         </div>
-
-
                                     </div>
 
                                 </div>
 
-
-
                                 <!-- HIGHLIGHTS -->
-
                                 <div class="info-card">
 
                                     <div class="info-header highlight-header">
                                         ★ Highlights
                                     </div>
 
-
                                     <div class="info-body">
-
-
                                         <div class="highlight-row">
-
                                             <span class="highlight-text">
-
                                                 <span class="check">
                                                     ✓
                                                 </span>
@@ -1409,24 +1337,7 @@
                                         </div>
 
 
-                                        <div class="highlight-row">
-
-                                            <span class="highlight-text">
-
-                                                <span class="check">
-                                                    ✓
-                                                </span>
-
-                                                Cross plant material
-
-                                            </span>
-
-                                            ${r.CrossplantMaterial
-                        ? `<span class="status-yes">YES</span>`
-                        : `<span class="status-neutral">-</span>`
-                    }
-
-                                        </div>
+                                        
 
 
                                     </div>
