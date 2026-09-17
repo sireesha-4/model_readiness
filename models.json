@@ -1,0 +1,186 @@
+[
+  {
+    "Material": {
+      "MATNR": "fsd",
+      "WERKS": "dsfds",
+      "MTART": "dfds",
+      "MBRSH": "dfsds",
+      "MATKL": "",
+      "MEINS": "",
+      "EAN11": "dfs",
+      "MSTAE": "",
+      "MSTAV": "",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "KSCHL": "",
+      "SELKZB1": "",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "COUNTRY": "",
+      "STANDARD": "X",
+      "EXTENDED": ""
+    },
+    "Compatibility": {
+      "AMAZONDART": "X",
+      "BRREFRESH": "X"
+    },
+    "OrderType": {
+      "DRUM": "X",
+      "CLAIMORDER": "X"
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "Replenish",
+      "WERKS": "dfgff",
+      "MTART": "gffddfg",
+      "MBRSH": "",
+      "MATKL": "fgdf",
+      "MEINS": "gffd",
+      "EAN11": "fgd",
+      "MSTAE": "fd",
+      "MSTAV": "gdf",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "gdfdf",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "KSCHL": "",
+      "SELKZB1": "",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "COUNTRY": "",
+      "STANDARD": "X",
+      "EXTENDED": "X"
+    },
+    "Compatibility": {
+      "AMAZONDART": "X",
+      "BRREFRESH": "X"
+    },
+    "OrderType": {
+      "DRUM": "X",
+      "CLAIMORDER": ""
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "gdf",
+      "WERKS": "dfgd",
+      "MTART": "ddf",
+      "MBRSH": "",
+      "MATKL": "",
+      "MEINS": "",
+      "EAN11": "",
+      "MSTAE": "",
+      "MSTAV": "",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "KSCHL": "",
+      "SELKZB1": "",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "COUNTRY": "",
+      "STANDARD": "",
+      "EXTENDED": ""
+    },
+    "Compatibility": {
+      "AMAZONDART": "",
+      "BRREFRESH": "X"
+    },
+    "OrderType": {
+      "DRUM": "X",
+      "CLAIMORDER": ""
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "dfg",
+      "WERKS": "dfgf",
+      "MTART": "fdgdf",
+      "MBRSH": "",
+      "MATKL": "",
+      "MEINS": "",
+      "EAN11": "",
+      "MSTAE": "",
+      "MSTAV": "",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "KSCHL": "",
+      "SELKZB1": "",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "COUNTRY": "",
+      "STANDARD": "",
+      "EXTENDED": ""
+    },
+    "Compatibility": {
+      "AMAZONDART": "",
+      "BRREFRESH": ""
+    },
+    "OrderType": {
+      "DRUM": "X",
+      "CLAIMORDER": ""
+    }
+  }
+]

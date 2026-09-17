@@ -59,66 +59,78 @@ function loadStep(){
         <h3>Material Information</h3>
  
         <div class="grid">
- 
-            <div class="form-group">
-                <label>Material Number *</label>
-                <input
-    type="text"
-    id="matnr"
-    value="${modelData.matnr || ''}"
-    placeholder="DCPL2550DW">
-            </div>
- 
-            <div class="form-group">
-                <label>Country *</label>
-                <select id="country">
-    <option ${modelData.country==="US"?"selected":""}>US</option>
-    <option ${modelData.country==="CA"?"selected":""}>CA</option>
-    <option ${modelData.country==="UK"?"selected":""}>UK</option>
-    <option ${modelData.country==="JP"?"selected":""}>JP</option>
-</select>
-            </div>
- 
-            <div class="form-group">
-                <label>EAN *</label>
-                <input
-    type="text"
-    id="ean11"
-    value="${modelData.ean11 || ''}">
- 
-            </div>
- 
-            <div class="form-group">
-                <label>Cross Plant Material</label>
-                <input type="text"
-                       id="crossplant">
-            </div>
- 
-            <div class="form-group">
-                <label>Material Type</label>
-                <input type="text"
-                       id="mtart">
-            </div>
- 
-            <div class="form-group">
-                <label>Material Group</label>
-                <input type="text"
-                       id="matkl">
-            </div>
- 
-            <div class="form-group">
-                <label>Base Unit</label>
-                <input type="text"
-                       id="meins">
-            </div>
- 
-            <div class="form-group">
-                <label>Division</label>
-                <input type="text"
-                       id="spart">
-            </div>
- 
-        </div>
+
+    <div class="form-group">
+        <label>Material Number *</label>
+        <input type="text" id="matnr">
+    </div>
+
+    <div class="form-group">
+        <label>Plant *</label>
+        <input type="text" id="werks">
+    </div>
+
+    <div class="form-group">
+        <label>Material Type *</label>
+        <input type="text" id="mtart">
+    </div>
+
+    <div class="form-group">
+        <label>Industry Sector</label>
+        <input type="text" id="mbrsh">
+    </div>
+
+    <div class="form-group">
+        <label>Material Group</label>
+        <input type="text" id="matkl">
+    </div>
+
+    <div class="form-group">
+        <label>Base Unit Of Measure</label>
+        <input type="text" id="meins">
+    </div>
+
+    <div class="form-group">
+        <label>Division</label>
+        <input type="text" id="spart">
+    </div>
+
+    <div class="form-group">
+        <label>EAN / UPC</label>
+        <input type="text" id="ean11">
+    </div>
+
+    <div class="form-group">
+        <label>Cross Plant Status</label>
+        <input type="text" id="mstae">
+    </div>
+
+    <div class="form-group">
+        <label>Cross Distribution Status</label>
+        <input type="text" id="mstav">
+    </div>
+
+    <div class="form-group">
+        <label>Language</label>
+        <input type="text" id="spras">
+    </div>
+
+    <div class="form-group">
+        <label>Material Description</label>
+        <input type="text" id="maktx">
+    </div>
+
+    <div class="form-group">
+        <label>Distribution Channel</label>
+        <input type="text" id="vtweg">
+    </div>
+
+    <div class="form-group">
+        <label>Distribution Material Status</label>
+        <input type="text" id="vmsta">
+    </div>
+
+</div>
  
         <div class="btn-row">
  
@@ -148,89 +160,84 @@ function loadStep(){
         <h3>Price Setup</h3>
  
             <div class="grid">
- 
-            <div class="form-group">
-                <label>B1 Price Setup</label>
-                <select id="b1price">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
- 
-            <div class="form-group">
-                <label>BR Price Setup</label>
-                <select id="brprice">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
- 
-            <div class="form-group">
-                <label>Condition Type</label>
-                <input
-                    type="text"
-                    id="kschl"
-                    placeholder="PR00">
-            </div>
- 
-            <div class="form-group">
-                <label>Currency</label>
-                <select id="konwa">
-                    <option>USD</option>
-                    <option>CAD</option>
-                    <option>EUR</option>
-                    <option>JPY</option>
-                </select>
-            </div>
- 
-            <div class="form-group">
-                <label>Price Amount</label>
-                <input
-                    type="number"
-                    id="kbetr"
-                    placeholder="199.99">
-            </div>
- 
-            <div class="form-group">
-                <label>Price Unit</label>
-                <input
-                    type="number"
-                    id="kpein"
-                    placeholder="1">
-            </div>
- 
-            <div class="form-group">
-                <label>Unit Of Measure</label>
-                <input
-                    type="text"
-                    id="kmein"
-                    placeholder="EA">
-            </div>
- 
-            <div class="form-group">
-                <label>Price Group</label>
-                <input
-                    type="text"
-                    id="kondm">
-            </div>
- 
-            <div class="form-group">
-                <label>Valid From</label>
-                <input
-                    type="date"
-                    id="datab">
-            </div>
- 
-            <div class="form-group">
-                <label>Valid To</label>
-                <input
-                    type="date"
-                    id="datbi">
-            </div>
- 
-        </div>
+
+<div class="form-group">
+<label>B1 Pricing Enabled</label>
+<select id="selkzb1">
+<option value="">No</option>
+<option value="X">Yes</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>BR Pricing Enabled</label>
+<select id="selkzbr">
+<option value="">No</option>
+<option value="X">Yes</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Condition Type</label>
+<input type="text" id="kschl">
+</div>
+
+<div class="form-group">
+<label>Sales Organization</label>
+<input type="text" id="vkorg">
+</div>
+
+<div class="form-group">
+<label>Division</label>
+<input type="text" id="priceSpart">
+</div>
+
+<div class="form-group">
+<label>Distribution Channel</label>
+<input type="text" id="priceVtweg">
+</div>
+
+<div class="form-group">
+<label>Customer Price Group</label>
+<input type="text" id="konda">
+</div>
+
+<div class="form-group">
+<label>Price Amount</label>
+<input type="number" id="kbetr">
+</div>
+
+<div class="form-group">
+<label>Currency</label>
+<input type="text" id="konwa">
+</div>
+
+<div class="form-group">
+<label>Pricing Unit</label>
+<input type="number" id="kpein">
+</div>
+
+<div class="form-group">
+<label>Unit Of Measure</label>
+<input type="text" id="kmein">
+</div>
+
+<div class="form-group">
+<label>Calculation Type</label>
+<input type="text" id="krech">
+</div>
+
+<div class="form-group">
+<label>Valid From</label>
+<input type="date" id="datab">
+</div>
+
+<div class="form-group">
+<label>Valid To</label>
+<input type="date" id="datbi">
+</div>
+
+</div>
              
  
         <div class="btn-row">
@@ -554,73 +561,7 @@ function loadStep(){
  
 </div>
  
-        <hr class="section-divider">
- 
-        <h3 class="section-title">
-    Distribution Configuration
-</h3>
- 
-        <div class="grid">
- 
-            <div class="form-group">
-                <label>X Distribution Status</label>
-                <select id="xdistr">
-                    <option value="">Inactive</option>
-                    <option value="X">Active</option>
-                </select>
-            </div>
- 
-            <div class="form-group">
-                <label>D Chain Status</label>
-                <select id="dchain">
-                    <option value="">Inactive</option>
-                    <option value="X">Active</option>
-                </select>
-            </div>
- 
-        </div>
- 
-        <hr class="section-divider">
- 
-        <h3 class="section-title">
-    Consumables Compatibility
-</h3>
- 
-        <div class="grid">
- 
-            <div class="form-group">
-                <label>Supported Drum</label>
-                <input
-                    type="text"
-                    id="drumModel"
-                    placeholder="DR-730">
-            </div>
- 
-            <div class="form-group">
-                <label>Supported Toner</label>
-                <input
-                    type="text"
-                    id="tonerModel"
-                    placeholder="TN-760">
-            </div>
- 
-            <div class="form-group">
-                <label>Belt Unit</label>
-                <input
-                    type="text"
-                    id="beltModel"
-                    placeholder="BU-223CL">
-            </div>
- 
-            <div class="form-group">
-                <label>Waste Toner Box</label>
-                <input
-                    type="text"
-                    id="wasteModel"
-                    placeholder="WT-223CL">
-            </div>
- 
-        </div>
+        
  
         <div class="btn-row">
  
@@ -868,7 +809,7 @@ if(currentStep === 6){
  
             <button
                 class="btn save"
-                onclick="showSuccessPage()">
+                onclick="saveModel()">
  
                 Create Model
  
@@ -942,6 +883,39 @@ function saveCurrentStepData(){
  
         modelData.crossplant =
             document.getElementById("crossplant")?.value || "";
+            modelData.werks =
+document.getElementById("werks")?.value || "";
+
+modelData.mtart =
+document.getElementById("mtart")?.value || "";
+
+modelData.mbrsh =
+document.getElementById("mbrsh")?.value || "";
+
+modelData.matkl =
+document.getElementById("matkl")?.value || "";
+
+modelData.meins =
+document.getElementById("meins")?.value || "";
+
+modelData.mstae =
+document.getElementById("mstae")?.value || "";
+
+modelData.mstav =
+document.getElementById("mstav")?.value || "";
+
+modelData.spras =
+document.getElementById("spras")?.value || "";
+
+modelData.maktx =
+document.getElementById("maktx")?.value || "";
+
+modelData.vtweg =
+document.getElementById("vtweg")?.value || "";
+
+modelData.vmsta =
+document.getElementById("vmsta")?.value || "";
+
     }
  
     if(currentStep === 2){
@@ -981,80 +955,126 @@ function saveCurrentStepData(){
     }
 }
  
-async function saveModel(){
- 
+async function saveModel() {
+
     const payload = {
- 
-        Matnr:
-            document.getElementById("matnr")?.value || "",
- 
-        Country:
-            document.getElementById("country")?.value || "",
- 
-        Ean11:
-            document.getElementById("ean11")?.value || "",
- 
-        CrossplantMaterial:
-            document.getElementById("crossplant")?.value || "",
- 
-        B1priceSetup:
-            document.getElementById("b1price")?.value || "",
- 
-        BrpriceSetup:
-            document.getElementById("brprice")?.value || "",
- 
-        StandardWarranty:
-            document.getElementById("standardWarranty")?.value || "",
- 
-        ExtendedWarranty:
-            document.getElementById("extendedWarranty")?.value || "",
- 
-        BrothercareWarranty:
-            document.getElementById("brotherCareWarranty")?.value || "",
- 
-        BarracudaWarranty:
-            document.getElementById("barracudaWarranty")?.value || "",
- 
-        BrotherplusWarranty:
-            document.getElementById("brotherPlusWarranty")?.value || "",
- 
-        Amazondart:
-            document.getElementById("amazondart")?.value || "",
- 
-        Brrefresh:
-            document.getElementById("brrefresh")?.value || "",
- 
-        Barracuda:
-            document.getElementById("barracuda")?.value || "",
- 
-        Bplus:
-            document.getElementById("bplus")?.value || "",
- 
-        BackupOrder:
-            document.getElementById("backupOrder")?.value || "",
- 
-        DrumOrder:
-            document.getElementById("drumOrder")?.value || "",
- 
-        WasteToner:
-            document.getElementById("wasteToner")?.value || "",
- 
-        BeltUnit:
-            document.getElementById("beltUnit")?.value || "",
- 
-        Claimorder:
-            document.getElementById("claimOrder")?.value || ""
- 
+
+        Material: {
+
+            MATNR: modelData.matnr,
+            WERKS: modelData.werks,
+            MTART: modelData.mtart,
+            MBRSH: modelData.mbrsh,
+            MATKL: modelData.matkl,
+            MEINS: modelData.meins,
+            SPART: modelData.spart,
+            EAN11: modelData.ean11,
+            MSTAE: modelData.mstae,
+            MSTAV: modelData.mstav,
+            SPRAS: modelData.spras,
+            MAKTX: modelData.maktx,
+            VTWEG: modelData.vtweg,
+            VMSTA: modelData.vmsta
+
+        },
+
+        PriceSetup: {
+
+            KSCHL: document.getElementById("kschl")?.value || "",
+            SELKZB1: document.getElementById("selkzb1")?.value || "",
+            SELKZBR: document.getElementById("selkzbr")?.value || "",
+            VKORG: document.getElementById("vkorg")?.value || "",
+            SPART: document.getElementById("priceSpart")?.value || "",
+            VTWEG: document.getElementById("priceVtweg")?.value || "",
+            KONDA: document.getElementById("konda")?.value || "",
+            KBETR: document.getElementById("kbetr")?.value || "",
+            KONWA: document.getElementById("konwa")?.value || "",
+            KPEIN: document.getElementById("kpein")?.value || "",
+            KMEIN: document.getElementById("kmein")?.value || "",
+            KRECH: document.getElementById("krech")?.value || "",
+            DATAB: document.getElementById("datab")?.value || "",
+            DATBI: document.getElementById("datbi")?.value || ""
+
+        },
+
+        Warranty: {
+
+            COUNTRY: modelData.country,
+            STANDARD: modelData.standardWarranty,
+            EXTENDED: modelData.extendedWarranty,
+            BROTHERCARE: modelData.brotherCareWarranty,
+            BARRACUDA: modelData.barracudaWarranty,
+            BROTHERPLUS: modelData.brotherPlusWarranty
+
+        },
+
+        Compatibility: {
+
+            AMAZONDART: modelData.amazondart,
+            BRREFRESH: modelData.brrefresh,
+            BARRACUDA: modelData.barracuda,
+            BPLUS: modelData.bplus
+
+        },
+
+        OrderType: {
+
+            CONSUMABLE: modelData.consumable,
+            DRUM: modelData.drumOrder,
+            WASTE_TONER: modelData.wasteToner,
+            BELT_UNIT: modelData.beltUnit,
+            CLAIMORDER: modelData.claimOrder
+
+        }
+
     };
- 
-    console.log(payload);
- 
-    alert(
-        "Model Data Ready For SAP POST"
-    );
- 
+
+    console.log("SAP Payload:", payload);
+
+    try {
+
+       const response = await fetch(
+    "http://localhost:3000/api/model/create",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+    }
+);
+
+if(response.ok){
+
+    showSuccessPage();
+
 }
- 
+else{
+
+    alert("Failed to save model");
+}
+
+        if (response.ok) {
+
+            console.log("Model saved successfully");
+
+            showSuccessPage();
+
+        } else {
+
+            alert("Failed to save model");
+
+        }
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Backend connection failed");
+
+    }
+
+}
  
 function showSuccessPage(){
  

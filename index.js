@@ -2,6 +2,7 @@ const express = require("express");
 const axios = require("axios");
 const session = require("express-session");
 const path = require("path");
+const fs = require("fs");
 
 const app = express();
 const PORT = 3000;
@@ -237,6 +238,92 @@ app.get("/logout", (req, res) => {
     });
 
 });
+
+// =============================
+// CREATE MODEL API
+// =============================
+
+app.post("/api/model/create", async (req, res) => {
+
+    try {
+
+        let existing = [];
+
+        if (fs.existsSync("models.json")) {
+
+            existing = JSON.parse(
+                fs.readFileSync(
+                    "models.json",
+                    "utf8"
+                )
+            );
+        }
+
+        existing.push(req.body);
+
+        fs.writeFileSync(
+            "models.json",
+            JSON.stringify(
+                existing,
+                null,
+                2
+            )
+        );
+
+        console.log(
+            "MODEL SAVED"
+        );
+
+        console.log(
+            JSON.stringify(
+                req.body,
+                null,
+                2
+            )
+        );
+
+        res.json({
+            success: true,
+            message: "Model Saved Successfully"
+        });
+
+    }
+    catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+
+});
+
+
+app.get("/api/saved-models", (req, res) => {
+
+    const filePath = path.join(
+        __dirname,
+        "models.json"
+    );
+
+    if (!fs.existsSync(filePath)) {
+        return res.json([]);
+    }
+
+    const data = JSON.parse(
+        fs.readFileSync(
+            filePath,
+            "utf8"
+        )
+    );
+
+    res.json(data);
+
+});
+
 app.listen(PORT, () => {
 
     console.log(
