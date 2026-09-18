@@ -182,5 +182,303 @@
       "DRUM": "X",
       "CLAIMORDER": ""
     }
+  },
+  {
+    "Material": {
+      "MATNR": "",
+      "WERKS": "",
+      "MTART": "",
+      "MBRSH": "",
+      "MATKL": "",
+      "MEINS": "",
+      "EAN11": "",
+      "MSTAE": "",
+      "MSTAV": "",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "KSCHL": "",
+      "SELKZB1": "",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "COUNTRY": "",
+      "STANDARD": "",
+      "EXTENDED": ""
+    },
+    "Compatibility": {
+      "AMAZONDART": "",
+      "BRREFRESH": ""
+    },
+    "OrderType": {
+      "DRUM": "",
+      "CLAIMORDER": ""
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "ghfdhfg",
+      "WERKS": "3454",
+      "MTART": "fghf",
+      "MBRSH": "fghfg",
+      "MATKL": "gfhfg",
+      "MEINS": "gddh",
+      "SPART": "fgf",
+      "EAN11": "fgd",
+      "MSTAE": "fgh",
+      "MSTAV": "gfhg",
+      "SPRAS": "gfhf",
+      "MAKTX": "fghhf",
+      "VTWEG": "fghfhg",
+      "VMSTA": "fghgf"
+    },
+    "PriceSetup": {
+      "MATNR": "ghfdhfg",
+      "KSCHL": "gfhg",
+      "SELKZB1": "X",
+      "SELKZBR": "X",
+      "VKORG": "gfhf",
+      "SPART": "bvcbcv",
+      "VTWEG": "gfhhhg",
+      "KONDA": "",
+      "KBETR": "4533",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "MATNR": "ghfdhfg",
+      "COUNTRY": "",
+      "STANDARD": {
+        "WARRANTY_TYPE": "STANDARD",
+        "ENABLED": "X",
+        "WTY_LEN": "1",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "EXTENDED": {
+        "WARRANTY_TYPE": "EXTENDED",
+        "ENABLED": "X",
+        "WTY_LEN": "2",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BROTHERCARE": {
+        "WARRANTY_TYPE": "BROTHER_CARE",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BARRACUDA": {
+        "WARRANTY_TYPE": "BARRACUDA",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BROTHERPLUS": {
+        "WARRANTY_TYPE": "BROTHER_PLUS",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      }
+    },
+    "Compatibility": {
+      "MATNR": "ghfdhfg",
+      "COUNTRY": "",
+      "AMAZONDART": "X",
+      "BRREFRESH": "X",
+      "BARRACUDA": "X",
+      "BPLUS": ""
+    },
+    "OrderType": {
+      "MATNR": "ghfdhfg",
+      "COUNTRY": "",
+      "CONSUMABLE": "X",
+      "DRUM": "X",
+      "WASTE_TONER": "X",
+      "BELT_UNIT": "",
+      "CLAIMORDER": ""
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "gfh",
+      "WERKS": "hghf",
+      "MTART": "gfhf",
+      "MBRSH": "hgg",
+      "MATKL": "gf",
+      "MEINS": "ghf",
+      "SPART": "hgf",
+      "EAN11": "gfhgf",
+      "MSTAE": "gfh",
+      "MSTAV": "ghf",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "MATNR": "gfh",
+      "KSCHL": "gfh",
+      "SELKZB1": "X",
+      "SELKZBR": "X",
+      "VKORG": "gfhf",
+      "SPART": "ghfg",
+      "VTWEG": "ghfg",
+      "KONDA": "ghfg",
+      "KBETR": "656",
+      "KONWA": "",
+      "KPEIN": "1",
+      "KMEIN": "ea",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "MATNR": "gfh",
+      "COUNTRY": "US",
+      "STANDARD": {
+        "WARRANTY_TYPE": "STANDARD",
+        "ENABLED": "X",
+        "WTY_LEN": "1",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "EXTENDED": {
+        "WARRANTY_TYPE": "EXTENDED",
+        "ENABLED": "X",
+        "WTY_LEN": "2",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BROTHERCARE": {
+        "WARRANTY_TYPE": "BROTHER_CARE",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BARRACUDA": {
+        "WARRANTY_TYPE": "BARRACUDA",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      },
+      "BROTHERPLUS": {
+        "WARRANTY_TYPE": "BROTHER_PLUS",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": "YR"
+      }
+    },
+    "Compatibility": {
+      "MATNR": "gfh",
+      "COUNTRY": "US",
+      "AMAZONDART": "",
+      "BRREFRESH": "X",
+      "BARRACUDA": "X",
+      "BPLUS": "X"
+    },
+    "OrderType": {
+      "MATNR": "gfh",
+      "COUNTRY": "US",
+      "CONSUMABLE": "X",
+      "DRUM": "X",
+      "WASTE_TONER": "X",
+      "BELT_UNIT": "",
+      "CLAIMORDER": "X"
+    }
+  },
+  {
+    "Material": {
+      "MATNR": "ttty",
+      "WERKS": "",
+      "MTART": "",
+      "MBRSH": "",
+      "MATKL": "",
+      "MEINS": "",
+      "SPART": "",
+      "EAN11": "",
+      "MSTAE": "",
+      "MSTAV": "",
+      "SPRAS": "",
+      "MAKTX": "",
+      "VTWEG": "",
+      "VMSTA": ""
+    },
+    "PriceSetup": {
+      "MATNR": "ttty",
+      "KSCHL": "",
+      "SELKZB1": "X",
+      "SELKZBR": "",
+      "VKORG": "",
+      "SPART": "",
+      "VTWEG": "",
+      "KONDA": "",
+      "KBETR": "",
+      "KONWA": "",
+      "KPEIN": "",
+      "KMEIN": "",
+      "KRECH": "",
+      "DATAB": "",
+      "DATBI": ""
+    },
+    "Warranty": {
+      "MATNR": "ttty",
+      "COUNTRY": "US",
+      "STANDARD": {
+        "WARRANTY_TYPE": "STANDARD",
+        "ENABLED": "X",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": ""
+      },
+      "EXTENDED": {
+        "WARRANTY_TYPE": "EXTENDED",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": ""
+      },
+      "BROTHERCARE": {
+        "WARRANTY_TYPE": "BROTHER_CARE",
+        "ENABLED": "X",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": ""
+      },
+      "BROTHERPLUS": {
+        "WARRANTY_TYPE": "BROTHER_PLUS",
+        "ENABLED": "",
+        "WTY_LEN": "",
+        "WTY_LEN_UNIT": ""
+      }
+    },
+    "Compatibility": {
+      "MATNR": "ttty",
+      "COUNTRY": "US",
+      "AMAZONDART": "",
+      "BRREFRESH": "X",
+      "BARRACUDA": "X",
+      "BPLUS": "X"
+    },
+    "OrderType": {
+      "MATNR": "ttty",
+      "COUNTRY": "US",
+      "CONSUMABLE": "X",
+      "DRUM": "X",
+      "WASTE_TONER": "",
+      "BELT_UNIT": "",
+      "CLAIMORDER": "X"
+    }
   }
 ]

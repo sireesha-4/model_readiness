@@ -980,3 +980,419 @@ body{
  
     height:120px;
 }
+/* ========================================
+   YES / NO SEGMENTED RADIO BUTTONS
+======================================== */
+
+.radio-toggle {
+    display: flex;
+    width: 100%;
+    height: 42px;
+
+    padding: 3px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+/* Each option */
+.radio-option {
+    flex: 1;
+
+    margin: 0 !important;
+
+    position: relative;
+
+    cursor: pointer;
+}
+
+/* Hide original radio circle */
+.radio-option input {
+    position: absolute;
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+
+    pointer-events: none;
+}
+
+/* Yes / No button */
+.radio-option span {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    color: #94a3b8;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+/* YES selected */
+.radio-option.yes input:checked + span {
+    background: #16a34a;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 12px rgba(22, 163, 74, 0.30);
+}
+
+/* NO selected */
+.radio-option.no input:checked + span {
+    background: #475569;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 10px rgba(71, 85, 105, 0.25);
+}
+
+/* Hover */
+.radio-option span:hover {
+    color: #ffffff;
+
+    background: rgba(59, 130, 246, 0.08);
+}
+
+/* Keep selected YES green even when hovering */
+.radio-option.yes input:checked + span:hover {
+    background: #16a34a;
+}
+
+/* Keep selected NO gray even when hovering */
+.radio-option.no input:checked + span:hover {
+    background: #475569;
+}
+/* Compact Warranty Toggle */
+
+.warranty-toggle-row {
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 10px;
+
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.warranty-switch {
+    position: relative;
+
+    display: inline-block;
+
+    width: 46px;
+    height: 24px;
+
+    margin: 0 !important;
+}
+
+.warranty-switch input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.warranty-slider {
+    position: absolute;
+
+    cursor: pointer;
+
+    inset: 0;
+
+    background: #475569;
+
+    border-radius: 24px;
+
+    transition: 0.25s ease;
+}
+
+.warranty-slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    transition: 0.25s ease;
+}
+
+.warranty-switch input:checked + .warranty-slider {
+    background: #16a34a;
+
+    box-shadow:
+        0 0 10px rgba(22, 163, 74, 0.30);
+}
+
+.warranty-switch input:checked + .warranty-slider::before {
+    transform: translateX(22px);
+}
+
+/* Disabled warranty details */
+
+.form-group input:disabled,
+.form-group select:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+/* ========================================
+   MODEL / COUNTRY CONTEXT
+======================================== */
+
+.model-context-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+
+/* Individual Model / Country box */
+.context-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 190px;
+    height: 42px;
+
+    padding: 0 14px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 9px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Label - Model / Country */
+.context-label {
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Actual value */
+.context-item strong {
+    color: #60a5fa;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+}
+
+/* No divider needed */
+.context-divider {
+    display: none;
+}
+/* ========================================
+   ORDER TYPE CHECKBOXES
+======================================== */
+
+.order-section-title {
+    margin-top: 4px;
+    margin-bottom: 12px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.order-check-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(220px, 1fr));
+
+    gap: 12px;
+
+    max-width: 900px;
+
+    margin-bottom: 25px;
+}
+
+/* Complete clickable row */
+
+.order-check-item {
+    min-height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 15px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Hide normal checkbox */
+
+.order-check-item input {
+    position: absolute;
+
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+
+    pointer-events: none;
+}
+
+/* Custom checkbox */
+
+.order-checkbox {
+    width: 21px;
+    height: 21px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #0b1627;
+
+    border: 2px solid #64748b;
+
+    border-radius: 6px;
+
+    color: white;
+
+    transition: all 0.2s ease;
+}
+
+/* Checkmark */
+
+.order-checkbox::after {
+    content: "✓";
+
+    font-size: 14px;
+    font-weight: 700;
+
+    opacity: 0;
+
+    transform: scale(0.5);
+
+    transition: all 0.2s ease;
+}
+
+/* Label */
+
+.order-check-text {
+    color: #cbd5e1;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Selected checkbox */
+
+.order-check-item input:checked + .order-checkbox {
+    background: #16a34a;
+
+    border-color: #22c55e;
+
+    box-shadow:
+        0 0 10px rgba(34, 197, 94, 0.25);
+}
+
+.order-check-item input:checked + .order-checkbox::after {
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+/* Selected complete row */
+
+.order-check-item:has(input:checked) {
+    background:
+        rgba(34, 197, 94, 0.06);
+
+    border-color:
+        rgba(34, 197, 94, 0.65);
+}
+
+.order-check-item:has(input:checked)
+.order-check-text {
+    color: #ffffff;
+}
+
+/* Hover */
+
+.order-check-item:hover {
+    border-color: #3b82f6;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 12px rgba(59, 130, 246, 0.10);
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .order-check-grid {
+        grid-template-columns:
+            repeat(2, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 600px) {
+
+    .order-check-grid {
+        grid-template-columns: 1fr;
+    }
+}

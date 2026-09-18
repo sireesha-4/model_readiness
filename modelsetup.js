@@ -3,6 +3,37 @@ let currentStep = 1;
  
 loadStep();
  
+function modelContextBar() {
+
+    return `
+        <div class="model-context-bar">
+
+            <div class="context-item">
+                <span class="context-label">
+                    Model
+                </span>
+
+                <strong>
+                    ${modelData.matnr || "-"}
+                </strong>
+            </div>
+
+            <div class="context-divider"></div>
+
+            <div class="context-item">
+                <span class="context-label">
+                    Country
+                </span>
+
+                <strong>
+                    ${modelData.country || "-"}
+                </strong>
+            </div>
+
+        </div>
+    `;
+}
+
 function loadStep(){
  
     document.getElementById(
@@ -64,6 +95,16 @@ function loadStep(){
         <label>Material Number *</label>
         <input type="text" id="matnr">
     </div>
+
+    <div class="form-group">
+    <label>Country *</label>
+
+    <select id="country">
+        <option value="">Select Country</option>
+        <option value="US">US</option>
+        <option value="CA">CA</option>
+    </select>
+</div>
 
     <div class="form-group">
         <label>Plant *</label>
@@ -151,118 +192,189 @@ function loadStep(){
     `;
 }
  
-    if(currentStep === 2){
- 
+    if (currentStep === 2) {
+
     area.innerHTML = `
- 
+
     <div class="card">
- 
+
         <h3>Price Setup</h3>
- 
-            <div class="grid">
+
+        ${modelContextBar()}
+
+        <div class="grid">
 
 <div class="form-group">
-<label>B1 Pricing Enabled</label>
-<select id="selkzb1">
-<option value="">No</option>
-<option value="X">Yes</option>
-</select>
+
+    <label>B1 Pricing Required</label>
+
+    <div class="radio-toggle">
+
+        <label class="radio-option yes">
+            <input
+                type="radio"
+                name="b1Pricing"
+                value="X"
+                ${modelData.selkzb1 === "X" ? "checked" : ""}>
+            <span>Yes</span>
+        </label>
+
+        <label class="radio-option no">
+            <input
+                type="radio"
+                name="b1Pricing"
+                value=""
+                ${modelData.selkzb1 !== "X" ? "checked" : ""}>
+            <span>No</span>
+        </label>
+
+    </div>
+
 </div>
+
 
 <div class="form-group">
-<label>BR Pricing Enabled</label>
-<select id="selkzbr">
-<option value="">No</option>
-<option value="X">Yes</option>
-</select>
-</div>
 
-<div class="form-group">
-<label>Condition Type</label>
-<input type="text" id="kschl">
-</div>
+    <label>BR Pricing Required</label>
 
-<div class="form-group">
-<label>Sales Organization</label>
-<input type="text" id="vkorg">
-</div>
+    <div class="radio-toggle">
 
-<div class="form-group">
-<label>Division</label>
-<input type="text" id="priceSpart">
-</div>
+        <label class="radio-option yes">
+            <input
+                type="radio"
+                name="brPricing"
+                value="X"
+                ${modelData.selkzbr === "X" ? "checked" : ""}>
+            <span>Yes</span>
+        </label>
 
-<div class="form-group">
-<label>Distribution Channel</label>
-<input type="text" id="priceVtweg">
-</div>
+        <label class="radio-option no">
+            <input
+                type="radio"
+                name="brPricing"
+                value=""
+                ${modelData.selkzbr !== "X" ? "checked" : ""}>
+            <span>No</span>
+        </label>
 
-<div class="form-group">
-<label>Customer Price Group</label>
-<input type="text" id="konda">
-</div>
-
-<div class="form-group">
-<label>Price Amount</label>
-<input type="number" id="kbetr">
-</div>
-
-<div class="form-group">
-<label>Currency</label>
-<input type="text" id="konwa">
-</div>
-
-<div class="form-group">
-<label>Pricing Unit</label>
-<input type="number" id="kpein">
-</div>
-
-<div class="form-group">
-<label>Unit Of Measure</label>
-<input type="text" id="kmein">
-</div>
-
-<div class="form-group">
-<label>Calculation Type</label>
-<input type="text" id="krech">
-</div>
-
-<div class="form-group">
-<label>Valid From</label>
-<input type="date" id="datab">
-</div>
-
-<div class="form-group">
-<label>Valid To</label>
-<input type="date" id="datbi">
-</div>
+    </div>
 
 </div>
-             
- 
+
+            <div class="form-group">
+                <label>Condition Type</label>
+                <input
+                    type="text"
+                    id="kschl"
+                    placeholder="PR00">
+            </div>
+
+            <div class="form-group">
+                <label>Sales Organization</label>
+                <input
+                    type="text"
+                    id="vkorg">
+            </div>
+
+            <div class="form-group">
+                <label>Division</label>
+                <input
+                    type="text"
+                    id="priceSpart">
+            </div>
+
+            <div class="form-group">
+                <label>Distribution Channel</label>
+                <input
+                    type="text"
+                    id="priceVtweg">
+            </div>
+
+            <div class="form-group">
+                <label>Customer Price Group</label>
+                <input
+                    type="text"
+                    id="konda">
+            </div>
+
+            <div class="form-group">
+                <label>Price Amount</label>
+                <input
+                    type="number"
+                    id="kbetr"
+                    step="0.01"
+                    placeholder="199.99">
+            </div>
+
+            <div class="form-group">
+                <label>Currency</label>
+
+                <select id="konwa">
+                    <option value="">Select Currency</option>
+                    <option value="USD">USD</option>
+                    <option value="CAD">CAD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="JPY">JPY</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Pricing Unit</label>
+                <input
+                    type="number"
+                    id="kpein"
+                    placeholder="1">
+            </div>
+
+            <div class="form-group">
+                <label>Unit Of Measure</label>
+                <input
+                    type="text"
+                    id="kmein"
+                    placeholder="EA">
+            </div>
+
+            <div class="form-group">
+                <label>Calculation Type</label>
+                <input
+                    type="text"
+                    id="krech">
+            </div>
+
+            <div class="form-group">
+                <label>Valid From</label>
+                <input
+                    type="date"
+                    id="datab">
+            </div>
+
+            <div class="form-group">
+                <label>Valid To</label>
+                <input
+                    type="date"
+                    id="datbi">
+            </div>
+
+        </div>
+
         <div class="btn-row">
- 
+
             <button
                 class="btn back"
                 onclick="backStep()">
- 
                 ← Back
- 
             </button>
- 
+
             <button
                 class="btn next"
                 onclick="nextStep()">
- 
                 Next →
- 
             </button>
- 
+
         </div>
- 
+
     </div>
-     </div>
- 
+
     `;
 }
  
@@ -273,17 +385,40 @@ function loadStep(){
     <div class="card">
  
         <h3>Warranty Setup</h3>
+
+        ${modelContextBar()}
  
         <div class="grid">
  
             <div class="form-group">
-                <label>Standard Warranty</label>
-                <select id="standardWarranty">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
+
+    <label>Standard Warranty</label>
+
+    <div class="warranty-toggle-row">
+
+        <span id="standardWarrantyText">
+            Off
+        </span>
+
+        <label class="warranty-switch">
+
+            <input
+                type="checkbox"
+                id="standardWarranty"
+                onchange="toggleWarranty(
+                    'standardWarranty',
+                    'standardWarrantyText',
+                    'standardLength',
+                    'standardUnit'
+                )">
+
+            <span class="warranty-slider"></span>
+
+        </label>
+
+    </div>
+
+</div>
  
             <div class="form-group">
                 <label>Length</label>
@@ -304,13 +439,34 @@ function loadStep(){
             <div></div>
  
             <div class="form-group">
-                <label>Extended Warranty</label>
-                <select id="extendedWarranty">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
+
+    <label>Extended Warranty</label>
+
+    <div class="warranty-toggle-row">
+
+        <span id="extendedWarrantyText">
+            Off
+        </span>
+
+        <label class="warranty-switch">
+
+            <input
+                type="checkbox"
+                id="extendedWarranty"
+                onchange="toggleWarranty(
+                    'extendedWarranty',
+                    'extendedWarrantyText',
+                    'extendedLength',
+                    'extendedUnit'
+                )">
+
+            <span class="warranty-slider"></span>
+
+        </label>
+
+    </div>
+
+</div>
  
             <div class="form-group">
                 <label>Length</label>
@@ -331,13 +487,34 @@ function loadStep(){
             <div></div>
  
             <div class="form-group">
-                <label>Brother Care Warranty</label>
-                <select id="brotherCareWarranty">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
+
+    <label>Brother Care Warranty</label>
+
+    <div class="warranty-toggle-row">
+
+        <span id="brotherCareWarrantyText">
+            Off
+        </span>
+
+        <label class="warranty-switch">
+
+            <input
+                type="checkbox"
+                id="brotherCareWarranty"
+                onchange="toggleWarranty(
+                    'brotherCareWarranty',
+                    'brotherCareWarrantyText',
+                    'brotherCareLength',
+                    'brotherCareUnit'
+                )">
+
+            <span class="warranty-slider"></span>
+
+        </label>
+
+    </div>
+
+</div>
  
             <div class="form-group">
                 <label>Length</label>
@@ -357,41 +534,37 @@ function loadStep(){
  
             <div></div>
  
-            <div class="form-group">
-                <label>Barracuda Warranty</label>
-                <select id="barracudaWarranty">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
+            
  
             <div class="form-group">
-                <label>Length</label>
-                <input
-                    type="number"
-                    id="barracudaLength"
-                    placeholder="1">
-            </div>
- 
-            <div class="form-group">
-                <label>Unit</label>
-                <select id="barracudaUnit">
-                    <option>YR</option>
-                    <option>MON</option>
-                </select>
-            </div>
- 
-            <div></div>
- 
-            <div class="form-group">
-                <label>Brother Plus Warranty</label>
-                <select id="brotherPlusWarranty">
-                    <option value="">Select</option>
-                    <option value="X">Enabled</option>
-                    <option value="">Disabled</option>
-                </select>
-            </div>
+
+    <label>Brother Plus Warranty</label>
+
+    <div class="warranty-toggle-row">
+
+        <span id="brotherPlusWarrantyText">
+            Off
+        </span>
+
+        <label class="warranty-switch">
+
+            <input
+                type="checkbox"
+                id="brotherPlusWarranty"
+                onchange="toggleWarranty(
+                    'brotherPlusWarranty',
+                    'brotherPlusWarrantyText',
+                    'brotherPlusLength',
+                    'brotherPlusUnit'
+                )">
+
+            <span class="warranty-slider"></span>
+
+        </label>
+
+    </div>
+
+</div>
  
             <div class="form-group">
                 <label>Length</label>
@@ -436,299 +609,278 @@ function loadStep(){
     `;
 }
  
-   if(currentStep === 4){
- 
+   if (currentStep === 4) {
+
     area.innerHTML = `
- 
+
     <div class="card">
- 
+
         <h3>Compatibility & Programs</h3>
- 
- 
-            <div class="program-grid">
- 
-    <div class="program-card"
-         id="amazondartCard"
-         onclick="toggleProgram('amazondart')">
- 
-        <div class="program-title">
-            Amazon Dart
+
+        ${modelContextBar()}
+
+        <div class="program-grid">
+
+            <div
+                class="program-card"
+                id="amazondartCard"
+                onclick="toggleProgram('amazondart')">
+
+                <div class="program-title">
+                    Amazon Dart
+                </div>
+
+                <div
+                    id="amazondartIcon"
+                    class="program-icon">
+                    ◇
+                </div>
+
+                <div
+                    id="amazondartStatus"
+                    class="program-status">
+                    Available
+                </div>
+
+                <input
+                    type="hidden"
+                    id="amazondart"
+                    value="${modelData.amazondart || ''}">
+
+            </div>
+
+
+            <div
+                class="program-card"
+                id="brrefreshCard"
+                onclick="toggleProgram('brrefresh')">
+
+                <div class="program-title">
+                    BR Refresh
+                </div>
+
+                <div
+                    id="brrefreshIcon"
+                    class="program-icon">
+                    ◇
+                </div>
+
+                <div
+                    id="brrefreshStatus"
+                    class="program-status">
+                    Available
+                </div>
+
+                <input
+                    type="hidden"
+                    id="brrefresh"
+                    value="${modelData.brrefresh || ''}">
+
+            </div>
+
+
+            <div
+                class="program-card"
+                id="barracudaCard"
+                onclick="toggleProgram('barracuda')">
+
+                <div class="program-title">
+                    Barracuda
+                </div>
+
+                <div
+                    id="barracudaIcon"
+                    class="program-icon">
+                    ◇
+                </div>
+
+                <div
+                    id="barracudaStatus"
+                    class="program-status">
+                    Available
+                </div>
+
+                <input
+                    type="hidden"
+                    id="barracuda"
+                    value="${modelData.barracuda || ''}">
+
+            </div>
+
+
+            <div
+                class="program-card"
+                id="bplusCard"
+                onclick="toggleProgram('bplus')">
+
+                <div class="program-title">
+                    Brother Plus
+                </div>
+
+                <div
+                    id="bplusIcon"
+                    class="program-icon">
+                    ◇
+                </div>
+
+                <div
+                    id="bplusStatus"
+                    class="program-status">
+                    Available
+                </div>
+
+                <input
+                    type="hidden"
+                    id="bplus"
+                    value="${modelData.bplus || ''}">
+
+            </div>
+
         </div>
- 
-        <div id="amazondartIcon"
-             class="program-icon">
- 
-            ○
- 
-        </div>
- 
-        <div id="amazondartStatus"
-             class="program-status">
- 
-            Not Enabled
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="amazondart"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="brrefreshCard"
-         onclick="toggleProgram('brrefresh')">
- 
-        <div class="program-title">
-            BR Refresh
-        </div>
- 
-        <div id="brrefreshIcon"
-             class="program-icon">
- 
-            ○
- 
-        </div>
- 
-        <div id="brrefreshStatus"
-             class="program-status">
- 
-            Not Enabled
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="brrefresh"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="barracudaCard"
-         onclick="toggleProgram('barracuda')">
- 
-        <div class="program-title">
-            Barracuda
-        </div>
- 
-        <div id="barracudaIcon"
-             class="program-icon">
- 
-            ○
- 
-        </div>
- 
-        <div id="barracudaStatus"
-             class="program-status">
- 
-            Not Enabled
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="barracuda"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="bplusCard"
-         onclick="toggleProgram('bplus')">
- 
-        <div class="program-title">
-            Brother Plus
-        </div>
- 
-        <div id="bplusIcon"
-             class="program-icon">
- 
-            ○
- 
-        </div>
- 
-        <div id="bplusStatus"
-             class="program-status">
- 
-            Not Enabled
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="bplus"
-            value="">
-    </div>
- 
-</div>
- 
-        
- 
+
+
         <div class="btn-row">
- 
+
             <button
                 class="btn back"
                 onclick="backStep()">
- 
                 ← Back
- 
             </button>
- 
+
             <button
                 class="btn next"
                 onclick="nextStep()">
- 
                 Next →
- 
             </button>
- 
+
         </div>
- 
+
     </div>
- 
+
     `;
+
+    restoreProgramState("amazondart");
+    restoreProgramState("brrefresh");
+    restoreProgramState("barracuda");
+    restoreProgramState("bplus");
 }
  
-  if(currentStep === 5){
- 
+if (currentStep === 5) {
+
     area.innerHTML = `
- 
+
     <div class="card">
- 
+
         <h3>Order Types & Final Configuration</h3>
- 
- 
-           <div class="order-grid">
- 
-    <div class="program-card"
-         id="backupOrderCard"
-         onclick="toggleProgram('backupOrder')">
- 
-        <div class="program-title">
-            Backup Order
+
+        ${modelContextBar()}
+
+        <div class="order-section-title">
+            Select Applicable Order Types
         </div>
- 
-        <div id="backupOrderIcon"
-             class="program-icon">
- 
-            ☐
- 
+
+        <div class="order-check-grid">
+
+            <label class="order-check-item">
+
+                <input
+                    type="checkbox"
+                    id="consumable"
+                    ${modelData.consumable === "X" ? "checked" : ""}>
+
+                <span class="order-checkbox"></span>
+
+                <span class="order-check-text">
+                    Consumable Order
+                </span>
+
+            </label>
+
+
+            <label class="order-check-item">
+
+                <input
+                    type="checkbox"
+                    id="drumOrder"
+                    ${modelData.drumOrder === "X" ? "checked" : ""}>
+
+                <span class="order-checkbox"></span>
+
+                <span class="order-check-text">
+                    Drum Order
+                </span>
+
+            </label>
+
+
+            <label class="order-check-item">
+
+                <input
+                    type="checkbox"
+                    id="wasteToner"
+                    ${modelData.wasteToner === "X" ? "checked" : ""}>
+
+                <span class="order-checkbox"></span>
+
+                <span class="order-check-text">
+                    Waste Toner
+                </span>
+
+            </label>
+
+
+            <label class="order-check-item">
+
+                <input
+                    type="checkbox"
+                    id="beltUnit"
+                    ${modelData.beltUnit === "X" ? "checked" : ""}>
+
+                <span class="order-checkbox"></span>
+
+                <span class="order-check-text">
+                    Belt Unit
+                </span>
+
+            </label>
+
+
+            <label class="order-check-item">
+
+                <input
+                    type="checkbox"
+                    id="claimOrder"
+                    ${modelData.claimOrder === "X" ? "checked" : ""}>
+
+                <span class="order-checkbox"></span>
+
+                <span class="order-check-text">
+                    Claim Order
+                </span>
+
+            </label>
+
         </div>
- 
-        <input
-            type="hidden"
-            id="backupOrder"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="drumOrderCard"
-         onclick="toggleProgram('drumOrder')">
- 
-        <div class="program-title">
-            Drum Order
-        </div>
- 
-        <div id="drumOrderIcon"
-             class="program-icon">
- 
-            ☐
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="drumOrder"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="wasteTonerCard"
-         onclick="toggleProgram('wasteToner')">
- 
-        <div class="program-title">
-            Waste Toner
-        </div>
- 
-        <div id="wasteTonerIcon"
-             class="program-icon">
- 
-            ☐
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="wasteToner"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="beltUnitCard"
-         onclick="toggleProgram('beltUnit')">
- 
-        <div class="program-title">
-            Belt Unit
-        </div>
- 
-        <div id="beltUnitIcon"
-             class="program-icon">
- 
-            ☐
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="beltUnit"
-            value="">
-    </div>
- 
-    <div class="program-card"
-         id="claimOrderCard"
-         onclick="toggleProgram('claimOrder')">
- 
-        <div class="program-title">
-            Claim Order
-        </div>
- 
-        <div id="claimOrderIcon"
-             class="program-icon">
- 
-            ☐
- 
-        </div>
- 
-        <input
-            type="hidden"
-            id="claimOrder"
-            value="">
-    </div>
- 
-</div>
- 
-       
+
+
         <div class="btn-row">
- 
-    <button
-        class="btn back"
-        onclick="backStep()">
- 
-        ← Back
- 
-    </button>
- 
-    <button
-        class="btn next"
-        onclick="nextStep()">
- 
-        Review →
- 
-    </button>
- 
-</div>
- 
+
+            <button
+                class="btn back"
+                onclick="backStep()">
+                ← Back
+            </button>
+
+            <button
+                class="btn next"
+                onclick="nextStep()">
+                Review →
+            </button>
+
+        </div>
+
     </div>
- 
+
     `;
 }
  
@@ -746,7 +898,7 @@ if(currentStep === 6){
  
             <div class="review-card">
  
-                <h4>Model Information</h4>
+                <h4>Model Details</h4>
  
                 <p>
                     Material :
@@ -835,124 +987,457 @@ const progressBar =
     );
  
 if(progressBar){
- 
+
     progressBar.style.width =
         progress + "%";
+}
+
+/*
+Restore previous values whenever
+a step is rendered again.
+*/
+restoreStepData();
+
  
 }
- 
+
+function restoreProgramState(id) {
+
+    const input =
+        document.getElementById(id);
+
+    const card =
+        document.getElementById(
+            id + "Card"
+        );
+
+    const icon =
+        document.getElementById(
+            id + "Icon"
+        );
+
+    const status =
+        document.getElementById(
+            id + "Status"
+        );
+
+    if (!input || !card) {
+        return;
+    }
+
+    if (input.value === "X") {
+
+        card.classList.add("active");
+
+        if (icon) {
+            icon.innerHTML = "◆";
+        }
+
+        if (status) {
+            status.innerHTML = "Configured";
+        }
+
+    } else {
+
+        card.classList.remove("active");
+
+        if (icon) {
+            icon.innerHTML = "◇";
+        }
+
+        if (status) {
+            status.innerHTML = "Available";
+        }
+    }
+}
+
+function setValue(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element) {
+        element.value = value ?? "";
+    }
+}
+
+
+function restoreStepData() {
+
+    // STEP 1 - Material Information
+    if (currentStep === 1) {
+
+        setValue("matnr", modelData.matnr);
+        setValue("country", modelData.country);
+        setValue("werks", modelData.werks);
+        setValue("mtart", modelData.mtart);
+        setValue("mbrsh", modelData.mbrsh);
+        setValue("matkl", modelData.matkl);
+        setValue("meins", modelData.meins);
+        setValue("spart", modelData.spart);
+        setValue("ean11", modelData.ean11);
+        setValue("mstae", modelData.mstae);
+        setValue("mstav", modelData.mstav);
+        setValue("spras", modelData.spras);
+        setValue("maktx", modelData.maktx);
+        setValue("vtweg", modelData.vtweg);
+        setValue("vmsta", modelData.vmsta);
+    }
+
+
+    // STEP 2 - Price Setup
+    if (currentStep === 2) {
+
+        // setValue("selkzb1", modelData.selkzb1);
+        // setValue("selkzbr", modelData.selkzbr);
+        setValue("kschl", modelData.kschl);
+        setValue("vkorg", modelData.vkorg);
+        setValue("priceSpart", modelData.priceSpart);
+        setValue("priceVtweg", modelData.priceVtweg);
+        setValue("konda", modelData.konda);
+        setValue("kbetr", modelData.kbetr);
+        setValue("konwa", modelData.konwa);
+        setValue("kpein", modelData.kpein);
+        setValue("kmein", modelData.kmein);
+        setValue("krech", modelData.krech);
+        setValue("datab", modelData.datab);
+        setValue("datbi", modelData.datbi);
+    }
+
+
+    // STEP 3 - Warranty
+    if (currentStep === 3) {
+
+    setValue(
+        "standardLength",
+        modelData.standardLength
+    );
+
+    setValue(
+        "standardUnit",
+        modelData.standardUnit
+    );
+
+    restoreWarranty(
+        "standardWarranty",
+        "standardWarrantyText",
+        "standardLength",
+        "standardUnit",
+        modelData.standardWarranty
+    );
+
+
+    setValue(
+        "extendedLength",
+        modelData.extendedLength
+    );
+
+    setValue(
+        "extendedUnit",
+        modelData.extendedUnit
+    );
+
+    restoreWarranty(
+        "extendedWarranty",
+        "extendedWarrantyText",
+        "extendedLength",
+        "extendedUnit",
+        modelData.extendedWarranty
+    );
+
+
+    setValue(
+        "brotherCareLength",
+        modelData.brotherCareLength
+    );
+
+    setValue(
+        "brotherCareUnit",
+        modelData.brotherCareUnit
+    );
+
+    restoreWarranty(
+        "brotherCareWarranty",
+        "brotherCareWarrantyText",
+        "brotherCareLength",
+        "brotherCareUnit",
+        modelData.brotherCareWarranty
+    );
+
+
+    setValue(
+        "brotherPlusLength",
+        modelData.brotherPlusLength
+    );
+
+    setValue(
+        "brotherPlusUnit",
+        modelData.brotherPlusUnit
+    );
+
+    restoreWarranty(
+        "brotherPlusWarranty",
+        "brotherPlusWarrantyText",
+        "brotherPlusLength",
+        "brotherPlusUnit",
+        modelData.brotherPlusWarranty
+    );
+}
+
+
+    // STEP 4 - Compatibility
+    if (currentStep === 4) {
+
+        setValue(
+            "amazondart",
+            modelData.amazondart
+        );
+
+        setValue(
+            "brrefresh",
+            modelData.brrefresh
+        );
+
+        setValue(
+            "barracuda",
+            modelData.barracuda
+        );
+
+        setValue(
+            "bplus",
+            modelData.bplus
+        );
+
+        restoreProgramState("amazondart");
+        restoreProgramState("brrefresh");
+        restoreProgramState("barracuda");
+        restoreProgramState("bplus");
+    }
+
+
+    // STEP 5 - Order Types
+
 }
  
-function nextStep(){
- 
+function nextStep() {
+
+    // Save current screen first
     saveCurrentStepData();
- 
-    if(currentStep < 6){
- 
+
+    if (currentStep < 6) {
+
         currentStep++;
- 
+
+        // Render next screen
         loadStep();
- 
     }
 }
  
  
-function backStep(){
- 
-    if(currentStep > 1){
- 
+function backStep() {
+
+    // Save changes made on current screen
+    saveCurrentStepData();
+
+    if (currentStep > 1) {
+
         currentStep--;
- 
+
+        // Render previous screen
         loadStep();
     }
- 
 }
  
-function saveCurrentStepData(){
- 
-    if(currentStep === 1){
- 
-        modelData.matnr =
-            document.getElementById("matnr")?.value || "";
- 
-        modelData.country =
-            document.getElementById("country")?.value || "";
- 
-        modelData.ean11 =
-            document.getElementById("ean11")?.value || "";
- 
-        modelData.crossplant =
-            document.getElementById("crossplant")?.value || "";
-            modelData.werks =
-document.getElementById("werks")?.value || "";
 
-modelData.mtart =
-document.getElementById("mtart")?.value || "";
 
-modelData.mbrsh =
-document.getElementById("mbrsh")?.value || "";
+function getValue(id) {
 
-modelData.matkl =
-document.getElementById("matkl")?.value || "";
+    return document.getElementById(id)?.value || "";
+}
 
-modelData.meins =
-document.getElementById("meins")?.value || "";
+function saveCurrentStepData() {
 
-modelData.mstae =
-document.getElementById("mstae")?.value || "";
+    /*
+    STEP 1
+    Material Information
+    */
+    if (currentStep === 1) {
 
-modelData.mstav =
-document.getElementById("mstav")?.value || "";
+        modelData.matnr = getValue("matnr");
+        modelData.werks = getValue("werks");
+        modelData.mtart = getValue("mtart");
+        modelData.mbrsh = getValue("mbrsh");
+        modelData.matkl = getValue("matkl");
+        modelData.meins = getValue("meins");
+        modelData.spart = getValue("spart");
+        modelData.ean11 = getValue("ean11");
 
-modelData.spras =
-document.getElementById("spras")?.value || "";
+        modelData.mstae = getValue("mstae");
+        modelData.mstav = getValue("mstav");
 
-modelData.maktx =
-document.getElementById("maktx")?.value || "";
+        modelData.spras = getValue("spras");
+        modelData.maktx = getValue("maktx");
+        modelData.vtweg = getValue("vtweg");
+        modelData.vmsta = getValue("vmsta");
 
-modelData.vtweg =
-document.getElementById("vtweg")?.value || "";
-
-modelData.vmsta =
-document.getElementById("vmsta")?.value || "";
-
+        modelData.country = getValue("country");
     }
- 
-    if(currentStep === 2){
- 
-        modelData.price =
-            document.getElementById("kbetr")?.value || "";
- 
-        modelData.currency =
-            document.getElementById("konwa")?.value || "";
+
+    /*
+    STEP 2
+    Pricing
+    */
+    if (currentStep === 2) {
+
+       modelData.selkzb1 =
+    document.querySelector(
+        'input[name="b1Pricing"\]:checked'
+    )?.value || "";
+
+modelData.selkzbr =
+    document.querySelector(
+        'input[name="brPricing"\]:checked'
+    )?.value || "";
+
+        modelData.kschl =
+            getValue("kschl");
+
+        modelData.vkorg =
+            getValue("vkorg");
+
+        modelData.priceSpart =
+            getValue("priceSpart");
+
+        modelData.priceVtweg =
+            getValue("priceVtweg");
+
+        modelData.konda =
+            getValue("konda");
+
+        modelData.kbetr =
+            getValue("kbetr");
+
+        modelData.konwa =
+            getValue("konwa");
+
+        modelData.kpein =
+            getValue("kpein");
+
+        modelData.kmein =
+            getValue("kmein");
+
+        modelData.krech =
+            getValue("krech");
+
+        modelData.datab =
+            getValue("datab");
+
+        modelData.datbi =
+            getValue("datbi");
     }
- 
-    if(currentStep === 3){
- 
-        modelData.standardWarranty =
-            document.getElementById("standardWarranty")?.value || "";
- 
-        modelData.extendedWarranty =
-            document.getElementById("extendedWarranty")?.value || "";
-    }
- 
-    if(currentStep === 4){
- 
-        modelData.amazondart =
-            document.getElementById("amazondart")?.value || "";
- 
-        modelData.brrefresh =
-            document.getElementById("brrefresh")?.value || "";
-    }
- 
-    if(currentStep === 5){
- 
-        modelData.drumOrder =
-            document.getElementById("drumOrder")?.value || "";
- 
-        modelData.claimOrder =
-            document.getElementById("claimOrder")?.value || "";
-    }
+
+    /*
+    STEP 3
+    Warranty
+    */
+    if (currentStep === 3) {
+
+    modelData.standardWarranty =
+        document.getElementById(
+            "standardWarranty"
+        )?.checked ? "X" : "";
+
+    modelData.standardLength =
+        getValue("standardLength");
+
+    modelData.standardUnit =
+        getValue("standardUnit");
+
+
+    modelData.extendedWarranty =
+        document.getElementById(
+            "extendedWarranty"
+        )?.checked ? "X" : "";
+
+    modelData.extendedLength =
+        getValue("extendedLength");
+
+    modelData.extendedUnit =
+        getValue("extendedUnit");
+
+
+    modelData.brotherCareWarranty =
+        document.getElementById(
+            "brotherCareWarranty"
+        )?.checked ? "X" : "";
+
+    modelData.brotherCareLength =
+        getValue("brotherCareLength");
+
+    modelData.brotherCareUnit =
+        getValue("brotherCareUnit");
+
+    modelData.brotherPlusWarranty =
+        document.getElementById(
+            "brotherPlusWarranty"
+        )?.checked ? "X" : "";
+
+    modelData.brotherPlusLength =
+        getValue("brotherPlusLength");
+
+    modelData.brotherPlusUnit =
+        getValue("brotherPlusUnit");
+}
+
+    /*
+    STEP 4
+    Compatibility
+    */
+  if (currentStep === 4) {
+
+    modelData.amazondart =
+        getValue("amazondart");
+
+    modelData.brrefresh =
+        getValue("brrefresh");
+
+    modelData.barracuda =
+        getValue("barracuda");
+
+    modelData.bplus =
+        getValue("bplus");
+}
+
+    /*
+    STEP 5
+    Order Types
+    */
+    if (currentStep === 5) {
+
+    modelData.consumable =
+        document.getElementById("consumable")?.checked
+            ? "X"
+            : "";
+
+    modelData.drumOrder =
+        document.getElementById("drumOrder")?.checked
+            ? "X"
+            : "";
+
+    modelData.wasteToner =
+        document.getElementById("wasteToner")?.checked
+            ? "X"
+            : "";
+
+    modelData.beltUnit =
+        document.getElementById("beltUnit")?.checked
+            ? "X"
+            : "";
+
+    modelData.claimOrder =
+        document.getElementById("claimOrder")?.checked
+            ? "X"
+            : "";
+}
 }
  
 async function saveModel() {
@@ -960,120 +1445,155 @@ async function saveModel() {
     const payload = {
 
         Material: {
-
-            MATNR: modelData.matnr,
-            WERKS: modelData.werks,
-            MTART: modelData.mtart,
-            MBRSH: modelData.mbrsh,
-            MATKL: modelData.matkl,
-            MEINS: modelData.meins,
-            SPART: modelData.spart,
-            EAN11: modelData.ean11,
-            MSTAE: modelData.mstae,
-            MSTAV: modelData.mstav,
-            SPRAS: modelData.spras,
-            MAKTX: modelData.maktx,
-            VTWEG: modelData.vtweg,
-            VMSTA: modelData.vmsta
-
+            MATNR: modelData.matnr || "",
+            WERKS: modelData.werks || "",
+            MTART: modelData.mtart || "",
+            MBRSH: modelData.mbrsh || "",
+            MATKL: modelData.matkl || "",
+            MEINS: modelData.meins || "",
+            SPART: modelData.spart || "",
+            EAN11: modelData.ean11 || "",
+            MSTAE: modelData.mstae || "",
+            MSTAV: modelData.mstav || "",
+            SPRAS: modelData.spras || "",
+            MAKTX: modelData.maktx || "",
+            VTWEG: modelData.vtweg || "",
+            VMSTA: modelData.vmsta || ""
         },
 
         PriceSetup: {
-
-            KSCHL: document.getElementById("kschl")?.value || "",
-            SELKZB1: document.getElementById("selkzb1")?.value || "",
-            SELKZBR: document.getElementById("selkzbr")?.value || "",
-            VKORG: document.getElementById("vkorg")?.value || "",
-            SPART: document.getElementById("priceSpart")?.value || "",
-            VTWEG: document.getElementById("priceVtweg")?.value || "",
-            KONDA: document.getElementById("konda")?.value || "",
-            KBETR: document.getElementById("kbetr")?.value || "",
-            KONWA: document.getElementById("konwa")?.value || "",
-            KPEIN: document.getElementById("kpein")?.value || "",
-            KMEIN: document.getElementById("kmein")?.value || "",
-            KRECH: document.getElementById("krech")?.value || "",
-            DATAB: document.getElementById("datab")?.value || "",
-            DATBI: document.getElementById("datbi")?.value || ""
-
+            MATNR: modelData.matnr || "",
+            KSCHL: modelData.kschl || "",
+            SELKZB1: modelData.selkzb1 || "",
+            SELKZBR: modelData.selkzbr || "",
+            VKORG: modelData.vkorg || "",
+            SPART: modelData.priceSpart || "",
+            VTWEG: modelData.priceVtweg || "",
+            KONDA: modelData.konda || "",
+            KBETR: modelData.kbetr || "",
+            KONWA: modelData.konwa || "",
+            KPEIN: modelData.kpein || "",
+            KMEIN: modelData.kmein || "",
+            KRECH: modelData.krech || "",
+            DATAB: modelData.datab || "",
+            DATBI: modelData.datbi || ""
         },
 
         Warranty: {
+            MATNR: modelData.matnr || "",
+            COUNTRY: modelData.country || "",
 
-            COUNTRY: modelData.country,
-            STANDARD: modelData.standardWarranty,
-            EXTENDED: modelData.extendedWarranty,
-            BROTHERCARE: modelData.brotherCareWarranty,
-            BARRACUDA: modelData.barracudaWarranty,
-            BROTHERPLUS: modelData.brotherPlusWarranty
+            STANDARD: {
+                WARRANTY_TYPE: "STANDARD",
+                ENABLED: modelData.standardWarranty || "",
+                WTY_LEN: modelData.standardLength || "",
+                WTY_LEN_UNIT: modelData.standardUnit || ""
+            },
 
+            EXTENDED: {
+                WARRANTY_TYPE: "EXTENDED",
+                ENABLED: modelData.extendedWarranty || "",
+                WTY_LEN: modelData.extendedLength || "",
+                WTY_LEN_UNIT: modelData.extendedUnit || ""
+            },
+
+            BROTHERCARE: {
+                WARRANTY_TYPE: "BROTHER_CARE",
+                ENABLED: modelData.brotherCareWarranty || "",
+                WTY_LEN: modelData.brotherCareLength || "",
+                WTY_LEN_UNIT: modelData.brotherCareUnit || ""
+            },
+
+           
+            BROTHERPLUS: {
+                WARRANTY_TYPE: "BROTHER_PLUS",
+                ENABLED: modelData.brotherPlusWarranty || "",
+                WTY_LEN: modelData.brotherPlusLength || "",
+                WTY_LEN_UNIT: modelData.brotherPlusUnit || ""
+            }
         },
 
         Compatibility: {
-
-            AMAZONDART: modelData.amazondart,
-            BRREFRESH: modelData.brrefresh,
-            BARRACUDA: modelData.barracuda,
-            BPLUS: modelData.bplus
-
+            MATNR: modelData.matnr || "",
+            COUNTRY: modelData.country || "",
+            AMAZONDART: modelData.amazondart || "",
+            BRREFRESH: modelData.brrefresh || "",
+            BARRACUDA: modelData.barracuda || "",
+            BPLUS: modelData.bplus || ""
         },
 
         OrderType: {
-
-            CONSUMABLE: modelData.consumable,
-            DRUM: modelData.drumOrder,
-            WASTE_TONER: modelData.wasteToner,
-            BELT_UNIT: modelData.beltUnit,
-            CLAIMORDER: modelData.claimOrder
-
+            MATNR: modelData.matnr || "",
+            COUNTRY: modelData.country || "",
+            CONSUMABLE: modelData.consumable || "",
+            DRUM: modelData.drumOrder || "",
+            WASTE_TONER: modelData.wasteToner || "",
+            BELT_UNIT: modelData.beltUnit || "",
+            CLAIMORDER: modelData.claimOrder || ""
         }
-
     };
 
-    console.log("SAP Payload:", payload);
+    console.log(
+        "FINAL MODEL JSON:",
+        JSON.stringify(payload, null, 2)
+    );
 
     try {
 
-       const response = await fetch(
-    "http://localhost:3000/api/model/create",
-    {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    }
-);
+        const response = await fetch(
+            "/api/model/create",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }
+        );
 
-if(response.ok){
+        const result = await response.json();
 
-    showSuccessPage();
+        if (!response.ok || !result.success) {
 
-}
-else{
+            console.error(
+                "Create Model Error:",
+                result
+            );
 
-    alert("Failed to save model");
-}
+            alert(
+                result.message ||
+                "Failed to create model"
+            );
 
-        if (response.ok) {
-
-            console.log("Model saved successfully");
-
-            showSuccessPage();
-
-        } else {
-
-            alert("Failed to save model");
-
+            return;
         }
 
-    } catch (error) {
+        console.log(
+            "Backend response:",
+            result
+        );
 
-        console.error(error);
-
-        alert("Backend connection failed");
+        showSuccessPage();
 
     }
+    catch (error) {
 
+        console.error(
+            "Backend connection error:",
+            error
+        );
+
+        alert(
+            "Unable to connect to backend"
+        );
+    }
+}
+
+function friendlyStatus(value) {
+
+    return value === "X"
+        ? "Configured"
+        : "Not Configured";
 }
  
 function showSuccessPage(){
@@ -1156,25 +1676,40 @@ View Created Model
      style="display:none">
  
     <div class="detail-card">
-        <h3>Model Information</h3>
+        <h3>Model Details</h3>
  
         <p><b>Model :</b> ${modelData.matnr || "-"}</p>
         <p><b>Country :</b> ${modelData.country || "-"}</p>
         <p><b>EAN :</b> ${modelData.ean11 || "-"}</p>
-        <p><b>Cross Plant :</b> ${modelData.crossplant || "-"}</p>
+        <p>
+    <b>Cross Plant Status :</b>
+    ${modelData.mstae || "-"}
+</p>
     </div>
  
     <div class="detail-card">
         <h3>Pricing</h3>
  
-        <p><b>Price :</b>
-        ${modelData.price || "-"} ${modelData.currency || ""}</p>
- 
-        <p><b>B1 Price :</b>
-        ${modelData.b1price || "-"}</p>
- 
-        <p><b>BR Price :</b>
-        ${modelData.brprice || "-"}</p>
+        <p>
+    <b>Price :</b>
+    ${modelData.kbetr || "-"}
+    ${modelData.konwa || ""}
+</p>
+
+<p>
+    <b>B1 Pricing :</b>
+    ${friendlyStatus(modelData.selkzb1)}
+</p>
+
+<p>
+    <b>BR Pricing :</b>
+    ${friendlyStatus(modelData.selkzbr)}
+</p>
+
+<p>
+    <b>Condition Type :</b>
+    ${modelData.kschl || "-"}
+</p>
     </div>
  
     <div class="detail-card">
@@ -1242,63 +1777,141 @@ function goDashboard(){
         );
     }
 }
-function toggleProgram(id){
- 
+function toggleProgram(id) {
+
     const card =
         document.getElementById(
             id + "Card"
         );
- 
-    const hidden =
+
+    const input =
         document.getElementById(id);
- 
+
     const icon =
         document.getElementById(
             id + "Icon"
         );
- 
+
     const status =
         document.getElementById(
             id + "Status"
         );
- 
-    if(hidden.value === "X"){
- 
-        hidden.value = "";
- 
+
+    if (!card || !input) {
+        return;
+    }
+
+    if (input.value === "X") {
+
+        input.value = "";
+
         card.classList.remove(
             "active"
         );
- 
-        if(icon){
- 
-           icon.innerHTML = "◇";
+
+        if (icon) {
+            icon.innerHTML = "◇";
         }
- 
-        if(status){
- 
-           status.innerHTML = "Available";
+
+        if (status) {
+            status.innerHTML =
+                "Available";
         }
- 
-    }
-    else{
- 
-        hidden.value = "X";
- 
+
+    } else {
+
+        input.value = "X";
+
         card.classList.add(
             "active"
         );
- 
-        if(icon){
- 
-          icon.innerHTML = "◆";
+
+        if (icon) {
+            icon.innerHTML = "◆";
         }
- 
-        if(status){
- 
-            status.innerHTML = "Configured";
+
+        if (status) {
+            status.innerHTML =
+                "Configured";
         }
- 
     }
- 
+}
+function toggleWarranty(
+    toggleId,
+    textId,
+    lengthId,
+    unitId
+) {
+
+    const toggle =
+        document.getElementById(toggleId);
+
+    const text =
+        document.getElementById(textId);
+
+    const length =
+        document.getElementById(lengthId);
+
+    const unit =
+        document.getElementById(unitId);
+
+    if (!toggle) {
+        return;
+    }
+
+    if (toggle.checked) {
+
+        if (text) {
+            text.textContent = "On";
+            text.style.color = "#22c55e";
+        }
+
+        if (length) {
+            length.disabled = false;
+        }
+
+        if (unit) {
+            unit.disabled = false;
+        }
+
+    } else {
+
+        if (text) {
+            text.textContent = "Off";
+            text.style.color = "#94a3b8";
+        }
+
+        if (length) {
+            length.disabled = true;
+        }
+
+        if (unit) {
+            unit.disabled = true;
+        }
+    }
+}
+function restoreWarranty(
+    toggleId,
+    textId,
+    lengthId,
+    unitId,
+    value
+) {
+
+    const toggle =
+        document.getElementById(toggleId);
+
+    if (!toggle) {
+        return;
+    }
+
+    toggle.checked =
+        value === "X";
+
+    toggleWarranty(
+        toggleId,
+        textId,
+        lengthId,
+        unitId
+    );
 }
