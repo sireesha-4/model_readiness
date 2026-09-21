@@ -139,8 +139,8 @@ console.log(req.query);
 });
 
 // ======================================================
-        // MODEL REPORT API
-        // ======================================================
+// MODEL REPORT API
+// ======================================================
 
         app.get("/api/models", async (req, res) => {
 
@@ -212,11 +212,7 @@ console.log(req.query);
             }
 
         });
-// =============================
-// app.get("/logout", (req, res) => {
-//     req.session.destroy();
-//     res.json({ success: true });
-// });
+
 // =============================
 // LOGOUT
 // =============================
@@ -314,7 +310,6 @@ function hasValue(value) {
     );
 }
 
-
 function sapStatus(value) {
 
     return (
@@ -332,10 +327,8 @@ function isValidModelQuestion(question) {
             .toLowerCase()
             .trim();
 
-    /*
-    Words/topics that your current
-    read-only assistant understands.
-    */
+    /* Words/topics that your current
+    read-only assistant understands */
     const validTerms = [
 
         // General
@@ -398,7 +391,6 @@ function isValidModelQuestion(question) {
         "country"
     ];
 
-
     return validTerms.some(
         term => q.includes(term)
     );
@@ -414,7 +406,6 @@ function buildModelAnswer(
     const q = question
         .toLowerCase()
         .trim();
-
 
     // =========================================
     // SPECIFIC PRICING QUESTIONS
@@ -432,7 +423,6 @@ function buildModelAnswer(
         );
     }
 
-
     // B1 Pricing only
     if (
         q.includes("b1 pricing") ||
@@ -444,7 +434,6 @@ function buildModelAnswer(
             `${sapStatus(data.B1priceSetup)}.`
         );
     }
-
 
     // =========================================
     // SPECIFIC WARRANTY QUESTIONS
@@ -472,10 +461,8 @@ function buildModelAnswer(
                 `${data.StandardwarrantyUnit || ""}.`;
         }
 
-
         return answer;
     }
-
 
     // Extended Warranty only
     if (
@@ -503,7 +490,6 @@ function buildModelAnswer(
         return answer;
     }
 
-
     // Brother Care Warranty only
     if (
         q.includes("brother care")
@@ -526,10 +512,8 @@ function buildModelAnswer(
                 `${data.BrothercarewarrantyUnit || ""}.`;
         }
 
-
         return answer;
     }
-
 
     // Barracuda Warranty specifically
     if (
@@ -542,7 +526,6 @@ function buildModelAnswer(
         );
     }
 
-
     // Brother Plus Warranty specifically
     if (
         q.includes("brother plus warranty")
@@ -554,11 +537,9 @@ function buildModelAnswer(
         );
     }
 
-
     // =========================================
     // SPECIFIC COMPATIBILITY QUESTIONS
     // =========================================
-
     // Amazon Dart only
     if (
         q.includes("amazon dart") ||
@@ -570,7 +551,6 @@ function buildModelAnswer(
             `${sapStatus(data.Amazondart)}.`
         );
     }
-
 
     // BR Refresh only
     if (
@@ -584,7 +564,6 @@ function buildModelAnswer(
         );
     }
 
-
     // Barracuda Program only
     if (
         q.includes("barracuda") &&
@@ -596,7 +575,6 @@ function buildModelAnswer(
             `${sapStatus(data.Barracuda)}.`
         );
     }
-
 
     // Brother Plus Program only
     if (
@@ -612,7 +590,6 @@ function buildModelAnswer(
             `${sapStatus(data.Bplus)}.`
         );
     }
-
 
     // =========================================
     // SPECIFIC ORDER QUESTIONS
@@ -632,7 +609,6 @@ function buildModelAnswer(
         );
     }
 
-
     // Drum only
     if (
         q.includes("drum")
@@ -644,7 +620,6 @@ function buildModelAnswer(
         );
     }
 
-
     // Waste Toner only
     if (
         q.includes("waste toner")
@@ -655,7 +630,6 @@ function buildModelAnswer(
             `${sapStatus(data.WasteToner)}.`
         );
     }
-
 
     // Belt Unit only
     if (
@@ -669,7 +643,6 @@ function buildModelAnswer(
         );
     }
 
-
     // Claim Order only
     if (
         q.includes("claim order") ||
@@ -681,7 +654,6 @@ function buildModelAnswer(
             `${sapStatus(data.Claimorder)}.`
         );
     }
-
 
     // =========================================
     // SPECIFIC MATERIAL QUESTIONS
@@ -698,7 +670,6 @@ function buildModelAnswer(
         );
     }
 
-
     if (
         q.includes("cross plant")
     ) {
@@ -708,7 +679,6 @@ function buildModelAnswer(
             `${data.CrossplantMaterial || "not available in SAP"}.`
         );
     }
-
 
     // =========================================
     // FULL PRICING QUESTION
@@ -725,7 +695,6 @@ function buildModelAnswer(
             `BR Pricing: ${sapStatus(data.BrpriceSetup)}`
         ];
 
-
         if (
             hasValue(data.Kbetr)
         ) {
@@ -735,10 +704,8 @@ function buildModelAnswer(
             );
         }
 
-
         return lines.join("\n");
     }
-
 
     // =========================================
     // FULL WARRANTY QUESTION
@@ -753,11 +720,9 @@ function buildModelAnswer(
             `Warranty information for ${model} (${country}):`
         ];
 
-
         lines.push(
             `Standard Warranty: ${sapStatus(data.StandardWarranty)}`
         );
-
 
         if (
             data.StandardWarranty === "X" &&
@@ -772,11 +737,9 @@ function buildModelAnswer(
             );
         }
 
-
         lines.push(
             `Extended Warranty: ${sapStatus(data.ExtendedWarranty)}`
         );
-
 
         if (
             data.ExtendedWarranty === "X" &&
@@ -791,7 +754,6 @@ function buildModelAnswer(
             );
         }
 
-
         lines.push(
             `Brother Care: ${sapStatus(data.BrothercareWarranty)}`
         );
@@ -804,10 +766,8 @@ function buildModelAnswer(
             `Brother Plus Warranty: ${sapStatus(data.BrotherplusWarranty)}`
         );
 
-
         return lines.join("\n");
     }
-
 
     // =========================================
     // FULL COMPATIBILITY QUESTION
@@ -826,7 +786,6 @@ function buildModelAnswer(
             `Brother Plus: ${sapStatus(data.Bplus)}`
         ].join("\n");
     }
-
 
     // =========================================
     // FULL ORDER TYPE QUESTION
@@ -850,7 +809,6 @@ function buildModelAnswer(
         ].join("\n");
     }
 
-
     // =========================================
     // GENERAL MODEL DETAILS
     // =========================================
@@ -858,7 +816,6 @@ function buildModelAnswer(
     const lines = [
         `SAP model information for ${model} (${country}):`
     ];
-
 
     if (
         hasValue(data.Ean11)
@@ -881,7 +838,6 @@ function buildModelAnswer(
         );
     }
 
-
     lines.push(
         `B1 Pricing: ${sapStatus(data.B1priceSetup)}`
     );
@@ -902,10 +858,8 @@ function buildModelAnswer(
         `BR Refresh: ${sapStatus(data.Brrefresh)}`
     );
 
-
     return lines.join("\n");
 }
-
 
 app.get("/api/saved-models", (req, res) => {
 
@@ -946,20 +900,16 @@ async function getModelFromSAP(
         String(country)
             .replace(/'/g, "''");
 
-
     const requestedFields =
         `Matnr='${safeModel}',Country='${safeCountry}'`;
 
-
     const sapUrl =
         `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
-
 
     console.log(
         "AI SAP REQUEST:",
         sapUrl
     );
-
 
     const response =
         await axios.get(
@@ -979,7 +929,6 @@ async function getModelFromSAP(
                 }
             }
         );
-
 
     return (
         response.data?.d ||
@@ -1055,18 +1004,15 @@ app.post(
                 });
         }
 
-
         // Clear only AI conversation memory
         req.session.aiContext = {
             model: "",
             country: ""
         };
 
-
         console.log(
             "AI conversation memory cleared"
         );
-
 
         return res.json({
 
@@ -1101,12 +1047,10 @@ app.post(
                     });
             }
 
-
             const question =
                 String(
                     req.body.question || ""
                 ).trim();
-
 
             if (!question) {
 
@@ -1121,7 +1065,7 @@ app.post(
                     });
             }
 
-            // ---------------------------------
+// ---------------------------------
 // Validate Model-related Question
 // ---------------------------------
 
@@ -1160,14 +1104,12 @@ if (!isValidModelQuestion(question)) {
                 question
             );
 
-
             // ---------------------------------
             // READ-ONLY PROTECTION
             // ---------------------------------
 
             const lowerQuestion =
                 question.toLowerCase();
-
 
             const blockedActions = [
                 "create",
@@ -1178,7 +1120,6 @@ if (!isValidModelQuestion(question)) {
                 "remove"
             ];
 
-
             const wantsWrite =
                 blockedActions.some(
                     action =>
@@ -1186,7 +1127,6 @@ if (!isValidModelQuestion(question)) {
                             action
                         )
                 );
-
 
             if (wantsWrite) {
 
@@ -1199,7 +1139,7 @@ if (!isValidModelQuestion(question)) {
                 });
             }
 
-            // =========================================
+// =========================================
 // CONVERSATION MEMORY
 // =========================================
 
@@ -1211,7 +1151,6 @@ if (!req.session.aiContext) {
     };
 }
 
-
 // =========================================
 // MODEL EXTRACTION
 // =========================================
@@ -1220,7 +1159,6 @@ let model =
     req.session.aiContext.model || "";
 
 let modelWasProvided = false;
-
 
 /*
 Supported examples:
@@ -1243,7 +1181,6 @@ Important:
 must NOT interpret "have" as model number.
 */
 
-
 const modelPatterns = [
 
     // Model number DCPL2550DW
@@ -1265,22 +1202,18 @@ const modelPatterns = [
     /\bmaterial\s+([A-Za-z0-9_-]*\d[A-Za-z0-9_-]*)/i
 ];
 
-
 for (const pattern of modelPatterns) {
 
     const match =
         question.match(pattern);
-
 
     if (match) {
 
         const newModel =
             match[1];
 
-
         const previousModel =
             req.session.aiContext.model;
-
 
         model =
             newModel;
@@ -1312,19 +1245,15 @@ for (const pattern of modelPatterns) {
                 "";
         }
 
-
         req.session.aiContext.model =
             newModel;
-
 
         modelWasProvided =
             true;
 
-
         break;
     }
 }
-
 
 // =========================================
 // COUNTRY EXTRACTION
@@ -1336,12 +1265,10 @@ let country =
 let countryWasProvided =
     false;
 
-
 const countryMatch =
     question.match(
         /\b(US|CA|UK|JP)\b/i
     );
-
 
 if (countryMatch) {
 
@@ -1349,15 +1276,12 @@ if (countryMatch) {
         countryMatch[1]
             .toUpperCase();
 
-
     req.session.aiContext.country =
         country;
-
 
     countryWasProvided =
         true;
 }
-
 
 // =========================================
 // SAVE FINAL CONVERSATION CONTEXT
@@ -1369,13 +1293,11 @@ if (model) {
         model;
 }
 
-
 if (country) {
 
     req.session.aiContext.country =
         country;
 }
-
 
 // =========================================
 // VALIDATE MODEL + COUNTRY
@@ -1404,7 +1326,6 @@ if (!model && !country) {
     });
 }
 
-
 if (!model) {
 
     return res.json({
@@ -1416,7 +1337,6 @@ if (!model) {
             `but I still need the Model Number.`
     });
 }
-
 
 if (!country) {
 
@@ -1433,7 +1353,6 @@ if (!country) {
             `"Show details for model ${model} US."`
     });
 }
-
 
 // =========================================
 // DEBUG CONVERSATION MEMORY
@@ -1459,13 +1378,11 @@ console.log(
                     "''"
                 );
 
-
             const safeCountry =
                 country.replace(
                     /'/g,
                     "''"
                 );
-
 
             // ---------------------------------
             // Build SAP OData URL
@@ -1474,10 +1391,8 @@ console.log(
             const requestedFields =
                 `Matnr='${safeModel}',Country='${safeCountry}'`;
 
-
             const sapUrl =
                 `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
-
 
             console.log(
                 "AI SAP REQUEST:"
@@ -1486,7 +1401,6 @@ console.log(
             console.log(
                 sapUrl
             );
-
 
             // ---------------------------------
             // SAP READ
@@ -1511,11 +1425,9 @@ console.log(
                     }
                 );
 
-
             const sapData =
                 sapResponse.data?.d ||
                 sapResponse.data;
-
 
             console.log(
                 "AI SAP RESPONSE:"
@@ -1529,7 +1441,6 @@ console.log(
                 )
             );
 
-
             if (!sapData) {
 
                 return res.json({
@@ -1540,7 +1451,6 @@ console.log(
                         `No SAP data was found for model ${model} and country ${country}.`
                 });
             }
-
 
             // ---------------------------------
             // Build grounded answer
@@ -1553,7 +1463,6 @@ console.log(
                     model,
                     country
                 );
-
 
             // ---------------------------------
             // Return to dashboard
@@ -1600,7 +1509,6 @@ console.log(
         });
 }
 
-
             if (
                 error.response?.status === 401 ||
                 error.response?.status === 403
@@ -1616,7 +1524,6 @@ console.log(
                             "SAP authorization failed. Please sign in again."
                     });
             }
-
 
             return res
                 .status(500)

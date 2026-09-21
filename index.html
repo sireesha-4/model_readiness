@@ -21,8 +21,6 @@
             color: #e2e8f0;
         }
 
-
-
         /* ========== PREMIUM LOGIN PAGE – Exact Match ========== */
         #loginSection {
             display: flex;
@@ -117,7 +115,6 @@
 
     z-index:-1;
 }
-
 
         .login-logo-box {
             width: 150px;
@@ -252,8 +249,6 @@
         0 12px 25px rgba(37,99,235,.40);
 }
 
-
-
         #loginMessage {
             margin-top: 14px;
             text-align: center;
@@ -291,8 +286,7 @@
             object-fit: contain;
             /* Softens the hard edges of the image background */
             mix-blend-mode: lighten;
-            /* try this first */
-            /* OR use the alternative below if lighten is too strong */
+           
         }
 
         /* Hide floating badges (already in image) */
@@ -635,7 +629,6 @@
             color: #64748b;
         }
 
-        /* ========== KPI CARDS ========== */
         /* ========== KPI CARDS – Exact Target Match ========== */
         .kpi-grid {
             display: grid;
@@ -653,14 +646,6 @@
             overflow: hidden;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
-
-        /* .kpi-card {
-    background: rgba(20, 30, 50, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 18px;
-    box-shadow: 0 8px 24px rgba(0,0,0,.35);
-} */
 
         .kpi-card:hover {
             transform: translateY(-2px);
@@ -738,15 +723,6 @@
             color: #94a3b8;
         }
 
-        /* Large number */
-        /* .kpi-value {
-            font-size: 30px;
-            font-weight: 700;
-            color: #f1f5f9;
-            letter-spacing: -0.8px;
-            line-height: 1.1;
-            margin-bottom: 6px;
-        } */
         .kpi-value {
             font-size: 56px;
             font-weight: 700;
@@ -786,7 +762,6 @@
         }
 
         F
-
         /* ========== SEARCH CARD ========== */
         .search-card {
             background: linear-gradient(145deg, #162238, #1a2a42);
@@ -1493,7 +1468,6 @@
         filter 0.25s ease;
 }
 
-
 /* Sparkle */
 
 .ai-button-icon {
@@ -1534,9 +1508,7 @@
         aiPulseRing 2.4s ease-out infinite;
 }
 
-
 /* Inner soft glow */
-
 .ai-chat-button::after {
     content: "";
 
@@ -1559,7 +1531,6 @@
 
 
 /* Hover */
-
 .ai-chat-button:hover {
     animation-play-state: paused;
 
@@ -1572,7 +1543,6 @@
 
 
 /* Floating movement */
-
 @keyframes aiFloating {
 
     0%,
@@ -1587,7 +1557,6 @@
 
 
 /* Expanding glow */
-
 @keyframes aiPulseRing {
 
     0% {
@@ -1607,7 +1576,6 @@
 }
 
 /* Chat Window */
-
 .ai-chat-panel {
     position: fixed;
 
@@ -1645,9 +1613,7 @@
     display: flex;
 }
 
-
 /* Header */
-
 .ai-chat-header {
     min-height: 72px;
 
@@ -1684,7 +1650,6 @@
 }
 
 /* Messages */
-
 .ai-chat-messages {
     flex: 1;
 
@@ -1778,7 +1743,6 @@
 
 
 /* Input Area */
-
 .ai-chat-input-area {
     display: flex;
 
@@ -1883,7 +1847,6 @@
     gap: 5px;
 }
 
-
 /* ========================================
    NEW CHAT / RESET BUTTON
 ======================================== */
@@ -1924,11 +1887,9 @@
     transform: rotate(30deg);
 }
 
-
 /* ========================================
    CLOSE BUTTON
 ======================================== */
-
 .ai-close-button {
     width: 30px;
     height: 30px;
@@ -1954,7 +1915,6 @@
         background 0.2s ease,
         color 0.2s ease;
 }
-
 
 .ai-close-button:hover {
     background: rgba(239, 68, 68, 0.10);
@@ -1987,7 +1947,6 @@
     font-size: 12px;
 }
 
-
 /* Three dots container */
 
 .ai-thinking-dots {
@@ -1996,9 +1955,7 @@
     gap: 4px;
 }
 
-
 /* Individual dot */
-
 .ai-thinking-dots span {
     width: 5px;
     height: 5px;
@@ -2013,9 +1970,7 @@
         aiThinkingDot 1.2s infinite ease-in-out;
 }
 
-
 /* Delay each dot */
-
 .ai-thinking-dots span:nth-child(1) {
     animation-delay: 0s;
 }
@@ -2028,9 +1983,7 @@
     animation-delay: 0.30s;
 }
 
-
 /* Dot animation */
-
 @keyframes aiThinkingDot {
 
     0%,
@@ -2051,23 +2004,6 @@
 
 <body>
 
-    <!-- LOGIN -->
-    <!-- <div id="loginSection">
-        <div class="login-left">
-            <div class="welcome">Welcome To</div>
-            <h1>Model Setup</h1>
-            <div class="subtitle">SAP Model Setup Platform</div>
-            <form onsubmit="login(); return false;">
-                <input type="text" id="username" placeholder="SAP Username" autocomplete="username">
-                <input type="password" id="password" placeholder="SAP Password" autocomplete="current-password">
-                <button type="submit" class="login-btn">Sign In</button>
-            </form>
-            <p id="loginMessage"></p>
-        </div>
-        <div class="login-right"></div>
-    </div> -->
-    <!-- LOGIN -->
-    <!-- LOGIN -->
     <div id="loginSection">
         <!-- LEFT: Form -->
         <div class="login-left">
@@ -2193,7 +2129,6 @@
                         </div>
                     </div>
 
-                    <!-- KPI CARDS -->
                     <!-- KPI CARDS -->
                     <div class="kpi-grid">
                         <div class="kpi-card total">
@@ -2380,11 +2315,15 @@
 
                 </iframe>
             </div>
+            <!-- Model Change  -->
             <div id="modelChange" class="page">
-                <div class="placeholder-page">
-                    <h1>Model Change</h1>
-                    <p>Model Change content will appear here.</p>
-                </div>
+                <iframe src="modelchange1.html" style="
+                         width:100%;
+                         height:calc(100vh - 70px);
+                         border:none;
+                         background:transparent;
+                         display:block;">
+                </iframe>
             </div>
         </div>
     </div>
@@ -2392,8 +2331,6 @@
     <!-- =====================================================
      AI MODEL READINESS ASSISTANT
 ===================================================== -->
-
-
 <!-- FLOATING AI LAUNCHER -->
 
 <div
@@ -2419,9 +2356,7 @@
 
 </div>
 
-
 <!-- AI CHAT WINDOW -->
-
 <div
     id="aiChatPanel"
     class="ai-chat-panel">
@@ -2480,7 +2415,6 @@
 
     </div>
 
-
     <!-- MESSAGES -->
 
     <div
@@ -2504,7 +2438,6 @@ Example:
 
     </div>
 
-
     <!-- INPUT -->
 
     <div class="ai-chat-input-area">
@@ -2524,9 +2457,7 @@ Example:
             <i class="fas fa-paper-plane"></i>
 
         </button>
-
     </div>
-
 </div>
 
 
@@ -2547,7 +2478,6 @@ Example:
 <button onclick="setAIQuestion('amazon')">
     Amazon Dart
 </button>
-
     </div>
 
 
@@ -2567,12 +2497,11 @@ Example:
             <i class="fas fa-paper-plane"></i>
 
         </button>
-
     </div>
-
 </div>
 
     <script>
+
         // DateTime
         function updateDateTime() {
             const now = new Date();
@@ -2605,7 +2534,6 @@ Example:
             "none";
     }
 
-
     const appSection =
         document.getElementById(
             "appSection"
@@ -2620,7 +2548,6 @@ Example:
             "active"
         );
     }
-
 
     const aiLauncher =
         document.getElementById(
@@ -2655,7 +2582,6 @@ Example:
             "appSection"
         );
 
-
     if (appSection) {
 
         appSection.style.display =
@@ -2666,7 +2592,6 @@ Example:
         );
     }
 
-
     // -----------------------------
     // Show Login
     // -----------------------------
@@ -2676,13 +2601,11 @@ Example:
             "loginSection"
         );
 
-
     if (loginSection) {
 
         loginSection.style.display =
             "flex";
     }
-
 
     // -----------------------------
     // Hide AI Launcher
@@ -2693,13 +2616,11 @@ Example:
             "aiLauncher"
         );
 
-
     if (aiLauncher) {
 
         aiLauncher.style.display =
             "none";
     }
-
 
     // -----------------------------
     // Close AI Chat
@@ -2709,7 +2630,6 @@ Example:
         document.getElementById(
             "aiChatPanel"
         );
-
 
     if (aiPanel) {
 
@@ -2779,60 +2699,6 @@ Example:
             if (country) document.getElementById("country").value = country;
         }
         loadSearchValues();
-
-        // async function searchModel() {
-        //     const model = document.getElementById("model").value.trim();
-        //     const country = document.getElementById("country").value.trim();
-        //     try {
-        //         const response = await fetch(`/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`);
-        //         const data = await response.json();
-        //         const results = data.d?.results;
-        //         // const record = data.d;
-
-        //         if (!record) {
-        //             document.getElementById("result").innerHTML =
-        //                 '<div class="no-data">No data found</div>';
-        //             return;
-        //         }
-
-        //         // loadModelDetails(record);
-        //         const firstRecord = results[0];
-
-        //     } catch (error) {
-        //         document.getElementById("result").innerHTML = `<div class="no-data">${error.message || "Search failed"}</div>`;
-        //     }
-        // }
-
-        // async function searchModel() {
-
-        //     console.log("Search button clicked");
-
-        //     const model = document.getElementById("model").value.trim();
-        //     const country = document.getElementById("country").value.trim();
-
-        //     console.log("Model:", model);
-        //     console.log("Country:", country);
-
-        //     try {
-        //         const response = await fetch(
-        //             `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
-        //         );
-
-        //         console.log("API called");
-
-        //         const data = await response.json();
-
-        //         console.log("Response:", data);
-        //         const results = data.d?.results;
-
-        //         console.log(results);
-        //         const firstRecord = results[0];
-        //         console.log(firstRecord);
-        //         loadModelDetails(firstRecord);
-        //     } catch (error) {
-        //         console.error(error);
-        //     }
-        // }
 
         async function searchModel() {
 
@@ -3080,9 +2946,7 @@ Example:
         <td>${showStatus(r.BeltUnit)}</td>
         <td>${showStatus(r.Claimorder)}</td>
  
-       
         </tr>
- 
         `;
 
                 }).join("");
@@ -3248,16 +3112,10 @@ Example:
 
                 );
 
-
-
             if (!model.matnr) {
 
                 return;
-
             }
-
-
-
             buildCards([{
 
                 Matnr: model.matnr,
@@ -3271,8 +3129,6 @@ Example:
                 Amazondart: model.amazondart
 
             }]);
-
-
 
             buildReportTable([{
 
@@ -3288,8 +3144,6 @@ Example:
 
             }]);
 
-
-
             document.getElementById(
 
                 "modelCount"
@@ -3300,7 +3154,7 @@ Example:
 
         }
 
-        // =====================================================
+ // =====================================================
 // AI MODEL READINESS ASSISTANT
 // =====================================================
 
@@ -3310,7 +3164,6 @@ function toggleAIChat() {
         document.getElementById(
             "appSection"
         );
-
 
     // AI cannot be used on Login page
 
@@ -3324,12 +3177,10 @@ function toggleAIChat() {
         return;
     }
 
-
     const panel =
         document.getElementById(
             "aiChatPanel"
         );
-
 
     if (!panel) {
 
@@ -3340,12 +3191,10 @@ function toggleAIChat() {
         return;
     }
 
-
     const isOpen =
         panel.classList.contains(
             "open"
         );
-
 
     // -----------------------------
     // CLOSE
@@ -3360,10 +3209,8 @@ function toggleAIChat() {
         panel.style.display =
             "none";
 
-
         return;
     }
-
 
     // -----------------------------
     // OPEN
@@ -3376,12 +3223,10 @@ function toggleAIChat() {
         "open"
     );
 
-
     const input =
         document.getElementById(
             "aiQuestion"
         );
-
 
     if (input) {
 
@@ -3395,10 +3240,10 @@ function toggleAIChat() {
         );
     }
 }
+
 async function resetAIChat() {
 
     try {
-
         const response =
             await fetch(
                 "/api/ai/reset",
@@ -3412,10 +3257,8 @@ async function resetAIChat() {
                 }
             );
 
-
         const result =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -3427,13 +3270,11 @@ async function resetAIChat() {
             return;
         }
 
-
         // Clear current chat messages
         const messages =
             document.getElementById(
                 "aiChatMessages"
             );
-
 
         if (messages) {
 
@@ -3455,13 +3296,11 @@ Example:
             `;
         }
 
-
         // Clear input box
         const input =
             document.getElementById(
                 "aiQuestion"
             );
-
 
         if (input) {
 
@@ -3469,7 +3308,6 @@ Example:
 
             input.focus();
         }
-
 
         console.log(
             "AI conversation reset successfully"
@@ -3494,7 +3332,6 @@ function handleAIKey(event) {
         sendAIQuestion();
     }
 }
-
 
 function addAIMessage(
     message,
@@ -3527,7 +3364,6 @@ function addAIMessage(
     wrapper.appendChild(avatar);
 }
 
-
     const content =
         document.createElement(
             "div"
@@ -3536,10 +3372,7 @@ function addAIMessage(
     content.className =
         "ai-message-content";
 
-    /*
-    Important:
-    Use textContent instead of innerHTML.
-    */
+    /* Important: Use textContent instead of innerHTML. */
     content.textContent =
         message;
 
@@ -3547,25 +3380,22 @@ function addAIMessage(
         content
     );
 
-
     messages.appendChild(
         wrapper
     );
 
-
     messages.scrollTop =
         messages.scrollHeight;
 
-
     return wrapper;
 }
+
 function addAIThinkingMessage() {
 
     const messages =
         document.getElementById(
             "aiChatMessages"
         );
-
 
     const wrapper =
         document.createElement(
@@ -3574,7 +3404,6 @@ function addAIThinkingMessage() {
 
     wrapper.className =
         "ai-message ai-message-bot";
-
 
     // AI Avatar
 
@@ -3589,11 +3418,9 @@ function addAIThinkingMessage() {
     avatar.textContent =
         "✦";
 
-
     wrapper.appendChild(
         avatar
     );
-
 
     // Thinking content
 
@@ -3605,7 +3432,6 @@ function addAIThinkingMessage() {
     content.className =
         "ai-thinking-content";
 
-
     // Text
 
     const text =
@@ -3616,11 +3442,9 @@ function addAIThinkingMessage() {
     text.textContent =
         "Analyzing SAP data";
 
-
     content.appendChild(
         text
     );
-
 
     // Animated dots
 
@@ -3631,7 +3455,6 @@ function addAIThinkingMessage() {
 
     dots.className =
         "ai-thinking-dots";
-
 
     const dot1 =
         document.createElement(
@@ -3648,32 +3471,25 @@ function addAIThinkingMessage() {
             "span"
         );
 
-
     dots.appendChild(dot1);
     dots.appendChild(dot2);
     dots.appendChild(dot3);
-
 
     content.appendChild(
         dots
     );
 
-
     wrapper.appendChild(
         content
     );
-
 
     messages.appendChild(
         wrapper
     );
 
-
     // Automatically scroll down
-
     messages.scrollTop =
         messages.scrollHeight;
-
 
     return wrapper;
 }
@@ -3690,22 +3506,18 @@ async function sendAIQuestion() {
             "aiSendButton"
         );
 
-
     const question =
         input.value.trim();
-
 
     if (!question) {
 
         return;
     }
 
-
     addAIMessage(
         question,
         "user"
     );
-
 
     input.value = "";
 
@@ -3735,13 +3547,10 @@ async function sendAIQuestion() {
                 }
             );
 
-
         const result =
             await response.json();
 
-
         loading.remove();
-
 
         if (!response.ok) {
 
@@ -3753,7 +3562,6 @@ async function sendAIQuestion() {
 
             return;
         }
-
 
         addAIMessage(
             result.answer,
@@ -3768,9 +3576,7 @@ async function sendAIQuestion() {
             error
         );
 
-
         loading.remove();
-
 
         addAIMessage(
             "Unable to connect to the Model Readiness Assistant.",
