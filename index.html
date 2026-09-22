@@ -1682,19 +1682,33 @@
 
     border-radius: 10px;
 
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #2563eb
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #6d28d9,
+            #2563eb
+        );
+
+    border:
+        1px solid
+        rgba(167, 139, 250, 0.35);
 
     color: #ffffff;
 
-    font-size: 17px;
-    font-weight: 700;
-
     box-shadow:
-        0 0 14px rgba(124, 58, 237, 0.35);
+        0 0 14px
+        rgba(124, 58, 237, 0.35);
+}
+
+
+.ai-avatar i {
+    font-size: 14px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 7px
+        rgba(255, 255, 255, 0.30);
 }
 
 .ai-message-content {
@@ -2424,8 +2438,8 @@
         <div class="ai-message ai-message-bot">
 
             <div class="ai-avatar">
-                ✦
-            </div>
+    <i class="fas fa-robot"></i>
+</div>
 
             <div class="ai-message-content">Hi! I'm your Model Readiness Assistant.
 
@@ -3355,13 +3369,31 @@ function addAIMessage(
     if (type === "bot") {
 
     const avatar =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    avatar.className = "ai-avatar";
+    avatar.className =
+        "ai-avatar";
 
-    avatar.textContent = "✦";
 
-    wrapper.appendChild(avatar);
+    const botIcon =
+        document.createElement(
+            "i"
+        );
+
+    botIcon.className =
+        "fas fa-robot";
+
+
+    avatar.appendChild(
+        botIcon
+    );
+
+
+    wrapper.appendChild(
+        avatar
+    );
 }
 
     const content =
@@ -3408,19 +3440,31 @@ function addAIThinkingMessage() {
     // AI Avatar
 
     const avatar =
-        document.createElement(
-            "div"
-        );
-
-    avatar.className =
-        "ai-avatar";
-
-    avatar.textContent =
-        "✦";
-
-    wrapper.appendChild(
-        avatar
+    document.createElement(
+        "div"
     );
+
+avatar.className =
+    "ai-avatar";
+
+
+const botIcon =
+    document.createElement(
+        "i"
+    );
+
+botIcon.className =
+    "fas fa-robot";
+
+
+avatar.appendChild(
+    botIcon
+);
+
+
+wrapper.appendChild(
+    avatar
+);
 
     // Thinking content
 
