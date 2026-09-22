@@ -447,21 +447,232 @@
         }
 
         /* ========== CONTENT ========== */
-        .content {
-            flex: 1;
-            min-width: 0;
-            padding: 24px 28px;
-            background: #061224;
-            overflow-y: auto;
-        }
+        /* =========================================================
+   MAIN APPLICATION CONTENT
+========================================================= */
+/* =========================================================
+   MAIN APPLICATION CONTENT
+========================================================= */
 
-        .page {
-            display: none;
-        }
+.content {
+    flex: 1;
+    min-width: 0;
+    height: 100vh;
 
-        .page.active {
-            display: block;
-        }
+    padding: 24px 28px;
+
+    background: #061224;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    position: relative;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   COMMON APPLICATION PAGE LAYOUT
+========================================================= */
+
+.page {
+    display: none;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.page.active {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   DASHBOARD PAGE
+========================================================= */
+
+#dashboard {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+}
+
+
+#dashboardContent {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+#detailsContent {
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+
+#modelDetailsFrame {
+    display: block;
+
+    width: 100%;
+    min-height: 680px;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 18px;
+
+    background: transparent;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODEL REPORT PAGE
+========================================================= */
+
+#modelReport {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODEL SETUP PAGE
+========================================================= */
+
+#newModel {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODEL CHANGE PAGE
+========================================================= */
+
+#modelChange {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   MODEL SETUP AND MODEL CHANGE IFRAMES
+========================================================= */
+
+.app-page-frame {
+    display: block;
+    width: 100%;
+    height: calc(100vh - 20px);
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: none;
+    border-radius: 16px;
+
+    background: #061224;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RESPONSIVE APPLICATION LAYOUT
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .content {
+        flex: 1;
+        min-width: 0;
+        padding: 18px;
+    }
+
+
+    .page {
+        width: 100%;
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .page.active {
+        display: block;
+        width: 100%;
+    }
+
+
+    #dashboard,
+    #modelReport,
+    #newModel,
+    #modelChange {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .app-page-frame {
+        width: 100%;
+        height: calc(100vh - 36px);
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .report-search-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+
+    .report-search-card .form-field {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    .report-search-actions {
+        width: 100%;
+    }
+
+
+    .btn-search,
+    .btn-reset {
+        flex: 1;
+        justify-content: center;
+    }
+}
 
         /* ========== HERO HEADER ========== */
         /* .dashboard-hero {
@@ -629,139 +840,7 @@
             color: #64748b;
         }
 
-        /* ========== KPI CARDS – Exact Target Match ========== */
-        .kpi-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 22px;
-        }
-
-        .kpi-card {
-            background: #162238;
-            border: 1px solid #243b55;
-            border-radius: 16px;
-            padding: 16px 18px 14px;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .kpi-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Colored top accent line */
-        .kpi-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            border-radius: 16px 16px 0 0;
-        }
-
-        .kpi-card.total::before {
-            background: #3b82f6;
-        }
-
-        .kpi-card.success::before {
-            background: #14b8a6;
-        }
-
-        .kpi-card.warning::before {
-            background: #f59e0b;
-        }
-
-        .kpi-card.danger::before {
-            background: #fb7185;
-        }
-
-        /* Icon + Label row */
-        .kpi-top {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-        }
-
-        .kpi-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-        }
-
-        .kpi-card.total .kpi-icon {
-            background: rgba(59, 130, 246, 0.18);
-            color: #60a5fa;
-        }
-
-        .kpi-card.success .kpi-icon {
-            background: rgba(20, 184, 166, 0.18);
-            color: #2dd4bf;
-        }
-
-        .kpi-card.warning .kpi-icon {
-            background: rgba(245, 158, 11, 0.18);
-            color: #fbbf24;
-        }
-
-        .kpi-card.danger .kpi-icon {
-            background: rgba(251, 113, 133, 0.18);
-            color: #fb7185;
-        }
-
-        .kpi-label {
-            font-size: 13px;
-            font-weight: 500;
-            color: #94a3b8;
-        }
-
-        .kpi-value {
-            font-size: 56px;
-            font-weight: 700;
-            line-height: 1;
-            margin: 20px 0;
-        }
-
-        /* Trend text */
-        .kpi-trend {
-            font-size: 12px;
-            font-weight: 500;
-        }
-
-        .kpi-trend.up {
-            color: #2dd4bf;
-        }
-
-        .kpi-trend.down {
-            color: #fb7185;
-        }
-
-        /* Specific colors for each card trend */
-        .kpi-card.total .kpi-trend {
-            color: #60a5fa;
-        }
-
-        .kpi-card.success .kpi-trend {
-            color: #2dd4bf;
-        }
-
-        .kpi-card.warning .kpi-trend {
-            color: #fbbf24;
-        }
-
-        .kpi-card.danger .kpi-trend {
-            color: #fb7185;
-        }
-
-        F
+        
         /* ========== SEARCH CARD ========== */
         .search-card {
             background: linear-gradient(145deg, #162238, #1a2a42);
@@ -930,58 +1009,611 @@
             font-size: 22px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 1200px) {
-            .kpi-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+      /* =========================================================
+   DASHBOARD LANDING PAGE
+========================================================= */
 
-            .search-form {
-                grid-template-columns: 1fr 1fr;
-            }
+.dashboard-landing {
+    position: relative;
+    width: 100%;
+    border: 1px solid #203550;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #071629;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
 
-            .search-actions {
-                grid-column: span 2;
-            }
-        }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 64px;
-            }
+/* =========================================================
+   HERO IMAGE AREA
+========================================================= */
 
-            .logo .brand,
-            .logo .tagline,
-            .menu-item span,
-            .sidebar-logout-btn span {
-                display: none;
-            }
+.landing-main {
+    position: relative;
+    width: 100%;
+    height: 540px;
+    overflow: hidden;
+    background: #071629;
+}
 
-            .menu-item {
-                justify-content: center;
-                padding: 12px;
-            }
 
-            .kpi-grid {
-                grid-template-columns: 1fr;
-            }
+/* Real dashboard image */
 
-            .dashboard-hero {
-                flex-direction: column;
-                gap: 16px;
-                align-items: flex-start;
-            }
+.landing-background-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center center;
+    z-index: 1;
+}
 
-            .search-form {
-                grid-template-columns: 1fr;
-            }
 
-            .search-actions {
-                grid-column: auto;
-            }
-        }
+/* Dark overlay for readable text */
 
-        /* =========================================================
+.landing-image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3, 12, 24, 0.86) 0%,
+            rgba(3, 12, 24, 0.60) 25%,
+            rgba(3, 12, 24, 0.18) 52%,
+            rgba(3, 12, 24, 0.25) 100%
+        );
+}
+
+
+.landing-image-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at 52% 48%,
+            rgba(14, 165, 233, 0.08),
+            transparent 46%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   LEFT HERO TEXT
+========================================================= */
+
+.landing-copy {
+    position: absolute;
+    z-index: 4;
+
+    top: 34px;
+    left: 32px;
+
+    width: 470px;
+    max-width: 42%;
+}
+
+
+.landing-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 13px;
+    color: #22d3ee;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+
+.landing-eyebrow-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: #22d3ee;
+    box-shadow: 0 0 10px rgba(34, 211, 238, 0.85);
+}
+
+
+.landing-title {
+    color: #ffffff;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    font-size: clamp(36px, 3vw, 50px);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: -1.4px;
+
+    text-shadow:
+        0 5px 22px rgba(0, 0, 0, 0.55);
+}
+
+
+.landing-subtitle {
+    margin-top: 17px;
+    color: #c5d1df;
+    font-size: 15px;
+    line-height: 1.6;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.60);
+}
+
+
+/* =========================================================
+   QUICK MODEL SEARCH
+========================================================= */
+
+.quick-model-card {
+    position: absolute;
+    z-index: 5;
+
+    top: 28px;
+    right: 28px;
+
+    width: 350px;
+    min-height: 380px;
+
+    padding: 30px 25px;
+
+    border: 1px solid rgba(96, 165, 250, 0.42);
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 38, 62, 0.96),
+            rgba(7, 23, 41, 0.97)
+        );
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.46),
+        0 0 28px rgba(14, 165, 233, 0.10);
+}
+
+
+.quick-model-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(14, 165, 233, 0.11),
+            transparent 45%
+        );
+
+    pointer-events: none;
+}
+
+
+.quick-model-title {
+    position: relative;
+
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.quick-model-subtitle {
+    position: relative;
+
+    margin-top: 6px;
+    margin-bottom: 24px;
+
+    color: #9aabc0;
+
+    font-size: 12.5px;
+    line-height: 1.5;
+}
+
+
+.quick-field {
+    position: relative;
+
+    margin-bottom: 19px;
+}
+
+
+.quick-field label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #dbe6f4;
+
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+
+.quick-input-wrap {
+    position: relative;
+}
+
+
+.quick-input-wrap i {
+    position: absolute;
+    z-index: 2;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7790aa;
+    font-size: 12px;
+}
+
+
+.quick-input-wrap input {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px 0 39px;
+
+    border: 1px solid #31465f;
+    border-radius: 9px;
+
+    background: rgba(8, 24, 42, 0.88);
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.quick-input-wrap input::placeholder {
+    color: #64748b;
+}
+
+
+.quick-input-wrap input:focus {
+    border-color: #22d3ee;
+
+    box-shadow:
+        0 0 0 3px rgba(34, 211, 238, 0.10);
+}
+
+
+.quick-country-select {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid #31465f;
+    border-radius: 9px;
+
+    background: rgba(8, 24, 42, 0.88);
+
+    color: #dbeafe;
+
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+
+.quick-country-select option {
+    background: #0f1c2e;
+    color: #ffffff;
+}
+
+
+.quick-search-actions {
+    display: grid;
+
+    grid-template-columns: 1fr 46px;
+
+    gap: 9px;
+
+    margin-top: 23px;
+}
+
+
+.quick-search-btn {
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    border: 1px solid #3b82f6;
+    border-radius: 9px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 16px rgba(37, 99, 235, 0.35);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+
+/* .quick-search-btn:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 0 25px rgba(14, 165, 233, 0.38);
+} */
+
+
+.quick-reset-btn {
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid #31465f;
+    border-radius: 9px;
+
+    background: rgba(8, 24, 42, 0.86);
+
+    color: #94a3b8;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.quick-reset-btn:hover {
+    color: #ffffff;
+    border-color: #64748b;
+    background: rgba(15, 34, 55, 0.95);
+}
+
+
+/* =========================================================
+   CAPABILITIES
+========================================================= */
+
+.landing-capabilities {
+    position: relative;
+
+    z-index: 6;
+
+    margin: 0;
+
+    padding: 22px 24px 24px;
+
+    border-top: 1px solid #263c57;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 29, 50, 0.99),
+            rgba(6, 21, 37, 0.99)
+        );
+}
+
+
+.capabilities-title {
+    margin-bottom: 20px;
+
+    color: #f8fafc;
+
+    font-size: 18px;
+    font-weight: 700;
+
+    letter-spacing: -0.2px;
+}
+
+.capabilities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+
+.capability-item {
+    display: flex;
+
+    gap: 13px;
+
+    min-width: 0;
+    min-height: 78px;
+
+    padding: 3px 20px;
+
+    border-right:
+        1px solid #31435a;
+}
+
+
+.capability-item:first-child {
+    padding-left: 0;
+}
+
+
+.capability-item:last-child {
+    padding-right: 0;
+    border-right: none;
+}
+
+
+.capability-icon {
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 1px;
+
+    border: 1px solid #22d3ee;
+    border-radius: 50%;
+
+    color: #22d3ee;
+
+    font-size: 11px;
+
+    background:
+        rgba(34, 211, 238, 0.05);
+
+    box-shadow:
+        0 0 12px rgba(34, 211, 238, 0.15);
+}
+
+
+.capability-heading {
+    margin-bottom: 7px;
+
+    color: #e2e8f0;
+
+    font-size: 13.5px;
+    font-weight: 700;
+
+    line-height: 1.3;
+}
+
+.capability-text {
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    line-height: 1.55;
+}
+
+
+/* =========================================================
+   RESPONSIVE LANDING PAGE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .landing-main {
+        height: 680px;
+    }
+
+
+    .landing-copy {
+        top: 32px;
+        left: 30px;
+        width: calc(100% - 60px);
+        max-width: 520px;
+    }
+
+
+    .quick-model-card {
+        top: auto;
+        right: 30px;
+        bottom: 28px;
+        left: 30px;
+        width: auto;
+    }
+
+
+    .capabilities-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 15px;
+    }
+
+
+    .capability-item {
+        padding: 7px 10px;
+        border-right: none;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .landing-main {
+        height: 700px;
+    }
+
+
+    .landing-copy {
+        top: 26px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+    }
+
+
+    .landing-title {
+        font-size: 36px;
+    }
+
+
+    .landing-subtitle {
+        font-size: 13px;
+    }
+
+
+    .quick-model-card {
+        right: 16px;
+        left: 16px;
+        bottom: 16px;
+    }
+
+
+    .capabilities-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .capability-item {
+        padding: 9px 0;
+
+        border-bottom:
+            1px solid #25384f;
+    }
+
+
+    .capability-item:last-child {
+        border-bottom: none;
+    }
+} 
+
+ /* =========================================================
    MODEL REPORT – Premium Dark Theme
 ========================================================= */
         .report-header {
@@ -2116,115 +2748,338 @@
 
         <div class="content">
             <!-- DASHBOARD -->
-            <div id="dashboard" class="page active">
-                <div id="dashboardContent">
+           
+<div id="dashboard" class="page active">
 
-                    <!-- HERO HEADER -->
-                    <!-- HERO HEADER -->
-                    <div class="dashboard-hero">
-                        <div class="hero-left">
-                            <div class="hero-logo">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>B</span>
-                            </div>
-                            <div>
-                                <div class="hero-title">Brother Readiness Validation Center</div>
-                                <div class="hero-subtitle">Validate. Prepare. Strengthen. Serve.</div>
-                            </div>
-                        </div>
+    <div id="dashboardContent">
 
-                        <div class="hero-right">
-                            <div class="system-status">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>System Status</span>
-                                <span class="status-text">All Systems Operational</span>
-                            </div>
-                            <div class="hero-datetime" id="currentDateTime"></div>
-                        </div>
-                    </div>
 
-                    <!-- KPI CARDS -->
-                    <div class="kpi-grid">
-                        <div class="kpi-card total">
-                            <div class="kpi-top">
-                                <div class="kpi-icon"><i class="fas fa-cube"></i></div>
-                                <div class="kpi-label">Total Models</div>
-                            </div>
-                            <div class="kpi-value">120</div>
-                            <div class="kpi-trend up">↑ All registered models</div>
-                        </div>
+        <!-- =========================================
+             TOP STATUS HEADER
+        ========================================== -->
 
-                        <div class="kpi-card success">
-                            <div class="kpi-top">
-                                <div class="kpi-icon"><i class="fas fa-check-circle"></i></div>
-                                <div class="kpi-label">Completed</div>
-                            </div>
-                            <div class="kpi-value">97</div>
-                            <div class="kpi-trend up">↑ 80.8% of total</div>
-                        </div>
+        <div class="dashboard-hero">
 
-                        <div class="kpi-card warning">
-                            <div class="kpi-top">
-                                <div class="kpi-icon"><i class="fas fa-clock"></i></div>
-                                <div class="kpi-label">Pending</div>
-                            </div>
-                            <div class="kpi-value">18</div>
-                            <div class="kpi-trend up">↑ 15.0% of total</div>
-                        </div>
+            <div class="hero-left">
 
-                        <div class="kpi-card danger">
-                            <div class="kpi-top">
-                                <div class="kpi-icon"><i class="fas fa-exclamation-circle"></i></div>
-                                <div class="kpi-label">Issues</div>
-                            </div>
-                            <div class="kpi-value">5</div>
-                            <div class="kpi-trend down">↓ 4.2% of total</div>
-                        </div>
-                    </div>
+                <div class="hero-logo">
 
-                    <!-- SEARCH & FILTER -->
-                    <div class="search-card">
-                        <div class="search-header">
-                            <i class="fas fa-search"></i>
-                            <div class="search-title">Search & Filter Models</div>
-                        </div>
-                        <div class="search-subtitle">Find models by name, ID, or country to validate readiness.</div>
+                    <i class="fas fa-shield-alt"></i>
 
-                        <div class="search-form">
-                            <div class="form-field">
-                                <label>Model</label>
-                                <div class="input-with-icon">
-                                    <i class="fas fa-cube"></i>
-                                    <input type="text" id="model" placeholder="e.g., DCPL2550DW">
-                                </div>
-                            </div>
+                    <span>B</span>
 
-                            <div class="form-field">
-                                <label>Country</label>
-                                <div class="input-with-icon">
-                                    <i class="fas fa-globe"></i>
-                                    <input type="text" id="country" placeholder="e.g., US">
-                                </div>
-                            </div>
-
-                            <div class="search-actions">
-                                <button class="btn-primary" onclick="searchModel()">
-                                    <i class="fas fa-search"></i> Search
-                                </button>
-                                <button class="btn-secondary" onclick="clearFilters()">
-                                    <i class="fas fa-times"></i> Clear
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="search-tip">Tip: Enter model number and country code for precise results.</div>
-                    </div>
-
-                    <div id="result"></div>
                 </div>
 
-                <div id="detailsContent"></div>
+                <div>
+
+                    <div class="hero-title">
+                        Brother Readiness Validation Center
+                    </div>
+
+                    <div class="hero-subtitle">
+                        Validate. Prepare. Strengthen. Serve.
+                    </div>
+
+                </div>
+
             </div>
+
+
+            <div class="hero-right">
+
+                <div class="system-status">
+
+                    <i class="fas fa-shield-alt"></i>
+
+                    <span>
+                        System Status
+                    </span>
+
+                    <span class="status-text">
+                        All Systems Operational
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="hero-datetime"
+                    id="currentDateTime">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             LANDING HERO
+        ========================================== -->
+
+        <div class="dashboard-landing">
+
+
+            <div class="landing-main">
+
+<!-- REAL BACKGROUND IMAGE -->
+
+<img
+    src="dashboard.png"
+    alt="Brother printer workspace"
+    class="landing-background-image">
+
+
+<!-- DARK OVERLAY -->
+
+<div class="landing-image-overlay"></div>
+
+
+                <!-- =====================================
+                     QUICK MODEL SEARCH
+                ====================================== -->
+
+                <div class="quick-model-card">
+
+                    <div class="quick-model-title">
+                        Quick Model Search
+                    </div>
+
+                    <div class="quick-model-subtitle">
+                        Find and validate a model instantly.
+                    </div>
+
+
+                    <!-- MODEL -->
+
+                    <div class="quick-field">
+
+                        <label>
+                            Search Model
+                        </label>
+
+                        <div class="quick-input-wrap">
+
+                            <i class="fas fa-search"></i>
+
+                            <input
+                                id="model"
+                                type="text"
+                                placeholder="Search model e.g., DCPL2550DW"
+                                autocomplete="off">
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="quick-field">
+
+                        <label>
+                            Country
+                        </label>
+
+                        <select
+                            id="country"
+                            class="quick-country-select">
+
+                            <option value="">
+                                Select country
+                            </option>
+
+                            <option value="US">
+                                United States
+                            </option>
+
+                            <option value="CA">
+                                Canada
+                            </option>
+
+                            <option value="UK">
+                                United Kingdom
+                            </option>
+
+                            <option value="JP">
+                                Japan
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="quick-search-actions">
+
+                        <button
+                            class="quick-search-btn"
+                            type="button"
+                            onclick="searchModel()">
+
+                            <i class="fas fa-search"></i>
+
+                            Validate Model
+
+                        </button>
+
+
+                        <button
+                            class="quick-reset-btn"
+                            type="button"
+                            onclick="clearFilters()"
+                            title="Reset">
+
+                            <i class="fas fa-rotate-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================================
+                 CAPABILITIES
+            ========================================== -->
+
+            <div class="landing-capabilities">
+
+                <div class="capabilities-title">
+                    What You Can Do Here
+                </div>
+
+
+                <div class="capabilities-grid">
+
+
+                    <!-- VALIDATE -->
+
+                    <div class="capability-item">
+
+                        <div class="capability-icon">
+
+                            <i class="fas fa-check"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div class="capability-heading">
+                                Validate model readiness
+                            </div>
+
+                            <div class="capability-text">
+                                Confirm material, pricing,
+                                warranty and configuration readiness.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- REPORT -->
+
+                    <div
+                        class="capability-item"
+                        style="cursor: pointer;"
+                        onclick="openDashboardPage('modelReport', 1)">
+
+                        <div class="capability-icon">
+
+                            <i class="fas fa-file-lines"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div class="capability-heading">
+                                Review model results
+                            </div>
+
+                            <div class="capability-text">
+                                Access model readiness and
+                                consolidated validation results.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MARKET -->
+
+                    <div class="capability-item">
+
+                        <div class="capability-icon">
+
+                            <i class="fas fa-globe"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div class="capability-heading">
+                                Check market readiness
+                            </div>
+
+                            <div class="capability-text">
+                                Validate configuration and
+                                model requirements by country.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AI -->
+
+                    <div
+                        class="capability-item"
+                        style="cursor: pointer;"
+                        onclick="toggleAIChat()">
+
+                        <div class="capability-icon">
+
+                            <i class="fas fa-robot"></i>
+
+                        </div>
+
+                        <div>
+
+                            <div class="capability-heading">
+                                Ask Model Readiness AI
+                            </div>
+
+                            <div class="capability-text">
+                                Query SAP model information
+                                or compare multiple models.
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div id="result"></div>
+
+    </div>
+
+
+    <div id="detailsContent"></div>
+
+</div>
 
             <div id="modelReport" class="page">
                 <div class="report-header">
@@ -2314,31 +3169,39 @@
                 </div>
             </div>
             <!-- Model Setup Page (placeholder) -->
-            <div id="newModel" class="page">
-                <iframe src="modelsetup.html" style=" 
+<!-- =====================================================
+     MODEL SETUP
+===================================================== -->
 
-                    width:100%; 
+<div
+    id="newModel"
+    class="page">
 
-                  height:calc(100vh - 70px); 
+    <iframe
+        id="modelSetupFrame"
+        class="app-page-frame"
+        src="modelsetup.html"
+        title="Model Setup">
+    </iframe>
 
-                    border:none; 
-
-                    border-radius:18px; 
-
-                    background:transparent;">
-
-                </iframe>
-            </div>
+</div>
             <!-- Model Change  -->
-            <div id="modelChange" class="page">
-                <iframe src="modelchange1.html" style="
-                         width:100%;
-                         height:calc(100vh - 70px);
-                         border:none;
-                         background:transparent;
-                         display:block;">
-                </iframe>
-            </div>
+            <!-- =====================================================
+     MODEL CHANGE
+===================================================== -->
+
+<div
+    id="modelChange"
+    class="page">
+
+    <iframe
+        id="modelChangeFrame"
+        class="app-page-frame"
+        src="modelchange1.html"
+        title="Model Change">
+    </iframe>
+
+</div>
         </div>
     </div>
 
@@ -2564,24 +3427,46 @@ Example:
     }
 
     const aiLauncher =
-        document.getElementById(
-            "aiLauncher"
-        );
+    document.getElementById("aiLauncher");
 
-    if (aiLauncher) {
-
-        aiLauncher.style.display =
-            "flex";
-
-        console.log(
-            "AI Launcher visible"
-        );
-
-    } else {
+if (aiLauncher) {
+    aiLauncher.style.display = "none";
+} else {
 
         console.error(
             "ERROR: aiLauncher not found"
         );
+    }
+}
+
+function showAIForModelDetails() {
+
+    const aiLauncher =
+        document.getElementById("aiLauncher");
+
+    if (aiLauncher) {
+        aiLauncher.style.display = "flex";
+    }
+}
+
+
+function hideAI() {
+
+    const aiLauncher =
+        document.getElementById("aiLauncher");
+
+    const aiPanel =
+        document.getElementById("aiChatPanel");
+
+
+    if (aiLauncher) {
+        aiLauncher.style.display = "none";
+    }
+
+
+    if (aiPanel) {
+        aiPanel.classList.remove("open");
+        aiPanel.style.display = "none";
     }
 }
 
@@ -2673,12 +3558,112 @@ Example:
             document.getElementById("dashboard").classList.add("active");
         }
 
-        function showPage(pageId, element) {
-            document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
-            document.querySelectorAll(".menu-item").forEach(item => item.classList.remove("active-menu"));
-            document.getElementById(pageId).classList.add("active");
-            element.classList.add("active-menu");
+      function showPage(
+    pageId,
+    element
+) {
+
+hideAI();
+
+    const pages =
+        document.querySelectorAll(
+            ".page"
+        );
+
+
+    pages.forEach(
+        function (page) {
+
+            page.classList.remove(
+                "active"
+            );
         }
+    );
+
+
+    const menuItems =
+        document.querySelectorAll(
+            ".menu-item"
+        );
+
+
+    menuItems.forEach(
+        function (item) {
+
+            item.classList.remove(
+                "active-menu"
+            );
+        }
+    );
+
+
+    const selectedPage =
+        document.getElementById(
+            pageId
+        );
+
+
+    if (!selectedPage) {
+
+        console.error(
+            "Page not found:",
+            pageId
+        );
+
+        return;
+    }
+
+
+    selectedPage.classList.add(
+        "active"
+    );
+
+
+    if (element) {
+
+        element.classList.add(
+            "active-menu"
+        );
+    }
+
+
+    const content =
+        document.querySelector(
+            ".content"
+        );
+
+
+    if (content) {
+
+        content.scrollTop = 0;
+        content.scrollLeft = 0;
+    }
+}
+
+        function openDashboardPage(
+    pageId,
+    menuIndex
+) {
+
+    const menus =
+        document.querySelectorAll(
+            ".menu-item"
+        );
+
+
+    if (
+        !menus[menuIndex]
+    ) {
+
+        return;
+    }
+
+
+    showPage(
+        pageId,
+        menus[menuIndex]
+    );
+}
 
         async function login() {
             const username = document.getElementById("username").value.trim();
@@ -2706,68 +3691,430 @@ Example:
         }
 
         function loadSearchValues() {
-            const params = new URLSearchParams(window.location.search);
-            const model = params.get("model");
-            const country = params.get("country");
-            if (model) document.getElementById("model").value = model;
-            if (country) document.getElementById("country").value = country;
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const model =
+        params.get(
+            "model"
+        );
+
+
+    const country =
+        params.get(
+            "country"
+        );
+
+
+    if (model) {
+
+        document.getElementById(
+            "model"
+        ).value =
+            model;
+    }
+
+
+    if (country) {
+
+        document.getElementById(
+            "country"
+        ).value =
+            country;
+    }
+}
+
+loadSearchValues();
+      
+
+        document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const modelInput =
+            document.getElementById(
+                "model"
+            );
+
+
+        if (modelInput) {
+
+            modelInput.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter"
+                    ) {
+
+                        event.preventDefault();
+
+                        searchModel();
+                    }
+                }
+            );
         }
-        loadSearchValues();
+
+    }
+);
 
         async function searchModel() {
 
-            console.log("Search button clicked");
-
-            const model = document.getElementById("model").value.trim();
-            const country = document.getElementById("country").value.trim();
-
-            console.log("Model:", model);
-            console.log("Country:", country);
-
-            try {
-
-                const response = await fetch(
-                    `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
-                );
-
-                console.log("API called");
-
-                const data = await response.json();
-
-                console.log("Response:", data);
-
-                const record = data.d;
-
-                console.log("FIRST RECORD");
-                console.log(record);
-
-                if (!record) {
-                    alert("No data found");
-                    return;
-                }
-
-                loadModelDetails(record);
-
-            } catch (error) {
-                console.error("Search Error:", error);
-            }
-        }
-        
-        function loadModelDetails(r) {
-            document.getElementById("dashboardContent").style.display = "none";
-            document.getElementById("detailsContent").innerHTML = `
-                <iframe
-                    src="details.html?matnr=${encodeURIComponent(r.Matnr)}&country=${encodeURIComponent(r.Country)}"
-                    width="100%"
-                    height="1400px"
-                    style="border:none; border-radius:18px; background:transparent;">
-                </iframe>
+    console.log(
+        "Search button clicked"
+    );
 
 
+    const model =
+        document.getElementById(
+            "model"
+        ).value.trim();
+
+
+    const country =
+        document.getElementById(
+            "country"
+        ).value.trim();
+
+
+    if (!model || !country) {
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        if (result) {
+
+            result.innerHTML = `
+                <div class="no-data">
+                    Please enter a Model Number
+                    and select a Country.
+                </div>
             `;
-            console.log("loadModelDetails called");
-            console.log(r);
         }
+
+
+        return;
+    }
+
+
+    console.log(
+        "Model:",
+        model
+    );
+
+
+    console.log(
+        "Country:",
+        country
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                data.error ||
+                "Model search failed"
+            );
+        }
+
+
+        const record =
+            data.d;
+
+
+        if (!record) {
+
+            document.getElementById(
+                "result"
+            ).innerHTML = `
+                <div class="no-data">
+                    No model data found.
+                </div>
+            `;
+
+
+            return;
+        }
+
+
+        document.getElementById(
+            "result"
+        ).innerHTML = "";
+
+
+        loadModelDetails(
+            record
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Search Error:",
+            error
+        );
+
+
+        document.getElementById(
+            "result"
+        ).innerHTML = `
+            <div class="no-data">
+                ${error.message || "Search failed"}
+            </div>
+        `;
+    }
+}
+        
+ function loadModelDetails(r) {
+
+    const dashboardContent =
+        document.getElementById("dashboardContent");
+
+    const detailsContent =
+        document.getElementById("detailsContent");
+
+
+    if (!dashboardContent || !detailsContent) {
+
+        console.error(
+            "Dashboard content containers not found"
+        );
+
+        return;
+    }
+
+
+    dashboardContent.style.display =
+        "none";
+
+
+    detailsContent.innerHTML =
+        "";
+
+
+    const detailsUrl =
+        "details.html?matnr=" +
+        encodeURIComponent(r.Matnr) +
+        "&country=" +
+        encodeURIComponent(r.Country);
+
+
+    const frame =
+        document.createElement("iframe");
+
+
+    frame.id =
+        "modelDetailsFrame";
+
+    frame.src =
+        detailsUrl;
+
+    frame.title =
+        "Model Details";
+
+    frame.style.width =
+        "100%";
+
+    frame.style.height =
+        "700px";
+
+    frame.style.display =
+        "block";
+
+    frame.style.border =
+        "none";
+
+    frame.style.borderRadius =
+        "18px";
+
+    frame.style.background =
+        "transparent";
+
+
+    detailsContent.appendChild(
+        frame
+    );
+
+
+    frame.addEventListener(
+        "load",
+        function () {
+
+            resizeModelDetailsFrame(
+                frame
+            );
+
+        }
+    );
+
+
+    showAIForModelDetails();
+
+
+    const content =
+        document.querySelector(
+            ".content"
+        );
+
+
+    if (content) {
+        content.scrollTop = 0;
+    }
+
+
+    console.log(
+        "loadModelDetails called",
+        r
+    );
+}
+
+function resizeModelDetailsFrame(frame) {
+
+    try {
+
+        if (
+            !frame ||
+            !frame.contentWindow
+        ) {
+
+            return;
+        }
+
+
+        const frameDocument =
+            frame.contentDocument ||
+            frame.contentWindow.document;
+
+
+        if (!frameDocument) {
+
+            return;
+        }
+
+
+        const body =
+            frameDocument.body;
+
+        const html =
+            frameDocument.documentElement;
+
+
+        if (!body || !html) {
+
+            return;
+        }
+
+
+        const contentHeight =
+            Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+
+
+        const minimumHeight =
+            680;
+
+
+        const finalHeight =
+            Math.max(
+                contentHeight,
+                minimumHeight
+            );
+
+
+        frame.style.height =
+            finalHeight + "px";
+
+
+        console.log(
+            "Model details iframe height:",
+            finalHeight
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Unable to resize model details iframe:",
+            error
+        );
+
+
+        frame.style.height =
+            "700px";
+    }
+}
+function observeModelDetailsFrame(frame) {
+
+    try {
+
+        const frameDocument =
+            frame.contentDocument ||
+            frame.contentWindow.document;
+
+
+        if (
+            !frameDocument ||
+            !frameDocument.body
+        ) {
+
+            return;
+        }
+
+
+        const observer =
+            new ResizeObserver(
+                function () {
+
+                    resizeModelDetailsFrame(
+                        frame
+                    );
+                }
+            );
+
+
+        observer.observe(
+            frameDocument.body
+        );
+
+
+        console.log(
+            "Model details resize observer started"
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Unable to observe model details:",
+            error
+        );
+    }
+}
+
         const createdModel =
 
             JSON.parse(
@@ -3085,33 +4432,86 @@ Example:
         }
         function goBackToDashboard() {
 
-            parent.document
-                .getElementById(
-                    "dashboardContent"
-                )
-                .style.display = "block";
+    const dashboardContent =
+        parent.document.getElementById(
+            "dashboardContent"
+        );
 
-            parent.document
-                .getElementById(
-                    "detailsContent"
-                )
-                .innerHTML = "";
 
-            const menus =
-                parent.document.querySelectorAll(
-                    ".menu-item"
-                );
+    const detailsContent =
+        parent.document.getElementById(
+            "detailsContent"
+        );
 
-            menus.forEach(m =>
-                m.classList.remove(
-                    "active-menu"
-                )
-            );
 
-            menus[0].classList.add(
+    if (dashboardContent) {
+
+        dashboardContent.style.display =
+            "block";
+    }
+
+
+    if (detailsContent) {
+
+        detailsContent.innerHTML =
+            "";
+    }
+
+
+    const menus =
+        parent.document.querySelectorAll(
+            ".menu-item"
+        );
+
+
+    menus.forEach(
+        function (menu) {
+
+            menu.classList.remove(
                 "active-menu"
             );
         }
+    );
+
+
+    if (menus[0]) {
+
+        menus[0].classList.add(
+            "active-menu"
+        );
+    }
+
+
+    const aiLauncher =
+        parent.document.getElementById(
+            "aiLauncher"
+        );
+
+
+    if (aiLauncher) {
+
+        aiLauncher.style.display =
+            "none";
+    }
+
+
+    const aiPanel =
+        parent.document.getElementById(
+            "aiChatPanel"
+        );
+
+
+    if (aiPanel) {
+
+        aiPanel.classList.remove(
+            "open"
+        );
+
+        aiPanel.style.display =
+            "none";
+    }
+}
+
         function loadCreatedModelReport() {
 
             const model =
@@ -3179,7 +4579,6 @@ function toggleAIChat() {
             "appSection"
         );
 
-    // AI cannot be used on Login page
 
     if (
         !appSection ||
@@ -3191,10 +4590,49 @@ function toggleAIChat() {
         return;
     }
 
+
+    const dashboard =
+        document.getElementById(
+            "dashboard"
+        );
+
+
+    const dashboardContent =
+        document.getElementById(
+            "dashboardContent"
+        );
+
+
+    const detailsContent =
+        document.getElementById(
+            "detailsContent"
+        );
+
+
+    const modelDetailsFrame =
+        document.getElementById(
+            "modelDetailsFrame"
+        );
+
+
+    if (
+        !dashboard ||
+        !dashboard.classList.contains("active") ||
+        !dashboardContent ||
+        dashboardContent.style.display !== "none" ||
+        !detailsContent ||
+        !modelDetailsFrame
+    ) {
+
+        return;
+    }
+
+
     const panel =
         document.getElementById(
             "aiChatPanel"
         );
+
 
     if (!panel) {
 
@@ -3205,14 +4643,12 @@ function toggleAIChat() {
         return;
     }
 
+
     const isOpen =
         panel.classList.contains(
             "open"
         );
 
-    // -----------------------------
-    // CLOSE
-    // -----------------------------
 
     if (isOpen) {
 
@@ -3226,9 +4662,6 @@ function toggleAIChat() {
         return;
     }
 
-    // -----------------------------
-    // OPEN
-    // -----------------------------
 
     panel.style.display =
         "flex";
@@ -3237,10 +4670,12 @@ function toggleAIChat() {
         "open"
     );
 
+
     const input =
         document.getElementById(
             "aiQuestion"
         );
+
 
     if (input) {
 

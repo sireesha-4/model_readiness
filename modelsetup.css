@@ -1396,3 +1396,39 @@ body{
         grid-template-columns: 1fr;
     }
 }
+/* =========================================================
+   MODEL SETUP ROOT POSITION
+========================================================= */
+
+html {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: #061224;
+
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+}
+
+
+body {
+    width: 100%;
+    min-width: 0;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: #061224;
+
+    overflow-x: hidden;
+
+    position: relative;
+
+    box-sizing: border-box;
+}
