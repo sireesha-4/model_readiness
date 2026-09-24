@@ -499,14 +499,15 @@ function loadStep(){
         <label class="warranty-switch">
 
             <input
-                type="checkbox"
-                id="brotherCareWarranty"
-                onchange="toggleWarranty(
-                    'brotherCareWarranty',
-                    'brotherCareWarrantyText',
-                    'brotherCareLength',
-                    'brotherCareUnit'
-                )">
+    type="checkbox"
+    id="brotherCareWarranty"
+    onchange="toggleWarranty(
+        'brotherCareWarranty',
+        'brotherCareWarrantyText',
+        'brotherCareLength',
+        'brotherCareUnit',
+        true
+    )">
 
             <span class="warranty-slider"></span>
 
@@ -527,9 +528,10 @@ function loadStep(){
             <div class="form-group">
                 <label>Unit</label>
                 <select id="brotherCareUnit">
-                    <option>YR</option>
-                    <option>MON</option>
-                </select>
+    <option value="">Select Unit</option>
+    <option value="YR">YR</option>
+    <option value="MON">MON</option>
+</select>
             </div>
  
             <div></div>
@@ -549,14 +551,15 @@ function loadStep(){
         <label class="warranty-switch">
 
             <input
-                type="checkbox"
-                id="brotherPlusWarranty"
-                onchange="toggleWarranty(
-                    'brotherPlusWarranty',
-                    'brotherPlusWarrantyText',
-                    'brotherPlusLength',
-                    'brotherPlusUnit'
-                )">
+    type="checkbox"
+    id="brotherPlusWarranty"
+    onchange="toggleWarranty(
+        'brotherPlusWarranty',
+        'brotherPlusWarrantyText',
+        'brotherPlusLength',
+        'brotherPlusUnit',
+        true
+    )">
 
             <span class="warranty-slider"></span>
 
@@ -577,9 +580,10 @@ function loadStep(){
             <div class="form-group">
                 <label>Unit</label>
                 <select id="brotherPlusUnit">
-                    <option>YR</option>
-                    <option>MON</option>
-                </select>
+    <option value="">Select Unit</option>
+    <option value="YR">YR</option>
+    <option value="MON">MON</option>
+</select>
             </div>
  
         </div>
@@ -1156,13 +1160,13 @@ function restoreStepData() {
     );
 
     restoreWarranty(
-        "brotherCareWarranty",
-        "brotherCareWarrantyText",
-        "brotherCareLength",
-        "brotherCareUnit",
-        modelData.brotherCareWarranty
-    );
-
+    "brotherCareWarranty",
+    "brotherCareWarrantyText",
+    "brotherCareLength",
+    "brotherCareUnit",
+    modelData.brotherCareWarranty,
+    true
+);
 
     setValue(
         "brotherPlusLength",
@@ -1175,12 +1179,13 @@ function restoreStepData() {
     );
 
     restoreWarranty(
-        "brotherPlusWarranty",
-        "brotherPlusWarrantyText",
-        "brotherPlusLength",
-        "brotherPlusUnit",
-        modelData.brotherPlusWarranty
-    );
+    "brotherPlusWarranty",
+    "brotherPlusWarrantyText",
+    "brotherPlusLength",
+    "brotherPlusUnit",
+    modelData.brotherPlusWarranty,
+    true
+);
 }
 
 
@@ -1836,11 +1841,13 @@ function toggleProgram(id) {
         }
     }
 }
+
 function toggleWarranty(
     toggleId,
     textId,
     lengthId,
-    unitId
+    unitId,
+    autoSixMonths = false
 ) {
 
     const toggle =
@@ -1855,9 +1862,11 @@ function toggleWarranty(
     const unit =
         document.getElementById(unitId);
 
+
     if (!toggle) {
         return;
     }
+
 
     if (toggle.checked) {
 
@@ -1866,12 +1875,30 @@ function toggleWarranty(
             text.style.color = "#22c55e";
         }
 
-        if (length) {
-            length.disabled = false;
-        }
 
-        if (unit) {
-            unit.disabled = false;
+        if (autoSixMonths) {
+
+            if (length) {
+                length.value = "6";
+                length.disabled = false;
+            }
+
+
+            if (unit) {
+                unit.value = "MON";
+                unit.disabled = false;
+            }
+
+        } else {
+
+            if (length) {
+                length.disabled = false;
+            }
+
+
+            if (unit) {
+                unit.disabled = false;
+            }
         }
 
     } else {
@@ -1881,37 +1908,55 @@ function toggleWarranty(
             text.style.color = "#94a3b8";
         }
 
+
         if (length) {
+
+            if (autoSixMonths) {
+                length.value = "";
+            }
+
             length.disabled = true;
         }
 
+
         if (unit) {
+
+            if (autoSixMonths) {
+                unit.value = "";
+            }
+
             unit.disabled = true;
         }
     }
 }
+
 function restoreWarranty(
     toggleId,
     textId,
     lengthId,
     unitId,
-    value
+    value,
+    autoSixMonths = false
 ) {
 
     const toggle =
         document.getElementById(toggleId);
 
+
     if (!toggle) {
         return;
     }
 
+
     toggle.checked =
         value === "X";
+
 
     toggleWarranty(
         toggleId,
         textId,
         lengthId,
-        unitId
+        unitId,
+        autoSixMonths
     );
 }
