@@ -26,6 +26,7 @@
             color: #e2e8f0;
             padding: 22px 24px;
             overflow-x: hidden;
+            overflow-y: hidden;
         }
 
         /* HEADER */
@@ -1005,7 +1006,7 @@
 
                 const orderCount =
                     countEnabled([
-                        r.BackupOrder,
+                       
                         r.DrumOrder,
                         r.WasteToner,
                         r.BeltUnit,
@@ -1068,7 +1069,7 @@
 <div class="details-hero">
     <!-- Left: Large Printer -->
     <div class="hero-image-area">
-        <img src="printer.png" alt="Printer" class="hero-printer">
+        <img src="imageprinter.png" alt="Printer" class="hero-printer">
     </div>
 
     <!-- Right: Model Info + KPIs -->
@@ -1161,11 +1162,6 @@
                                 ◇ Pricing Setup
                             </button>
 
-                            <button
-                                class="tab"
-                                data-tab="status">
-                                〽 Status
-                            </button>
                         </div>
                     </div>
 
@@ -1474,6 +1470,21 @@
 
                                         </div>
 
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Standard Warranty Length
+                                            </span>
+
+                                            <span class="data-value">
+    ${r.StandardwarrantyLength
+                        ? `${r.StandardwarrantyLength} ${safeValue(r.StandardwarrantyUnit)}`
+                        : "-"
+                    }
+</span>
+
+                                        </div>
+
 
                                         <div class="data-row">
 
@@ -1485,40 +1496,18 @@
 
                                         </div>
 
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Barracuda Warranty
-                                            </span>
-
-                                            ${iconValue(r.BarracudaWarranty)}
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Standard Warranty Length
-                                            </span>
-
-                                            <span class="data-value">
-                                                ${safeValue(r.StandardWarrantyLength)}
-                                            </span>
-
-                                        </div>
-
-
                                         <div class="data-row">
 
                                             <span class="data-label">
                                                 Extended Warranty Length
                                             </span>
 
-                                            <span class="data-value">
-                                                ${safeValue(r.ExtendedWarrantyLength)}
-                                            </span>
+                                           <span class="data-value">
+    ${r.ExtendedwarrantyLength
+                        ? `${r.ExtendedwarrantyLength} ${safeValue(r.ExtendedwarrantyUnit)}`
+                        : "-"
+                    }
+</span>
 
                                         </div>
 
@@ -1526,13 +1515,49 @@
                                         <div class="data-row">
 
                                             <span class="data-label">
-                                                Barracuda Warranty Length
+                                                BrotherPlus Warranty
+                                            </span>
+
+                                            ${iconValue(r.BrotherplusWarranty)}
+
+                                        </div>
+
+                                         <div class="data-row">
+
+                                            <span class="data-label">
+                                                BrotherPlus Warranty Length
                                             </span>
 
                                             <span class="data-value">
-                                                ${safeValue(r.BarracudaWarrantyLength)}
+    ${r.BrotherpluswarrantyLength
+                        ? `${r.BrotherpluswarrantyLength} ${safeValue(r.BrotherpluswarrantyUnit)}`
+                        : "-"
+                    }
+</span>
+                                        </div>
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                BrotherCare Warranty
                                             </span>
 
+                                            ${iconValue(r.BrothercareWarranty)}
+
+                                        </div>
+
+                                        <div class="data-row">
+
+                                            <span class="data-label">
+                                                Brothercare Warranty Length
+                                            </span>
+
+                                            <span class="data-value">
+    ${r.BrothercarewarrantyLength
+                        ? `${r.BrothercarewarrantyLength} ${safeValue(r.BrothercarewarrantyUnit)}`
+                        : "-"
+                    }
+</span>
                                         </div>
 
 
@@ -1544,7 +1569,6 @@
                             </div>
 
                         </div>
-
 
 
                         <!-- ORDER SETUP -->
@@ -1574,17 +1598,6 @@
 
 
                                     <div class="data-card-body">
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Backup Order
-                                            </span>
-
-                                            ${iconValue(r.BackupOrder)}
-
-                                        </div>
 
 
                                         <div class="data-row">
@@ -1678,7 +1691,7 @@
                                             </span>
 
                                             <span class="data-value">
-                                                ${safeValue(r.B1PriceSetup)}
+                                                ${safeValue(r.B1priceSetup)}
                                             </span>
 
                                         </div>
@@ -1686,12 +1699,12 @@
 
                                         <div class="data-row">
 
-                                            <span class="data-label">
+                                            <span class="data-label">    
                                                 BR Price Setup
                                             </span>
 
                                             <span class="data-value">
-                                                ${safeValue(r.BrPriceSetup)}
+                                                ${safeValue(r.BrpriceSetup)}
                                             </span>
 
                                         </div>
@@ -1705,101 +1718,20 @@
                             </div>
 
                         </div>
-
-
-
-                        <!-- STATUS -->
-
-                        <div
-                            id="statusTab"
-                            class="tab-panel"
-                            style="display:none;">
-
-                            <div class="content-title">
-                                Status
-                            </div>
-
-                            <div class="content-subtitle">
-                                Distribution and model status information returned from SAP.
-                            </div>
-
-
-                            <div class="data-section">
-
-
-                                <div class="data-card">
-
-                                    <div class="data-card-header">
-                                        〽 Model Status
-                                    </div>
-
-
-                                    <div class="data-card-body">
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Distribution Chain Status
-                                            </span>
-
-                                            <span class="data-value">
-                                                ${safeValue(r.DistributionChainStatus)}
-                                            </span>
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Cross Distribution Status
-                                            </span>
-
-                                            <span class="data-value">
-                                                ${safeValue(r.CrossDistributionStatus)}
-                                            </span>
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Overall Model Status
-                                            </span>
-
-                                            <span class="data-value">
-                                                ${safeValue(
-                        r.Status ||
-                        r.OverallStatus ||
-                        r.ModelStatus
-                    )}
-                                            </span>
-
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
 
                     </div>
 
                 `;
-
 
                 /* =====================================================
                    TAB SWITCHING
                 ===================================================== */
 
                 setupTabs();
+
+                setTimeout(() => {
+                    resizeParentFrame();
+                }, 100);
 
             }
 
@@ -1921,13 +1853,14 @@
                                 this.dataset.tab;
 
 
-                            if (
-                                panels[selectedTab]
-                            ) {
+                            if (panels[selectedTab]) {
 
-                                panels[selectedTab]
-                                    .style.display =
+                                panels[selectedTab].style.display =
                                     "block";
+
+                                setTimeout(() => {
+                                    resizeParentFrame();
+                                }, 50);
 
                             }
 
@@ -1939,13 +1872,37 @@
 
         }
 
+        function resizeParentFrame() {
 
+            try {
+
+                const height = Math.max(
+                    document.body.scrollHeight,
+                    document.documentElement.scrollHeight
+                );
+
+                const frame =
+                    parent.document.getElementById(
+                        "modelDetailsFrame"
+                    );
+
+                if (frame) {
+                    frame.style.height = height + "px";
+                }
+
+            } catch (e) {
+                console.log(e);
+            }
+        }
 
         /* =========================================================
            START
         ========================================================= */
 
         loadDetails();
+
+        window.addEventListener("load", resizeParentFrame);
+        window.addEventListener("resize", resizeParentFrame);
 
     </script>
 

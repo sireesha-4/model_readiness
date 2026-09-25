@@ -4,13 +4,18 @@
     box-sizing:border-box;
 }
  
-body{
-    font-family:"Segoe UI",sans-serif;
-    background:#061224;
-    color:#fff;
-    padding:20px;
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #061224;
+    color: #ffffff;
+    padding: 20px;
 }
- 
+ button,
+input,
+select,
+textarea {
+    font-family: "Segoe UI", Arial, sans-serif;
+}
 .setup-page{
     width:100%;
 }
@@ -1241,11 +1246,12 @@ body{
     display: grid;
 
     grid-template-columns:
-        repeat(3, minmax(220px, 1fr));
+        repeat(4, minmax(0, 1fr));
 
     gap: 12px;
 
-    max-width: 900px;
+    width: 100%;
+    max-width: 100%;
 
     margin-bottom: 25px;
 }
@@ -1253,6 +1259,8 @@ body{
 /* Complete clickable row */
 
 .order-check-item {
+    width: 100%;
+    height: 54px;
     min-height: 54px;
 
     display: flex;
@@ -1260,15 +1268,16 @@ body{
 
     gap: 12px;
 
-    padding: 12px 15px;
+    padding: 0 15px;
 
     background: #0f1c2e;
 
     border: 1px solid #334155;
-
     border-radius: 10px;
 
     cursor: pointer;
+
+    box-sizing: border-box;
 
     transition:
         border-color 0.2s ease,
@@ -1431,4 +1440,169 @@ body {
     position: relative;
 
     box-sizing: border-box;
+}
+/* =========================================================
+   CREATE MODEL PRICING BLOCKS
+========================================================= */
+
+.create-pricing-block {
+    margin-top: 18px;
+
+    padding: 18px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 12px;
+}
+
+
+.create-pricing-block:first-of-type {
+    margin-top: 20px;
+}
+
+
+.create-pricing-header {
+    width: 100%;
+
+    border-bottom: 1px solid #334155;
+
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+
+.create-pricing-title {
+    color: #60a5fa;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 14px;
+}
+
+
+.create-pricing-toggle {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+}
+
+
+.create-pricing-toggle .warranty-switch {
+    flex-shrink: 0;
+}
+
+
+.create-pricing-fields {
+    display: none;
+
+    margin-top: 18px;
+}
+
+
+.create-pricing-fields .grid {
+    margin-top: 0;
+}
+
+
+@media (max-width: 1100px) {
+
+    .create-pricing-fields .grid {
+        grid-template-columns:
+            repeat(2, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+
+    .create-pricing-fields .grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* =========================================================
+   PRICING SELECTION ERROR
+========================================================= */
+.pricing-selection-error {
+    display: none;
+
+    width: 100%;
+
+    margin: 8px 0 18px;
+    padding: 12px 14px;
+
+    align-items: center;
+
+    background: rgba(239, 68, 68, 0.10);
+
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    border-radius: 9px;
+
+    color: #fca5a5;
+
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 4px 14px rgba(239, 68, 68, 0.08);
+}
+/* =========================================================
+   CONSUMABLE ORDER FIELD
+========================================================= */
+.consumable-field {
+    width: 100%;
+    max-width: 420px;
+
+    margin: 0 0 22px 0;
+}
+
+
+.consumable-field input {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 12px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 10px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+
+    outline: none;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.consumable-field input:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.10);
+}
+
+
+.consumable-field input::placeholder {
+    color: #64748b;
+}
+
+
+.order-types-heading {
+    margin-top: 8px;
 }

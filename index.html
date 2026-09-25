@@ -2773,7 +2773,7 @@
                 <div>
 
                     <div class="hero-title">
-                        Brother Readiness Validation Center
+                        Model Setup Application with Integrated AI
                     </div>
 
                     <div class="hero-subtitle">
@@ -3143,11 +3143,10 @@
                                     <th>Standard Duration</th>
                                     <th>Extended Warranty</th>
                                     <th>Extended Duration</th>
-                                    <th>Brother Care</th>
+                                    <th>Brother Care Warranty</th>
                                     <th>Brother Care Duration</th>
-                                    <th>Barracuda Warranty</th>
-                                    <th>Barracuda Duration</th>
-                                    <th>Brother Plus Warranty</th>
+                                     <th>Brother Plus Warranty</th>
+                                    <th>Brother Plus Warranty Duration</th>
                                     <th>Amazon Dart</th>
                                     <th>BR Refresh</th>
                                     <th>Barracuda</th>
@@ -4167,7 +4166,7 @@ function observeModelDetailsFrame(frame) {
         function buildCards(results) {
             document.getElementById("modelCards").innerHTML = results.map(r => {
                 const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
-                const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BarracudaWarranty].filter(x => x === "X").length;
+                const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BrothercareWarranty, r.BrotherplusWarranty].filter(x => x === "X").length;
                 const orders = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit, r.Claimorder].filter(x => x === "X").length;
                 const pricing = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
 
@@ -4281,11 +4280,12 @@ function observeModelDetailsFrame(frame) {
     ${r.BrothercarewarrantyUnit || ""}
 </td>
  
-<td>${showStatus(r.BarracudaWarranty)}</td>
-<td>
-    ${r.BarracudawarrantyLength || "-"}
-    ${r.BarracudawarrantyUnit || ""}
+      <td>${showStatus(r.BrotherplusWarranty)}</td>
+    <td>
+    ${r.BrotherpluswarrantyLength || "-"}
+    ${r.BrotherpluswarrantyUnit || ""}
 </td>
+ 
  
 <td>${showStatus(r.BrotherplusWarranty)}</td>
  
@@ -5070,6 +5070,50 @@ async function sendAIQuestion() {
 
         input.focus();
     }
+}
+
+function resizeModelChangeFrame() {
+ 
+    const frame =
+        document.getElementById("modelChangeFrame");
+ 
+    if (!frame) return;
+ 
+    try {
+ 
+        const doc =
+            frame.contentDocument ||
+            frame.contentWindow.document;
+ 
+        const height = Math.max(
+            doc.body.scrollHeight,
+            doc.documentElement.scrollHeight
+        );
+ 
+        frame.style.height = height + "px";
+ 
+    } catch (e) {
+        console.error(e);
+    }
+}
+const modelChangeFrame =
+    document.getElementById("modelChangeFrame");
+ 
+if (modelChangeFrame) {
+ 
+    modelChangeFrame.addEventListener(
+        "load",
+        function () {
+ 
+            resizeModelChangeFrame();
+ 
+            setInterval(
+                resizeModelChangeFrame,
+                500
+            );
+ 
+        }
+    );
 }
 
     </script>

@@ -1,8 +1,8 @@
 const modelData = {};
 let currentStep = 1;
- 
+
 loadStep();
- 
+
 function modelContextBar() {
 
     return `
@@ -34,56 +34,56 @@ function modelContextBar() {
     `;
 }
 
-function loadStep(){
- 
+function loadStep() {
+
     document.getElementById(
         "stepText"
     ).innerHTML =
-    `Step ${currentStep} of 6`;
- 
+        `Step ${currentStep} of 6`;
+
     document
-    .querySelectorAll(".step")
-    .forEach((step,index)=>{
- 
-        step.classList.remove(
-            "active",
-            "completed"
-        );
- 
-        const circle =
-            step.querySelector(".circle");
- 
-        if(index + 1 < currentStep){
- 
-            step.classList.add(
+        .querySelectorAll(".step")
+        .forEach((step, index) => {
+
+            step.classList.remove(
+                "active",
                 "completed"
             );
- 
-            circle.innerHTML =
-                "✓";
-        }
-        else{
- 
-            circle.innerHTML =
-                (index + 1);
-        }
- 
-        if(index + 1 === currentStep){
- 
-            step.classList.add(
-                "active"
-            );
-        }
-    });
- 
+
+            const circle =
+                step.querySelector(".circle");
+
+            if (index + 1 < currentStep) {
+
+                step.classList.add(
+                    "completed"
+                );
+
+                circle.innerHTML =
+                    "✓";
+            }
+            else {
+
+                circle.innerHTML =
+                    (index + 1);
+            }
+
+            if (index + 1 === currentStep) {
+
+                step.classList.add(
+                    "active"
+                );
+            }
+        });
+
     const area =
         document.getElementById(
             "contentArea"
         );
- 
-    if(currentStep === 1){
- 
-    area.innerHTML = `
+
+    if (currentStep === 1) {
+
+        area.innerHTML = `
  
     <div class="card">
  
@@ -190,11 +190,11 @@ function loadStep(){
     </div>
  
     `;
-}
- 
+    }
+
     if (currentStep === 2) {
 
-    area.innerHTML = `
+        area.innerHTML = `
 
     <div class="card">
 
@@ -202,173 +202,398 @@ function loadStep(){
 
         ${modelContextBar()}
 
-        <div class="grid">
 
-<div class="form-group">
+        <!-- B1 PRICE SETUP -->
 
-    <label>B1 Pricing Required</label>
+        <div class="create-pricing-block">
 
-    <div class="radio-toggle">
+            <div class="create-pricing-header">
 
-        <label class="radio-option yes">
-            <input
-                type="radio"
-                name="b1Pricing"
-                value="X"
-                ${modelData.selkzb1 === "X" ? "checked" : ""}>
-            <span>Yes</span>
-        </label>
+                <div class="create-pricing-title">
+                    B1 Price Details
+                </div>
 
-        <label class="radio-option no">
-            <input
-                type="radio"
-                name="b1Pricing"
-                value=""
-                ${modelData.selkzb1 !== "X" ? "checked" : ""}>
-            <span>No</span>
-        </label>
+                <div class="create-pricing-toggle">
 
-    </div>
+                    <span>B1 Price Setup</span>
 
-</div>
+                    <label class="warranty-switch">
 
+                        <input
+                            type="checkbox"
+                            id="b1PricingToggle"
+                            ${modelData.selkzb1 === "X" ? "checked" : ""}
+                            onchange="toggleCreatePricing('b1')">
 
-<div class="form-group">
+                        <span class="warranty-slider"></span>
 
-    <label>BR Pricing Required</label>
+                    </label>
 
-    <div class="radio-toggle">
+                </div>
 
-        <label class="radio-option yes">
-            <input
-                type="radio"
-                name="brPricing"
-                value="X"
-                ${modelData.selkzbr === "X" ? "checked" : ""}>
-            <span>Yes</span>
-        </label>
-
-        <label class="radio-option no">
-            <input
-                type="radio"
-                name="brPricing"
-                value=""
-                ${modelData.selkzbr !== "X" ? "checked" : ""}>
-            <span>No</span>
-        </label>
-
-    </div>
-
-</div>
-
-            <div class="form-group">
-                <label>Condition Type</label>
-                <input
-                    type="text"
-                    id="kschl"
-                    placeholder="PR00">
             </div>
 
-            <div class="form-group">
-                <label>Sales Organization</label>
-                <input
-                    type="text"
-                    id="vkorg">
-            </div>
 
-            <div class="form-group">
-                <label>Division</label>
-                <input
-                    type="text"
-                    id="priceSpart">
-            </div>
+            <div
+                id="b1PricingFields"
+                class="create-pricing-fields">
 
-            <div class="form-group">
-                <label>Distribution Channel</label>
-                <input
-                    type="text"
-                    id="priceVtweg">
-            </div>
+                <div class="grid">
 
-            <div class="form-group">
-                <label>Customer Price Group</label>
-                <input
-                    type="text"
-                    id="konda">
-            </div>
+                    <div class="form-group">
+                        <label>B1 Material Price</label>
+                        <input
+                            type="number"
+                            id="b1Kbetr"
+                            step="0.01"
+                            placeholder="199.99">
+                    </div>
 
-            <div class="form-group">
-                <label>Price Amount</label>
-                <input
-                    type="number"
-                    id="kbetr"
-                    step="0.01"
-                    placeholder="199.99">
-            </div>
 
-            <div class="form-group">
-                <label>Currency</label>
+                    <div class="form-group">
+                        <label>B1 Currency</label>
 
-                <select id="konwa">
-                    <option value="">Select Currency</option>
-                    <option value="USD">USD</option>
-                    <option value="CAD">CAD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="JPY">JPY</option>
-                </select>
-            </div>
+                        <select id="b1Konwa">
 
-            <div class="form-group">
-                <label>Pricing Unit</label>
-                <input
-                    type="number"
-                    id="kpein"
-                    placeholder="1">
-            </div>
+                            <option value="">
+                                Select Currency
+                            </option>
 
-            <div class="form-group">
-                <label>Unit Of Measure</label>
-                <input
-                    type="text"
-                    id="kmein"
-                    placeholder="EA">
-            </div>
+                            <option value="USD">
+                                USD
+                            </option>
 
-            <div class="form-group">
-                <label>Calculation Type</label>
-                <input
-                    type="text"
-                    id="krech">
-            </div>
+                            <option value="CAD">
+                                CAD
+                            </option>
 
-            <div class="form-group">
-                <label>Valid From</label>
-                <input
-                    type="date"
-                    id="datab">
-            </div>
+                            <option value="EUR">
+                                EUR
+                            </option>
 
-            <div class="form-group">
-                <label>Valid To</label>
-                <input
-                    type="date"
-                    id="datbi">
+                            <option value="JPY">
+                                JPY
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>B1 Pricing Unit</label>
+
+                        <input
+                            type="number"
+                            id="b1Kpein"
+                            placeholder="1">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Condition Type</label>
+
+                        <input
+                            type="text"
+                            id="Kschl"
+                            placeholder="PR00">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Sales Organization</label>
+
+                        <input
+                            type="text"
+                            id="Vkorg">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Division</label>
+
+                        <input
+                            type="text"
+                            id="Spart">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Distribution Channel</label>
+
+                        <input
+                            type="text"
+                            id="Vtweg">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Customer Price Group</label>
+
+                        <input
+                            type="text"
+                            id="Konda">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>B1 Unit Of Measure</label>
+
+                        <input
+                            type="text"
+                            id="b1Kmein"
+                            placeholder="EA">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>B1 Calculation Type</label>
+
+                        <input
+                            type="text"
+                            id="b1Krech">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>B1 Valid From</label>
+
+                        <input
+                            type="date"
+                            id="b1Datab">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>B1 Valid To</label>
+
+                        <input
+                            type="date"
+                            id="b1Datbi">
+
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
+
+
+        <!-- BR PRICE SETUP -->
+
+        <div class="create-pricing-block">
+
+            <div class="create-pricing-header">
+
+                <div class="create-pricing-title">
+                    BR Price Details
+                </div>
+
+                <div class="create-pricing-toggle">
+
+                    <span>BR Price Setup</span>
+
+                    <label class="warranty-switch">
+
+                        <input
+                            type="checkbox"
+                            id="brPricingToggle"
+                            ${modelData.selkzbr === "X" ? "checked" : ""}
+                            onchange="toggleCreatePricing('br')">
+
+                        <span class="warranty-slider"></span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="brPricingFields"
+                class="create-pricing-fields">
+
+                <div class="grid">
+
+                    <div class="form-group">
+                        <label>BR Material Price</label>
+
+                        <input
+                            type="number"
+                            id="brKbetr"
+                            step="0.01"
+                            placeholder="199.99">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Currency</label>
+
+                        <select id="brKonwa">
+
+                            <option value="">
+                                Select Currency
+                            </option>
+
+                            <option value="USD">
+                                USD
+                            </option>
+
+                            <option value="CAD">
+                                CAD
+                            </option>
+
+                            <option value="EUR">
+                                EUR
+                            </option>
+
+                            <option value="JPY">
+                                JPY
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Pricing Unit</label>
+
+                        <input
+                            type="number"
+                            id="brKpein"
+                            placeholder="1">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Condition Type</label>
+
+                        <input
+                            type="text"
+                            id="Kschl"
+                            placeholder="PR00">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Sales Organization</label>
+
+                        <input
+                            type="text"
+                            id="Vkorg">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Division</label>
+
+                        <input
+                            type="text"
+                            id="Spart">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Distribution Channel</label>
+
+                        <input
+                            type="text"
+                            id="Vtweg">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Customer Price Group</label>
+
+                        <input
+                            type="text"
+                            id="Konda">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Unit Of Measure</label>
+
+                        <input
+                            type="text"
+                            id="brKmein"
+                            placeholder="EA">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Calculation Type</label>
+
+                        <input
+                            type="text"
+                            id="brKrech">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Valid From</label>
+
+                        <input
+                            type="date"
+                            id="brDatab">
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>BR Valid To</label>
+
+                        <input
+                            type="date"
+                            id="brDatbi">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
         <div class="btn-row">
 
             <button
                 class="btn back"
                 onclick="backStep()">
+
                 ← Back
+
             </button>
+
 
             <button
                 class="btn next"
                 onclick="nextStep()">
+
                 Next →
+
             </button>
 
         </div>
@@ -376,11 +601,20 @@ function loadStep(){
     </div>
 
     `;
-}
- 
-    if(currentStep === 3){
- 
-    area.innerHTML = `
+
+
+        restoreStepData();
+
+        toggleCreatePricing("b1");
+
+        toggleCreatePricing("br");
+
+        return;
+    }
+
+    if (currentStep === 3) {
+
+        area.innerHTML = `
  
     <div class="card">
  
@@ -432,7 +666,7 @@ function loadStep(){
                 <label>Unit</label>
                 <select id="standardUnit">
                     <option>YR</option>
-                    <option>MON</option>
+                    <option value="MO">MON</option>
                 </select>
             </div>
  
@@ -480,7 +714,7 @@ function loadStep(){
                 <label>Unit</label>
                 <select id="extendedUnit">
                     <option>YR</option>
-                    <option>MON</option>
+                    <option value="MO">MON</option>
                 </select>
             </div>
  
@@ -530,7 +764,7 @@ function loadStep(){
                 <select id="brotherCareUnit">
     <option value="">Select Unit</option>
     <option value="YR">YR</option>
-    <option value="MON">MON</option>
+    <option value="MO">MON</option>
 </select>
             </div>
  
@@ -582,7 +816,7 @@ function loadStep(){
                 <select id="brotherPlusUnit">
     <option value="">Select Unit</option>
     <option value="YR">YR</option>
-    <option value="MON">MON</option>
+    <option value="MO">MON</option>
 </select>
             </div>
  
@@ -611,11 +845,11 @@ function loadStep(){
     </div>
  
     `;
-}
- 
-   if (currentStep === 4) {
+    }
 
-    area.innerHTML = `
+    if (currentStep === 4) {
+
+        area.innerHTML = `
 
     <div class="card">
 
@@ -763,43 +997,47 @@ function loadStep(){
 
     `;
 
-    restoreProgramState("amazondart");
-    restoreProgramState("brrefresh");
-    restoreProgramState("barracuda");
-    restoreProgramState("bplus");
-}
- 
-if (currentStep === 5) {
+        restoreProgramState("amazondart");
+        restoreProgramState("brrefresh");
+        restoreProgramState("barracuda");
+        restoreProgramState("bplus");
+    }
 
-    area.innerHTML = `
+    if (currentStep === 5) {
+
+        area.innerHTML = `
 
     <div class="card">
 
-        <h3>Order Types & Final Configuration</h3>
+        <h3>
+            Order Types & Final Configuration
+        </h3>
 
         ${modelContextBar()}
 
+
         <div class="order-section-title">
+            Consumable
+        </div>
+
+
+        <div class="consumable-field">
+
+            <input
+                type="text"
+                id="consumable"
+                value="${modelData.consumable || ""}"
+                placeholder="Enter consumable">
+
+        </div>
+
+
+        <div class="order-section-title order-types-heading">
             Select Applicable Order Types
         </div>
 
+
         <div class="order-check-grid">
-
-            <label class="order-check-item">
-
-                <input
-                    type="checkbox"
-                    id="consumable"
-                    ${modelData.consumable === "X" ? "checked" : ""}>
-
-                <span class="order-checkbox"></span>
-
-                <span class="order-check-text">
-                    Consumable Order
-                </span>
-
-            </label>
-
 
             <label class="order-check-item">
 
@@ -872,13 +1110,18 @@ if (currentStep === 5) {
             <button
                 class="btn back"
                 onclick="backStep()">
+
                 ← Back
+
             </button>
+
 
             <button
                 class="btn next"
                 onclick="nextStep()">
+
                 Review →
+
             </button>
 
         </div>
@@ -886,11 +1129,11 @@ if (currentStep === 5) {
     </div>
 
     `;
-}
- 
-if(currentStep === 6){
- 
-    area.innerHTML = `
+    }
+
+    if (currentStep === 6) {
+
+        area.innerHTML = `
  
     <div class="card">
  
@@ -975,34 +1218,34 @@ if(currentStep === 6){
  
     </div>
     `;
-}
- 
-const progress =
- 
-(
-    (currentStep - 1)
-    / 5
-)
-* 100;
- 
-const progressBar =
-    document.getElementById(
-        "wizardProgress"
-    );
- 
-if(progressBar){
+    }
 
-    progressBar.style.width =
-        progress + "%";
-}
+    const progress =
 
-/*
-Restore previous values whenever
-a step is rendered again.
-*/
-restoreStepData();
+        (
+            (currentStep - 1)
+            / 5
+        )
+        * 100;
 
- 
+    const progressBar =
+        document.getElementById(
+            "wizardProgress"
+        );
+
+    if (progressBar) {
+
+        progressBar.style.width =
+            progress + "%";
+    }
+
+    /*
+    Restore previous values whenever
+    a step is rendered again.
+    */
+    restoreStepData();
+
+
 }
 
 function restoreProgramState(id) {
@@ -1064,6 +1307,234 @@ function setValue(id, value) {
     }
 }
 
+function toggleCreatePricing(type) {
+
+    const b1Toggle =
+        document.getElementById("b1PricingToggle");
+
+    const brToggle =
+        document.getElementById("brPricingToggle");
+
+    const b1Fields =
+        document.getElementById("b1PricingFields");
+
+    const brFields =
+        document.getElementById("brPricingFields");
+
+
+    if (!b1Toggle || !brToggle) {
+        return;
+    }
+
+
+    // B1 PRICE SETUP
+
+    if (type === "b1") {
+
+        if (
+            b1Toggle.checked &&
+            brToggle.checked
+        ) {
+
+            b1Toggle.checked = false;
+
+            modelData.selkzb1 = "";
+
+
+            if (b1Fields) {
+                b1Fields.style.display = "none";
+            }
+
+
+            showPricingError(
+                "BR Price Setup is already selected. Only one pricing setup can be created at a time."
+            );
+
+            return;
+        }
+
+
+        modelData.selkzb1 =
+            b1Toggle.checked
+                ? "X"
+                : "";
+
+
+        if (b1Fields) {
+
+            b1Fields.style.display =
+                b1Toggle.checked
+                    ? "block"
+                    : "none";
+        }
+
+        if (b1Toggle.checked) {
+
+    carryForwardPricingValues("b1");
+}
+    }
+
+
+    // BR PRICE SETUP
+
+    if (type === "br") {
+
+        if (
+            brToggle.checked &&
+            b1Toggle.checked
+        ) {
+
+            brToggle.checked = false;
+
+            modelData.selkzbr = "";
+
+
+            if (brFields) {
+                brFields.style.display = "none";
+            }
+
+
+            showPricingError(
+                "B1 Price Setup is already selected. Only one pricing setup can be created at a time."
+            );
+
+            return;
+        }
+
+
+        modelData.selkzbr =
+            brToggle.checked
+                ? "X"
+                : "";
+
+
+        if (brFields) {
+
+    brFields.style.display =
+        brToggle.checked
+            ? "block"
+            : "none";
+}
+
+
+if (brToggle.checked) {
+
+    carryForwardPricingValues("br");
+}
+    }
+}
+
+function carryForwardPricingValues(type) {
+
+    const fields =
+        type === "b1"
+            ? document.getElementById("b1PricingFields")
+            : document.getElementById("brPricingFields");
+
+
+    if (!fields) {
+        return;
+    }
+
+
+    const inputs =
+        fields.querySelectorAll("input");
+
+
+    inputs.forEach(function (input) {
+
+        if (input.id === "Vkorg" && !input.value) {
+            input.value = modelData.werks || "";
+        }
+
+
+        if (input.id === "Spart" && !input.value) {
+            input.value = modelData.spart || "";
+        }
+
+
+        if (input.id === "Vtweg" && !input.value) {
+            input.value = modelData.vtweg || "";
+        }
+
+    });
+}
+
+function showPricingError(message) {
+
+    let errorBox =
+        document.getElementById(
+            "pricingSelectionError"
+        );
+
+
+    if (!errorBox) {
+
+        errorBox =
+            document.createElement("div");
+
+        errorBox.id =
+            "pricingSelectionError";
+
+        errorBox.className =
+            "pricing-selection-error";
+
+
+        const card =
+            document.querySelector(
+                "#contentArea .card"
+            );
+
+
+        if (card) {
+
+            const contextBar =
+                card.querySelector(
+                    ".model-context-bar"
+                );
+
+
+            if (contextBar) {
+
+                contextBar.insertAdjacentElement(
+                    "afterend",
+                    errorBox
+                );
+
+            } else {
+
+                card.prepend(
+                    errorBox
+                );
+            }
+        }
+    }
+
+
+    errorBox.textContent =
+        message;
+
+    errorBox.style.display =
+        "flex";
+
+
+    clearTimeout(
+        window.pricingErrorTimer
+    );
+
+
+    window.pricingErrorTimer =
+        setTimeout(
+            function () {
+
+                errorBox.style.display =
+                    "none";
+
+            },
+            4000
+        );
+}
+
 
 function restoreStepData() {
 
@@ -1089,104 +1560,290 @@ function restoreStepData() {
 
 
     // STEP 2 - Price Setup
-    if (currentStep === 2) {
+    // STEP 2 - Price Setup
+if (currentStep === 2) {
 
-        // setValue("selkzb1", modelData.selkzb1);
-        // setValue("selkzbr", modelData.selkzbr);
-        setValue("kschl", modelData.kschl);
-        setValue("vkorg", modelData.vkorg);
-        setValue("priceSpart", modelData.priceSpart);
-        setValue("priceVtweg", modelData.priceVtweg);
-        setValue("konda", modelData.konda);
-        setValue("kbetr", modelData.kbetr);
-        setValue("konwa", modelData.konwa);
-        setValue("kpein", modelData.kpein);
-        setValue("kmein", modelData.kmein);
-        setValue("krech", modelData.krech);
-        setValue("datab", modelData.datab);
-        setValue("datbi", modelData.datbi);
+    const b1Toggle =
+        document.getElementById("b1PricingToggle");
+
+    const brToggle =
+        document.getElementById("brPricingToggle");
+
+    const b1Block =
+        document.getElementById("b1PricingFields");
+
+    const brBlock =
+        document.getElementById("brPricingFields");
+
+
+    // Restore toggle selections
+
+    if (b1Toggle) {
+        b1Toggle.checked =
+            modelData.selkzb1 === "X";
     }
+
+    if (brToggle) {
+        brToggle.checked =
+            modelData.selkzbr === "X";
+    }
+
+
+    // ========================================
+    // B1 PRICING
+    // ========================================
+
+    if (b1Block) {
+
+        const setB1Value =
+            function (selector, value) {
+
+                const element =
+                    b1Block.querySelector(selector);
+
+                if (element) {
+                    element.value =
+                        value ?? "";
+                }
+            };
+
+
+        setB1Value(
+            "#b1Kbetr",
+            modelData.b1Kbetr
+        );
+
+        setB1Value(
+            "#b1Konwa",
+            modelData.b1Konwa
+        );
+
+        setB1Value(
+            "#b1Kpein",
+            modelData.b1Kpein
+        );
+
+        setB1Value(
+            "#Kschl",
+            modelData.Kschl
+        );
+
+        setB1Value(
+            "#Vkorg",
+            modelData.Vkorg ||
+            modelData.werks
+        );
+
+        setB1Value(
+            "#Spart",
+            modelData.Spart ||
+            modelData.spart
+        );
+
+        setB1Value(
+            "#Vtweg",
+            modelData.Vtweg ||
+            modelData.vtweg
+        );
+
+        setB1Value(
+            "#Konda",
+            modelData.Konda
+        );
+
+        setB1Value(
+            "#b1Kmein",
+            modelData.b1Kmein
+        );
+
+        setB1Value(
+            "#b1Krech",
+            modelData.b1Krech
+        );
+
+        setB1Value(
+            "#b1Datab",
+            modelData.b1Datab
+        );
+
+        setB1Value(
+            "#b1Datbi",
+            modelData.b1Datbi
+        );
+    }
+
+
+    // ========================================
+    // BR PRICING
+    // ========================================
+
+    if (brBlock) {
+
+        const setBRValue =
+            function (selector, value) {
+
+                const element =
+                    brBlock.querySelector(selector);
+
+                if (element) {
+                    element.value =
+                        value ?? "";
+                }
+            };
+
+
+        setBRValue(
+            "#brKbetr",
+            modelData.brKbetr
+        );
+
+        setBRValue(
+            "#brKonwa",
+            modelData.brKonwa
+        );
+
+        setBRValue(
+            "#brKpein",
+            modelData.brKpein
+        );
+
+        setBRValue(
+            "#Kschl",
+            modelData.Kschl
+        );
+
+        setBRValue(
+            "#Vkorg",
+            modelData.Vkorg ||
+            modelData.werks
+        );
+
+        setBRValue(
+            "#Spart",
+            modelData.Spart ||
+            modelData.spart
+        );
+
+        setBRValue(
+            "#Vtweg",
+            modelData.Vtweg ||
+            modelData.vtweg
+        );
+
+        setBRValue(
+            "#Konda",
+            modelData.Konda
+        );
+
+        setBRValue(
+            "#brKmein",
+            modelData.brKmein
+        );
+
+        setBRValue(
+            "#brKrech",
+            modelData.brKrech
+        );
+
+        setBRValue(
+            "#brDatab",
+            modelData.brDatab
+        );
+
+        setBRValue(
+            "#brDatbi",
+            modelData.brDatbi
+        );
+    }
+
+
+    // Show only selected pricing section
+
+    toggleCreatePricing("b1");
+
+    toggleCreatePricing("br");
+}
 
 
     // STEP 3 - Warranty
     if (currentStep === 3) {
 
-    setValue(
-        "standardLength",
-        modelData.standardLength
-    );
+        setValue(
+            "standardLength",
+            modelData.standardLength
+        );
 
-    setValue(
-        "standardUnit",
-        modelData.standardUnit
-    );
+        setValue(
+            "standardUnit",
+            modelData.standardUnit
+        );
 
-    restoreWarranty(
-        "standardWarranty",
-        "standardWarrantyText",
-        "standardLength",
-        "standardUnit",
-        modelData.standardWarranty
-    );
-
-
-    setValue(
-        "extendedLength",
-        modelData.extendedLength
-    );
-
-    setValue(
-        "extendedUnit",
-        modelData.extendedUnit
-    );
-
-    restoreWarranty(
-        "extendedWarranty",
-        "extendedWarrantyText",
-        "extendedLength",
-        "extendedUnit",
-        modelData.extendedWarranty
-    );
+        restoreWarranty(
+            "standardWarranty",
+            "standardWarrantyText",
+            "standardLength",
+            "standardUnit",
+            modelData.standardWarranty
+        );
 
 
-    setValue(
-        "brotherCareLength",
-        modelData.brotherCareLength
-    );
+        setValue(
+            "extendedLength",
+            modelData.extendedLength
+        );
 
-    setValue(
-        "brotherCareUnit",
-        modelData.brotherCareUnit
-    );
+        setValue(
+            "extendedUnit",
+            modelData.extendedUnit
+        );
 
-    restoreWarranty(
-    "brotherCareWarranty",
-    "brotherCareWarrantyText",
-    "brotherCareLength",
-    "brotherCareUnit",
-    modelData.brotherCareWarranty,
-    true
-);
+        restoreWarranty(
+            "extendedWarranty",
+            "extendedWarrantyText",
+            "extendedLength",
+            "extendedUnit",
+            modelData.extendedWarranty
+        );
 
-    setValue(
-        "brotherPlusLength",
-        modelData.brotherPlusLength
-    );
 
-    setValue(
-        "brotherPlusUnit",
-        modelData.brotherPlusUnit
-    );
+        setValue(
+            "brotherCareLength",
+            modelData.brotherCareLength
+        );
 
-    restoreWarranty(
-    "brotherPlusWarranty",
-    "brotherPlusWarrantyText",
-    "brotherPlusLength",
-    "brotherPlusUnit",
-    modelData.brotherPlusWarranty,
-    true
-);
-}
+        setValue(
+            "brotherCareUnit",
+            modelData.brotherCareUnit
+        );
+
+        restoreWarranty(
+            "brotherCareWarranty",
+            "brotherCareWarrantyText",
+            "brotherCareLength",
+            "brotherCareUnit",
+            modelData.brotherCareWarranty,
+            true
+        );
+
+        setValue(
+            "brotherPlusLength",
+            modelData.brotherPlusLength
+        );
+
+        setValue(
+            "brotherPlusUnit",
+            modelData.brotherPlusUnit
+        );
+
+        restoreWarranty(
+            "brotherPlusWarranty",
+            "brotherPlusWarrantyText",
+            "brotherPlusLength",
+            "brotherPlusUnit",
+            modelData.brotherPlusWarranty,
+            true
+        );
+    }
 
 
     // STEP 4 - Compatibility
@@ -1222,22 +1879,37 @@ function restoreStepData() {
     // STEP 5 - Order Types
 
 }
- 
+
 function nextStep() {
 
-    // Save current screen first
     saveCurrentStepData();
+
+
+    if (currentStep === 2) {
+
+        if (
+            modelData.selkzb1 === "X" &&
+            modelData.selkzbr === "X"
+        ) {
+
+            showPricingError(
+                "B1 and BR pricing cannot be created at the same time. Please select only one pricing setup."
+            );
+
+            return;
+        }
+    }
+
 
     if (currentStep < 6) {
 
         currentStep++;
 
-        // Render next screen
         loadStep();
     }
 }
- 
- 
+
+
 function backStep() {
 
     // Save changes made on current screen
@@ -1251,7 +1923,7 @@ function backStep() {
         loadStep();
     }
 }
- 
+
 
 
 function getValue(id) {
@@ -1291,54 +1963,126 @@ function saveCurrentStepData() {
     STEP 2
     Pricing
     */
-    if (currentStep === 2) {
+  if (currentStep === 2) {
 
-       modelData.selkzb1 =
-    document.querySelector(
-        'input[name="b1Pricing"\]:checked'
-    )?.value || "";
+    const b1Toggle =
+        document.getElementById("b1PricingToggle");
 
-modelData.selkzbr =
-    document.querySelector(
-        'input[name="brPricing"\]:checked'
-    )?.value || "";
+    const brToggle =
+        document.getElementById("brPricingToggle");
 
-        modelData.kschl =
-            getValue("kschl");
 
-        modelData.vkorg =
-            getValue("vkorg");
+    modelData.selkzb1 =
+        b1Toggle && b1Toggle.checked
+            ? "X"
+            : "";
 
-        modelData.priceSpart =
-            getValue("priceSpart");
 
-        modelData.priceVtweg =
-            getValue("priceVtweg");
+    modelData.selkzbr =
+        brToggle && brToggle.checked
+            ? "X"
+            : "";
 
-        modelData.konda =
-            getValue("konda");
 
-        modelData.kbetr =
-            getValue("kbetr");
+    /* ==============================
+       B1 PRICING
+    ============================== */
 
-        modelData.konwa =
-            getValue("konwa");
+    if (modelData.selkzb1 === "X") {
 
-        modelData.kpein =
-            getValue("kpein");
+        const block =
+            document.getElementById(
+                "b1PricingFields"
+            );
 
-        modelData.kmein =
-            getValue("kmein");
 
-        modelData.krech =
-            getValue("krech");
+        modelData.b1Kbetr =
+            block.querySelector("#b1Kbetr")?.value || "";
 
-        modelData.datab =
-            getValue("datab");
+        modelData.b1Konwa =
+            block.querySelector("#b1Konwa")?.value || "";
 
-        modelData.datbi =
-            getValue("datbi");
+        modelData.b1Kpein =
+            block.querySelector("#b1Kpein")?.value || "";
+
+        modelData.Kschl =
+            block.querySelector("#Kschl")?.value || "";
+
+        modelData.Vkorg =
+            block.querySelector("#Vkorg")?.value || "";
+
+        modelData.Spart =
+            block.querySelector("#Spart")?.value || "";
+
+        modelData.Vtweg =
+            block.querySelector("#Vtweg")?.value || "";
+
+        modelData.Konda =
+            block.querySelector("#Konda")?.value || "";
+
+        modelData.b1Kmein =
+            block.querySelector("#b1Kmein")?.value || "";
+
+        modelData.b1Krech =
+            block.querySelector("#b1Krech")?.value || "";
+
+        modelData.b1Datab =
+            block.querySelector("#b1Datab")?.value || "";
+
+        modelData.b1Datbi =
+            block.querySelector("#b1Datbi")?.value || "";
     }
+
+
+    /* ==============================
+       BR PRICING
+    ============================== */
+
+    if (modelData.selkzbr === "X") {
+
+        const block =
+            document.getElementById(
+                "brPricingFields"
+            );
+
+
+        modelData.brKbetr =
+            block.querySelector("#brKbetr")?.value || "";
+
+        modelData.brKonwa =
+            block.querySelector("#brKonwa")?.value || "";
+
+        modelData.brKpein =
+            block.querySelector("#brKpein")?.value || "";
+
+        modelData.Kschl =
+            block.querySelector("#Kschl")?.value || "";
+
+        modelData.Vkorg =
+            block.querySelector("#Vkorg")?.value || "";
+
+        modelData.Spart =
+            block.querySelector("#Spart")?.value || "";
+
+        modelData.Vtweg =
+            block.querySelector("#Vtweg")?.value || "";
+
+        modelData.Konda =
+            block.querySelector("#Konda")?.value || "";
+
+        modelData.brKmein =
+            block.querySelector("#brKmein")?.value || "";
+
+        modelData.brKrech =
+            block.querySelector("#brKrech")?.value || "";
+
+        modelData.brDatab =
+            block.querySelector("#brDatab")?.value || "";
+
+        modelData.brDatbi =
+            block.querySelector("#brDatbi")?.value || "";
+    }
+}
 
     /*
     STEP 3
@@ -1346,71 +2090,71 @@ modelData.selkzbr =
     */
     if (currentStep === 3) {
 
-    modelData.standardWarranty =
-        document.getElementById(
-            "standardWarranty"
-        )?.checked ? "X" : "";
+        modelData.standardWarranty =
+            document.getElementById(
+                "standardWarranty"
+            )?.checked ? "X" : "";
 
-    modelData.standardLength =
-        getValue("standardLength");
+        modelData.standardLength =
+            getValue("standardLength");
 
-    modelData.standardUnit =
-        getValue("standardUnit");
-
-
-    modelData.extendedWarranty =
-        document.getElementById(
-            "extendedWarranty"
-        )?.checked ? "X" : "";
-
-    modelData.extendedLength =
-        getValue("extendedLength");
-
-    modelData.extendedUnit =
-        getValue("extendedUnit");
+        modelData.standardUnit =
+            getValue("standardUnit");
 
 
-    modelData.brotherCareWarranty =
-        document.getElementById(
-            "brotherCareWarranty"
-        )?.checked ? "X" : "";
+        modelData.extendedWarranty =
+            document.getElementById(
+                "extendedWarranty"
+            )?.checked ? "X" : "";
 
-    modelData.brotherCareLength =
-        getValue("brotherCareLength");
+        modelData.extendedLength =
+            getValue("extendedLength");
 
-    modelData.brotherCareUnit =
-        getValue("brotherCareUnit");
+        modelData.extendedUnit =
+            getValue("extendedUnit");
 
-    modelData.brotherPlusWarranty =
-        document.getElementById(
-            "brotherPlusWarranty"
-        )?.checked ? "X" : "";
 
-    modelData.brotherPlusLength =
-        getValue("brotherPlusLength");
+        modelData.brotherCareWarranty =
+            document.getElementById(
+                "brotherCareWarranty"
+            )?.checked ? "X" : "";
 
-    modelData.brotherPlusUnit =
-        getValue("brotherPlusUnit");
-}
+        modelData.brotherCareLength =
+            getValue("brotherCareLength");
+
+        modelData.brotherCareUnit =
+            getValue("brotherCareUnit");
+
+        modelData.brotherPlusWarranty =
+            document.getElementById(
+                "brotherPlusWarranty"
+            )?.checked ? "X" : "";
+
+        modelData.brotherPlusLength =
+            getValue("brotherPlusLength");
+
+        modelData.brotherPlusUnit =
+            getValue("brotherPlusUnit");
+    }
 
     /*
     STEP 4
     Compatibility
     */
-  if (currentStep === 4) {
+    if (currentStep === 4) {
 
-    modelData.amazondart =
-        getValue("amazondart");
+        modelData.amazondart =
+            getValue("amazondart");
 
-    modelData.brrefresh =
-        getValue("brrefresh");
+        modelData.brrefresh =
+            getValue("brrefresh");
 
-    modelData.barracuda =
-        getValue("barracuda");
+        modelData.barracuda =
+            getValue("barracuda");
 
-    modelData.bplus =
-        getValue("bplus");
-}
+        modelData.bplus =
+            getValue("bplus");
+    }
 
     /*
     STEP 5
@@ -1418,181 +2162,478 @@ modelData.selkzbr =
     */
     if (currentStep === 5) {
 
-    modelData.consumable =
-        document.getElementById("consumable")?.checked
-            ? "X"
-            : "";
+        modelData.consumable =
+            getValue("consumable");
 
-    modelData.drumOrder =
-        document.getElementById("drumOrder")?.checked
-            ? "X"
-            : "";
 
-    modelData.wasteToner =
-        document.getElementById("wasteToner")?.checked
-            ? "X"
-            : "";
+        modelData.drumOrder =
+            document.getElementById("drumOrder")?.checked
+                ? "X"
+                : "";
 
-    modelData.beltUnit =
-        document.getElementById("beltUnit")?.checked
-            ? "X"
-            : "";
 
-    modelData.claimOrder =
-        document.getElementById("claimOrder")?.checked
-            ? "X"
-            : "";
+        modelData.wasteToner =
+            document.getElementById("wasteToner")?.checked
+                ? "X"
+                : "";
+
+
+        modelData.beltUnit =
+            document.getElementById("beltUnit")?.checked
+                ? "X"
+                : "";
+
+
+        modelData.claimOrder =
+            document.getElementById("claimOrder")?.checked
+                ? "X"
+                : "";
+    }
 }
-}
- 
+
+
 async function saveModel() {
+
+    const isB1Pricing =
+        modelData.selkzb1 === "X";
+
+    const isBRPricing =
+        modelData.selkzbr === "X";
+
 
     const payload = {
 
-        Material: {
-            MATNR: modelData.matnr || "",
-            WERKS: modelData.werks || "",
-            MTART: modelData.mtart || "",
-            MBRSH: modelData.mbrsh || "",
-            MATKL: modelData.matkl || "",
-            MEINS: modelData.meins || "",
-            SPART: modelData.spart || "",
-            EAN11: modelData.ean11 || "",
-            MSTAE: modelData.mstae || "",
-            MSTAV: modelData.mstav || "",
-            SPRAS: modelData.spras || "",
-            MAKTX: modelData.maktx || "",
-            VTWEG: modelData.vtweg || "",
-            VMSTA: modelData.vmsta || ""
-        },
+        Matnr:
+            modelData.matnr || "",
 
-        PriceSetup: {
-            MATNR: modelData.matnr || "",
-            KSCHL: modelData.kschl || "",
-            SELKZB1: modelData.selkzb1 || "",
-            SELKZBR: modelData.selkzbr || "",
-            VKORG: modelData.vkorg || "",
-            SPART: modelData.priceSpart || "",
-            VTWEG: modelData.priceVtweg || "",
-            KONDA: modelData.konda || "",
-            KBETR: modelData.kbetr || "",
-            KONWA: modelData.konwa || "",
-            KPEIN: modelData.kpein || "",
-            KMEIN: modelData.kmein || "",
-            KRECH: modelData.krech || "",
-            DATAB: modelData.datab || "",
-            DATBI: modelData.datbi || ""
-        },
+        Country:
+            modelData.country || "",
 
-        Warranty: {
-            MATNR: modelData.matnr || "",
-            COUNTRY: modelData.country || "",
+        Mtart:
+            modelData.mtart || "",
 
-            STANDARD: {
-                WARRANTY_TYPE: "STANDARD",
-                ENABLED: modelData.standardWarranty || "",
-                WTY_LEN: modelData.standardLength || "",
-                WTY_LEN_UNIT: modelData.standardUnit || ""
-            },
+        Mbrsh:
+            modelData.mbrsh || "",
 
-            EXTENDED: {
-                WARRANTY_TYPE: "EXTENDED",
-                ENABLED: modelData.extendedWarranty || "",
-                WTY_LEN: modelData.extendedLength || "",
-                WTY_LEN_UNIT: modelData.extendedUnit || ""
-            },
+        Matkl:
+            modelData.matkl || "",
 
-            BROTHERCARE: {
-                WARRANTY_TYPE: "BROTHER_CARE",
-                ENABLED: modelData.brotherCareWarranty || "",
-                WTY_LEN: modelData.brotherCareLength || "",
-                WTY_LEN_UNIT: modelData.brotherCareUnit || ""
-            },
+        Meins:
+            modelData.meins || "",
 
-           
-            BROTHERPLUS: {
-                WARRANTY_TYPE: "BROTHER_PLUS",
-                ENABLED: modelData.brotherPlusWarranty || "",
-                WTY_LEN: modelData.brotherPlusLength || "",
-                WTY_LEN_UNIT: modelData.brotherPlusUnit || ""
-            }
-        },
+        Spart:
+            modelData.spart || "",
 
-        Compatibility: {
-            MATNR: modelData.matnr || "",
-            COUNTRY: modelData.country || "",
-            AMAZONDART: modelData.amazondart || "",
-            BRREFRESH: modelData.brrefresh || "",
-            BARRACUDA: modelData.barracuda || "",
-            BPLUS: modelData.bplus || ""
-        },
+        Ean11:
+            modelData.ean11 || "",
 
-        OrderType: {
-            MATNR: modelData.matnr || "",
-            COUNTRY: modelData.country || "",
-            CONSUMABLE: modelData.consumable || "",
-            DRUM: modelData.drumOrder || "",
-            WASTE_TONER: modelData.wasteToner || "",
-            BELT_UNIT: modelData.beltUnit || "",
-            CLAIMORDER: modelData.claimOrder || ""
-        }
+        Mstae:
+            modelData.mstae || "",
+
+        Mstav:
+            modelData.mstav || "",
+
+        Spras:
+            modelData.spras || "",
+
+        Maktx:
+            modelData.maktx || "",
+
+        Vtweg:
+            modelData.vtweg || "",
+
+        Werks:
+            modelData.werks || "",
+
+        Vmsta:
+            modelData.vmsta || "",
+
+
+        Kschl:
+            modelData.Kschl || "",
+
+        Selkzb1:
+            modelData.selkzb1 || "",
+
+        Selkzbr:
+            modelData.selkzbr || "",
+
+        Vkorg:
+            modelData.Vkorg ||
+            modelData.werks ||
+            "",
+
+        Konda:
+            modelData.Konda || "",
+
+
+        B1kbetr:
+            isB1Pricing
+                ? modelData.b1Kbetr || ""
+                : "",
+
+        B1konwa:
+            isB1Pricing
+                ? modelData.b1Konwa || ""
+                : "",
+
+        B1kpein:
+            isB1Pricing
+                ? modelData.b1Kpein || ""
+                : "",
+
+        B1kmein:
+            isB1Pricing
+                ? modelData.b1Kmein || ""
+                : "",
+
+        B1krech:
+            isB1Pricing
+                ? modelData.b1Krech || ""
+                : "",
+
+        B1datab:
+    isB1Pricing
+        ? modelData.b1Datab || ""
+        : "",
+
+B1datbi:
+    isB1Pricing
+        ? modelData.b1Datbi || ""
+        : "",
+
+
+        Brkbetr:
+            isBRPricing
+                ? modelData.brKbetr || ""
+                : "",
+
+        Brkonwa:
+            isBRPricing
+                ? modelData.brKonwa || ""
+                : "",
+
+        Brkpein:
+            isBRPricing
+                ? modelData.brKpein || ""
+                : "",
+
+        Brkmein:
+            isBRPricing
+                ? modelData.brKmein || ""
+                : "",
+
+        Brkrech:
+            isBRPricing
+                ? modelData.brKrech || ""
+                : "",
+
+        Brdatab:
+    isBRPricing
+        ? modelData.brDatab || ""
+        : "",
+
+Brdatbi:
+    isBRPricing
+        ? modelData.brDatbi || ""
+        : "",
+
+        StdWtyType:
+            modelData.standardWarranty || "",
+
+        StdWtyLen:
+            modelData.standardLength || "",
+
+        StdWtyLenUnit:
+            modelData.standardUnit || "",
+
+
+        ExtdWtyType:
+            modelData.extendedWarranty || "",
+
+        ExtdWtyLen:
+            modelData.extendedLength || "",
+
+        ExtdWtyLenUnit:
+            modelData.extendedUnit || "",
+
+
+        BcareWtyType:
+            modelData.brotherCareWarranty || "",
+
+        BcareWtyLen:
+            modelData.brotherCareLength || "",
+
+        BcareWtyLenUnit:
+            modelData.brotherCareUnit || "",
+
+
+        BplusWtyType:
+            modelData.brotherPlusWarranty || "",
+
+        BplusWtyLen:
+            modelData.brotherPlusLength || "",
+
+        BplusWtyLenUnit:
+            modelData.brotherPlusUnit || "",
+
+
+        Amazondart:
+            modelData.amazondart || "",
+
+        Brrefresh:
+            modelData.brrefresh || "",
+
+        Barracuda:
+            modelData.barracuda || "",
+
+        Bplus:
+            modelData.bplus || "",
+
+
+        Consumable:
+            modelData.consumable || "",
+
+        Drum:
+            modelData.drumOrder || "",
+
+        WasteToner:
+            modelData.wasteToner || "",
+
+        BeltUnit:
+            modelData.beltUnit || "",
+
+        Claimorder:
+            modelData.claimOrder || ""
     };
 
+
     console.log(
-        "FINAL MODEL JSON:",
-        JSON.stringify(payload, null, 2)
+        "MODEL DATA:",
+        modelData
     );
+
+
+    console.log(
+        "FINAL SAP PAYLOAD:",
+        JSON.stringify(
+            payload,
+            null,
+            2
+        )
+    );
+
 
     try {
 
-        const response = await fetch(
-            "/api/model/create",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            }
-        );
+        const response =
+            await fetch(
+                "/api/model/create",
+                {
+                    method: "POST",
 
-        const result = await response.json();
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-        if (!response.ok || !result.success) {
-
-            console.error(
-                "Create Model Error:",
-                result
+                    body:
+                        JSON.stringify(payload)
+                }
             );
 
-            alert(
+
+        const responseText =
+            await response.text();
+
+
+        console.log(
+            "CREATE HTTP STATUS:",
+            response.status
+        );
+
+
+        console.log(
+            "CREATE RAW RESPONSE:",
+            responseText
+        );
+
+
+        let result = {};
+
+
+        if (responseText) {
+
+            try {
+
+                result =
+                    JSON.parse(responseText);
+
+            } catch (jsonError) {
+
+                result = {
+                    message: responseText
+                };
+            }
+        }
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                result.message ||
+                result.error ||
+                responseText ||
+                "Failed to create model"
+            );
+        }
+
+
+        if (result.success === false) {
+
+            throw new Error(
                 result.message ||
                 "Failed to create model"
             );
-
-            return;
         }
 
+
         console.log(
-            "Backend response:",
-            result
+            "Model created successfully"
         );
+
 
         showSuccessPage();
 
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(
-            "Backend connection error:",
+            "CREATE MODEL ERROR:",
             error
         );
 
+
         alert(
-            "Unable to connect to backend"
+            error.message ||
+            "Failed to create model"
         );
     }
 }
+
+// async function saveModel() {
+
+//     const payload = {
+//         Matnr: modelData.matnr,
+//         Country: modelData.country,
+//         Mbrsh: modelData.mbrsh,
+//         Matkl: modelData.matkl,
+//         Meins: modelData.meins,
+//         Spart: modelData.spart,
+//         Ean11: modelData.ean11,
+//         Mstae: modelData.mstae,
+//         Mstav: modelData.mstav,
+//         Spras: modelData.spras,
+//         Maktx: modelData.maktx,
+//         Vtweg: modelData.vtweg,
+//         Werks: modelData.werks,
+//         Vmsta: modelData.vmsta,
+//         Kschl: modelData.kschl,
+//         Selkzb1: modelData.selkzb1,
+//         Selkzbr: modelData.selkzbr,
+//         Vkorg: modelData.vkorg,
+//         Konda: modelData.konda,
+//         B1kbetr: modelData.kbetr,
+//         B1konwa: modelData.konwa,
+//         B1kpein: modelData.kpein,
+//         B1kmein: modelData.kmein,
+//         B1krech: modelData.krech,
+//         B1datab: modelData.datab ? modelData.datab + "T00:00:00" : today + "T00:00:00",
+//         B1datbi: modelData.datbi ? modelData.datbi + "T00:00:00" : "9999-12-31T00:00:00",
+//         Brkbetr: modelData.kbetr,
+//         Brkonwa: modelData.konwa,
+//         Brkpein: modelData.kpein,
+//         Brkmein: modelData.kmein,
+//         Brkrech: modelData.krech,
+//         Brdatab: modelData.datab ? modelData.datab + "T00:00:00" : today + "T00:00:00",
+//         Brdatbi: modelData.datbi ? modelData.datbi + "T00:00:00" : "9999-12-31T00:00:00",
+//         StdWtyType: modelData.stdWtyType,
+//         StdWtyLen: modelData.stdWtyLen,
+//         StdWtyLenUnit: modelData.stdWtyLenUnit,
+//         ExtdWtyType: modelData.extdWtyType,
+//         ExtdWtyLen: modelData.extdWtyLen,
+//         ExtdWtyLenUnit: modelData.extdWtyLenUnit,
+//         BcareWtyType: modelData.bCareWtyType,
+//         BcareWtyLen: modelData.bCareWtyLen,
+//         BcareWtyLenUnit: modelData.bCareWtyLenUnit,
+//         BplusWtyType: modelData.bPlusWtyType,
+//         BplusWtyLen: modelData.bPlusWtyLen,
+//         BplusWtyLenUnit: modelData.bPlusWtyLenUnit,
+//         Amazondart: modelData.amazondart,
+//         Brrefresh: modelData.brrefresh,
+//         Barracuda: modelData.barracuda,
+//         Bplus: modelData.bplus,
+//         Consumable: modelData.consumable,
+//         Drum: modelData.drumOrder,
+//         WasteToner: modelData.wasteToner,
+//         BeltUnit: modelData.beltUnit,
+//         Claimorder: modelData.claimOrder
+//     };
+
+//     console.log(
+//         "FINAL MODEL JSON:",
+//         JSON.stringify(payload, null, 2)
+//     );
+
+//     try {
+
+//         const response = await fetch(
+//             "/api/model/create",
+//             {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify(payload)
+//             }
+//         );
+
+//         const result = await response.json();
+
+//         if (!response.ok || !result.success) {
+
+//             console.error(
+//                 "Create Model Error:",
+//                 result
+//             );
+
+//             alert(
+//                 result.message ||
+//                 "Failed to create model"
+//             );
+
+//             return;
+//         }
+
+//         console.log(
+//             "Backend response:",
+//             result
+//         );
+
+//         showSuccessPage();
+
+//     }
+//     catch (error) {
+
+//         console.error(
+//             "Backend connection error:",
+//             error
+//         );
+
+//         alert(
+//             "Unable to connect to backend"
+//         );
+//     }
+// }
 
 function friendlyStatus(value) {
 
@@ -1600,19 +2641,19 @@ function friendlyStatus(value) {
         ? "Configured"
         : "Not Configured";
 }
- 
-function showSuccessPage(){
- 
+
+function showSuccessPage() {
+
     document.querySelector(
-    ".stepper"
-).style.display =
-"none";
- 
-document.getElementById(
-    "stepText"
-).style.display =
-"none";
- 
+        ".stepper"
+    ).style.display =
+        "none";
+
+    document.getElementById(
+        "stepText"
+    ).style.display =
+        "none";
+
     document.getElementById(
         "contentArea"
     ).innerHTML = `
@@ -1757,26 +2798,26 @@ View Created Model
  
     `;
 }
- 
-function toggleCreatedModelDetails(){
- 
+
+function toggleCreatedModelDetails() {
+
     const panel =
         document.getElementById(
             "createdModelPanel"
         );
- 
+
     panel.style.display =
         panel.style.display === "none"
-        ? "grid"
-        : "none";
- 
+            ? "grid"
+            : "none";
+
 }
- 
- 
-function goDashboard(){
- 
-    if(window.parent.showPage){
- 
+
+
+function goDashboard() {
+
+    if (window.parent.showPage) {
+
         window.parent.showPage(
             "dashboard"
         );
@@ -1885,7 +2926,7 @@ function toggleWarranty(
 
 
             if (unit) {
-                unit.value = "MON";
+                unit.value = "MO";
                 unit.disabled = false;
             }
 

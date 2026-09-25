@@ -17,17 +17,18 @@
       font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
       background: transparent;
       color: #e2e8f0;
-      height: 100%;
+      height: auto;
       margin: 0;
       padding: 24px;
-      min-height: 100%;
-      overflow-y: auto;
+      min-height: auto;
+      overflow: hidden;
     }
 
     .container {
       width: 100%;
       max-width: 100%;
       min-height: auto;
+      overflow: visible;
     }
 
     .report-header {
@@ -626,11 +627,7 @@
     .status-no {
       color: #ff4d4f;
       font-size: 28px;
-
-
     }
-
-
     .review-close-btn:hover {
 
       background: #2563eb;
@@ -802,6 +799,16 @@
     .pricing-details.hidden {
       display: none;
     }
+
+    .material-readonly {
+      background: #0f1c2e;
+      color: #ffffff;
+      cursor: not-allowed;
+    }
+
+    .material-readonly:focus {
+      outline: none;
+    }
   </style>
 </head>
 
@@ -826,7 +833,7 @@
         <input type="text" id="changeCountrySearch" placeholder="e.g. US">
       </div>
 
-        <div class="form-field">
+      <div class="form-field">
         <label>Search Type</label>
 
         <select id="searchType">
@@ -925,7 +932,7 @@
         document.getElementById("changeCountrySearch")
           .value.trim();
 
-      
+
 
       const searchType =
         document.getElementById("searchType").value;
@@ -939,7 +946,7 @@
       }
       try {
         const response = await fetch(
-          `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+          `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
         );
 
         console.log("API called");
@@ -999,6 +1006,11 @@
 
       const section =
         icon.closest(".change-section");
+      const sectionName =
+        section.querySelector("h3").innerText;
+
+      const isMaterialSection =
+        sectionName === "Material Information";
 
       const content =
         section.querySelector(".change-content");
@@ -1149,8 +1161,22 @@
 </div>
 `;
         } else {
-          field.outerHTML =
-            `<input type="text" value="${value}">`;
+          if (isMaterialSection) {   // material readonly
+
+            field.outerHTML =
+              `<input type="text"
+                value="${value}"
+                readonly
+                class="material-readonly">`;
+
+          } else {
+
+            field.outerHTML =
+              `<input type="text"
+                value="${value}">`;
+
+          }
+          ``
         }
       });
 
@@ -1456,35 +1482,6 @@
 
       });
 
-      // changes.forEach(change => {
-
-      //   html += `
-
-      //       <tr>
-
-      //           <td>${change.section}</td>
-
-      //           <td>${change.field}</td>
-
-      //           <td class="before-value">
-      //               ${change.before}
-      //           </td>
-
-      //           <td class="after-value">
-      //               ${change.after}
-      //           </td>
-
-      //           <td class="status-cell">
-
-      //               <i class="fa-solid fa-circle-check"></i>
-
-      //           </td>
-
-      //       </tr>
-
-      //   `;
-      // });
-
       Object.keys(groupedChanges).forEach(section => {
 
         const items = groupedChanges[section];
@@ -1608,6 +1605,12 @@
     function showChangeBlocks(record, searchType) {
 
       originalData = JSON.parse(JSON.stringify(record)); //Store the Original data
+      const isB1PriceSetup =
+        record.B1kbetr &&
+        record.B1kbetr !== "0" &&
+        record.B1kbetr !== 0;
+
+
 
       const showMaterial =
         searchType === "full" ||
@@ -1636,9 +1639,7 @@ ${showMaterial ? `
     <h3>Material Information</h3>
          <div class="header-actions">
              
-              <div class="edit-icon" onclick="enableEdit(this)">
-                <i class="fas fa-pen-to-square"></i>
-              </div>
+             
 
               <div class="toggle-icon"
               onclick="toggleSection(this)">
@@ -1880,16 +1881,16 @@ ${showPricing ? `
 
             <div class="info-field">
                 <label>B1 Price Setup</label>
-                <span class="field-value">
-                    ${record.B1priceSetup === "X" ? "Yes" : "No"}
-                </span>
+    <span class="field-value">
+    ${isB1PriceSetup ? "Yes" : "No"}
+</span>             
             </div>
 
         </div>
 
         <div
-            id="b1PricingDetails"
-            class="pricing-details ${record.B1priceSetup === "X" ? "" : "hidden"}">
+    id="b1PricingDetails"
+    class="pricing-details ${isB1PriceSetup ? "" : "hidden"}">
 
             <div class="info-grid">
 
@@ -1945,12 +1946,12 @@ ${showPricing ? `
 
                 <div class="info-field">
                     <label>B1 Valid From</label>
-                    <span class="field-value">${record.B1datab || "-"}</span>
+                    ${formatODataDate(record.B1datab)}
                 </div>
 
                 <div class="info-field">
                     <label>B1 Valid To</label>
-                    <span class="field-value">${record.B1datai || "-"}</span>
+                    ${formatODataDate(record.B1datbi)}
                 </div>
 
             </div>
@@ -2106,6 +2107,7 @@ ${showOrder ? `
 ` : ''}
 `;
     }
+
     function toggleWarrantyLength(toggleElement, warrantyType) {
 
       const infoField =
@@ -2161,72 +2163,7 @@ ${showOrder ? `
       }
     }
 
-    // function saveChanges() {
-
-    //   const today = new Date().toISOString().split("T")[0];
-
-    //   const payload = {
-    //     Matnr: currentData.matnr,
-    //     Country: currentData.country,
-    //     Mbrsh: currentData.mbrsh,
-    //     Matkl: currentData.matkl,
-    //     Meins: currentData.meins,
-    //     Spart: currentData.spart,
-    //     Ean11: currentData.ean11,
-    //     Mstae: currentData.mstae,
-    //     Mstav: currentData.mstav,
-    //     Spras: currentData.spras,
-    //     Maktx: currentData.maktx,
-    //     Vtweg: currentData.vtweg,
-    //     Werks: currentData.werks,
-    //     Vmsta: currentData.vmsta,
-    //     Kschl: currentData.kschl,
-    //     Selkzb1: currentData.selkzb1,
-    //     Selkzbr: currentData.selkzbr,
-    //     Vkorg: currentData.vkorg,
-    //     Konda: currentData.konda,
-    //     Kbetr: currentData.kbetr,
-    //     Konwa: currentData.konwa,
-    //     Kpein: currentData.kpein,
-    //     Kmein: currentData.kmein,
-    //     Krech: currentData.krech,
-    //     Datab: currentData.datab
-    //       ? currentData.datab + "T00:00:00"
-    //       : today + "T00:00:00",
-    //     Datbi: currentData.datbi
-    //       ? currentData.datbi + "T00:00:00"
-    //       : "9999-12-31T00:00:00",
-
-    //     StdWtyType: currentData.stdWtyType,
-    //     StdWtyLen: currentData.stdWtyLen,
-    //     StdWtyLenUnit: currentData.stdWtyLenUnit,
-
-    //     ExtdWtyType: currentData.extdWtyType,
-    //     ExtdWtyLen: currentData.extdWtyLen,
-    //     ExtdWtyLenUnit: currentData.extdWtyLenUnit,
-
-    //     BcareWtyType: currentData.bCareWtyType,
-    //     BcareWtyLen: currentData.bCareWtyLen,
-    //     BcareWtyLenUnit: currentData.bCareWtyLenUnit,
-
-    //     BplusWtyType: currentData.bPlusWtyType,
-    //     BplusWtyLen: currentData.bPlusWtyLen,
-    //     BplusWtyLenUnit: currentData.bPlusWtyLenUnit,
-
-    //     Amazondart: currentData.amazondart,
-    //     Brrefresh: currentData.brrefresh,
-    //     Barracuda: currentData.barracuda,
-    //     Bplus: currentData.bplus,
-    //     Consumable: currentData.consumable,
-    //     Drum: currentData.drumOrder,
-    //     WasteToner: currentData.wasteToner,
-    //     BeltUnit: currentData.beltUnit,
-    //     Claimorder: currentData.claimOrder
-    //   };
-
-    //   console.log("Payload:", JSON.stringify(payload, null, 2));
-
-    //   closeReviewPopup();
+ closeReviewPopup();
     // }
     function saveChanges() {
 
@@ -2296,18 +2233,20 @@ ${showOrder ? `
         "Payload:",
         JSON.stringify(payload, null, 2)
       );
-      // API Call
-      /*
-      fetch('/api/updateModel', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
-      });
-      */
 
       closeReviewPopup();
+    }
+    function formatODataDate(dateStr) {
+
+      if (!dateStr) return "-";
+
+      const timestamp = parseInt(
+        dateStr.match(/\d+/)[0]
+      );
+
+      const date = new Date(timestamp);
+
+      return date.toLocaleDateString("en-GB");
     }
 
   </script>
