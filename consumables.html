@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Consumables</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link
+        rel="stylesheet"
+        href="consumables.css">
+
+</head>
+
+
+<body>
+
+    <div class="consumables-page">
+
+
+        <div class="consumables-header">
+
+            <h1>Consumables</h1>
+
+            <p>
+                Search and view consumable pricing details.
+            </p>
+
+        </div>
+
+
+        <div class="consumables-search-card">
+
+
+            <div class="search-field consumable-search-field">
+
+                <label>Consumable</label>
+
+                <div class="search-input-wrapper">
+
+                    <input
+                        type="text"
+                        id="consumableSearch"
+                        placeholder="e.g. TN760"
+                        autocomplete="off">
+
+                    <i class="fas fa-search"></i>
+
+                </div>
+
+            </div>
+
+
+            <div class="search-field">
+
+                <label>Country</label>
+
+                <select id="consumableCountry">
+
+                    <option value="">
+                        Select Country
+                    </option>
+
+                    <option value="US">
+                        US
+                    </option>
+
+                    <option value="CA">
+                        CA
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="search-field">
+
+                <label>Program</label>
+
+                <select id="consumableProgram">
+
+                    <option value="">
+                        Select Program
+                    </option>
+
+                    <option value="B1">
+                        Barracuda
+                    </option>
+
+                    <option value="BR">
+                        Auto Reorder
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="search-button-group">
+
+                <button
+                    type="button"
+                    class="consumable-search-btn"
+                    onclick="searchConsumable()">
+
+                    <i class="fas fa-search"></i>
+
+                    Search
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="consumable-reset-btn"
+                    onclick="resetConsumableSearch()">
+
+                    <i class="fas fa-rotate-right"></i>
+
+                    Reset
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="consumableMessage"
+            class="consumable-message">
+        </div>
+
+
+        <div
+    id="consumableResult"
+    class="consumable-result-section">
+
+
+    <div class="consumable-product-card">
+
+
+        <div class="product-image-area">
+
+    <!-- <div class="product-glow"></div> -->
+
+    <img
+        id="consumableImage"
+        src="consumable.png"
+        alt="Brother Consumable"
+        class="consumable-main-image">
+
+</div>
+
+       
+        <div class="consumable-features">
+
+
+            <div class="consumable-feature">
+
+                <div class="feature-icon">
+
+                    <i class="fas fa-box"></i>
+
+                </div>
+
+                <div class="feature-label">
+                    High Yield
+                </div>
+
+            </div>
+
+
+            <div class="consumable-feature">
+
+                <div class="feature-icon">
+
+                    <i class="fas fa-print"></i>
+
+                </div>
+
+                <div class="feature-label">
+                    Sharp Prints
+                </div>
+
+            </div>
+
+
+            <div class="consumable-feature">
+
+                <div class="feature-icon">
+
+                    <i class="fas fa-shield-alt"></i>
+
+                </div>
+
+                <div class="feature-label">
+                    Reliable Quality
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="consumable-pricing-card">
+
+
+        <div class="pricing-card-header">
+
+            <div class="pricing-title-icon">
+
+                <i class="fas fa-tag"></i>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    Pricing Details
+                </h2>
+
+                <p>
+                    SAP pricing information
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="pricingInitialMessage"
+            class="pricing-initial-message">
+
+            <div class="pricing-empty-icon">
+
+                <i class="fas fa-search"></i>
+
+            </div>
+
+            <h3>
+                Search for Pricing
+            </h3>
+
+            <p>
+                Enter a consumable, select a country
+                and program, then click Search.
+            </p>
+
+        </div>
+
+
+        <div
+            id="pricingData"
+            style="display:none;">
+
+
+            <div class="pricing-context">
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Consumable
+                    </span>
+
+                    <span
+                        id="pricingConsumable"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Country
+                    </span>
+
+                    <span
+                        id="pricingCountry"
+                        class="pricing-value blue-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Program
+                    </span>
+
+                    <span
+                        id="pricingProgram"
+                        class="program-badge">
+                        -
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="pricing-divider"></div>
+
+
+            <div class="pricing-details-group">
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Condition Type
+                    </span>
+
+                    <span
+                        id="pricingConditionType"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Sales Org
+                    </span>
+
+                    <span
+                        id="pricingSalesOrg"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Distribution Channel
+                    </span>
+
+                    <span
+                        id="pricingDistribution"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Division
+                    </span>
+
+                    <span
+                        id="pricingDivision"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="pricing-divider"></div>
+
+
+            <div class="pricing-details-group">
+
+
+                <div class="pricing-row price-row">
+
+                    <span class="pricing-label">
+                        Price
+                    </span>
+
+                    <span
+                        id="pricingPrice"
+                        class="pricing-price">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Pricing Unit
+                    </span>
+
+                    <span
+                        id="pricingUnit"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Unit of Measure
+                    </span>
+
+                    <span
+                        id="pricingUom"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Valid From
+                    </span>
+
+                    <span
+                        id="pricingValidFrom"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+
+                <div class="pricing-row">
+
+                    <span class="pricing-label">
+                        Valid To
+                    </span>
+
+                    <span
+                        id="pricingValidTo"
+                        class="pricing-value">
+                        -
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+    </div>
+
+
+    <script src="consumables.js"></script>
+
+</body>
+
+</html>

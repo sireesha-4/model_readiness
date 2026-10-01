@@ -53,21 +53,39 @@
         .header-actions {
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 10px;
+            min-height: 32px;
         }
 
         .active-badge {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 6px;
-            height: 30px;
+            justify-content: center;
+
+            height: 32px;
+            min-height: 32px;
+
+            margin: 0;
             padding: 0 12px;
+
             border-radius: 20px;
+
             background: #064e3b;
             color: #6ee7b7;
+
             font-size: 11.5px;
             font-weight: 600;
+
             border: 1px solid #065f46;
+
+            line-height: 1;
+
+            position: static;
+            top: auto;
+            transform: none;
+
+            gap: 6px;
         }
 
         .active-dot {
@@ -78,16 +96,39 @@
         }
 
         .back-btn {
-            border: none;
             height: 32px;
+            min-height: 32px;
+
+            margin: 0;
             padding: 0 14px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: none;
             border-radius: 8px;
+
             background: #2563eb;
             color: #ffffff;
+
+            font-family: inherit;
             font-size: 12px;
             font-weight: 600;
+            line-height: 1;
+
+            white-space: nowrap;
+
             cursor: pointer;
-            transition: 0.18s ease;
+
+            position: static;
+            top: auto;
+            transform: none;
+
+            vertical-align: middle;
+
+            transition:
+                background 0.18s ease;
         }
 
         .back-btn:hover {
@@ -757,9 +798,7 @@
 
 </head>
 
-
 <body>
-
 
     <!-- =========================================================
          PAGE HEADER
@@ -779,7 +818,6 @@
 
         </div>
 
-
         <div class="header-actions">
 
             <span class="active-badge">
@@ -792,6 +830,11 @@
 
             </span>
 
+            <button id="backToReportBtn" class="back-btn" onclick="goBackToModelReport()" style="display:none;">
+
+                ← Back To Model Report
+
+            </button>
 
             <button class="back-btn" onclick="goBackToDashboard()">
 
@@ -802,8 +845,6 @@
         </div>
 
     </div>
-
-
 
     <!-- =========================================================
          DYNAMIC CONTENT
@@ -816,8 +857,6 @@
         </div>
 
     </div>
-
-
 
     <script>
 
@@ -843,13 +882,11 @@
 
             }
 
-
             if (dashboardContent) {
 
                 dashboardContent.style.display = "block";
 
             }
-
 
             if (detailsContent) {
 
@@ -859,7 +896,60 @@
 
         }
 
+        // goBackToModelReport // 
 
+        function goBackToModelReport() {
+
+            if (
+                window.parent &&
+                typeof window.parent.returnToModelReport === "function"
+            ) {
+
+                window.parent.returnToModelReport();
+
+                return;
+            }
+
+
+            console.error(
+                "returnToModelReport function not found in parent"
+            );
+        }
+
+        function configureBackButtons() {
+
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
+
+
+            const source =
+                params.get("source");
+
+
+            const reportButton =
+                document.getElementById(
+                    "backToReportBtn"
+                );
+
+
+            if (!reportButton) {
+                return;
+            }
+
+
+            if (source === "modelReport") {
+
+                reportButton.style.display =
+                    "inline-flex";
+
+            } else {
+
+                reportButton.style.display =
+                    "none";
+            }
+        }
 
         /* =========================================================
            SAP X / EMPTY VALUE
@@ -885,8 +975,6 @@
 
         }
 
-
-
         /* =========================================================
            SAFE VALUE
         ========================================================= */
@@ -907,8 +995,6 @@
 
         }
 
-
-
         /* =========================================================
            COUNT X VALUES
         ========================================================= */
@@ -921,8 +1007,6 @@
 
         }
 
-
-
         /* =========================================================
            LOAD SAP MODEL DETAILS
         ========================================================= */
@@ -934,7 +1018,6 @@
                     window.location.search
                 );
 
-
             const matnr =
                 params.get("matnr");
 
@@ -942,14 +1025,12 @@
             const country =
                 params.get("country");
 
-
             try {
 
                 const response =
                     await fetch(
                         `/api/model?model=${encodeURIComponent(matnr || "")}&country=${encodeURIComponent(country || "")}`
                     );
-
 
                 if (!response.ok) {
 
@@ -959,7 +1040,6 @@
 
                 }
 
-
                 const data =
                     await response.json();
 
@@ -968,7 +1048,6 @@
                     "SAP OData Response:",
                     data
                 );
-
 
                 const r =
                     data &&
@@ -982,6 +1061,9 @@
                         "No model details were returned from SAP."
                     );
                 }
+
+                //  for sample model Flag
+                const samplematerial = (r.B1smatnr || r.Demomatnr || r.Samplematnr) ? 'X' : '';
 
                 /* =====================================================
                    DYNAMIC COUNTS
@@ -1006,7 +1088,7 @@
 
                 const orderCount =
                     countEnabled([
-                       
+
                         r.DrumOrder,
                         r.WasteToner,
                         r.BeltUnit,
@@ -1134,7 +1216,8 @@
                                 class="tab active"
                                 data-tab="overview">
 
-                                ▣ Overview
+                                ▣ Material Information
+
 
                             </button>
 
@@ -1153,13 +1236,14 @@
                             <button
                                 class="tab"
                                 data-tab="orders">
-                                🛒 Order Setup
+                                 🛒 Order Drum & Accessories
+
                             </button>
 
                             <button
                                 class="tab"
                                 data-tab="pricing">
-                                ◇ Pricing Setup
+                                ◇ Price Details
                             </button>
 
                         </div>
@@ -1225,68 +1309,48 @@
                                             <span class="info-label">
                                                 EAN
                                             </span>
+                                            
 
                                             <span class="info-value">
                                                 ${safeValue(r.Ean11)}
                                             </span>
                                         </div>
+                                                         
+<div class="info-row">
+    <span class="info-label">
+        Sample Model
+    </span>
+    ${iconValue(samplematerial)}
+</div>
+
                                     </div>
                                 </div>
 
-                                <!-- QUICK STATUS -->
+                         ${samplematerial === "X" ? `
 
-                                <div class="info-card">
-
-                                    <div class="info-header status-header">
-                                        ⚡ Quick Status
-                                    </div>
+<div class="info-card">
+    <div class="info-header general-header">
+        🛒 Sample Model Details
+    </div>
 
                                     <div class="info-body">
+ <div class="info-row">
+            ${safeValue(r.B1smatnr)}
+        </div>
 
-                                        <div class="info-row">
-                                            <span class="info-label">
-                                                Programs
-                                            </span>
+        <div class="info-row">
+            ${safeValue(r.Demomatnr)}
+        </div>
 
-                                            <span class="status-yes">
-                                                ${programCount} Available
-                                            </span>
 
-                                        </div>
+               <div class="info-row">
+            ${safeValue(r.Samplematnr)}
+        </div>
 
-                                        <div class="info-row">
 
-                                            <span class="info-label">
-                                                Warranty
-                                            </span>
-
-                                            <span class="status-yes">
-                                                ${warrantyCount} Available
-                                            </span>
-                                        </div>
-
-                                        <div class="info-row">
-                                            <span class="info-label">
-                                                Orders
-                                            </span>
-
-                                            <span class="status-yes">
-                                                ${orderCount} Active
-                                            </span>
-                                        </div>
-
-                                        <div class="info-row">
-                                            <span class="info-label">
-                                                Overall Status
-                                            </span>
-
-                                            <span class="status-yes">
-                                                ${displayStatus}
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                </div>
+     </div>
+</div>
+` : ''}
 
                                 <!-- HIGHLIGHTS -->
                                 <div class="info-card">
@@ -1332,19 +1396,13 @@
 
                                         </div>
 
-
-                                        
-
-
                                     </div>
 
                                 </div>
 
-
                             </div>
 
                         </div>
-
 
 
                         <!-- PROGRAMS -->
@@ -1365,7 +1423,6 @@
 
                             <div class="data-section">
 
-
                                 <div class="data-card">
 
                                     <div class="data-card-header">
@@ -1374,7 +1431,6 @@
 
 
                                     <div class="data-card-body">
-
 
                                         <div class="data-row">
 
@@ -1424,11 +1480,9 @@
 
                                 </div>
 
-
                             </div>
 
                         </div>
-
 
 
                         <!-- WARRANTY -->
@@ -1636,7 +1690,7 @@
                                         <div class="data-row">
 
                                             <span class="data-label">
-                                                Claim Order
+                                                Backup Order
                                             </span>
 
                                             ${iconValue(r.Claimorder)}
@@ -1648,11 +1702,9 @@
 
                                 </div>
 
-
                             </div>
 
                         </div>
-
 
 
                         <!-- PRICING -->
@@ -1687,33 +1739,27 @@
                                         <div class="data-row">
 
                                             <span class="data-label">
-                                                B1 Price Setup
+                                                Barracuda Price Setup
                                             </span>
-
-                                            <span class="data-value">
-                                                ${safeValue(r.B1priceSetup)}
-                                            </span>
-
+                                        
+                     ${iconValue(r.B1priceSetup)}
+                                            
                                         </div>
 
 
                                         <div class="data-row">
 
                                             <span class="data-label">    
-                                                BR Price Setup
+                                                Auto Reorder Price Setup
                                             </span>
 
-                                            <span class="data-value">
-                                                ${safeValue(r.BrpriceSetup)}
-                                            </span>
+                                     ${iconValue(r.BrpriceSetup)}
 
                                         </div>
-
 
                                     </div>
 
                                 </div>
-
 
                             </div>
 
@@ -1762,7 +1808,6 @@
             }
 
         }
-
 
 
         /* =========================================================
@@ -1899,10 +1944,19 @@
            START
         ========================================================= */
 
+        configureBackButtons();
+
         loadDetails();
 
-        window.addEventListener("load", resizeParentFrame);
-        window.addEventListener("resize", resizeParentFrame);
+        window.addEventListener(
+            "load",
+            resizeParentFrame
+        );
+
+        window.addEventListener(
+            "resize",
+            resizeParentFrame
+        );
 
     </script>
 

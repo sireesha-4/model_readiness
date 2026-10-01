@@ -769,6 +769,300 @@ app.put("/api/model/change", async (req, res) => {
  
 });
 
+// Consumable API endpoint for testing
+app.get(
+    "/api/consumable/pricing",
+    async (req, res) => {
+
+        try {
+
+            if (!req.session.sapAuth) {
+
+                return res.status(401).json({
+                    success: false,
+                    message: "Please login first"
+                });
+            }
+
+
+            const consumable =
+                req.query.consumable || "";
+
+            const country =
+                req.query.country || "";
+
+            const program =
+                req.query.program || "";
+
+
+            if (
+                !consumable ||
+                !country ||
+                !program
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    message:
+                        "Consumable, Country and Program are required"
+                });
+            }
+
+
+            console.log(
+                "======================================"
+            );
+
+            console.log(
+                "CONSUMABLE PRICING SEARCH"
+            );
+
+            console.log(
+                "Consumable:",
+                consumable
+            );
+
+            console.log(
+                "Country:",
+                country
+            );
+
+            console.log(
+                "Program:",
+                program
+            );
+
+
+            const filter =
+                "$filter=Matnr eq '" +
+                consumable +
+                "' and Country eq '" +
+                country +
+                "'";
+
+
+            const url =
+                ODATA_URL +
+                "Model_setupSet?" +
+                filter +
+                "&$format=json";
+
+
+            console.log(
+                "SAP URL:",
+                url
+            );
+
+
+            const response =
+                await axios.get(
+                    url,
+                    {
+                        headers: {
+
+                            Authorization:
+                                req.session.sapAuth,
+
+                            Accept:
+                                "application/json",
+
+                            "sap-client":
+                                "800"
+                        }
+                    }
+                );
+
+
+            const rows =
+                response.data?.d?.results || [];
+
+
+            console.log(
+                "SAP RESULT COUNT:",
+                rows.length
+            );
+
+
+            console.log(
+                "SAP RESPONSE:",
+                JSON.stringify(
+                    response.data,
+                    null,
+                    2
+                )
+            );
+
+
+            if (rows.length === 0) {
+
+                return res.status(404).json({
+
+                    success: false,
+
+                    message:
+                        "No pricing information found for this consumable"
+                });
+            }
+
+
+            const record =
+                rows[0];
+
+
+            let pricing;
+
+
+            if (program === "B1") {
+
+                pricing = {
+
+                    Kschl:
+                        record.Kschl || "",
+
+                    Vkorg:
+                        record.Vkorg || "",
+
+                    Vtweg:
+                        record.Vtweg || "",
+
+                    Spart:
+                        record.Spart || "",
+
+                    Kbetr:
+                        record.B1kbetr || "",
+
+                    Konwa:
+                        record.B1konwa || "",
+
+                    Kpein:
+                        record.B1kpein || "",
+
+                    Kmein:
+                        record.B1kmein || "",
+
+                    Krech:
+                        record.B1krech || "",
+
+                    Datab:
+                        record.B1datab || "",
+
+                    Datbi:
+                        record.B1datbi || ""
+                };
+
+            } else {
+
+                pricing = {
+
+                    Kschl:
+                        record.Kschl || "",
+
+                    Vkorg:
+                        record.Vkorg || "",
+
+                    Vtweg:
+                        record.Vtweg || "",
+
+                    Spart:
+                        record.Spart || "",
+
+                    Kbetr:
+                        record.Brkbetr || "",
+
+                    Konwa:
+                        record.Brkonwa || "",
+
+                    Kpein:
+                        record.Brkpein || "",
+
+                    Kmein:
+                        record.Brkmein || "",
+
+                    Krech:
+                        record.Brkrech || "",
+
+                    Datab:
+                        record.Brdatab || "",
+
+                    Datbi:
+                        record.Brdatbi || ""
+                };
+            }
+
+
+            return res.status(200).json({
+
+                success: true,
+
+                consumable:
+                    consumable,
+
+                country:
+                    country,
+
+                program:
+                    program,
+
+                pricing:
+                    pricing
+
+            });
+
+        } catch (error) {
+
+            console.error(
+                "CONSUMABLE PRICING ERROR:"
+            );
+
+
+            console.error(
+                error.response?.data ||
+                error.message
+            );
+
+
+            let message =
+                error.message ||
+                "Unable to retrieve consumable pricing";
+
+
+            const sapError =
+                error.response?.data?.error;
+
+
+            if (
+                sapError?.message?.value
+            ) {
+
+                message =
+                    sapError.message.value;
+
+            } else if (
+                typeof sapError?.message ===
+                "string"
+            ) {
+
+                message =
+                    sapError.message;
+            }
+
+
+            return res.status(500).json({
+
+                success: false,
+
+                message:
+                    message
+
+            });
+        }
+    }
+);
+
+// consumbles
+
 app.listen(PORT, () => {
 
     console.log(

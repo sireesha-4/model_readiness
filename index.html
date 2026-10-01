@@ -65,56 +65,54 @@
             z-index: 2;
         }
 
-.login-form-card {
-    width: 100%;
-    max-width: 460px;
-    padding: 48px 42px;
-    border-radius: 22px;
+        .login-form-card {
+            width: 100%;
+            max-width: 460px;
+            padding: 48px 42px;
+            border-radius: 22px;
 
-    background: rgba(15, 28, 46, 0.78);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+            background: rgba(15, 28, 46, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
 
-    border: 1px solid #3b82f6;
+            border: 1px solid #3b82f6;
 
-    box-shadow:
-        0 0 8px rgba(59,130,246,.30),
-        0 0 20px rgba(59,130,246,.18),
-        0 20px 50px rgba(0,0,0,.45);
+            box-shadow:
+                0 0 8px rgba(59, 130, 246, .30),
+                0 0 20px rgba(59, 130, 246, .18),
+                0 20px 50px rgba(0, 0, 0, .45);
 
-    position: relative;
-    overflow: hidden;
-}
-.login-form-card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
+            position: relative;
+            overflow: hidden;
+        }
 
-    width:100%;
-    height:2px;
+        .login-form-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
 
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #60a5fa,
-        transparent
-    );
-}
-.login-form-card::after{
-    content:"";
-    position:absolute;
-    inset:-40px;
+            width: 100%;
+            height: 2px;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(59,130,246,.10),
-            transparent 70%
-        );
+            background: linear-gradient(90deg,
+                    transparent,
+                    #60a5fa,
+                    transparent);
+        }
 
-    z-index:-1;
-}
+        .login-form-card::after {
+            content: "";
+            position: absolute;
+            inset: -40px;
+
+            background:
+                radial-gradient(circle,
+                    rgba(59, 130, 246, .10),
+                    transparent 70%);
+
+            z-index: -1;
+        }
 
         .login-logo-box {
             width: 150px;
@@ -208,46 +206,44 @@
             border-color: #2563eb;
         }
 
-        .login-btn{
+        .login-btn {
 
-    width:100%;
+            width: 100%;
 
-    height:48px;
+            height: 48px;
 
-    border:none;
+            border: none;
 
-    border-radius:10px;
+            border-radius: 10px;
 
-    background:linear-gradient(
-        135deg,
-        #3b82f6,
-        #2563eb,
-        #1d4ed8
-    );
+            background: linear-gradient(135deg,
+                    #3b82f6,
+                    #2563eb,
+                    #1d4ed8);
 
-    color:white;
+            color: white;
 
-    font-size:15px;
+            font-size: 15px;
 
-    font-weight:700;
+            font-weight: 700;
 
-    letter-spacing:.3px;
+            letter-spacing: .3px;
 
-    cursor:pointer;
+            cursor: pointer;
 
-    box-shadow:
-        0 8px 20px rgba(37,99,235,.30);
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, .30);
 
-    transition:all .3s ease;
-}
+            transition: all .3s ease;
+        }
 
-.login-btn:hover{
+        .login-btn:hover {
 
-    transform:translateY(-2px);
+            transform: translateY(-2px);
 
-    box-shadow:
-        0 12px 25px rgba(37,99,235,.40);
-}
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, .40);
+        }
 
         #loginMessage {
             margin-top: 14px;
@@ -286,7 +282,7 @@
             object-fit: contain;
             /* Softens the hard edges of the image background */
             mix-blend-mode: lighten;
-           
+
         }
 
         /* Hide floating badges (already in image) */
@@ -450,154 +446,222 @@
         /* =========================================================
    MAIN APPLICATION CONTENT
 ========================================================= */
-/* =========================================================
+        /* =========================================================
    MAIN APPLICATION CONTENT
 ========================================================= */
 
-.content {
-    flex: 1;
-    min-width: 0;
-    height: 100vh;
+        .content {
+            flex: 1;
+            min-width: 0;
+            height: 100vh;
 
-    padding: 24px 28px;
+            padding: 24px 28px;
 
-    background: #061224;
+            background: #061224;
 
-    overflow-x: hidden;
-    overflow-y: auto;
+            overflow-x: hidden;
+            overflow-y: auto;
 
-    position: relative;
-    box-sizing: border-box;
-}
+            position: relative;
+            box-sizing: border-box;
+        }
 
 
-/* =========================================================
+        /* =========================================================
    COMMON APPLICATION PAGE LAYOUT
 ========================================================= */
 
-.page {
-    display: none;
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        .page {
+            display: none;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 
-.page.active {
-    display: block;
-    width: 100%;
-    min-width: 0;
-}
+        .page.active {
+            display: block;
+            width: 100%;
+            min-width: 0;
+        }
 
 
-/* =========================================================
+        /* =========================================================
    DASHBOARD PAGE
 ========================================================= */
 
-#dashboard {
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-}
+        #dashboard {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+        }
 
 
-#dashboardContent {
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        #dashboardContent {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 
-#detailsContent {
-    width: 100%;
-    min-width: 0;
+        #detailsContent {
+            width: 100%;
+            min-width: 0;
 
-    margin: 0;
-    padding: 0;
+            margin: 0;
+            padding: 0;
 
-    box-sizing: border-box;
-}
-
-
-#modelDetailsFrame {
-    display: block;
-
-    width: 100%;
-    min-height: 680px;
-
-    margin: 0;
-    padding: 0;
-
-    border: none;
-    border-radius: 18px;
-
-    background: transparent;
-
-    box-sizing: border-box;
-}
+            box-sizing: border-box;
+        }
 
 
-/* =========================================================
+        #modelDetailsFrame {
+            display: block;
+
+            width: 100%;
+            min-height: 680px;
+
+            margin: 0;
+            padding: 0;
+
+            border: none;
+            border-radius: 18px;
+
+            background: transparent;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
    MODEL REPORT PAGE
 ========================================================= */
 
-#modelReport {
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        #modelReport {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
 
-/* =========================================================
+        /* =========================================================
    MODEL SETUP PAGE
 ========================================================= */
 
-#newModel {
-    width: 100%;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    box-sizing: border-box;
-}
+        #newModel {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
 
 
-/* =========================================================
+        /* =========================================================
    MODEL CHANGE PAGE
 ========================================================= */
 
-#modelChange {
+        #modelChange {
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+   MODEL SETUP AND MODEL CHANGE IFRAMES
+========================================================= */
+
+        .app-page-frame {
+            display: block;
+            width: 100%;
+            height: calc(100vh - 20px);
+            min-width: 0;
+
+            margin: 0;
+            padding: 0;
+
+            border: none;
+            border-radius: 16px;
+
+            background: #061224;
+
+            box-sizing: border-box;
+        }
+
+
+        /* =========================================================
+   RESPONSIVE APPLICATION LAYOUT
+========================================================= */
+
+        @media (max-width: 768px) {
+
+            .content {
+                flex: 1;
+                min-width: 0;
+                padding: 18px;
+            }
+
+
+            .page {
+                width: 100%;
+                min-width: 0;
+                margin: 0;
+                padding: 0;
+            }
+
+
+            .page.active {
+                display: block;
+                width: 100%;
+            }
+
+
+           #dashboard,
+#modelReport,
+#newModel,
+#modelChange,
+#consumables {
     width: 100%;
-    min-width: 0;
     margin: 0;
     padding: 0;
+}
+#consumables {
+    width: 100%;
+    height: calc(100vh - 48px);
+
+    margin: 0;
+    padding: 0;
+
     overflow: hidden;
+
     box-sizing: border-box;
 }
 
 
-/* =========================================================
-   MODEL SETUP AND MODEL CHANGE IFRAMES
-========================================================= */
-
-.app-page-frame {
+#consumablesFrame {
     display: block;
+
     width: 100%;
-    height: calc(100vh - 20px);
-    min-width: 0;
+    height: 100%;
 
     margin: 0;
     padding: 0;
 
     border: none;
-    border-radius: 16px;
+
+    overflow: hidden;
 
     background: #061224;
 
@@ -605,74 +669,37 @@
 }
 
 
-/* =========================================================
-   RESPONSIVE APPLICATION LAYOUT
-========================================================= */
-
-@media (max-width: 768px) {
-
-    .content {
-        flex: 1;
-        min-width: 0;
-        padding: 18px;
-    }
+            .app-page-frame {
+                width: 100%;
+                height: calc(100vh - 36px);
+                margin: 0;
+                padding: 0;
+            }
 
 
-    .page {
-        width: 100%;
-        min-width: 0;
-        margin: 0;
-        padding: 0;
-    }
+            .report-search-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
 
 
-    .page.active {
-        display: block;
-        width: 100%;
-    }
+            .report-search-card .form-field {
+                width: 100%;
+                min-width: 0;
+            }
 
 
-    #dashboard,
-    #modelReport,
-    #newModel,
-    #modelChange {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
+            .report-search-actions {
+                width: 100%;
+            }
 
 
-    .app-page-frame {
-        width: 100%;
-        height: calc(100vh - 36px);
-        margin: 0;
-        padding: 0;
-    }
-
-
-    .report-search-card {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-
-    .report-search-card .form-field {
-        width: 100%;
-        min-width: 0;
-    }
-
-
-    .report-search-actions {
-        width: 100%;
-    }
-
-
-    .btn-search,
-    .btn-reset {
-        flex: 1;
-        justify-content: center;
-    }
-}
+            .btn-search,
+            .btn-reset {
+                flex: 1;
+                justify-content: center;
+            }
+        }
 
         /* ========== HERO HEADER ========== */
         /* .dashboard-hero {
@@ -840,7 +867,7 @@
             color: #64748b;
         }
 
-        
+
         /* ========== SEARCH CARD ========== */
         .search-card {
             background: linear-gradient(145deg, #162238, #1a2a42);
@@ -1009,367 +1036,359 @@
             font-size: 22px;
         }
 
-      /* =========================================================
+        /* =========================================================
    DASHBOARD LANDING PAGE
 ========================================================= */
 
-.dashboard-landing {
-    position: relative;
-    width: 100%;
-    border: 1px solid #203550;
-    border-radius: 18px;
-    overflow: hidden;
-    background: #071629;
-    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
-}
+        .dashboard-landing {
+            position: relative;
+            width: 100%;
+            border: 1px solid #203550;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #071629;
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+        }
 
 
-/* =========================================================
+        /* =========================================================
    HERO IMAGE AREA
 ========================================================= */
 
-.landing-main {
-    position: relative;
-    width: 100%;
-    height: 540px;
-    overflow: hidden;
-    background: #071629;
-}
+        .landing-main {
+            position: relative;
+            width: 100%;
+            height: 540px;
+            overflow: hidden;
+            background: #071629;
+        }
 
 
-/* Real dashboard image */
+        /* Real dashboard image */
 
-.landing-background-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    object-position: center center;
-    z-index: 1;
-}
-
-
-/* Dark overlay for readable text */
-
-.landing-image-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    pointer-events: none;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(3, 12, 24, 0.86) 0%,
-            rgba(3, 12, 24, 0.60) 25%,
-            rgba(3, 12, 24, 0.18) 52%,
-            rgba(3, 12, 24, 0.25) 100%
-        );
-}
+        .landing-background-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center center;
+            z-index: 1;
+        }
 
 
-.landing-image-overlay::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+        /* Dark overlay for readable text */
 
-    background:
-        radial-gradient(
-            circle at 52% 48%,
-            rgba(14, 165, 233, 0.08),
-            transparent 46%
-        );
+        .landing-image-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
 
-    pointer-events: none;
-}
+            background:
+                linear-gradient(90deg,
+                    rgba(3, 12, 24, 0.86) 0%,
+                    rgba(3, 12, 24, 0.60) 25%,
+                    rgba(3, 12, 24, 0.18) 52%,
+                    rgba(3, 12, 24, 0.25) 100%);
+        }
 
 
-/* =========================================================
+        .landing-image-overlay::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background:
+                radial-gradient(circle at 52% 48%,
+                    rgba(14, 165, 233, 0.08),
+                    transparent 46%);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================================
    LEFT HERO TEXT
 ========================================================= */
 
-.landing-copy {
-    position: absolute;
-    z-index: 4;
+        .landing-copy {
+            position: absolute;
+            z-index: 4;
 
-    top: 34px;
-    left: 32px;
+            top: 34px;
+            left: 32px;
 
-    width: 470px;
-    max-width: 42%;
-}
-
-
-.landing-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 13px;
-    color: #22d3ee;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-}
+            width: 470px;
+            max-width: 42%;
+        }
 
 
-.landing-eyebrow-dot {
-    width: 7px;
-    height: 7px;
-    flex-shrink: 0;
-    border-radius: 50%;
-    background: #22d3ee;
-    box-shadow: 0 0 10px rgba(34, 211, 238, 0.85);
-}
+        .landing-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 13px;
+            color: #22d3ee;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.4px;
+            text-transform: uppercase;
+        }
 
 
-.landing-title {
-    color: #ffffff;
-
-    font-family: Georgia, "Times New Roman", serif;
-
-    font-size: clamp(36px, 3vw, 50px);
-    font-weight: 500;
-    line-height: 1.02;
-    letter-spacing: -1.4px;
-
-    text-shadow:
-        0 5px 22px rgba(0, 0, 0, 0.55);
-}
+        .landing-eyebrow-dot {
+            width: 7px;
+            height: 7px;
+            flex-shrink: 0;
+            border-radius: 50%;
+            background: #22d3ee;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.85);
+        }
 
 
-.landing-subtitle {
-    margin-top: 17px;
-    color: #c5d1df;
-    font-size: 15px;
-    line-height: 1.6;
+        .landing-title {
+            color: #ffffff;
 
-    text-shadow:
-        0 2px 8px rgba(0, 0, 0, 0.60);
-}
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(36px, 3vw, 50px);
+            font-weight: 500;
+            line-height: 1.02;
+            letter-spacing: -1.4px;
+
+            text-shadow:
+                0 5px 22px rgba(0, 0, 0, 0.55);
+        }
 
 
-/* =========================================================
+        .landing-subtitle {
+            margin-top: 17px;
+            color: #c5d1df;
+            font-size: 15px;
+            line-height: 1.6;
+
+            text-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.60);
+        }
+
+
+        /* =========================================================
    QUICK MODEL SEARCH
 ========================================================= */
 
-.quick-model-card {
-    position: absolute;
-    z-index: 5;
+        .quick-model-card {
+            position: absolute;
+            z-index: 5;
 
-    top: 28px;
-    right: 28px;
+            top: 28px;
+            right: 28px;
 
-    width: 350px;
-    min-height: 380px;
+            width: 350px;
+            min-height: 380px;
 
-    padding: 30px 25px;
+            padding: 30px 25px;
 
-    border: 1px solid rgba(96, 165, 250, 0.42);
-    border-radius: 17px;
+            border: 1px solid rgba(96, 165, 250, 0.42);
+            border-radius: 17px;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(17, 38, 62, 0.96),
-            rgba(7, 23, 41, 0.97)
-        );
+            background:
+                linear-gradient(145deg,
+                    rgba(17, 38, 62, 0.96),
+                    rgba(7, 23, 41, 0.97));
 
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
 
-    box-shadow:
-        0 22px 55px rgba(0, 0, 0, 0.46),
-        0 0 28px rgba(14, 165, 233, 0.10);
-}
+            box-shadow:
+                0 22px 55px rgba(0, 0, 0, 0.46),
+                0 0 28px rgba(14, 165, 233, 0.10);
+        }
 
 
-.quick-model-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
+        .quick-model-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
 
-    background:
-        radial-gradient(
-            circle at top right,
-            rgba(14, 165, 233, 0.11),
-            transparent 45%
-        );
+            background:
+                radial-gradient(circle at top right,
+                    rgba(14, 165, 233, 0.11),
+                    transparent 45%);
 
-    pointer-events: none;
-}
+            pointer-events: none;
+        }
 
 
-.quick-model-title {
-    position: relative;
+        .quick-model-title {
+            position: relative;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    font-size: 20px;
-    font-weight: 700;
+            font-size: 20px;
+            font-weight: 700;
 
-    line-height: 1.2;
-}
+            line-height: 1.2;
+        }
 
 
-.quick-model-subtitle {
-    position: relative;
+        .quick-model-subtitle {
+            position: relative;
 
-    margin-top: 6px;
-    margin-bottom: 24px;
+            margin-top: 6px;
+            margin-bottom: 24px;
 
-    color: #9aabc0;
+            color: #9aabc0;
 
-    font-size: 12.5px;
-    line-height: 1.5;
-}
+            font-size: 12.5px;
+            line-height: 1.5;
+        }
 
 
-.quick-field {
-    position: relative;
+        .quick-field {
+            position: relative;
 
-    margin-bottom: 19px;
-}
+            margin-bottom: 19px;
+        }
 
 
-.quick-field label {
-    display: block;
+        .quick-field label {
+            display: block;
 
-    margin-bottom: 7px;
+            margin-bottom: 7px;
 
-    color: #dbe6f4;
+            color: #dbe6f4;
 
-    font-size: 12.5px;
-    font-weight: 600;
-}
+            font-size: 12.5px;
+            font-weight: 600;
+        }
 
 
-.quick-input-wrap {
-    position: relative;
-}
+        .quick-input-wrap {
+            position: relative;
+        }
 
 
-.quick-input-wrap i {
-    position: absolute;
-    z-index: 2;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #7790aa;
-    font-size: 12px;
-}
+        .quick-input-wrap i {
+            position: absolute;
+            z-index: 2;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7790aa;
+            font-size: 12px;
+        }
 
 
-.quick-input-wrap input {
-    width: 100%;
-    height: 46px;
+        .quick-input-wrap input {
+            width: 100%;
+            height: 46px;
 
-    padding: 0 14px 0 39px;
+            padding: 0 14px 0 39px;
 
-    border: 1px solid #31465f;
-    border-radius: 9px;
+            border: 1px solid #31465f;
+            border-radius: 9px;
 
-    background: rgba(8, 24, 42, 0.88);
+            background: rgba(8, 24, 42, 0.88);
 
-    color: #ffffff;
+            color: #ffffff;
 
-    font-size: 13px;
+            font-size: 13px;
 
-    outline: none;
+            outline: none;
 
-    transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-}
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
 
 
-.quick-input-wrap input::placeholder {
-    color: #64748b;
-}
+        .quick-input-wrap input::placeholder {
+            color: #64748b;
+        }
 
 
-.quick-input-wrap input:focus {
-    border-color: #22d3ee;
+        .quick-input-wrap input:focus {
+            border-color: #22d3ee;
 
-    box-shadow:
-        0 0 0 3px rgba(34, 211, 238, 0.10);
-}
+            box-shadow:
+                0 0 0 3px rgba(34, 211, 238, 0.10);
+        }
 
 
-.quick-country-select {
-    width: 100%;
-    height: 46px;
+        .quick-country-select {
+            width: 100%;
+            height: 46px;
 
-    padding: 0 14px;
+            padding: 0 14px;
 
-    border: 1px solid #31465f;
-    border-radius: 9px;
+            border: 1px solid #31465f;
+            border-radius: 9px;
 
-    background: rgba(8, 24, 42, 0.88);
+            background: rgba(8, 24, 42, 0.88);
 
-    color: #dbeafe;
+            color: #dbeafe;
 
-    font-size: 13px;
+            font-size: 13px;
 
-    outline: none;
+            outline: none;
 
-    cursor: pointer;
-}
+            cursor: pointer;
+        }
 
 
-.quick-country-select option {
-    background: #0f1c2e;
-    color: #ffffff;
-}
+        .quick-country-select option {
+            background: #0f1c2e;
+            color: #ffffff;
+        }
 
 
-.quick-search-actions {
-    display: grid;
+        .quick-search-actions {
+            display: grid;
 
-    grid-template-columns: 1fr 46px;
+            grid-template-columns: 1fr 46px;
 
-    gap: 9px;
+            gap: 9px;
 
-    margin-top: 23px;
-}
+            margin-top: 23px;
+        }
 
 
-.quick-search-btn {
-    height: 46px;
+        .quick-search-btn {
+            height: 46px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    gap: 8px;
+            gap: 8px;
 
-    border: 1px solid #3b82f6;
-    border-radius: 9px;
+            border: 1px solid #3b82f6;
+            border-radius: 9px;
 
-    background: #2563eb;
+            background: #2563eb;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    font-size: 13px;
-    font-weight: 700;
+            font-size: 13px;
+            font-weight: 700;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    box-shadow:
-        0 6px 16px rgba(37, 99, 235, 0.35);
+            box-shadow:
+                0 6px 16px rgba(37, 99, 235, 0.35);
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-}
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
 
 
 
-/* .quick-search-btn:hover {
+        /* .quick-search-btn:hover {
     transform: translateY(-1px);
 
     box-shadow:
@@ -1377,243 +1396,241 @@
 } */
 
 
-.quick-reset-btn {
-    width: 46px;
-    height: 46px;
+        .quick-reset-btn {
+            width: 46px;
+            height: 46px;
 
-    border: 1px solid #31465f;
-    border-radius: 9px;
+            border: 1px solid #31465f;
+            border-radius: 9px;
 
-    background: rgba(8, 24, 42, 0.86);
+            background: rgba(8, 24, 42, 0.86);
 
-    color: #94a3b8;
+            color: #94a3b8;
 
-    font-size: 13px;
+            font-size: 13px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    transition:
-        color 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
-}
-
-
-.quick-reset-btn:hover {
-    color: #ffffff;
-    border-color: #64748b;
-    background: rgba(15, 34, 55, 0.95);
-}
+            transition:
+                color 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
 
 
-/* =========================================================
+        .quick-reset-btn:hover {
+            color: #ffffff;
+            border-color: #64748b;
+            background: rgba(15, 34, 55, 0.95);
+        }
+
+
+        /* =========================================================
    CAPABILITIES
 ========================================================= */
 
-.landing-capabilities {
-    position: relative;
+        .landing-capabilities {
+            position: relative;
 
-    z-index: 6;
+            z-index: 6;
 
-    margin: 0;
+            margin: 0;
 
-    padding: 22px 24px 24px;
+            padding: 22px 24px 24px;
 
-    border-top: 1px solid #263c57;
+            border-top: 1px solid #263c57;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(10, 29, 50, 0.99),
-            rgba(6, 21, 37, 0.99)
-        );
-}
+            background:
+                linear-gradient(135deg,
+                    rgba(10, 29, 50, 0.99),
+                    rgba(6, 21, 37, 0.99));
+        }
 
 
-.capabilities-title {
-    margin-bottom: 20px;
+        .capabilities-title {
+            margin-bottom: 20px;
 
-    color: #f8fafc;
+            color: #f8fafc;
 
-    font-size: 18px;
-    font-weight: 700;
+            font-size: 18px;
+            font-weight: 700;
 
-    letter-spacing: -0.2px;
-}
+            letter-spacing: -0.2px;
+        }
 
-.capabilities-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-
-.capability-item {
-    display: flex;
-
-    gap: 13px;
-
-    min-width: 0;
-    min-height: 78px;
-
-    padding: 3px 20px;
-
-    border-right:
-        1px solid #31435a;
-}
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
 
 
-.capability-item:first-child {
-    padding-left: 0;
-}
+        .capability-item {
+            display: flex;
+
+            gap: 13px;
+
+            min-width: 0;
+            min-height: 78px;
+
+            padding: 3px 20px;
+
+            border-right:
+                1px solid #31435a;
+        }
 
 
-.capability-item:last-child {
-    padding-right: 0;
-    border-right: none;
-}
+        .capability-item:first-child {
+            padding-left: 0;
+        }
 
 
-.capability-icon {
-    width: 28px;
-    height: 28px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    margin-top: 1px;
-
-    border: 1px solid #22d3ee;
-    border-radius: 50%;
-
-    color: #22d3ee;
-
-    font-size: 11px;
-
-    background:
-        rgba(34, 211, 238, 0.05);
-
-    box-shadow:
-        0 0 12px rgba(34, 211, 238, 0.15);
-}
+        .capability-item:last-child {
+            padding-right: 0;
+            border-right: none;
+        }
 
 
-.capability-heading {
-    margin-bottom: 7px;
+        .capability-icon {
+            width: 28px;
+            height: 28px;
 
-    color: #e2e8f0;
+            flex-shrink: 0;
 
-    font-size: 13.5px;
-    font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    line-height: 1.3;
-}
+            margin-top: 1px;
 
-.capability-text {
-    color: #94a3b8;
+            border: 1px solid #22d3ee;
+            border-radius: 50%;
 
-    font-size: 12px;
+            color: #22d3ee;
 
-    line-height: 1.55;
-}
+            font-size: 11px;
+
+            background:
+                rgba(34, 211, 238, 0.05);
+
+            box-shadow:
+                0 0 12px rgba(34, 211, 238, 0.15);
+        }
 
 
-/* =========================================================
+        .capability-heading {
+            margin-bottom: 7px;
+
+            color: #e2e8f0;
+
+            font-size: 13.5px;
+            font-weight: 700;
+
+            line-height: 1.3;
+        }
+
+        .capability-text {
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =========================================================
    RESPONSIVE LANDING PAGE
 ========================================================= */
 
-@media (max-width: 1100px) {
+        @media (max-width: 1100px) {
 
-    .landing-main {
-        height: 680px;
-    }
-
-
-    .landing-copy {
-        top: 32px;
-        left: 30px;
-        width: calc(100% - 60px);
-        max-width: 520px;
-    }
+            .landing-main {
+                height: 680px;
+            }
 
 
-    .quick-model-card {
-        top: auto;
-        right: 30px;
-        bottom: 28px;
-        left: 30px;
-        width: auto;
-    }
+            .landing-copy {
+                top: 32px;
+                left: 30px;
+                width: calc(100% - 60px);
+                max-width: 520px;
+            }
 
 
-    .capabilities-grid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 15px;
-    }
-
-
-    .capability-item {
-        padding: 7px 10px;
-        border-right: none;
-    }
-}
+            .quick-model-card {
+                top: auto;
+                right: 30px;
+                bottom: 28px;
+                left: 30px;
+                width: auto;
+            }
 
 
-@media (max-width: 700px) {
+            .capabilities-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
 
-    .landing-main {
-        height: 700px;
-    }
-
-
-    .landing-copy {
-        top: 26px;
-        left: 20px;
-        right: 20px;
-        width: auto;
-    }
+                gap: 15px;
+            }
 
 
-    .landing-title {
-        font-size: 36px;
-    }
+            .capability-item {
+                padding: 7px 10px;
+                border-right: none;
+            }
+        }
 
 
-    .landing-subtitle {
-        font-size: 13px;
-    }
+        @media (max-width: 700px) {
+
+            .landing-main {
+                height: 700px;
+            }
 
 
-    .quick-model-card {
-        right: 16px;
-        left: 16px;
-        bottom: 16px;
-    }
+            .landing-copy {
+                top: 26px;
+                left: 20px;
+                right: 20px;
+                width: auto;
+            }
 
 
-    .capabilities-grid {
-        grid-template-columns: 1fr;
-    }
+            .landing-title {
+                font-size: 36px;
+            }
 
 
-    .capability-item {
-        padding: 9px 0;
-
-        border-bottom:
-            1px solid #25384f;
-    }
+            .landing-subtitle {
+                font-size: 13px;
+            }
 
 
-    .capability-item:last-child {
-        border-bottom: none;
-    }
-} 
+            .quick-model-card {
+                right: 16px;
+                left: 16px;
+                bottom: 16px;
+            }
 
- /* =========================================================
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .capability-item {
+                padding: 9px 0;
+
+                border-bottom:
+                    1px solid #25384f;
+            }
+
+
+            .capability-item:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* =========================================================
    MODEL REPORT – Premium Dark Theme
 ========================================================= */
         .report-header {
@@ -1994,657 +2011,660 @@
             display: flex;
             justify-content: center;
         }
+
+        .warranty-value {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: 55px;
+
+            padding: 4px 10px;
+
+            border-radius: 7px;
+
+            background: rgba(20, 184, 166, 0.12);
+
+            color: #2dd4bf;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
         /* =========================================================
    AI MODEL READINESS ASSISTANT
 ========================================================= */
 
-.ai-launcher {
-    position: fixed;
+        .ai-launcher {
+            position: fixed;
 
-    right: 28px;
-    bottom: 28px;
+            right: 28px;
+            bottom: 28px;
 
-    display: none;
-    align-items: center;
+            display: none;
+            align-items: center;
 
-    gap: 12px;
+            gap: 12px;
 
-    z-index: 9998;
-}
+            z-index: 9998;
+        }
 
 
-/* Text shown when hovering */
+        /* Text shown when hovering */
 
-.ai-launcher-label {
-    padding: 9px 14px;
+        .ai-launcher-label {
+            padding: 9px 14px;
 
-    background: rgba(15, 23, 42, 0.96);
+            background: rgba(15, 23, 42, 0.96);
 
-    border: 1px solid rgba(139, 92, 246, 0.35);
-    border-radius: 10px;
+            border: 1px solid rgba(139, 92, 246, 0.35);
+            border-radius: 10px;
 
-    color: #c4b5fd;
+            color: #c4b5fd;
 
-    font-size: 12px;
-    font-weight: 600;
+            font-size: 12px;
+            font-weight: 600;
 
-    white-space: nowrap;
+            white-space: nowrap;
 
-    opacity: 0;
+            opacity: 0;
 
-    visibility: hidden;
+            visibility: hidden;
 
-    transform: translateX(12px);
+            transform: translateX(12px);
 
-    transition:
-        opacity 0.25s ease,
-        transform 0.25s ease,
-        visibility 0.25s ease;
+            transition:
+                opacity 0.25s ease,
+                transform 0.25s ease,
+                visibility 0.25s ease;
 
-    box-shadow:
-        0 8px 22px rgba(0, 0, 0, 0.30);
-}
+            box-shadow:
+                0 8px 22px rgba(0, 0, 0, 0.30);
+        }
 
 
-.ai-launcher:hover .ai-launcher-label {
-    opacity: 1;
+        .ai-launcher:hover .ai-launcher-label {
+            opacity: 1;
 
-    visibility: visible;
+            visibility: visible;
 
-    transform: translateX(0);
-}
+            transform: translateX(0);
+        }
 
 
-/* Main AI button */
+        /* Main AI button */
 
-.ai-chat-button {
-    position: relative;
+        .ai-chat-button {
+            position: relative;
 
-    width: 60px;
-    height: 60px;
+            width: 60px;
+            height: 60px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    flex-shrink: 0;
+            flex-shrink: 0;
 
-    padding: 0;
+            padding: 0;
 
-    border: 1px solid rgba(167, 139, 250, 0.50);
-    border-radius: 50%;
+            border: 1px solid rgba(167, 139, 250, 0.50);
+            border-radius: 50%;
 
-    background:
-        linear-gradient(
-            135deg,
-            #7c3aed 0%,
-            #6366f1 45%,
-            #2563eb 100%
-        );
+            background:
+                linear-gradient(135deg,
+                    #7c3aed 0%,
+                    #6366f1 45%,
+                    #2563eb 100%);
 
-    color: #ffffff;
+            color: #ffffff;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    outline: none;
+            outline: none;
 
-    box-shadow:
-        0 8px 26px rgba(76, 29, 149, 0.38),
-        0 0 20px rgba(99, 102, 241, 0.25);
+            box-shadow:
+                0 8px 26px rgba(76, 29, 149, 0.38),
+                0 0 20px rgba(99, 102, 241, 0.25);
 
-    animation:
-        aiFloating 3s ease-in-out infinite;
+            animation:
+                aiFloating 3s ease-in-out infinite;
 
-    transition:
-        box-shadow 0.25s ease,
-        filter 0.25s ease;
-}
+            transition:
+                box-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
 
-/* Sparkle */
+        /* Sparkle */
 
-.ai-button-icon {
-    position: relative;
+        .ai-button-icon {
+            position: relative;
 
-    z-index: 2;
+            z-index: 2;
 
-    display: block;
+            display: block;
 
-    font-size: 27px;
-    line-height: 1;
+            font-size: 27px;
+            line-height: 1;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    text-shadow:
-        0 0 10px rgba(255, 255, 255, 0.55);
-}
+            text-shadow:
+                0 0 10px rgba(255, 255, 255, 0.55);
+        }
 
 
-/* Pulse ring */
+        /* Pulse ring */
 
-.ai-chat-button::before {
-    content: "";
+        .ai-chat-button::before {
+            content: "";
 
-    position: absolute;
+            position: absolute;
 
-    top: -7px;
-    right: -7px;
-    bottom: -7px;
-    left: -7px;
+            top: -7px;
+            right: -7px;
+            bottom: -7px;
+            left: -7px;
 
-    border: 1px solid rgba(167, 139, 250, 0.45);
-    border-radius: 50%;
+            border: 1px solid rgba(167, 139, 250, 0.45);
+            border-radius: 50%;
 
-    pointer-events: none;
+            pointer-events: none;
 
-    animation:
-        aiPulseRing 2.4s ease-out infinite;
-}
+            animation:
+                aiPulseRing 2.4s ease-out infinite;
+        }
 
-/* Inner soft glow */
-.ai-chat-button::after {
-    content: "";
+        /* Inner soft glow */
+        .ai-chat-button::after {
+            content: "";
 
-    position: absolute;
+            position: absolute;
 
-    width: 32px;
-    height: 32px;
+            width: 32px;
+            height: 32px;
 
-    border-radius: 50%;
+            border-radius: 50%;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 255, 255, 0.20),
-            transparent 70%
-        );
+            background:
+                radial-gradient(circle,
+                    rgba(255, 255, 255, 0.20),
+                    transparent 70%);
 
-    pointer-events: none;
-}
+            pointer-events: none;
+        }
 
 
-/* Hover */
-.ai-chat-button:hover {
-    animation-play-state: paused;
+        /* Hover */
+        .ai-chat-button:hover {
+            animation-play-state: paused;
 
-    filter: brightness(1.10);
+            filter: brightness(1.10);
 
-    box-shadow:
-        0 12px 32px rgba(124, 58, 237, 0.48),
-        0 0 30px rgba(59, 130, 246, 0.35);
-}
+            box-shadow:
+                0 12px 32px rgba(124, 58, 237, 0.48),
+                0 0 30px rgba(59, 130, 246, 0.35);
+        }
 
 
-/* Floating movement */
-@keyframes aiFloating {
+        /* Floating movement */
+        @keyframes aiFloating {
 
-    0%,
-    100% {
-        transform: translateY(0);
-    }
+            0%,
+            100% {
+                transform: translateY(0);
+            }
 
-    50% {
-        transform: translateY(-5px);
-    }
-}
+            50% {
+                transform: translateY(-5px);
+            }
+        }
 
 
-/* Expanding glow */
-@keyframes aiPulseRing {
+        /* Expanding glow */
+        @keyframes aiPulseRing {
 
-    0% {
-        transform: scale(0.90);
-        opacity: 0.80;
-    }
+            0% {
+                transform: scale(0.90);
+                opacity: 0.80;
+            }
 
-    70% {
-        transform: scale(1.25);
-        opacity: 0;
-    }
+            70% {
+                transform: scale(1.25);
+                opacity: 0;
+            }
 
-    100% {
-        transform: scale(1.25);
-        opacity: 0;
-    }
-}
+            100% {
+                transform: scale(1.25);
+                opacity: 0;
+            }
+        }
 
-/* Chat Window */
-.ai-chat-panel {
-    position: fixed;
+        /* Chat Window */
+        .ai-chat-panel {
+            position: fixed;
 
-    right: 28px;
-    bottom: 105px;
+            right: 28px;
+            bottom: 105px;
 
-    width: 410px;
-    height: 590px;
+            width: 410px;
+            height: 590px;
 
-    display: none;
-    flex-direction: column;
+            display: none;
+            flex-direction: column;
 
-    background:
-        linear-gradient(
-            180deg,
-            #11182c 0%,
-            #0b1324 100%
-        );
+            background:
+                linear-gradient(180deg,
+                    #11182c 0%,
+                    #0b1324 100%);
 
-    border:
-        1px solid rgba(139, 92, 246, 0.35);
+            border:
+                1px solid rgba(139, 92, 246, 0.35);
 
-    border-radius: 20px;
+            border-radius: 20px;
 
-    overflow: hidden;
+            overflow: hidden;
 
-    z-index: 9999;
+            z-index: 9999;
 
-    box-shadow:
-        0 24px 70px rgba(0, 0, 0, 0.55),
-        0 0 35px rgba(124, 58, 237, 0.14);
-}
+            box-shadow:
+                0 24px 70px rgba(0, 0, 0, 0.55),
+                0 0 35px rgba(124, 58, 237, 0.14);
+        }
 
-.ai-chat-panel.open {
-    display: flex;
-}
+        .ai-chat-panel.open {
+            display: flex;
+        }
 
-/* Header */
-.ai-chat-header {
-    min-height: 72px;
+        /* Header */
+        .ai-chat-header {
+            min-height: 72px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-    padding: 14px 16px;
+            padding: 14px 16px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.17),
-            rgba(37, 99, 235, 0.10)
-        );
+            background:
+                linear-gradient(135deg,
+                    rgba(124, 58, 237, 0.17),
+                    rgba(37, 99, 235, 0.10));
 
-    border-bottom:
-        1px solid rgba(139, 92, 246, 0.25);
-}
+            border-bottom:
+                1px solid rgba(139, 92, 246, 0.25);
+        }
 
-.ai-chat-title {
-    font-size: 15px;
-    font-weight: 700;
+        .ai-chat-title {
+            font-size: 15px;
+            font-weight: 700;
 
-    color: #ffffff;
-}
+            color: #ffffff;
+        }
 
-.ai-chat-subtitle {
-    margin-top: 3px;
+        .ai-chat-subtitle {
+            margin-top: 3px;
 
-    font-size: 11px;
+            font-size: 11px;
 
-    color: #64748b;
-}
+            color: #64748b;
+        }
 
-/* Messages */
-.ai-chat-messages {
-    flex: 1;
+        /* Messages */
+        .ai-chat-messages {
+            flex: 1;
 
-    padding: 16px;
+            padding: 16px;
 
-    overflow-y: auto;
-}
+            overflow-y: auto;
+        }
 
-.ai-message {
-    display: flex;
+        .ai-message {
+            display: flex;
 
-    gap: 9px;
+            gap: 9px;
 
-    margin-bottom: 14px;
-}
+            margin-bottom: 14px;
+        }
 
-.ai-message-user {
-    justify-content: flex-end;
-}
+        .ai-message-user {
+            justify-content: flex-end;
+        }
 
-.ai-avatar {
-    width: 32px;
-    height: 32px;
+        .ai-avatar {
+            width: 32px;
+            height: 32px;
 
-    flex-shrink: 0;
+            flex-shrink: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    border-radius: 10px;
+            border-radius: 10px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #6d28d9,
-            #2563eb
-        );
+            background:
+                linear-gradient(135deg,
+                    #6d28d9,
+                    #2563eb);
 
-    border:
-        1px solid
-        rgba(167, 139, 250, 0.35);
+            border:
+                1px solid rgba(167, 139, 250, 0.35);
 
-    color: #ffffff;
+            color: #ffffff;
 
-    box-shadow:
-        0 0 14px
-        rgba(124, 58, 237, 0.35);
-}
+            box-shadow:
+                0 0 14px rgba(124, 58, 237, 0.35);
+        }
 
 
-.ai-avatar i {
-    font-size: 14px;
+        .ai-avatar i {
+            font-size: 14px;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    text-shadow:
-        0 0 7px
-        rgba(255, 255, 255, 0.30);
-}
+            text-shadow:
+                0 0 7px rgba(255, 255, 255, 0.30);
+        }
 
-.ai-message-content {
-    max-width: 290px;
+        .ai-message-content {
+            max-width: 290px;
 
-    padding: 10px 12px;
+            padding: 10px 12px;
 
-    border-radius: 12px;
+            border-radius: 12px;
 
-    font-size: 12.5px;
-    line-height: 1.55;
+            font-size: 12.5px;
+            line-height: 1.55;
 
-    white-space: pre-wrap;
-}
+            white-space: pre-wrap;
+        }
 
-.ai-message-bot .ai-message-content {
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.10),
-            rgba(30, 41, 59, 0.90)
-        );
+        .ai-message-bot .ai-message-content {
+            background:
+                linear-gradient(135deg,
+                    rgba(124, 58, 237, 0.10),
+                    rgba(30, 41, 59, 0.90));
 
-    border:
-        1px solid rgba(139, 92, 246, 0.22);
+            border:
+                1px solid rgba(139, 92, 246, 0.22);
 
-    color: #dbeafe;
+            color: #dbeafe;
 
-    box-shadow:
-        0 4px 14px rgba(0, 0, 0, 0.12);
-}
+            box-shadow:
+                0 4px 14px rgba(0, 0, 0, 0.12);
+        }
 
-.ai-message-user .ai-message-content {
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
+        .ai-message-user .ai-message-content {
+            background:
+                linear-gradient(135deg,
+                    #2563eb,
+                    #1d4ed8);
 
-    color: #ffffff;
+            color: #ffffff;
 
-    border-radius:
-        12px 12px 3px 12px;
-}
+            border-radius:
+                12px 12px 3px 12px;
+        }
 
 
-/* Input Area */
-.ai-chat-input-area {
-    display: flex;
+        /* Input Area */
+        .ai-chat-input-area {
+            display: flex;
 
-    gap: 8px;
+            gap: 8px;
 
-    padding: 12px;
+            padding: 12px;
 
-    background: #162238;
+            background: #162238;
 
-    border-top: 1px solid #243b55;
-}
+            border-top: 1px solid #243b55;
+        }
 
-.ai-chat-input-area input {
-    flex: 1;
+        .ai-chat-input-area input {
+            flex: 1;
 
-    padding: 11px 12px;
+            padding: 11px 12px;
 
-    background: #0f1c2e;
+            background: #0f1c2e;
 
-    border: 1px solid #334155;
-    border-radius: 9px;
+            border: 1px solid #334155;
+            border-radius: 9px;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    outline: none;
-}
+            outline: none;
+        }
 
-.ai-chat-input-area input:focus {
-    border-color: #3b82f6;
-}
+        .ai-chat-input-area input:focus {
+            border-color: #3b82f6;
+        }
 
-.ai-chat-input-area button {
-    width: 42px;
+        .ai-chat-input-area button {
+            width: 42px;
 
-    border: none;
-    border-radius: 9px;
+            border: none;
+            border-radius: 9px;
 
-    background: #2563eb;
+            background: #2563eb;
 
-    color: #ffffff;
+            color: #ffffff;
 
-    cursor: pointer;
-}
+            cursor: pointer;
+        }
 
-.ai-chat-input-area button:disabled {
-    opacity: 0.5;
+        .ai-chat-input-area button:disabled {
+            opacity: 0.5;
 
-    cursor: not-allowed;
-}
-.ai-header-identity {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+            cursor: not-allowed;
+        }
 
-.ai-header-avatar {
-    width: 38px;
-    height: 38px;
+        .ai-header-identity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+        .ai-header-avatar {
+            width: 38px;
+            height: 38px;
 
-    border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    background: linear-gradient(
-        135deg,
-        #7c3aed,
-        #2563eb
-    );
+            border-radius: 11px;
 
-    color: white;
+            background: linear-gradient(135deg,
+                    #7c3aed,
+                    #2563eb);
 
-    font-size: 20px;
+            color: white;
 
-    box-shadow:
-        0 0 18px rgba(124, 58, 237, 0.4);
-}
+            font-size: 20px;
 
-.ai-online-dot {
-    width: 7px;
-    height: 7px;
+            box-shadow:
+                0 0 18px rgba(124, 58, 237, 0.4);
+        }
 
-    display: inline-block;
+        .ai-online-dot {
+            width: 7px;
+            height: 7px;
 
-    margin-right: 5px;
+            display: inline-block;
 
-    border-radius: 50%;
+            margin-right: 5px;
 
-    background: #22c55e;
+            border-radius: 50%;
 
-    box-shadow:
-        0 0 7px rgba(34, 197, 94, 0.7);
-}
-/* ========================================
+            background: #22c55e;
+
+            box-shadow:
+                0 0 7px rgba(34, 197, 94, 0.7);
+        }
+
+        /* ========================================
    AI HEADER ACTIONS
 ======================================== */
 
-.ai-header-actions {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+        .ai-header-actions {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-/* ========================================
+        /* ========================================
    NEW CHAT / RESET BUTTON
 ======================================== */
 
-.ai-reset-button {
-    width: 30px;
-    height: 30px;
+        .ai-reset-button {
+            width: 30px;
+            height: 30px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    padding: 0;
+            padding: 0;
 
-    border: none;
-    border-radius: 7px;
+            border: none;
+            border-radius: 7px;
 
-    background: transparent;
+            background: transparent;
 
-    color: #94a3b8;
+            color: #94a3b8;
 
-    font-size: 18px;
+            font-size: 18px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        transform 0.2s ease;
-}
+            transition:
+                background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+        }
 
 
-.ai-reset-button:hover {
-    background: rgba(139, 92, 246, 0.15);
+        .ai-reset-button:hover {
+            background: rgba(139, 92, 246, 0.15);
 
-    color: #c4b5fd;
+            color: #c4b5fd;
 
-    transform: rotate(30deg);
-}
+            transform: rotate(30deg);
+        }
 
-/* ========================================
+        /* ========================================
    CLOSE BUTTON
 ======================================== */
-.ai-close-button {
-    width: 30px;
-    height: 30px;
+        .ai-close-button {
+            width: 30px;
+            height: 30px;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    padding: 0;
+            padding: 0;
 
-    border: none;
-    border-radius: 7px;
+            border: none;
+            border-radius: 7px;
 
-    background: transparent;
+            background: transparent;
 
-    color: #94a3b8;
+            color: #94a3b8;
 
-    font-size: 20px;
+            font-size: 20px;
 
-    cursor: pointer;
+            cursor: pointer;
 
-    transition:
-        background 0.2s ease,
-        color 0.2s ease;
-}
+            transition:
+                background 0.2s ease,
+                color 0.2s ease;
+        }
 
-.ai-close-button:hover {
-    background: rgba(239, 68, 68, 0.10);
+        .ai-close-button:hover {
+            background: rgba(239, 68, 68, 0.10);
 
-    color: #fca5a5;
-}
-/* ========================================
+            color: #fca5a5;
+        }
+
+        /* ========================================
    AI THINKING ANIMATION
 ======================================== */
 
-.ai-thinking-content {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+        .ai-thinking-content {
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
-    padding: 10px 12px;
+            padding: 10px 12px;
 
-    background:
-        linear-gradient(
-            135deg,
-            rgba(124, 58, 237, 0.10),
-            rgba(30, 41, 59, 0.90)
-        );
+            background:
+                linear-gradient(135deg,
+                    rgba(124, 58, 237, 0.10),
+                    rgba(30, 41, 59, 0.90));
 
-    border: 1px solid rgba(139, 92, 246, 0.22);
-    border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.22);
+            border-radius: 12px;
 
-    color: #cbd5e1;
+            color: #cbd5e1;
 
-    font-size: 12px;
-}
+            font-size: 12px;
+        }
 
-/* Three dots container */
+        /* Three dots container */
 
-.ai-thinking-dots {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
+        .ai-thinking-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
 
-/* Individual dot */
-.ai-thinking-dots span {
-    width: 5px;
-    height: 5px;
+        /* Individual dot */
+        .ai-thinking-dots span {
+            width: 5px;
+            height: 5px;
 
-    display: block;
+            display: block;
 
-    border-radius: 50%;
+            border-radius: 50%;
 
-    background: #a78bfa;
+            background: #a78bfa;
 
-    animation:
-        aiThinkingDot 1.2s infinite ease-in-out;
-}
+            animation:
+                aiThinkingDot 1.2s infinite ease-in-out;
+        }
 
-/* Delay each dot */
-.ai-thinking-dots span:nth-child(1) {
-    animation-delay: 0s;
-}
+        /* Delay each dot */
+        .ai-thinking-dots span:nth-child(1) {
+            animation-delay: 0s;
+        }
 
-.ai-thinking-dots span:nth-child(2) {
-    animation-delay: 0.15s;
-}
+        .ai-thinking-dots span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
 
-.ai-thinking-dots span:nth-child(3) {
-    animation-delay: 0.30s;
-}
+        .ai-thinking-dots span:nth-child(3) {
+            animation-delay: 0.30s;
+        }
 
-/* Dot animation */
-@keyframes aiThinkingDot {
+        /* Dot animation */
+        @keyframes aiThinkingDot {
 
-    0%,
-    60%,
-    100% {
-        transform: translateY(0);
-        opacity: 0.35;
-    }
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+                opacity: 0.35;
+            }
 
-    30% {
-        transform: translateY(-4px);
-        opacity: 1;
-    }
-}
-
+            30% {
+                transform: translateY(-4px);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 
@@ -2718,6 +2738,17 @@
             <div class="menu-item" onclick="showPage('modelChange', this)">
                 <i class="fas fa-sync-alt"></i> <span>Model Change</span>
             </div>
+            <div
+    class="menu-item"
+    onclick="showPage('consumables', this)">
+
+    <i class="fas fa-droplet"></i>
+
+    <span>
+        Consumables
+    </span>
+
+</div>
 
             <div class="sidebar-decoration">
                 <svg class="printer-svg" viewBox="0 0 160 130" fill="none">
@@ -2748,338 +2779,316 @@
 
         <div class="content">
             <!-- DASHBOARD -->
-           
-<div id="dashboard" class="page active">
 
-    <div id="dashboardContent">
+            <div id="dashboard" class="page active">
+
+                <div id="dashboardContent">
 
 
-        <!-- =========================================
+                    <!-- =========================================
              TOP STATUS HEADER
         ========================================== -->
 
-        <div class="dashboard-hero">
+                    <div class="dashboard-hero">
 
-            <div class="hero-left">
+                        <div class="hero-left">
 
-                <div class="hero-logo">
+                            <div class="hero-logo">
 
-                    <i class="fas fa-shield-alt"></i>
+                                <i class="fas fa-shield-alt"></i>
 
-                    <span>B</span>
+                                <span>B</span>
 
-                </div>
+                            </div>
 
-                <div>
+                            <div>
 
-                    <div class="hero-title">
-                        Model Setup Application with Integrated AI
+                                <div class="hero-title">
+                                    Model Setup Application with Integrated AI
+                                </div>
+
+                                <div class="hero-subtitle">
+                                    Validate. Prepare. Strengthen. Serve.
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="hero-right">
+
+                            <div class="system-status">
+
+                                <i class="fas fa-shield-alt"></i>
+
+                                <span>
+                                    System Status
+                                </span>
+
+                                <span class="status-text">
+                                    All Systems Operational
+                                </span>
+
+                            </div>
+
+
+                            <div class="hero-datetime" id="currentDateTime">
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <div class="hero-subtitle">
-                        Validate. Prepare. Strengthen. Serve.
-                    </div>
 
-                </div>
-
-            </div>
-
-
-            <div class="hero-right">
-
-                <div class="system-status">
-
-                    <i class="fas fa-shield-alt"></i>
-
-                    <span>
-                        System Status
-                    </span>
-
-                    <span class="status-text">
-                        All Systems Operational
-                    </span>
-
-                </div>
-
-
-                <div
-                    class="hero-datetime"
-                    id="currentDateTime">
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =========================================
+                    <!-- =========================================
              LANDING HERO
         ========================================== -->
 
-        <div class="dashboard-landing">
+                    <div class="dashboard-landing">
 
 
-            <div class="landing-main">
+                        <div class="landing-main">
 
-<!-- REAL BACKGROUND IMAGE -->
+                            <!-- REAL BACKGROUND IMAGE -->
 
-<img
-    src="dashboard.png"
-    alt="Brother printer workspace"
-    class="landing-background-image">
+                            <img src="dashboard.png" alt="Brother printer workspace" class="landing-background-image">
 
 
-<!-- DARK OVERLAY -->
+                            <!-- DARK OVERLAY -->
 
-<div class="landing-image-overlay"></div>
+                            <div class="landing-image-overlay"></div>
 
 
-                <!-- =====================================
+                            <!-- =====================================
                      QUICK MODEL SEARCH
                 ====================================== -->
 
-                <div class="quick-model-card">
+                            <div class="quick-model-card">
 
-                    <div class="quick-model-title">
-                        Quick Model Search
-                    </div>
+                                <div class="quick-model-title">
+                                    Quick Model Search
+                                </div>
 
-                    <div class="quick-model-subtitle">
-                        Find and validate a model instantly.
-                    </div>
+                                <div class="quick-model-subtitle">
+                                    Find and validate a model instantly.
+                                </div>
 
 
-                    <!-- MODEL -->
+                                <!-- MODEL -->
 
-                    <div class="quick-field">
+                                <div class="quick-field">
 
-                        <label>
-                            Search Model
-                        </label>
+                                    <label>
+                                        Search Model
+                                    </label>
 
-                        <div class="quick-input-wrap">
+                                    <div class="quick-input-wrap">
 
-                            <i class="fas fa-search"></i>
+                                        <i class="fas fa-search"></i>
 
-                            <input
-                                id="model"
-                                type="text"
-                                placeholder="e.g., DCPL2550DW"
-                                autocomplete="off">
+                                        <input id="model" type="text" placeholder="e.g., DCPL2550DW" autocomplete="off">
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- COUNTRY -->
+
+                                <div class="quick-field">
+
+                                    <label>
+                                        Country
+                                    </label>
+
+                                    <select id="country" class="quick-country-select">
+
+                                        <option value="">
+                                            Select country
+                                        </option>
+
+                                        <option value="US">
+                                            United States
+                                        </option>
+
+                                        <option value="CA">
+                                            Canada
+                                        </option>
+
+                                        <option value="UK">
+                                            United Kingdom
+                                        </option>
+
+                                        <option value="JP">
+                                            Japan
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <!-- BUTTONS -->
+
+                                <div class="quick-search-actions">
+
+                                    <button class="quick-search-btn" type="button" onclick="searchModel()">
+
+                                        <i class="fas fa-search"></i>
+
+                                        Validate Model
+
+                                    </button>
+
+
+                                    <button class="quick-reset-btn" type="button" onclick="clearFilters()"
+                                        title="Reset">
+
+                                        <i class="fas fa-rotate-right"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
 
                         </div>
 
-                    </div>
 
-
-                    <!-- COUNTRY -->
-
-                    <div class="quick-field">
-
-                        <label>
-                            Country
-                        </label>
-
-                        <select
-                            id="country"
-                            class="quick-country-select">
-
-                            <option value="">
-                                Select country
-                            </option>
-
-                            <option value="US">
-                                United States
-                            </option>
-
-                            <option value="CA">
-                                Canada
-                            </option>
-
-                            <option value="UK">
-                                United Kingdom
-                            </option>
-
-                            <option value="JP">
-                                Japan
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- BUTTONS -->
-
-                    <div class="quick-search-actions">
-
-                        <button
-                            class="quick-search-btn"
-                            type="button"
-                            onclick="searchModel()">
-
-                            <i class="fas fa-search"></i>
-
-                            Validate Model
-
-                        </button>
-
-
-                        <button
-                            class="quick-reset-btn"
-                            type="button"
-                            onclick="clearFilters()"
-                            title="Reset">
-
-                            <i class="fas fa-rotate-right"></i>
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- =========================================
+                        <!-- =========================================
                  CAPABILITIES
             ========================================== -->
 
-            <div class="landing-capabilities">
+                        <div class="landing-capabilities">
 
-                <div class="capabilities-title">
-                    What You Can Do Here
+                            <div class="capabilities-title">
+                                What You Can Do Here
+                            </div>
+
+
+                            <div class="capabilities-grid">
+
+
+                                <!-- VALIDATE -->
+
+                                <div class="capability-item">
+
+                                    <div class="capability-icon">
+
+                                        <i class="fas fa-check"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="capability-heading">
+                                            Validate model readiness
+                                        </div>
+
+                                        <div class="capability-text">
+                                            Confirm material, pricing,
+                                            warranty and configuration readiness.
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- REPORT -->
+
+                                <div class="capability-item" style="cursor: pointer;"
+                                    onclick="openDashboardPage('modelReport', 1)">
+
+                                    <div class="capability-icon">
+
+                                        <i class="fas fa-file-lines"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="capability-heading">
+                                            Review model results
+                                        </div>
+
+                                        <div class="capability-text">
+                                            Access model readiness and
+                                            consolidated validation results.
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- MARKET -->
+
+                                <div class="capability-item">
+
+                                    <div class="capability-icon">
+
+                                        <i class="fas fa-globe"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="capability-heading">
+                                            Check market readiness
+                                        </div>
+
+                                        <div class="capability-text">
+                                            Validate configuration and
+                                            model requirements by country.
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- AI -->
+
+                                <div class="capability-item" style="cursor: pointer;" onclick="toggleAIChat()">
+
+                                    <div class="capability-icon">
+
+                                        <i class="fas fa-robot"></i>
+
+                                    </div>
+
+                                    <div>
+
+                                        <div class="capability-heading">
+                                            Ask Model Readiness AI
+                                        </div>
+
+                                        <div class="capability-text">
+                                            Query SAP model information
+                                            or compare multiple models.
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="result"></div>
+
                 </div>
 
 
-                <div class="capabilities-grid">
-
-
-                    <!-- VALIDATE -->
-
-                    <div class="capability-item">
-
-                        <div class="capability-icon">
-
-                            <i class="fas fa-check"></i>
-
-                        </div>
-
-                        <div>
-
-                            <div class="capability-heading">
-                                Validate model readiness
-                            </div>
-
-                            <div class="capability-text">
-                                Confirm material, pricing,
-                                warranty and configuration readiness.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- REPORT -->
-
-                    <div
-                        class="capability-item"
-                        style="cursor: pointer;"
-                        onclick="openDashboardPage('modelReport', 1)">
-
-                        <div class="capability-icon">
-
-                            <i class="fas fa-file-lines"></i>
-
-                        </div>
-
-                        <div>
-
-                            <div class="capability-heading">
-                                Review model results
-                            </div>
-
-                            <div class="capability-text">
-                                Access model readiness and
-                                consolidated validation results.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- MARKET -->
-
-                    <div class="capability-item">
-
-                        <div class="capability-icon">
-
-                            <i class="fas fa-globe"></i>
-
-                        </div>
-
-                        <div>
-
-                            <div class="capability-heading">
-                                Check market readiness
-                            </div>
-
-                            <div class="capability-text">
-                                Validate configuration and
-                                model requirements by country.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- AI -->
-
-                    <div
-                        class="capability-item"
-                        style="cursor: pointer;"
-                        onclick="toggleAIChat()">
-
-                        <div class="capability-icon">
-
-                            <i class="fas fa-robot"></i>
-
-                        </div>
-
-                        <div>
-
-                            <div class="capability-heading">
-                                Ask Model Readiness AI
-                            </div>
-
-                            <div class="capability-text">
-                                Query SAP model information
-                                or compare multiple models.
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                <div id="detailsContent"></div>
 
             </div>
-
-        </div>
-
-
-        <div id="result"></div>
-
-    </div>
-
-
-    <div id="detailsContent"></div>
-
-</div>
 
             <div id="modelReport" class="page">
                 <div class="report-header">
@@ -3095,7 +3104,30 @@
                     </div>
                     <div class="form-field">
                         <label>Country</label>
-                        <input type="text" id="reportCountrySearch" placeholder="e.g. US">
+                        <select id="reportCountrySearch" class="quick-country-select">
+ 
+                            <option value="">
+                                Select country
+                            </option>
+ 
+                            <option value="US">
+                                United States
+                            </option>
+ 
+                            <option value="CA">
+                                Canada
+                            </option>
+ 
+                            <option value="UK">
+                                United Kingdom
+                            </option>
+ 
+                            <option value="JP">
+                                Japan
+                            </option>
+ 
+                        </select>
+ 
                     </div>
                     <div class="report-search-actions">
                         <button class="btn-search" onclick="loadModelReport()">
@@ -3139,27 +3171,28 @@
                                     <th>Model</th>
                                     <th>Country</th>
                                     <th>EAN</th>
+
                                     <th>Standard Warranty</th>
-                                    <th>Standard Duration</th>
                                     <th>Extended Warranty</th>
-                                    <th>Extended Duration</th>
                                     <th>Brother Care Warranty</th>
-                                    <th>Brother Care Duration</th>
-                                     <th>Brother Plus Warranty</th>
-                                    <th>Brother Plus Warranty Duration</th>
+                                    <th>Brother Plus Warranty</th>
+
                                     <th>Amazon Dart</th>
-                                    <th>BR Refresh</th>
+                                    <th>Auto Reorder</th>
                                     <th>Barracuda</th>
                                     <th>Brother Plus</th>
+
                                     <th>Cross Plant Material</th>
                                     <th>Distribution Status</th>
                                     <th>Chain Status</th>
-                                    <th>B1 Price Setup</th>
-                                    <th>BR Price Setup</th>
+
+                                    <th>Barracuda Price Setup</th>
+                                    <th>Auto Reorder Price Setup</th>
+
                                     <th>Drum Order</th>
                                     <th>Waste Toner</th>
                                     <th>Belt Unit</th>
-                                    <th>Claim Order</th>
+                                    <th>Backup Order</th>
                                 </tr>
                             </thead>
                             <tbody id="reportTableBody"></tbody>
@@ -3168,215 +3201,190 @@
                 </div>
             </div>
             <!-- Model Setup Page (placeholder) -->
-<!-- =====================================================
+            <!-- =====================================================
      MODEL SETUP
 ===================================================== -->
 
-<div
-    id="newModel"
-    class="page">
+            <div id="newModel" class="page">
 
-    <iframe
-        id="modelSetupFrame"
-        class="app-page-frame"
-        src="modelsetup.html"
-        title="Model Setup">
-    </iframe>
+                <iframe id="modelSetupFrame" class="app-page-frame" src="modelsetup.html" title="Model Setup">
+                </iframe>
 
-</div>
+            </div>
             <!-- Model Change  -->
             <!-- =====================================================
      MODEL CHANGE
 ===================================================== -->
 
-<div
-    id="modelChange"
-    class="page">
+            <div id="modelChange" class="page">
+
+                <iframe id="modelChangeFrame" class="app-page-frame" src="modelchange.html" title="Model Change">
+                </iframe>
+
+            </div>
+
+            <!-- =====================================================
+     CONSUMABLES PAGE
+===================================================== -->
+
+<div id="consumables" class="page">
 
     <iframe
-        id="modelChangeFrame"
+        id="consumablesFrame"
         class="app-page-frame"
-        src="modelchange.html"
-        title="Model Change">
+        src="consumables.html"
+        title="Consumables">
     </iframe>
 
 </div>
+
         </div>
     </div>
 
     <!-- =====================================================
      AI MODEL READINESS ASSISTANT
 ===================================================== -->
-<!-- FLOATING AI LAUNCHER -->
+    <!-- FLOATING AI LAUNCHER -->
 
-<div
-    id="aiLauncher"
-    class="ai-launcher">
+    <div id="aiLauncher" class="ai-launcher">
 
-    <div class="ai-launcher-label">
-        Model Readiness AI
-    </div>
+        <div class="ai-launcher-label">
+            Model Readiness AI
+        </div>
 
-    <button
-        id="aiChatButton"
-        class="ai-chat-button"
-        type="button"
-        onclick="toggleAIChat()"
-        title="Open Model Readiness AI">
+        <button id="aiChatButton" class="ai-chat-button" type="button" onclick="toggleAIChat()"
+            title="Open Model Readiness AI">
 
-        <span class="ai-button-icon">
-            ✦
-        </span>
-
-    </button>
-
-</div>
-
-<!-- AI CHAT WINDOW -->
-<div
-    id="aiChatPanel"
-    class="ai-chat-panel">
-
-    <!-- HEADER -->
-
-    <div class="ai-chat-header">
-
-        <div class="ai-header-identity">
-
-            <div class="ai-header-avatar">
+            <span class="ai-button-icon">
                 ✦
-            </div>
-
-            <div>
-
-                <div class="ai-chat-title">
-                    Model Readiness AI
-                </div>
-
-                <div class="ai-chat-subtitle">
-
-                    <span class="ai-online-dot"></span>
-
-                    Connected to SAP
-
-                </div>
-
-            </div>
-
-        </div>
-
-<div class="ai-header-actions">
-
-    <button
-        class="ai-reset-button"
-        type="button"
-        onclick="resetAIChat()"
-        title="New Chat">
-
-        ↻
-
-    </button>
-
-    <button
-        class="ai-close-button"
-        type="button"
-        onclick="toggleAIChat()"
-        title="Close">
-
-        ×
-
-    </button>
-
-</div>
-
-    </div>
-
-    <!-- MESSAGES -->
-
-    <div
-        id="aiChatMessages"
-        class="ai-chat-messages">
-
-        <div class="ai-message ai-message-bot">
-
-            <div class="ai-avatar">
-    <i class="fas fa-robot"></i>
-</div>
-
-            <div class="ai-message-content">Hi! I'm your Model Readiness Assistant.
-
-Ask me anything about model details, pricing, warranty, compatibility, or order types.
-
-Example:
-"Show details for model DCPL2550DW US?"</div>
-
-        </div>
-
-    </div>
-
-    <!-- INPUT -->
-
-    <div class="ai-chat-input-area">
-
-        <input
-            id="aiQuestion"
-            type="text"
-            placeholder="Ask anything about a model..."
-            autocomplete="off"
-            onkeydown="handleAIKey(event)">
-
-        <button
-            id="aiSendButton"
-            type="button"
-            onclick="sendAIQuestion()">
-
-            <i class="fas fa-paper-plane"></i>
+            </span>
 
         </button>
+
     </div>
-</div>
+
+    <!-- AI CHAT WINDOW -->
+    <div id="aiChatPanel" class="ai-chat-panel">
+
+        <!-- HEADER -->
+
+        <div class="ai-chat-header">
+
+            <div class="ai-header-identity">
+
+                <div class="ai-header-avatar">
+                    ✦
+                </div>
+
+                <div>
+
+                    <div class="ai-chat-title">
+                        Model Readiness AI
+                    </div>
+
+                    <div class="ai-chat-subtitle">
+
+                        <span class="ai-online-dot"></span>
+
+                        Connected to SAP
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="ai-header-actions">
+
+                <button class="ai-reset-button" type="button" onclick="resetAIChat()" title="New Chat">
+
+                    ↻
+
+                </button>
+
+                <button class="ai-close-button" type="button" onclick="toggleAIChat()" title="Close">
+
+                    ×
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- MESSAGES -->
+
+        <div id="aiChatMessages" class="ai-chat-messages">
+
+            <div class="ai-message ai-message-bot">
+
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+
+                <div class="ai-message-content">Hi! I'm your Model Readiness Assistant.
+
+                    Ask me anything about model details, pricing, warranty, compatibility, or order types.
+
+                    Example:
+                    "Show details for model DCPL2550DW US?"</div>
+
+            </div>
+
+        </div>
+
+        <!-- INPUT -->
+
+        <div class="ai-chat-input-area">
+
+            <input id="aiQuestion" type="text" placeholder="Ask anything about a model..." autocomplete="off"
+                onkeydown="handleAIKey(event)">
+
+            <button id="aiSendButton" type="button" onclick="sendAIQuestion()">
+
+                <i class="fas fa-paper-plane"></i>
+
+            </button>
+        </div>
+    </div>
 
 
     <div class="ai-quick-actions">
 
         <button onclick="setAIQuestion('details')">
-    Model Details
-</button>
+            Model Details
+        </button>
 
-<button onclick="setAIQuestion('warranty')">
-    Warranty
-</button>
+        <button onclick="setAIQuestion('warranty')">
+            Warranty
+        </button>
 
-<button onclick="setAIQuestion('pricing')">
-    Pricing
-</button>
+        <button onclick="setAIQuestion('pricing')">
+            Pricing
+        </button>
 
-<button onclick="setAIQuestion('amazon')">
-    Amazon Dart
-</button>
+        <button onclick="setAIQuestion('amazon')">
+            Amazon Dart
+        </button>
     </div>
 
 
     <div class="ai-chat-input-area">
 
-        <input
-            id="aiQuestion"
-            type="text"
-            placeholder="Ask about a model..."
-            autocomplete="off"
+        <input id="aiQuestion" type="text" placeholder="Ask about a model..." autocomplete="off"
             onkeydown="handleAIKey(event)">
 
-        <button
-            id="aiSendButton"
-            onclick="sendAIQuestion()">
+        <button id="aiSendButton" onclick="sendAIQuestion()">
 
             <i class="fas fa-paper-plane"></i>
 
         </button>
     </div>
-</div>
+    </div>
 
     <script>
+
+        let modelDetailsSource = "dashboard";
 
         // DateTime
         function updateDateTime() {
@@ -3393,152 +3401,152 @@ Example:
             document.getElementById('result').innerHTML = '';
         }
 
-       function showApp() {
+        function showApp() {
 
-    console.log(
-        "Showing application"
-    );
+            console.log(
+                "Showing application"
+            );
 
-    const loginSection =
-        document.getElementById(
-            "loginSection"
-        );
+            const loginSection =
+                document.getElementById(
+                    "loginSection"
+                );
 
-    if (loginSection) {
+            if (loginSection) {
 
-        loginSection.style.display =
-            "none";
-    }
+                loginSection.style.display =
+                    "none";
+            }
 
-    const appSection =
-        document.getElementById(
-            "appSection"
-        );
+            const appSection =
+                document.getElementById(
+                    "appSection"
+                );
 
-    if (appSection) {
+            if (appSection) {
 
-        appSection.style.display =
-            "flex";
+                appSection.style.display =
+                    "flex";
 
-        appSection.classList.add(
-            "active"
-        );
-    }
+                appSection.classList.add(
+                    "active"
+                );
+            }
 
-    const aiLauncher =
-    document.getElementById("aiLauncher");
+            const aiLauncher =
+                document.getElementById("aiLauncher");
 
-if (aiLauncher) {
-    aiLauncher.style.display = "none";
-} else {
+            if (aiLauncher) {
+                aiLauncher.style.display = "none";
+            } else {
 
-        console.error(
-            "ERROR: aiLauncher not found"
-        );
-    }
-}
+                console.error(
+                    "ERROR: aiLauncher not found"
+                );
+            }
+        }
 
-function showAIForModelDetails() {
+        function showAIForModelDetails() {
 
-    const aiLauncher =
-        document.getElementById("aiLauncher");
+            const aiLauncher =
+                document.getElementById("aiLauncher");
 
-    if (aiLauncher) {
-        aiLauncher.style.display = "flex";
-    }
-}
-
-
-function hideAI() {
-
-    const aiLauncher =
-        document.getElementById("aiLauncher");
-
-    const aiPanel =
-        document.getElementById("aiChatPanel");
+            if (aiLauncher) {
+                aiLauncher.style.display = "flex";
+            }
+        }
 
 
-    if (aiLauncher) {
-        aiLauncher.style.display = "none";
-    }
+        function hideAI() {
+
+            const aiLauncher =
+                document.getElementById("aiLauncher");
+
+            const aiPanel =
+                document.getElementById("aiChatPanel");
 
 
-    if (aiPanel) {
-        aiPanel.classList.remove("open");
-        aiPanel.style.display = "none";
-    }
-}
+            if (aiLauncher) {
+                aiLauncher.style.display = "none";
+            }
 
-   function showLogin() {
 
-    // -----------------------------
-    // Hide Application
-    // -----------------------------
+            if (aiPanel) {
+                aiPanel.classList.remove("open");
+                aiPanel.style.display = "none";
+            }
+        }
 
-    const appSection =
-        document.getElementById(
-            "appSection"
-        );
+        function showLogin() {
 
-    if (appSection) {
+            // -----------------------------
+            // Hide Application
+            // -----------------------------
 
-        appSection.style.display =
-            "none";
+            const appSection =
+                document.getElementById(
+                    "appSection"
+                );
 
-        appSection.classList.remove(
-            "active"
-        );
-    }
+            if (appSection) {
 
-    // -----------------------------
-    // Show Login
-    // -----------------------------
+                appSection.style.display =
+                    "none";
 
-    const loginSection =
-        document.getElementById(
-            "loginSection"
-        );
+                appSection.classList.remove(
+                    "active"
+                );
+            }
 
-    if (loginSection) {
+            // -----------------------------
+            // Show Login
+            // -----------------------------
 
-        loginSection.style.display =
-            "flex";
-    }
+            const loginSection =
+                document.getElementById(
+                    "loginSection"
+                );
 
-    // -----------------------------
-    // Hide AI Launcher
-    // -----------------------------
+            if (loginSection) {
 
-    const aiLauncher =
-        document.getElementById(
-            "aiLauncher"
-        );
+                loginSection.style.display =
+                    "flex";
+            }
 
-    if (aiLauncher) {
+            // -----------------------------
+            // Hide AI Launcher
+            // -----------------------------
 
-        aiLauncher.style.display =
-            "none";
-    }
+            const aiLauncher =
+                document.getElementById(
+                    "aiLauncher"
+                );
 
-    // -----------------------------
-    // Close AI Chat
-    // -----------------------------
+            if (aiLauncher) {
 
-    const aiPanel =
-        document.getElementById(
-            "aiChatPanel"
-        );
+                aiLauncher.style.display =
+                    "none";
+            }
 
-    if (aiPanel) {
+            // -----------------------------
+            // Close AI Chat
+            // -----------------------------
 
-        aiPanel.classList.remove(
-            "open"
-        );
+            const aiPanel =
+                document.getElementById(
+                    "aiChatPanel"
+                );
 
-        aiPanel.style.display =
-            "none";
-    }
-}
+            if (aiPanel) {
+
+                aiPanel.classList.remove(
+                    "open"
+                );
+
+                aiPanel.style.display =
+                    "none";
+            }
+        }
 
         async function logout() {
             try { await fetch("/logout"); } catch (e) { }
@@ -3557,112 +3565,112 @@ function hideAI() {
             document.getElementById("dashboard").classList.add("active");
         }
 
-      function showPage(
-    pageId,
-    element
-) {
+        function showPage(
+            pageId,
+            element
+        ) {
 
-hideAI();
+            hideAI();
 
-    const pages =
-        document.querySelectorAll(
-            ".page"
-        );
+            const pages =
+                document.querySelectorAll(
+                    ".page"
+                );
 
 
-    pages.forEach(
-        function (page) {
+            pages.forEach(
+                function (page) {
 
-            page.classList.remove(
+                    page.classList.remove(
+                        "active"
+                    );
+                }
+            );
+
+
+            const menuItems =
+                document.querySelectorAll(
+                    ".menu-item"
+                );
+
+
+            menuItems.forEach(
+                function (item) {
+
+                    item.classList.remove(
+                        "active-menu"
+                    );
+                }
+            );
+
+
+            const selectedPage =
+                document.getElementById(
+                    pageId
+                );
+
+
+            if (!selectedPage) {
+
+                console.error(
+                    "Page not found:",
+                    pageId
+                );
+
+                return;
+            }
+
+
+            selectedPage.classList.add(
                 "active"
             );
+
+
+            if (element) {
+
+                element.classList.add(
+                    "active-menu"
+                );
+            }
+
+
+            const content =
+                document.querySelector(
+                    ".content"
+                );
+
+
+            if (content) {
+
+                content.scrollTop = 0;
+                content.scrollLeft = 0;
+            }
         }
-    );
-
-
-    const menuItems =
-        document.querySelectorAll(
-            ".menu-item"
-        );
-
-
-    menuItems.forEach(
-        function (item) {
-
-            item.classList.remove(
-                "active-menu"
-            );
-        }
-    );
-
-
-    const selectedPage =
-        document.getElementById(
-            pageId
-        );
-
-
-    if (!selectedPage) {
-
-        console.error(
-            "Page not found:",
-            pageId
-        );
-
-        return;
-    }
-
-
-    selectedPage.classList.add(
-        "active"
-    );
-
-
-    if (element) {
-
-        element.classList.add(
-            "active-menu"
-        );
-    }
-
-
-    const content =
-        document.querySelector(
-            ".content"
-        );
-
-
-    if (content) {
-
-        content.scrollTop = 0;
-        content.scrollLeft = 0;
-    }
-}
 
         function openDashboardPage(
-    pageId,
-    menuIndex
-) {
+            pageId,
+            menuIndex
+        ) {
 
-    const menus =
-        document.querySelectorAll(
-            ".menu-item"
-        );
-
-
-    if (
-        !menus[menuIndex]
-    ) {
-
-        return;
-    }
+            const menus =
+                document.querySelectorAll(
+                    ".menu-item"
+                );
 
 
-    showPage(
-        pageId,
-        menus[menuIndex]
-    );
-}
+            if (
+                !menus[menuIndex]
+            ) {
+
+                return;
+            }
+
+
+            showPage(
+                pageId,
+                menus[menuIndex]
+            );
+        }
 
         async function login() {
             const username = document.getElementById("username").value.trim();
@@ -3691,428 +3699,438 @@ hideAI();
 
         function loadSearchValues() {
 
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
+            const params =
+                new URLSearchParams(
+                    window.location.search
+                );
 
 
-    const model =
-        params.get(
-            "model"
-        );
+            const model =
+                params.get(
+                    "model"
+                );
 
 
-    const country =
-        params.get(
-            "country"
-        );
+            const country =
+                params.get(
+                    "country"
+                );
 
 
-    if (model) {
+            if (model) {
 
-        document.getElementById(
-            "model"
-        ).value =
-            model;
-    }
-
-
-    if (country) {
-
-        document.getElementById(
-            "country"
-        ).value =
-            country;
-    }
-}
-
-loadSearchValues();
-      
-
-        document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const modelInput =
-            document.getElementById(
-                "model"
-            );
+                document.getElementById(
+                    "model"
+                ).value =
+                    model;
+            }
 
 
-        if (modelInput) {
+            if (country) {
 
-            modelInput.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (
-                        event.key === "Enter"
-                    ) {
-
-                        event.preventDefault();
-
-                        searchModel();
-                    }
-                }
-            );
+                document.getElementById(
+                    "country"
+                ).value =
+                    country;
+            }
         }
 
-    }
-);
+        loadSearchValues();
+
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const modelInput =
+                    document.getElementById(
+                        "model"
+                    );
+
+
+                if (modelInput) {
+
+                    modelInput.addEventListener(
+                        "keydown",
+                        function (event) {
+
+                            if (
+                                event.key === "Enter"
+                            ) {
+
+                                event.preventDefault();
+
+                                searchModel();
+                            }
+                        }
+                    );
+                }
+
+            }
+        );
 
         async function searchModel() {
 
-    console.log(
-        "Search button clicked"
-    );
-
-
-    const model =
-        document.getElementById(
-            "model"
-        ).value.trim();
-
-
-    const country =
-        document.getElementById(
-            "country"
-        ).value.trim();
-
-
-    if (!model || !country) {
-
-        const result =
-            document.getElementById(
-                "result"
+            console.log(
+                "Search button clicked"
             );
 
 
-        if (result) {
+            const model =
+                document.getElementById(
+                    "model"
+                ).value.trim();
 
-            result.innerHTML = `
+
+            const country =
+                document.getElementById(
+                    "country"
+                ).value.trim();
+
+
+            if (!model || !country) {
+
+                const result =
+                    document.getElementById(
+                        "result"
+                    );
+
+
+                if (result) {
+
+                    result.innerHTML = `
                 <div class="no-data">
                     Please enter a Model Number
                     and select a Country.
                 </div>
             `;
-        }
+                }
 
 
-        return;
-    }
+                return;
+            }
 
 
-    console.log(
-        "Model:",
-        model
-    );
-
-
-    console.log(
-        "Country:",
-        country
-    );
-
-
-    try {
-
-        const response =
-            await fetch(
-                `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+            console.log(
+                "Model:",
+                model
             );
 
 
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                data.message ||
-                data.error ||
-                "Model search failed"
+            console.log(
+                "Country:",
+                country
             );
-        }
 
 
-        const record =
-            data.d;
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+                    );
 
 
-        if (!record) {
+                const data =
+                    await response.json();
 
-            document.getElementById(
-                "result"
-            ).innerHTML = `
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        data.message ||
+                        data.error ||
+                        "Model search failed"
+                    );
+                }
+
+
+                const record =
+                    data.d;
+
+
+                if (!record) {
+
+                    document.getElementById(
+                        "result"
+                    ).innerHTML = `
                 <div class="no-data">
                     No model data found.
                 </div>
             `;
 
 
-            return;
-        }
+                    return;
+                }
 
 
-        document.getElementById(
-            "result"
-        ).innerHTML = "";
+                document.getElementById(
+                    "result"
+                ).innerHTML = "";
+
+                modelDetailsSource = "dashboard";
+
+                loadModelDetails(
+                    record
+                );
+
+                // loadModelDetails(
+                //     record
+                // );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Search Error:",
+                    error
+                );
 
 
-        loadModelDetails(
-            record
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Search Error:",
-            error
-        );
-
-
-        document.getElementById(
-            "result"
-        ).innerHTML = `
+                document.getElementById(
+                    "result"
+                ).innerHTML = `
             <div class="no-data">
                 ${error.message || "Search failed"}
             </div>
         `;
-    }
-}
-        
- function loadModelDetails(r) {
+            }
+        }
 
-    const dashboardContent =
-        document.getElementById("dashboardContent");
+        function loadModelDetails(
+            r,
+            source = "dashboard"
+        ) {
 
-    const detailsContent =
-        document.getElementById("detailsContent");
+            const dashboardContent =
+                document.getElementById("dashboardContent");
 
-
-    if (!dashboardContent || !detailsContent) {
-
-        console.error(
-            "Dashboard content containers not found"
-        );
-
-        return;
-    }
+            const detailsContent =
+                document.getElementById("detailsContent");
 
 
-    dashboardContent.style.display =
-        "none";
+            if (!dashboardContent || !detailsContent) {
+
+                console.error(
+                    "Dashboard content containers not found"
+                );
+
+                return;
+            }
 
 
-    detailsContent.innerHTML =
-        "";
+            dashboardContent.style.display =
+                "none";
 
 
-    const detailsUrl =
-        "details.html?matnr=" +
-        encodeURIComponent(r.Matnr) +
-        "&country=" +
-        encodeURIComponent(r.Country);
+            detailsContent.innerHTML =
+                "";
 
 
-    const frame =
-        document.createElement("iframe");
+            const detailsUrl =
+                "details.html?matnr=" +
+                encodeURIComponent(r.Matnr) +
+                "&country=" +
+                encodeURIComponent(r.Country) +
+                "&source=" +
+                encodeURIComponent(source);
 
 
-    frame.id =
-        "modelDetailsFrame";
-
-    frame.src =
-        detailsUrl;
-
-    frame.title =
-        "Model Details";
-
-    frame.style.width =
-        "100%";
-
-    frame.style.height =
-        "700px";
-
-    frame.style.display =
-        "block";
-
-    frame.style.border =
-        "none";
-
-    frame.style.borderRadius =
-        "18px";
-
-    frame.style.background =
-        "transparent";
+            const frame =
+                document.createElement("iframe");
 
 
-    detailsContent.appendChild(
-        frame
-    );
+            frame.id =
+                "modelDetailsFrame";
+
+            frame.src =
+                detailsUrl;
+
+            frame.title =
+                "Model Details";
+
+            frame.style.width =
+                "100%";
+
+            frame.style.height =
+                "700px";
+
+            frame.style.display =
+                "block";
+
+            frame.style.border =
+                "none";
+
+            frame.style.borderRadius =
+                "18px";
+
+            frame.style.background =
+                "transparent";
 
 
-    frame.addEventListener(
-        "load",
-        function () {
-
-            resizeModelDetailsFrame(
+            detailsContent.appendChild(
                 frame
             );
 
-        }
-    );
 
-
-    showAIForModelDetails();
-
-
-    const content =
-        document.querySelector(
-            ".content"
-        );
-
-
-    if (content) {
-        content.scrollTop = 0;
-    }
-
-
-    console.log(
-        "loadModelDetails called",
-        r
-    );
-}
-
-function resizeModelDetailsFrame(frame) {
-
-    try {
-
-        if (
-            !frame ||
-            !frame.contentWindow
-        ) {
-
-            return;
-        }
-
-
-        const frameDocument =
-            frame.contentDocument ||
-            frame.contentWindow.document;
-
-
-        if (!frameDocument) {
-
-            return;
-        }
-
-
-        const body =
-            frameDocument.body;
-
-        const html =
-            frameDocument.documentElement;
-
-
-        if (!body || !html) {
-
-            return;
-        }
-
-
-        const contentHeight =
-            Math.max(
-                body.scrollHeight,
-                body.offsetHeight,
-                html.scrollHeight,
-                html.offsetHeight
-            );
-
-
-        const minimumHeight =
-            680;
-
-
-        const finalHeight =
-            Math.max(
-                contentHeight,
-                minimumHeight
-            );
-
-
-        frame.style.height =
-            finalHeight + "px";
-
-
-        console.log(
-            "Model details iframe height:",
-            finalHeight
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "Unable to resize model details iframe:",
-            error
-        );
-
-
-        frame.style.height =
-            "700px";
-    }
-}
-function observeModelDetailsFrame(frame) {
-
-    try {
-
-        const frameDocument =
-            frame.contentDocument ||
-            frame.contentWindow.document;
-
-
-        if (
-            !frameDocument ||
-            !frameDocument.body
-        ) {
-
-            return;
-        }
-
-
-        const observer =
-            new ResizeObserver(
+            frame.addEventListener(
+                "load",
                 function () {
 
                     resizeModelDetailsFrame(
                         frame
                     );
+
                 }
             );
 
 
-        observer.observe(
-            frameDocument.body
-        );
+            showAIForModelDetails();
 
 
-        console.log(
-            "Model details resize observer started"
-        );
+            const content =
+                document.querySelector(
+                    ".content"
+                );
 
-    }
-    catch (error) {
 
-        console.error(
-            "Unable to observe model details:",
-            error
-        );
-    }
-}
+            if (content) {
+                content.scrollTop = 0;
+            }
+
+
+            console.log(
+                "loadModelDetails called",
+                r
+            );
+        }
+
+        function resizeModelDetailsFrame(frame) {
+
+            try {
+
+                if (
+                    !frame ||
+                    !frame.contentWindow
+                ) {
+
+                    return;
+                }
+
+
+                const frameDocument =
+                    frame.contentDocument ||
+                    frame.contentWindow.document;
+
+
+                if (!frameDocument) {
+
+                    return;
+                }
+
+
+                const body =
+                    frameDocument.body;
+
+                const html =
+                    frameDocument.documentElement;
+
+
+                if (!body || !html) {
+
+                    return;
+                }
+
+
+                const contentHeight =
+                    Math.max(
+                        body.scrollHeight,
+                        body.offsetHeight,
+                        html.scrollHeight,
+                        html.offsetHeight
+                    );
+
+
+                const minimumHeight =
+                    680;
+
+
+                const finalHeight =
+                    Math.max(
+                        contentHeight,
+                        minimumHeight
+                    );
+
+
+                frame.style.height =
+                    finalHeight + "px";
+
+
+                console.log(
+                    "Model details iframe height:",
+                    finalHeight
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Unable to resize model details iframe:",
+                    error
+                );
+
+
+                frame.style.height =
+                    "700px";
+            }
+        }
+        function observeModelDetailsFrame(frame) {
+
+            try {
+
+                const frameDocument =
+                    frame.contentDocument ||
+                    frame.contentWindow.document;
+
+
+                if (
+                    !frameDocument ||
+                    !frameDocument.body
+                ) {
+
+                    return;
+                }
+
+
+                const observer =
+                    new ResizeObserver(
+                        function () {
+
+                            resizeModelDetailsFrame(
+                                frame
+                            );
+                        }
+                    );
+
+
+                observer.observe(
+                    frameDocument.body
+                );
+
+
+                console.log(
+                    "Model details resize observer started"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "Unable to observe model details:",
+                    error
+                );
+            }
+        }
 
         const createdModel =
 
@@ -4167,14 +4185,20 @@ function observeModelDetailsFrame(frame) {
             document.getElementById("modelCards").innerHTML = results.map(r => {
                 const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
                 const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BrothercareWarranty, r.BrotherplusWarranty].filter(x => x === "X").length;
-                const orders = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit, r.Claimorder].filter(x => x === "X").length;
+                const orders = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit].filter(x => x === "X").length;
                 const pricing = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
 
                 const status = warranty >= 2 ? "Ready" : "Review";
 
                 const progPct = Math.round((programs / 4) * 100);
-                const warrPct = Math.round((warranty / 3) * 100);
-                const ordPct = Math.round((orders / 5) * 100);
+                const warrPct =
+                    Math.round(
+                        (warranty / 4) * 100
+                    );
+                const ordPct =
+                    Math.round(
+                        (orders / 4) * 100
+                    );
                 const pricPct = Math.round((pricing / 2) * 100);
 
                 return `
@@ -4208,13 +4232,17 @@ function observeModelDetailsFrame(frame) {
 
                 <div class="metric-line">
                     <span class="metric-label"><i class="fas fa-shield-alt"></i> Warranty</span>
-                    <span class="metric-value">${warranty}/3</span>
+                    <span class="metric-value">
+    ${warranty}/4
+</span>
                 </div>
                 <div class="progress-track"><div class="progress-fill green" style="width:${warrPct}%"></div></div>
 
                 <div class="metric-line">
                     <span class="metric-label"><i class="fas fa-shopping-cart"></i> Orders</span>
-                    <span class="metric-value">${orders}/5</span>
+                    <span class="metric-value">
+    ${orders}/4
+</span>
                 </div>
                 <div class="progress-track"><div class="progress-fill blue" style="width:${ordPct}%"></div></div>
 
@@ -4234,81 +4262,172 @@ function observeModelDetailsFrame(frame) {
         }
         function buildReportTable(results) {
 
-            // ADD THESE 4 LINES HERE
             if (results.length > 0) {
-                console.log("FIRST RECORD");
-                console.log(results[0]);
 
-                console.log("ALL COLUMN NAMES");
-                console.log(Object.keys(results[0]));
+                console.log(
+                    "MODEL REPORT DATA:",
+                    results[0]
+                );
             }
+
 
             document.getElementById(
                 "reportTableBody"
             ).innerHTML =
 
-                results.map(r => {
-                    const status =
-                        (
-                            r.StandardWarranty === "X" ||
-                            r.ExtendedWarranty === "X"
-                        )
-                            ? "Ready"
-                            : "Review";
+                results.map(function (r) {
+
                     return `
-        <tr>
- 
-        <td>${r.Matnr || "-"}</td>
-        <td>${r.Country || "-"}</td>
-        <td>${r.Ean11 || "-"}</td>
- 
-        <td>${showStatus(r.StandardWarranty)}</td>
-<td>
-    ${r.StandardwarrantyLength || "-"}
-    ${r.StandardwarrantyUnit || ""}
+
+                <tr>
+
+                    <td>
+                        ${r.Matnr || "-"}
+                    </td>
+
+                    <td>
+                        ${r.Country || "-"}
+                    </td>
+
+                    <td>
+                        ${r.Ean11 || "-"}
+                    </td>
+
+
+                    <!-- STANDARD WARRANTY -->
+
+                    <td>
+                        ${showWarranty(
+                        r.StandardWarranty,
+                        r.StandardwarrantyLength,
+                        r.StandardwarrantyUnit
+                    )}
+                    </td>
+
+
+                    <!-- EXTENDED WARRANTY -->
+
+                    <td>
+                        ${showWarranty(
+                        r.ExtendedWarranty,
+                        r.ExtendedwarrantyLength,
+                        r.ExtendedwarrantyUnit
+                    )}
+                    </td>
+
+
+                    <!-- BROTHER CARE WARRANTY -->
+
+                    <td>
+                        ${showWarranty(
+                        r.BrothercareWarranty,
+                        r.BrothercarewarrantyLength,
+                        r.BrothercarewarrantyUnit
+                    )}
+                    </td>
+
+
+                    <!-- BROTHER PLUS WARRANTY -->
+
+                    <td>
+                        ${showWarranty(
+                        r.BrotherplusWarranty,
+                        r.BrotherpluswarrantyLength,
+                        r.BrotherpluswarrantyUnit
+                    )}
+                    </td>
+
+
+                    <!-- COMPATIBILITY -->
+
+                    <td>
+                        ${showStatus(
+                        r.Amazondart
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.Brrefresh
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.Barracuda
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.Bplus
+                    )}
+                    </td>
+
+
+                    <!-- MATERIAL STATUS -->
+
+                    <td>
+                        ${r.CrossplantMaterial || "-"}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.XdistrchainStatus
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.DchainStatus
+                    )}
+                    </td>
+
+
+                    <!-- PRICING -->
+
+                    <td>
+                        ${showStatus(
+                        r.B1priceSetup
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.BrpriceSetup
+                    )}
+                    </td>
+
+
+                    <!-- ORDER TYPES -->
+
+                    <td>
+                        ${showStatus(
+                        r.DrumOrder
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.WasteToner
+                    )}
+                    </td>
+
+                    <td>
+                        ${showStatus(
+                        r.BeltUnit
+                    )}
+                    </td>
+
+                    <td>
+    ${showStatus(
+                        r.BackupOrder
+                    )}
 </td>
- 
-<td>${showStatus(r.ExtendedWarranty)}</td>
-<td>
-    ${r.ExtendedwarrantyLength || "-"}
-    ${r.ExtendedwarrantyUnit || ""}
-</td>
- 
-<td>${showStatus(r.BrothercareWarranty)}</td>
-<td>
-    ${r.BrothercarewarrantyLength || "-"}
-    ${r.BrothercarewarrantyUnit || ""}
-</td>
- 
-      <td>${showStatus(r.BrotherplusWarranty)}</td>
-    <td>
-    ${r.BrotherpluswarrantyLength || "-"}
-    ${r.BrotherpluswarrantyUnit || ""}
-</td>
- 
- 
-<td>${showStatus(r.BrotherplusWarranty)}</td>
- 
-        <td>${showStatus(r.Amazondart)}</td>
-        <td>${showStatus(r.Brrefresh)}</td>
-        <td>${showStatus(r.Barracuda)}</td>
-        <td>${showStatus(r.Bplus)}</td>
- 
-        <td>${r.CrossplantMaterial || "-"}</td>
- 
-        <td>${showStatus(r.XdistrchainStatus)}</td>
-        <td>${showStatus(r.DchainStatus)}</td>
- 
-        <td>${showStatus(r.B1priceSetup)}</td>
-        <td>${showStatus(r.BrpriceSetup)}</td>
- 
-        <td>${showStatus(r.DrumOrder)}</td>
-        <td>${showStatus(r.WasteToner)}</td>
-        <td>${showStatus(r.BeltUnit)}</td>
-        <td>${showStatus(r.Claimorder)}</td>
- 
-        </tr>
-        `;
+
+
+                </tr>
+            `;
 
                 }).join("");
         }
@@ -4375,23 +4494,175 @@ function observeModelDetailsFrame(frame) {
                 "Model_Report.xlsx"
             );
         }
-        function viewDetailsFromReport(matnr, country) {
+        function viewDetailsFromReport(
+            matnr,
+            country
+        ) {
 
-            const dashboardMenu =
+            const pages =
                 document.querySelectorAll(
-                    ".menu-item"
-                )[0];
+                    ".page"
+                );
 
-            showPage(
-                "dashboard",
-                dashboardMenu
+            pages.forEach(
+                function (page) {
+
+                    page.classList.remove(
+                        "active"
+                    );
+                }
             );
 
-            loadModelDetails({
-                Matnr: matnr,
-                Country: country
-            });
+
+            const dashboard =
+                document.getElementById(
+                    "dashboard"
+                );
+
+
+            if (dashboard) {
+
+                dashboard.classList.add(
+                    "active"
+                );
+            }
+
+
+            loadModelDetails(
+                {
+                    Matnr: matnr,
+                    Country: country
+                },
+                "modelReport"
+            );
+
+
+            const content =
+                document.querySelector(
+                    ".content"
+                );
+
+
+            if (content) {
+
+                content.scrollTop = 0;
+            }
         }
+
+
+        function returnToModelReport() {
+
+            const detailsContent =
+                document.getElementById(
+                    "detailsContent"
+                );
+
+
+            const dashboardContent =
+                document.getElementById(
+                    "dashboardContent"
+                );
+
+
+            // Remove Model Details iframe
+
+            if (detailsContent) {
+
+                detailsContent.innerHTML = "";
+            }
+
+
+            // Restore Dashboard content
+
+            if (dashboardContent) {
+
+                dashboardContent.style.display =
+                    "block";
+            }
+
+
+            // Remove active state from all pages
+
+            document
+                .querySelectorAll(".page")
+                .forEach(
+                    function (page) {
+
+                        page.classList.remove(
+                            "active"
+                        );
+                    }
+                );
+
+
+            // Show Model Report
+
+            const modelReport =
+                document.getElementById(
+                    "modelReport"
+                );
+
+
+            if (modelReport) {
+
+                modelReport.classList.add(
+                    "active"
+                );
+            }
+
+
+            // Update sidebar selection
+
+            const menus =
+                document.querySelectorAll(
+                    ".menu-item"
+                );
+
+
+            menus.forEach(
+                function (menu) {
+
+                    menu.classList.remove(
+                        "active-menu"
+                    );
+                }
+            );
+
+
+            // Menu index 1 = Model Report
+
+            if (menus[1]) {
+
+                menus[1].classList.add(
+                    "active-menu"
+                );
+            }
+
+
+            // Hide AI when returning to Model Report
+
+            if (
+                typeof hideAI === "function"
+            ) {
+
+                hideAI();
+            }
+
+
+            // Scroll Model Report to top
+
+            const content =
+                document.querySelector(
+                    ".content"
+                );
+
+
+            if (content) {
+
+                content.scrollTop = 0;
+            }
+        }
+
         function toggleReportTable() {
 
             const section =
@@ -4423,6 +4694,47 @@ function observeModelDetailsFrame(frame) {
                 icon.innerHTML = "▼";
             }
         }
+
+        function showWarranty(
+            warrantyFlag,
+            warrantyLength,
+            warrantyUnit
+        ) {
+
+            if (warrantyFlag !== "X") {
+
+                return `
+            <span class="no-icon">
+                ✖
+            </span>
+        `;
+            }
+
+
+            const length =
+                warrantyLength || "";
+
+            const unit =
+                warrantyUnit || "";
+
+
+            if (!length && !unit) {
+
+                return `
+            <span class="yes-icon">
+                ✔
+            </span>
+        `;
+            }
+
+
+            return `
+        <span class="warranty-value">
+            ${length} ${unit}
+        </span>
+    `;
+        }
+
         function showStatus(value) {
 
             return value === "X"
@@ -4432,85 +4744,122 @@ function observeModelDetailsFrame(frame) {
         }
         function goBackToDashboard() {
 
-    const dashboardContent =
-        parent.document.getElementById(
-            "dashboardContent"
-        );
+            /*
+               If Details was opened from Model Report,
+               return to Model Report.
+            */
+
+            if (modelDetailsSource === "modelReport") {
+
+                const modelReportMenu =
+                    document.querySelectorAll(
+                        ".menu-item"
+                    )[1];
 
 
-    const detailsContent =
-        parent.document.getElementById(
-            "detailsContent"
-        );
+                showPage(
+                    "modelReport",
+                    modelReportMenu
+                );
 
 
-    if (dashboardContent) {
-
-        dashboardContent.style.display =
-            "block";
-    }
+                modelDetailsSource =
+                    "dashboard";
 
 
-    if (detailsContent) {
-
-        detailsContent.innerHTML =
-            "";
-    }
+                hideAI();
 
 
-    const menus =
-        parent.document.querySelectorAll(
-            ".menu-item"
-        );
+                return;
+            }
 
 
-    menus.forEach(
-        function (menu) {
+            /*
+               Otherwise return to normal Dashboard.
+            */
 
-            menu.classList.remove(
-                "active-menu"
+            const dashboardContent =
+                document.getElementById(
+                    "dashboardContent"
+                );
+
+
+            const detailsContent =
+                document.getElementById(
+                    "detailsContent"
+                );
+
+
+            if (dashboardContent) {
+
+                dashboardContent.style.display =
+                    "block";
+            }
+
+
+            if (detailsContent) {
+
+                detailsContent.innerHTML =
+                    "";
+            }
+
+
+            const menus =
+                document.querySelectorAll(
+                    ".menu-item"
+                );
+
+
+            menus.forEach(
+                function (menu) {
+
+                    menu.classList.remove(
+                        "active-menu"
+                    );
+                }
             );
+
+
+            if (menus[0]) {
+
+                menus[0].classList.add(
+                    "active-menu"
+                );
+            }
+
+
+            const dashboard =
+                document.getElementById(
+                    "dashboard"
+                );
+
+
+            if (dashboard) {
+
+                document
+                    .querySelectorAll(".page")
+                    .forEach(
+                        function (page) {
+
+                            page.classList.remove(
+                                "active"
+                            );
+                        }
+                    );
+
+
+                dashboard.classList.add(
+                    "active"
+                );
+            }
+
+
+            hideAI();
+
+
+            modelDetailsSource =
+                "dashboard";
         }
-    );
-
-
-    if (menus[0]) {
-
-        menus[0].classList.add(
-            "active-menu"
-        );
-    }
-
-
-    const aiLauncher =
-        parent.document.getElementById(
-            "aiLauncher"
-        );
-
-
-    if (aiLauncher) {
-
-        aiLauncher.style.display =
-            "none";
-    }
-
-
-    const aiPanel =
-        parent.document.getElementById(
-            "aiChatPanel"
-        );
-
-
-    if (aiPanel) {
-
-        aiPanel.classList.remove(
-            "open"
-        );
-
-        aiPanel.style.display =
-            "none";
-    }
-}
 
         function loadCreatedModelReport() {
 
@@ -4568,166 +4917,166 @@ function observeModelDetailsFrame(frame) {
 
         }
 
- // =====================================================
-// AI MODEL READINESS ASSISTANT
-// =====================================================
+        // =====================================================
+        // AI MODEL READINESS ASSISTANT
+        // =====================================================
 
-function toggleAIChat() {
+        function toggleAIChat() {
 
-    const appSection =
-        document.getElementById(
-            "appSection"
-        );
-
-
-    if (
-        !appSection ||
-        !appSection.classList.contains(
-            "active"
-        )
-    ) {
-
-        return;
-    }
+            const appSection =
+                document.getElementById(
+                    "appSection"
+                );
 
 
-    const dashboard =
-        document.getElementById(
-            "dashboard"
-        );
+            if (
+                !appSection ||
+                !appSection.classList.contains(
+                    "active"
+                )
+            ) {
+
+                return;
+            }
 
 
-    const dashboardContent =
-        document.getElementById(
-            "dashboardContent"
-        );
+            const dashboard =
+                document.getElementById(
+                    "dashboard"
+                );
 
 
-    const detailsContent =
-        document.getElementById(
-            "detailsContent"
-        );
+            const dashboardContent =
+                document.getElementById(
+                    "dashboardContent"
+                );
 
 
-    const modelDetailsFrame =
-        document.getElementById(
-            "modelDetailsFrame"
-        );
+            const detailsContent =
+                document.getElementById(
+                    "detailsContent"
+                );
 
 
-    if (
-        !dashboard ||
-        !dashboard.classList.contains("active") ||
-        !dashboardContent ||
-        dashboardContent.style.display !== "none" ||
-        !detailsContent ||
-        !modelDetailsFrame
-    ) {
-
-        return;
-    }
+            const modelDetailsFrame =
+                document.getElementById(
+                    "modelDetailsFrame"
+                );
 
 
-    const panel =
-        document.getElementById(
-            "aiChatPanel"
-        );
+            if (
+                !dashboard ||
+                !dashboard.classList.contains("active") ||
+                !dashboardContent ||
+                dashboardContent.style.display !== "none" ||
+                !detailsContent ||
+                !modelDetailsFrame
+            ) {
+
+                return;
+            }
 
 
-    if (!panel) {
-
-        console.error(
-            "AI chat panel not found"
-        );
-
-        return;
-    }
+            const panel =
+                document.getElementById(
+                    "aiChatPanel"
+                );
 
 
-    const isOpen =
-        panel.classList.contains(
-            "open"
-        );
+            if (!panel) {
+
+                console.error(
+                    "AI chat panel not found"
+                );
+
+                return;
+            }
 
 
-    if (isOpen) {
-
-        panel.classList.remove(
-            "open"
-        );
-
-        panel.style.display =
-            "none";
-
-        return;
-    }
+            const isOpen =
+                panel.classList.contains(
+                    "open"
+                );
 
 
-    panel.style.display =
-        "flex";
+            if (isOpen) {
 
-    panel.classList.add(
-        "open"
-    );
+                panel.classList.remove(
+                    "open"
+                );
+
+                panel.style.display =
+                    "none";
+
+                return;
+            }
 
 
-    const input =
-        document.getElementById(
-            "aiQuestion"
-        );
+            panel.style.display =
+                "flex";
 
-
-    if (input) {
-
-        setTimeout(
-            function () {
-
-                input.focus();
-
-            },
-            100
-        );
-    }
-}
-
-async function resetAIChat() {
-
-    try {
-        const response =
-            await fetch(
-                "/api/ai/reset",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    }
-                }
+            panel.classList.add(
+                "open"
             );
 
-        const result =
-            await response.json();
 
-        if (!response.ok) {
+            const input =
+                document.getElementById(
+                    "aiQuestion"
+                );
 
-            console.error(
-                "AI Reset Error:",
-                result
-            );
 
-            return;
+            if (input) {
+
+                setTimeout(
+                    function () {
+
+                        input.focus();
+
+                    },
+                    100
+                );
+            }
         }
 
-        // Clear current chat messages
-        const messages =
-            document.getElementById(
-                "aiChatMessages"
-            );
+        async function resetAIChat() {
 
-        if (messages) {
+            try {
+                const response =
+                    await fetch(
+                        "/api/ai/reset",
+                        {
+                            method: "POST",
 
-            messages.innerHTML = `
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            }
+                        }
+                    );
+
+                const result =
+                    await response.json();
+
+                if (!response.ok) {
+
+                    console.error(
+                        "AI Reset Error:",
+                        result
+                    );
+
+                    return;
+                }
+
+                // Clear current chat messages
+                const messages =
+                    document.getElementById(
+                        "aiChatMessages"
+                    );
+
+                if (messages) {
+
+                    messages.innerHTML = `
                 <div class="ai-message ai-message-bot">
 
                     <div class="ai-avatar">
@@ -4743,378 +5092,378 @@ Example:
 
                 </div>
             `;
+                }
+
+                // Clear input box
+                const input =
+                    document.getElementById(
+                        "aiQuestion"
+                    );
+
+                if (input) {
+
+                    input.value = "";
+
+                    input.focus();
+                }
+
+                console.log(
+                    "AI conversation reset successfully"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "AI Reset Error:",
+                    error
+                );
+            }
         }
 
-        // Clear input box
-        const input =
-            document.getElementById(
-                "aiQuestion"
+        function handleAIKey(event) {
+
+            if (event.key === "Enter") {
+
+                event.preventDefault();
+
+                sendAIQuestion();
+            }
+        }
+
+        function addAIMessage(
+            message,
+            type
+        ) {
+
+            const messages =
+                document.getElementById(
+                    "aiChatMessages"
+                );
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+            wrapper.className =
+                `ai-message ai-message-${type}`;
+
+
+            if (type === "bot") {
+
+                const avatar =
+                    document.createElement(
+                        "div"
+                    );
+
+                avatar.className =
+                    "ai-avatar";
+
+
+                const botIcon =
+                    document.createElement(
+                        "i"
+                    );
+
+                botIcon.className =
+                    "fas fa-robot";
+
+
+                avatar.appendChild(
+                    botIcon
+                );
+
+
+                wrapper.appendChild(
+                    avatar
+                );
+            }
+
+            const content =
+                document.createElement(
+                    "div"
+                );
+
+            content.className =
+                "ai-message-content";
+
+            /* Important: Use textContent instead of innerHTML. */
+            content.textContent =
+                message;
+
+            wrapper.appendChild(
+                content
             );
 
-        if (input) {
+            messages.appendChild(
+                wrapper
+            );
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+            return wrapper;
+        }
+
+        function addAIThinkingMessage() {
+
+            const messages =
+                document.getElementById(
+                    "aiChatMessages"
+                );
+
+            const wrapper =
+                document.createElement(
+                    "div"
+                );
+
+            wrapper.className =
+                "ai-message ai-message-bot";
+
+            // AI Avatar
+
+            const avatar =
+                document.createElement(
+                    "div"
+                );
+
+            avatar.className =
+                "ai-avatar";
+
+
+            const botIcon =
+                document.createElement(
+                    "i"
+                );
+
+            botIcon.className =
+                "fas fa-robot";
+
+
+            avatar.appendChild(
+                botIcon
+            );
+
+
+            wrapper.appendChild(
+                avatar
+            );
+
+            // Thinking content
+
+            const content =
+                document.createElement(
+                    "div"
+                );
+
+            content.className =
+                "ai-thinking-content";
+
+            // Text
+
+            const text =
+                document.createElement(
+                    "span"
+                );
+
+            text.textContent =
+                "Analyzing SAP data";
+
+            content.appendChild(
+                text
+            );
+
+            // Animated dots
+
+            const dots =
+                document.createElement(
+                    "div"
+                );
+
+            dots.className =
+                "ai-thinking-dots";
+
+            const dot1 =
+                document.createElement(
+                    "span"
+                );
+
+            const dot2 =
+                document.createElement(
+                    "span"
+                );
+
+            const dot3 =
+                document.createElement(
+                    "span"
+                );
+
+            dots.appendChild(dot1);
+            dots.appendChild(dot2);
+            dots.appendChild(dot3);
+
+            content.appendChild(
+                dots
+            );
+
+            wrapper.appendChild(
+                content
+            );
+
+            messages.appendChild(
+                wrapper
+            );
+
+            // Automatically scroll down
+            messages.scrollTop =
+                messages.scrollHeight;
+
+            return wrapper;
+        }
+
+        async function sendAIQuestion() {
+
+            const input =
+                document.getElementById(
+                    "aiQuestion"
+                );
+
+            const button =
+                document.getElementById(
+                    "aiSendButton"
+                );
+
+            const question =
+                input.value.trim();
+
+            if (!question) {
+
+                return;
+            }
+
+            addAIMessage(
+                question,
+                "user"
+            );
 
             input.value = "";
 
-            input.focus();
+            button.disabled = true;
+
+            const loading =
+                addAIThinkingMessage();
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/ai/chat",
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body:
+                                JSON.stringify({
+                                    question:
+                                        question
+                                })
+                        }
+                    );
+
+                const result =
+                    await response.json();
+
+                loading.remove();
+
+                if (!response.ok) {
+
+                    addAIMessage(
+                        result.message ||
+                        "Unable to retrieve SAP data.",
+                        "bot"
+                    );
+
+                    return;
+                }
+
+                addAIMessage(
+                    result.answer,
+                    "bot"
+                );
+
+            }
+            catch (error) {
+
+                console.error(
+                    "AI Chat Error:",
+                    error
+                );
+
+                loading.remove();
+
+                addAIMessage(
+                    "Unable to connect to the Model Readiness Assistant.",
+                    "bot"
+                );
+
+            }
+            finally {
+
+                button.disabled =
+                    false;
+
+                input.focus();
+            }
         }
 
-        console.log(
-            "AI conversation reset successfully"
-        );
+        function resizeModelChangeFrame() {
 
-    }
-    catch (error) {
+            const frame =
+                document.getElementById("modelChangeFrame");
 
-        console.error(
-            "AI Reset Error:",
-            error
-        );
-    }
-}
+            if (!frame) return;
 
-function handleAIKey(event) {
+            try {
 
-    if (event.key === "Enter") {
+                const doc =
+                    frame.contentDocument ||
+                    frame.contentWindow.document;
 
-        event.preventDefault();
+                const height = Math.max(
+                    doc.body.scrollHeight,
+                    doc.documentElement.scrollHeight
+                );
 
-        sendAIQuestion();
-    }
-}
+                frame.style.height = height + "px";
 
-function addAIMessage(
-    message,
-    type
-) {
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        const modelChangeFrame =
+            document.getElementById("modelChangeFrame");
 
-    const messages =
-        document.getElementById(
-            "aiChatMessages"
-        );
+        if (modelChangeFrame) {
 
-    const wrapper =
-        document.createElement(
-            "div"
-        );
+            modelChangeFrame.addEventListener(
+                "load",
+                function () {
 
-    wrapper.className =
-        `ai-message ai-message-${type}`;
+                    resizeModelChangeFrame();
 
+                    setInterval(
+                        resizeModelChangeFrame,
+                        500
+                    );
 
-    if (type === "bot") {
-
-    const avatar =
-        document.createElement(
-            "div"
-        );
-
-    avatar.className =
-        "ai-avatar";
-
-
-    const botIcon =
-        document.createElement(
-            "i"
-        );
-
-    botIcon.className =
-        "fas fa-robot";
-
-
-    avatar.appendChild(
-        botIcon
-    );
-
-
-    wrapper.appendChild(
-        avatar
-    );
-}
-
-    const content =
-        document.createElement(
-            "div"
-        );
-
-    content.className =
-        "ai-message-content";
-
-    /* Important: Use textContent instead of innerHTML. */
-    content.textContent =
-        message;
-
-    wrapper.appendChild(
-        content
-    );
-
-    messages.appendChild(
-        wrapper
-    );
-
-    messages.scrollTop =
-        messages.scrollHeight;
-
-    return wrapper;
-}
-
-function addAIThinkingMessage() {
-
-    const messages =
-        document.getElementById(
-            "aiChatMessages"
-        );
-
-    const wrapper =
-        document.createElement(
-            "div"
-        );
-
-    wrapper.className =
-        "ai-message ai-message-bot";
-
-    // AI Avatar
-
-    const avatar =
-    document.createElement(
-        "div"
-    );
-
-avatar.className =
-    "ai-avatar";
-
-
-const botIcon =
-    document.createElement(
-        "i"
-    );
-
-botIcon.className =
-    "fas fa-robot";
-
-
-avatar.appendChild(
-    botIcon
-);
-
-
-wrapper.appendChild(
-    avatar
-);
-
-    // Thinking content
-
-    const content =
-        document.createElement(
-            "div"
-        );
-
-    content.className =
-        "ai-thinking-content";
-
-    // Text
-
-    const text =
-        document.createElement(
-            "span"
-        );
-
-    text.textContent =
-        "Analyzing SAP data";
-
-    content.appendChild(
-        text
-    );
-
-    // Animated dots
-
-    const dots =
-        document.createElement(
-            "div"
-        );
-
-    dots.className =
-        "ai-thinking-dots";
-
-    const dot1 =
-        document.createElement(
-            "span"
-        );
-
-    const dot2 =
-        document.createElement(
-            "span"
-        );
-
-    const dot3 =
-        document.createElement(
-            "span"
-        );
-
-    dots.appendChild(dot1);
-    dots.appendChild(dot2);
-    dots.appendChild(dot3);
-
-    content.appendChild(
-        dots
-    );
-
-    wrapper.appendChild(
-        content
-    );
-
-    messages.appendChild(
-        wrapper
-    );
-
-    // Automatically scroll down
-    messages.scrollTop =
-        messages.scrollHeight;
-
-    return wrapper;
-}
-
-async function sendAIQuestion() {
-
-    const input =
-        document.getElementById(
-            "aiQuestion"
-        );
-
-    const button =
-        document.getElementById(
-            "aiSendButton"
-        );
-
-    const question =
-        input.value.trim();
-
-    if (!question) {
-
-        return;
-    }
-
-    addAIMessage(
-        question,
-        "user"
-    );
-
-    input.value = "";
-
-    button.disabled = true;
-
-    const loading =
-    addAIThinkingMessage();
-
-    try {
-
-        const response =
-            await fetch(
-                "/api/ai/chat",
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body:
-                        JSON.stringify({
-                            question:
-                                question
-                        })
                 }
             );
-
-        const result =
-            await response.json();
-
-        loading.remove();
-
-        if (!response.ok) {
-
-            addAIMessage(
-                result.message ||
-                "Unable to retrieve SAP data.",
-                "bot"
-            );
-
-            return;
         }
-
-        addAIMessage(
-            result.answer,
-            "bot"
-        );
-
-    }
-    catch (error) {
-
-        console.error(
-            "AI Chat Error:",
-            error
-        );
-
-        loading.remove();
-
-        addAIMessage(
-            "Unable to connect to the Model Readiness Assistant.",
-            "bot"
-        );
-
-    }
-    finally {
-
-        button.disabled =
-            false;
-
-        input.focus();
-    }
-}
-
-function resizeModelChangeFrame() {
- 
-    const frame =
-        document.getElementById("modelChangeFrame");
- 
-    if (!frame) return;
- 
-    try {
- 
-        const doc =
-            frame.contentDocument ||
-            frame.contentWindow.document;
- 
-        const height = Math.max(
-            doc.body.scrollHeight,
-            doc.documentElement.scrollHeight
-        );
- 
-        frame.style.height = height + "px";
- 
-    } catch (e) {
-        console.error(e);
-    }
-}
-const modelChangeFrame =
-    document.getElementById("modelChangeFrame");
- 
-if (modelChangeFrame) {
- 
-    modelChangeFrame.addEventListener(
-        "load",
-        function () {
- 
-            resizeModelChangeFrame();
- 
-            setInterval(
-                resizeModelChangeFrame,
-                500
-            );
- 
-        }
-    );
-}
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>

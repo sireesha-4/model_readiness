@@ -316,21 +316,6 @@
       border-color: #ffffff;
     }
 
-    .warranty-group {
-      display: flex;
-      gap: 8px;
-      width: 100%;
-    }
-
-    .warranty-number {
-      flex: 0 0 100px;
-      min-width: 220px;
-    }
-
-    .warranty-unit {
-      flex: 0 0 90px;
-      min-width: 90px;
-    }
 
     .switch {
       position: relative;
@@ -430,6 +415,41 @@
       background: #d97706;
     }
 
+    /* ===== Warranty number + unit group ===== */
+    .warranty-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      max-width: 220px;
+    }
+
+    .warranty-number {
+      flex: 0 0 90px;
+      min-width: 90px;
+      max-width: 110px;
+      height: 34px;
+      padding: 0 10px;
+      background: #0f1c2e;
+      border: 1px solid #64748b;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .warranty-unit {
+      flex: 0 0 100px;
+      min-width: 100px;
+      height: 34px;
+      padding: 0 8px;
+      background: #0f1c2e;
+      border: 1px solid #64748b;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
     .warranty-number:disabled,
     .warranty-unit:disabled {
       opacity: 0.5;
@@ -438,60 +458,97 @@
       color: #94a3b8;
     }
 
+    /* ===== 3-column Warranty Grid ===== */
     .warranty-grid {
       display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 16px 28px;
+      grid-template-columns: 200px 240px 320px;
+      /* Toggle | Length | Material */
+      gap: 18px 24px;
       align-items: start;
+      justify-content: start;
     }
 
-    @media(max-width:768px) {
+    .warranty-grid .info-field {
+      min-width: 0;
+    }
+
+    /* Toggle column – keep compact */
+    .warranty-grid .info-field:nth-child(3n + 1) {
+      max-width: 200px;
+    }
+
+    /* Length column – number + unit side by side */
+    .warranty-grid .info-field:nth-child(3n + 2) .warranty-group,
+    .warranty-grid .info-field:nth-child(3n + 2) .field-value {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Material column – fixed width, no stretch */
+    .warranty-grid .info-field:nth-child(3n) input,
+    .warranty-grid .info-field:nth-child(3n) .field-value {
+      width: 100%;
+      max-width: 320px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .warranty-grid {
+        grid-template-columns: 180px 220px 280px;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .warranty-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .warranty-grid .info-field:nth-child(3n) {
+        grid-column: 1 / -1;
+        /* Material takes full width on medium screens */
+      }
+    }
+
+    @media (max-width: 600px) {
       .warranty-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    .warranty-grid .info-field:first-child,
-    .warranty-grid .info-field:nth-child(3),
-    .warranty-grid .info-field:nth-child(5),
-    .warranty-grid .info-field:nth-child(7) {
-      max-width: 220px;
-    }
-
     .review-modal {
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
 
       background: rgba(0, 0, 0, 0.78);
       backdrop-filter: blur(10px);
-
+      align-items: center;
       display: flex;
       justify-content: center;
-      align-items: center;
+      overflow: hidden;
 
-      z-index: 99999;
+      z-index: 2147483647;
     }
 
     .review-content {
-
       width: 980px;
       max-width: 95%;
+      max-height: 85vh;
 
       background:
         radial-gradient(circle at top left,
-          rgba(37, 99, 235, 0.18),
+          rgba(37, 99, 235, .18),
           #020817 65%);
 
-      border: 1px solid rgba(59, 130, 246, 0.45);
-
+      border: 1px solid rgba(59, 130, 246, .45);
       border-radius: 22px;
 
       padding: 28px;
 
-      box-shadow:
-        0 0 10px rgba(96, 165, 250, .5),
-        0 0 25px rgba(59, 130, 246, .35),
-        0 0 60px rgba(59, 130, 246, .15);
+      overflow: hidden;
     }
 
     .review-header {
@@ -628,6 +685,7 @@
       color: #ff4d4f;
       font-size: 28px;
     }
+
     .review-close-btn:hover {
 
       background: #2563eb;
@@ -664,7 +722,9 @@
     }
 
     .review-actions {
-      margin-top: 24px;
+      flex-shrink: 0;
+
+      margin-top: 16px;
 
       display: flex;
       justify-content: center;
@@ -709,11 +769,9 @@
     }
 
     .review-table-wrapper {
-
       max-height: 420px;
 
       overflow-y: auto;
-
       overflow-x: hidden;
 
       border-radius: 14px;
@@ -809,6 +867,32 @@
     .material-readonly:focus {
       outline: none;
     }
+
+    .quick-country-select {
+      width: 100%;
+      height: 46px;
+
+      padding: 0 14px;
+
+      border: 1px solid #31465f;
+      border-radius: 9px;
+
+      background: rgba(8, 24, 42, 0.88);
+
+      color: #dbeafe;
+
+      font-size: 13px;
+
+      outline: none;
+
+      cursor: pointer;
+    }
+
+
+    .quick-country-select option {
+      background: #0f1c2e;
+      color: #ffffff;
+    }
   </style>
 </head>
 
@@ -828,9 +912,41 @@
         <input type="text" id="changeModelSearch" placeholder="e.g. DCPL2550DW">
       </div>
 
-      <div class="form-field">
+      <!-- <div class="form-field">
         <label>Country</label>
         <input type="text" id="changeCountrySearch" placeholder="e.g. US">
+      </div> -->
+
+      <div class="form-field">
+
+        <label>
+          Country
+        </label>
+
+        <select id="country" class="quick-country-select">
+
+          <option value="">
+            Select country
+          </option>
+
+          <option value="US">
+            United States
+          </option>
+
+          <option value="CA">
+            Canada
+          </option>
+
+          <option value="UK">
+            United Kingdom
+          </option>
+
+          <option value="JP">
+            Japan
+          </option>
+
+        </select>
+
       </div>
 
       <div class="form-field">
@@ -890,33 +1006,37 @@
       "Material Description": "Maktx",
       "Distribution Channel": "Vtweg",
       "Distribution Material Status": "Vmsta",
-      "StandardWarranty": "StdWtyType",
-      "StandardwarrantyLength": "StdWtyLen",
-      "StandardwarrantyUnit": "StdWtyLenUnit",
-      "ExtendedWarranty": "ExtdWtyType",
-      "ExtendedwarrantyLength": "ExtdWtyLen",
-      "ExtendedwarrantyUnit": "ExtdWtyLenUnit",
-      "BrothercareWarranty": "BcareWtyType",
-      "BrothercarewarrantyLength": "BcareWtyLen",
-      "BrothercarewarrantyUnit": "BcareWtyLenUnit",
-      "BrotherplusWarranty": "BplusWtyType",
-      "BrotherpluswarrantyLength": "BplusWtyLen",
-      "BrotherpluswarrantyUnit": "BplusWtyLenUnit",
+      "Standard Warranty": "StdWtyType",
+      "Standard Warranty Length": "StdWtyLen",
+      "Standard Warranty Unit": "StdWtyLenUnit",
+      "Extended Warranty": "ExtdWtyType",
+      "Extended Warranty Length": "ExtdWtyLen",
+      "Extended Warranty Unit": "ExtdWtyLenUnit",
+      "BrotherCare Warranty": "BcareWtyType",
+      "BrotherCare Warranty Length": "BcareWtyLen",
+      "BrotherCare Warranty Unit": "BcareWtyLenUnit",
+      "BrotherPlus Warranty": "BplusWtyType",
+      "BrotherPlus Warranty Length": "BplusWtyLen",
+      "BrotherPlus Warranty Unit": "BplusWtyLenUnit",
+      "Standard Warranty SKU": "Swsku",
+      "Extended Warranty SKU": "Ewsku",
+      "BrotherCare SKU": "Bcsku",
+      "BrotherPlus SKU": "Bpsku",
       "Amazon Dart": "Amazondart",
-      "BR Refresh": "Brrefresh",
+      "Auto Reorder": "Brrefresh",
       "Barracuda": "Barracuda",
       "Brother Plus": "Bplus",
-      "B1 Price Setup": "Selkzb1",
-      "BR Price Setup": "Selkzbr",
-      "B1 Material Price": "B1Amount",
-      "B1 Currency": "B1Currency",
-      "BR Material Price": "BRAmount",
-      "BR Currency": "BRCurrency",
+      "Barracuda Price Setup": "Selkzb1",
+      "Auto Reorder Price Setup": "Selkzbr",
+      "Barracuda Material Price": "B1Amount",
+      "Barracuda Currency": "B1Currency",
+      "Auto Reorder Material Price": "BRAmount",
+      "Auto Reorder Currency": "BRCurrency",
       "Consumable": "Consumable",
       "Drum Order": "DrumOrder",
       "Waste Toner": "WasteToner",
       "Belt Unit": "BeltUnit",
-      "Claim Order": "Claimorder"
+      "Backup Order": "Claimorder"
 
     };
 
@@ -929,7 +1049,7 @@
           .value.trim();
 
       const country =
-        document.getElementById("changeCountrySearch")
+        document.getElementById("country")
           .value.trim();
 
 
@@ -946,7 +1066,7 @@
       }
       try {
         const response = await fetch(
-          `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+          `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
         );
 
         console.log("API called");
@@ -990,7 +1110,7 @@
       ).value = "";
 
       document.getElementById(
-        "changeCountrySearch"
+        "country"
       ).value = "";
 
       document.getElementById(
@@ -1029,14 +1149,26 @@
       }
 
       if (!section.dataset.originalValues) {
+        const fields = section.querySelectorAll(".info-field");
+        const values = [];
+        const keys = [];
 
-        section.dataset.originalValues =
-          JSON.stringify(
-            Array.from(
-              section.querySelectorAll(".field-value")
-            ).map(x => x.innerText)
-          );
+        fields.forEach(f => {
+          const label = f.querySelector("label")?.innerText?.trim() || "";
+          const value = f.querySelector(".field-value")?.innerText?.trim() || "-";
 
+          let sub = "-";
+          const subBlock = f.closest(".pricing-sub-block");
+          if (subBlock) {
+            sub = subBlock.querySelector(".pricing-sub-block-title")?.innerText?.trim() || "-";
+          }
+
+          keys.push(sub + "||" + label);   // unique key
+          values.push(value);
+        });
+
+        section.dataset.originalValues = JSON.stringify(values);
+        section.dataset.originalKeys = JSON.stringify(keys);
       }
 
       const toggle =
@@ -1058,33 +1190,32 @@
 
         const yesNoFields = [
 
-          "StandardWarranty",
-          "ExtendedWarranty",
-          "BrothercareWarranty",
-          "BrotherplusWarranty",
+          "Standard Warranty",
+          "Extended Warranty",
+          "BrotherCare Warranty",
+          "BrotherPlus Warranty",
 
           "Amazon Dart",
-          "BR Refresh",
+          "Auto Reorder",
           "Barracuda",
           "Brother Plus",
 
-          "B1 Price Setup",
-          "BR Price Setup",
+          "Barracuda Price Setup",
+          "Auto Reorder Price Setup",
 
           "Backup Order",
           "Drum Order",
           "Waste Toner",
-          "Belt Unit",
-          "Claim Order"
+          "Belt Unit"
 
         ];
 
         const warrantyFields = [
 
-          "StandardwarrantyLength",
-          "ExtendedwarrantyLength",
-          "BrothercarewarrantyLength",
-          "BrotherpluswarrantyLength"
+          "Standard Warranty Length",
+          "Extended Warranty Length",
+          "BrotherCare Warranty Length",
+          "BrotherPlus Warranty Length"
 
         ];
         if (warrantyFields.includes(label)) {
@@ -1207,7 +1338,7 @@
 
       if (!section) return;
 
-      if (label === "B1 Price Setup") {
+      if (label === "Barracuda Price Setup") {
 
         const block =
           section.querySelector("#b1PricingDetails");
@@ -1218,7 +1349,7 @@
         }
       }
 
-      if (label === "BR Price Setup") {
+      if (label === "Auto Reorder Price Setup") {
 
         const block =
           section.querySelector("#brPricingDetails");
@@ -1282,77 +1413,70 @@
           `<span class="field-value">${value}</span>`;
       });
       const originalValues =
-        JSON.parse(
-          section.dataset.originalValues || "[]"
+        JSON.parse(section.dataset.originalValues || "[]");
+
+      const originalLabels =
+        JSON.parse(section.dataset.originalLabels || "[]");
+
+      const fields =
+        section.querySelectorAll(".info-field");
+
+      const sectionName =
+        section.querySelector("h3").innerText;
+
+      let hasAnyChange = false;
+
+      fields.forEach(field => {
+        const label = field.querySelector("label")?.innerText?.trim();
+        if (!label) return;
+
+        const currentValue =
+          field.querySelector(".field-value")?.innerText?.trim() || "-";
+
+        // subCategory from DOM only (no hardcoding)
+        let subCategory = "-";
+        const subBlock = field.closest(".pricing-sub-block");
+        if (subBlock) {
+          subCategory =
+            subBlock.querySelector(".pricing-sub-block-title")?.innerText?.trim() || "-";
+        }
+
+        const originalKeys = JSON.parse(section.dataset.originalKeys || "[]");
+        const originalValues = JSON.parse(section.dataset.originalValues || "[]");
+
+        const key = subCategory + "||" + label;
+        const keyIndex = originalKeys.indexOf(key);
+        const originalValue =
+          keyIndex > -1 ? (originalValues[keyIndex] || "-") : currentValue;
+
+        const existingIndex = changedFields.findIndex(x =>
+          x.section === sectionName &&
+          x.field === label &&
+          (x.subCategory || "-") === subCategory
         );
 
-      const currentValues =
-        Array.from(
-          section.querySelectorAll(".field-value")
-        ).map(x => x.innerText);
+        if (originalValue !== currentValue) {
+          hasAnyChange = true;
 
-      const changed =
-        JSON.stringify(originalValues) !==
-        JSON.stringify(currentValues);
-
-      if (changed) {
-
-        const fields =
-          section.querySelectorAll(".info-field");
-
-        fields.forEach((field, index) => {
-
-          const label =
-            field.querySelector("label")?.innerText;
-
-          const currentValue =
-            field.querySelector(".field-value")?.innerText;
-
-          const originalValue =
-            originalValues[index];
-
-          const sectionName =
-            section.querySelector("h3").innerText;
-
-          const existingIndex =
-            changedFields.findIndex(x =>
-              x.section === sectionName &&
-              x.field === label
-            );
-
-          if (originalValue !== currentValue) {
-
-            if (existingIndex > -1) {
-
-              changedFields[existingIndex].after =
-                currentValue;
-
-            } else {
-
-              changedFields.push({
-                section: sectionName,
-                field: label,
-                before: originalValue,
-                after: currentValue
-              });
-
-            }
-
+          if (existingIndex > -1) {
+            changedFields[existingIndex].after = currentValue;
           } else {
-
-            if (existingIndex > -1) {
-
-              changedFields.splice(
-                existingIndex,
-                1
-              );
-
-            }
-
+            changedFields.push({
+              section: sectionName,
+              subCategory: subCategory,
+              field: label,
+              before: originalValue,
+              after: currentValue
+            });
           }
+        } else {
+          if (existingIndex > -1) {
+            changedFields.splice(existingIndex, 1);
+          }
+        }
+      });
 
-        });
-
+      if (hasAnyChange) {
         markAsChanged();
       }
       icon.innerHTML =
@@ -1418,164 +1542,297 @@
       showReviewPopup(changedFields);
     }
     function showReviewPopup(changes) {
-
       if (changes.length === 0) {
         alert("No changes detected.");
         return;
       }
 
+      // Build the modal HTML (same as before)
       let html = `
+    <div class="review-modal" id="modelChangeReviewModal">
+      <div class="review-content">
+        <div class="review-header">
+          <div class="review-title">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Review Changes</span>
+          </div>
+          <button class="review-close-icon" onclick="window.parent.closeModelChangeReview()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="review-divider"></div>
+        <div class="review-table-wrapper">
+          <table class="review-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Sub Category</th>   <!-- NEW -->
+                <th>Field</th>
+                <th>Before</th>
+                <th>After</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+  `;
 
-    <div class="review-modal">
-
-        <div class="review-content">
-
-            <div class="review-header">
-
-                <div class="review-title">
-
-                    <i class="fa-solid fa-shield-halved"></i>
-
-                    <span>Review Changes</span>
-
-                </div>
-
-                <button
-                    class="review-close-icon"
-                    onclick="closeReviewPopup()">
-
-                    <i class="fas fa-times"></i>
-
-                </button>
-
-            </div>
-
-            <div class="review-divider"></div>
-
-<div class="review-table-wrapper">
-            <table class="review-table">
-
-                <thead>
-
-                    <tr>
-                        <th>Category</th>
-                        <th>Field</th>
-                        <th>Before</th>
-                        <th>After</th>
-                        <th>Status</th>
-                    </tr>
-
-                </thead>
-
-                <tbody>
-    `;
-
-      const groupedChanges = {};
+      // Group: section → subCategory → items
+      const grouped = {};
 
       changes.forEach(change => {
+        const section = change.section;
+        const sub = change.subCategory || "-";
 
-        if (!groupedChanges[change.section]) {
-          groupedChanges[change.section] = [];
-        }
-
-        groupedChanges[change.section].push(change);
-
+        if (!grouped[section]) grouped[section] = {};
+        if (!grouped[section][sub]) grouped[section][sub] = [];
+        grouped[section][sub].push(change);
       });
 
-      Object.keys(groupedChanges).forEach(section => {
+      Object.keys(grouped).forEach(section => {
+        const subGroups = grouped[section];
+        const subKeys = Object.keys(subGroups);
 
-        const items = groupedChanges[section];
-
-        items.forEach((change, index) => {
-
-          html += `<tr>`;
-
-          if (index === 0) {
-
-            html += `
-                <td rowspan="${items.length}"
-                    class="category-cell">
-
-                    ${section}
-
-                </td>
-            `;
-          }
-
-          html += `
-
-            <td>${change.field}</td>
-
-            <td class="before-value">
-                ${change.before}
-            </td>
-
-          <td class="${change.after === "Yes"
-              ? "after-value yes-value"
-              : change.after === "No"
-                ? "after-value no-value"
-                : "after-value"
-            }">
-           ${change.after}
-            </td>
-
-
-          <td class="status-cell">
-
-    ${change.after === "No"
-              ? '<i class="fa-regular fa-circle-xmark status-no"></i>'
-              : '<i class="fa-regular fa-circle-check status-yes"></i>'
-            }
-
-</td>
-
-
-        </tr>
-        `;
+        // total rows in this section (for Category rowspan)
+        let sectionRowCount = 0;
+        subKeys.forEach(sub => {
+          sectionRowCount += subGroups[sub].length;
         });
 
+        let sectionFirstRow = true;
+
+        subKeys.forEach(sub => {
+          const items = subGroups[sub];
+          const subRowCount = items.length;
+
+          items.forEach((change, index) => {
+            html += `<tr>`;
+
+            // Category – only on the first row of the whole section
+            if (sectionFirstRow) {
+              html += `
+          <td rowspan="${sectionRowCount}" class="category-cell">
+            ${section}
+          </td>
+        `;
+              sectionFirstRow = false;
+            }
+
+            // Sub Category – only on the first row of this sub group
+            if (index === 0) {
+              html += `
+          <td rowspan="${subRowCount}" class="category-cell">
+            ${sub}
+          </td>
+        `;
+            }
+
+            html += `
+        <td>${change.field}</td>
+        <td class="before-value">${change.before}</td>
+        <td class="${change.after === "Yes" ? "after-value yes-value" :
+                change.after === "No" ? "after-value no-value" : "after-value"
+              }">
+          ${change.after}
+        </td>
+        <td class="status-cell">
+          ${change.after === "No"
+                ? '<i class="fa-regular fa-circle-xmark status-no"></i>'
+                : '<i class="fa-regular fa-circle-check status-yes"></i>'
+              }
+        </td>
+      </tr>`;
+          });
+        });
       });
-
       html += `
-
-                </tbody>
-
-            </table>
-            </div>
-
-            <div class="review-actions">
-
-    <button
-        class="review-save-btn"
-        onclick="saveChanges()">
-
-        <i class="fas fa-floppy-disk"></i>
-        Save Changes
-
-    </button>
-
-</div>
-
+            </tbody>
+          </table>
         </div>
-
+        <div class="review-actions">
+          <button class="review-save-btn" onclick="window.parent.saveModelChangeFromReview()">
+            <i class="fas fa-floppy-disk"></i>
+            Save Changes
+          </button>
+        </div>
+      </div>
     </div>
-    `;
+  `;
 
-      document.body.insertAdjacentHTML(
-        "beforeend",
-        html
-      );
+      // Inject styles into parent if they are not already present
+      injectReviewStylesToParent();
+
+      // Append modal to the PARENT document
+
+      window.parent.document.body.insertAdjacentHTML("beforeend", html);
+
+      // Prevent background scrolling
+      window.parent.document.body.style.overflow = "hidden";
+      const parentContent = window.parent.document.querySelector(".content");
+      if (parentContent) {
+        parentContent.style.overflowY = "hidden";
+      }
+    }
+
+    function injectReviewStylesToParent() {
+      if (window.parent.document.getElementById("modelChangeReviewStyles")) return;
+
+      const style = window.parent.document.createElement("style");
+      style.id = "modelChangeReviewStyles";
+      style.textContent = `
+    .review-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      z-index: 2147483647;
+    }
+    .review-content {
+      width: 980px;
+      max-width: 95%;
+      max-height: 85vh;
+      background: radial-gradient(circle at top left, rgba(37,99,235,.18), #020817 65%);
+      border: 1px solid rgba(59,130,246,.45);
+      border-radius: 22px;
+      padding: 28px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .review-title {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: #178eb6;
+      font-size: 24px;
+      font-weight: 700;
+      text-shadow: 0 0 4px rgba(34, 199, 255, .25);
+    }
+    .review-title i {
+      font-size: 48px;
+      color: #178eb6;
+    }
+    .review-close-icon {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .review-close-icon:hover {
+      color: #ffffff;
+    }
+    .review-divider {
+      height: 1px;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, transparent, #3b82f6, transparent);
+      flex-shrink: 0;
+    }
+    .review-table-wrapper {
+      max-height: 420px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border-radius: 14px;
+      flex: 1;
+    }
+    .review-table-wrapper::-webkit-scrollbar { width: 8px; }
+    .review-table-wrapper::-webkit-scrollbar-track { background: #07101f; border-radius: 10px; }
+    .review-table-wrapper::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 10px; }
+    .review-table-wrapper::-webkit-scrollbar-thumb:hover { background: #3b82f6; }
+    .review-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 14px;
+    }
+    .review-table thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: linear-gradient(180deg, rgba(37, 99, 235, .22), rgba(15, 23, 42, .95));
+      color: #dbeafe;
+      padding: 16px 14px;
+      text-align: left;
+      font-size: 14px;
+      border: 1px solid rgba(59, 130, 246, .2);
+    }
+    .review-table td {
+      padding: 14px;
+      color: #e2e8f0;
+      border: 1px solid rgba(59, 130, 246, .15);
+    }
+    .review-table tr:hover {
+      background: rgba(37, 99, 235, .05);
+    }
+    .before-value { color: #cbd5e1; text-align: center; }
+    .after-value { color: #f8fafc; font-weight: 600; text-align: center; }
+    .yes-value { color: #4ade80; }
+    .no-value { color: #ef4444; }
+    .status-cell { text-align: center; vertical-align: middle; }
+    .status-yes { color: #4ade80; font-size: 22px; }
+    .status-no { color: #ef4444; font-size: 22px; }
+    .category-cell {
+      width: 220px;
+      font-weight: 700;
+      color: #f8fafc;
+      vertical-align: middle;
+      line-height: 1.5;
+      background: rgba(37, 99, 235, .08);
+    }
+    .review-actions {
+      flex-shrink: 0;
+      margin-top: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .review-save-btn {
+      min-width: 220px;
+      height: 48px;
+      border: none;
+      border-radius: 10px;
+      background: #0e6f31;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background .2s ease, transform .2s ease;
+    }
+    .review-save-btn:hover {
+      background: #0e6f31;
+      transform: translateY(-2px);
+    }
+    .review-save-btn:active {
+      transform: translateY(0);
+    }
+  `;
+      window.parent.document.head.appendChild(style);
     }
 
     function closeReviewPopup() {
-
-      const modal =
-        document.querySelector(".review-modal");
-
-      if (modal) {
-        modal.remove();
-      }
+      // This will be called from parent, but keep a local version for safety
+      const modal = document.querySelector(".review-modal");
+      if (modal) modal.remove();
     }
+
+
     function toggleSection(btn) {
 
       const section =
@@ -1605,11 +1862,9 @@
     function showChangeBlocks(record, searchType) {
 
       originalData = JSON.parse(JSON.stringify(record)); //Store the Original data
-      const isB1PriceSetup =
-        record.B1kbetr &&
-        record.B1kbetr !== "0" &&
-        record.B1kbetr !== 0;
+      const isB1PriceSetup = record.Selkzb1 === "X";
 
+      const isBRPriceSetup = record.Selkzbr === "X";
 
 
       const showMaterial =
@@ -1753,51 +2008,63 @@ ${showWarranty ? `
     <div class="change-content">
         <div class="warranty-grid">
 
-            <div class="info-field">
-                <label>StandardWarranty</label>
-                <span class="field-value">${record.StandardWarranty === "X" ? "Yes" : "No"}</span>
-            </div>
+  <!-- ========== STANDARD ========== -->
+  <div class="info-field">
+    <label>Standard Warranty</label>
+    <span class="field-value">${record.StandardWarranty === "X" ? "Yes" : "No"}</span>
+  </div>
+  <div class="info-field">
+    <label>Standard Warranty Length</label>
+    <span class="field-value">${record.StandardwarrantyLength || "-"} ${record.StandardwarrantyUnit || ""}</span>
+  </div>
+  <div class="info-field">
+    <label>Standard Warranty SKU</label>
+    <span class="field-value">${record.Swsku || "-"}</span>
+  </div>
 
-            <div class="info-field">
-                <label>StandardwarrantyLength</label>
-                <span class="field-value">${record.StandardwarrantyLength || "-"} ${record.StandardwarrantyUnit || ""}</span>
-            </div>
+  <!-- ========== EXTENDED ========== -->
+  <div class="info-field">
+    <label>Extended Warranty</label>
+    <span class="field-value">${record.ExtendedWarranty === "X" ? "Yes" : "No"}</span>
+  </div>
+  <div class="info-field">
+    <label>Extended Warranty Length</label>
+    <span class="field-value">${record.ExtendedwarrantyLength || "-"} ${record.ExtendedwarrantyUnit || ""}</span>
+  </div>
+  <div class="info-field">
+    <label>Extended Warranty SKU</label>
+    <span class="field-value">${record.Ewsku || "-"}</span>
+  </div>
 
-           
+  <!-- ========== BROTHER CARE ========== -->
+  <div class="info-field">
+    <label>BrotherCare Warranty</label>
+    <span class="field-value">${record.BrothercareWarranty === "X" ? "Yes" : "No"}</span>
+  </div>
+  <div class="info-field">
+    <label>BrotherCare Warranty Length</label>
+    <span class="field-value">${record.BrothercarewarrantyLength || "-"} ${record.BrothercarewarrantyUnit || ""}</span>
+  </div>
+  <div class="info-field">
+    <label>BrotherCare SKU</label>
+    <span class="field-value">${record.Bcsku || "-"}</span>
+  </div>
 
-            <div class="info-field">
-                <label>ExtendedWarranty</label>
-                <span class="field-value">${record.ExtendedWarranty === "X" ? "Yes" : "No"}</span>
-            </div>
+  <!-- ========== BROTHER PLUS ========== -->
+  <div class="info-field">
+    <label>BrotherPlus Warranty</label>
+    <span class="field-value">${record.BrotherplusWarranty === "X" ? "Yes" : "No"}</span>
+  </div>
+  <div class="info-field">
+    <label>BrotherPlus Warranty Length</label>
+    <span class="field-value">${record.BrotherpluswarrantyLength || "-"} ${record.BrotherpluswarrantyUnit || ""}</span>
+  </div>
+  <div class="info-field">
+    <label>BrotherPlus SKU</label>
+    <span class="field-value">${record.Bpsku || "-"}</span>
+  </div>
 
-            <div class="info-field">
-                <label>ExtendedwarrantyLength</label>
-                <span class="field-value">${record.ExtendedwarrantyLength || "-"} ${record.ExtendedwarrantyUnit || ""}</span>
-            </div>
-
-
-            <div class="info-field">
-                <label>BrothercareWarranty</label>
-                <span class="field-value">${record.BrothercareWarranty === "X" ? "Yes" : "No"}</span>
-            </div>
-
-            <div class="info-field">
-                <label>BrothercarewarrantyLength</label>
-                <span class="field-value">${record.BrothercarewarrantyLength || "-"} ${record.BrothercarewarrantyUnit || ""}</span>
-            </div>
-
-            
-
-            <div class="info-field">
-                <label>BrotherplusWarranty</label>
-                <span class="field-value">${record.BrotherplusWarranty === "X" ? "Yes" : "No"}</span>
-            </div>
-
-            <div class="info-field">
-                <label>BrotherpluswarrantyLength</label>
-                <span class="field-value">${record.BrotherpluswarrantyLength || "-"} ${record.BrotherpluswarrantyUnit || ""}</span>
-            </div>
-        </div>
+</div>
     </div>
 </div>
 ` : ''}
@@ -1830,7 +2097,7 @@ ${showCompatibility ? `
             </div>
 
             <div class="info-field">
-                <label>BR Refresh</label>
+                <label>Auto Reorder</label>
                 <span class="field-value">${record.Brrefresh === "X" ? "Yes" : "No"}</span>
             </div>
 
@@ -1874,183 +2141,171 @@ ${showPricing ? `
     <div class="pricing-sub-block">
 
         <div class="pricing-sub-block-title">
-            B1 Price Details
+            Barracuda Price Details
         </div>
 
         <div class="toggle-grid">
 
             <div class="info-field">
-                <label>B1 Price Setup</label>
-    <span class="field-value">
-    ${isB1PriceSetup ? "Yes" : "No"}
-</span>             
+                <label>Barracuda Price Setup</label>
+                 <span class="field-value">
+                   ${record.Selkzb1 ? "Yes" : "No"}
+                 </span>             
             </div>
 
         </div>
 
-        <div
-    id="b1PricingDetails"
-    class="pricing-details ${isB1PriceSetup ? "" : "hidden"}">
+        <div id="b1PricingDetails" class="pricing-details ${isB1PriceSetup ? "" : "hidden"}">
 
             <div class="info-grid">
 
                 <div class="info-field">
-                    <label>B1 Material Price</label>
+                    <label>Material Price</label>
                     <span class="field-value">${record.B1kbetr || "-"}</span>
                 </div>
-
+                
                 <div class="info-field">
-                    <label>B1 Currency</label>
+                    <label>Currency</label>
                     <span class="field-value">${record.B1konwa || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Pricing Unit</label>
+                    <label>Pricing Unit</label>
                     <span class="field-value">${record.B1kpein || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Condition Type</label>
+                    <label>Condition Type</label>
                     <span class="field-value">${record.Kschl || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Sales Organization</label>
+                    <label>Sales Organization</label>
                     <span class="field-value">${record.Vkorg || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Division</label>
+                    <label>Division</label>
                     <span class="field-value">${record.Spart || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Distribution Channel</label>
+                    <label>Distribution Channel</label>
                     <span class="field-value">${record.Vtweg || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Customer Price Group</label>
+                    <label>Customer Price Group</label>
                     <span class="field-value">${record.Konda || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Unit Of Measure</label>
+                    <label>Unit Of Measure</label>
                     <span class="field-value">${record.Meins || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Calculation Type</label>
-                    <span class="field-value">${record.B1krech || "-"}</span>
+                    <label>Calculation Type</label>
+                    <span class="field-value">${record.B1krech}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Valid From</label>
-                    ${formatODataDate(record.B1datab)}
+                    <label>Valid From</label>
+                   <span class="field-value">${formatODataDate(record.B1datab)}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Valid To</label>
-                    ${formatODataDate(record.B1datbi)}
+                    <label>Valid To</label>
+                   <span class="field-value">${formatODataDate(record.B1datbi)}</span>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 
     <!-- BR BLOCK -->
 
     <div class="pricing-sub-block">
 
         <div class="pricing-sub-block-title">
-            BR Price Details
+            Auto Reorder Price Details
         </div>
 
         <div class="toggle-grid">
 
             <div class="info-field">
-                <label>BR Price Setup</label>
+                <label>Auto Reorder Price Setup</label>
                 <span class="field-value">
-                    ${record.BrpriceSetup === "X" ? "Yes" : "No"}
+                    ${record.Selkzbr === "X" ? "Yes" : "No"}
                 </span>
             </div>
 
         </div>
 
-        <div
-            id="brPricingDetails"
-            class="pricing-details ${record.BrpriceSetup === "X" ? "" : "hidden"}">
-
+        <div id="brPricingDetails"  class="pricing-details ${isBRPriceSetup ? "" : "hidden"}">
             <div class="info-grid">
 
                 <div class="info-field">
-                    <label>BR Material Price</label>
-                    <span class="field-value">${record.Brkbetr || "-"}</span>
+                 <label>Material Price</label>
+                  <span class="field-value">${record.Brkbetr || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Currency</label>
-                    <span class="field-value">${record.Brkonwa || "-"}</span>
+                   <label>Currency</label>
+                   <span class="field-value">${record.Brkonwa || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>B1 Pricing Unit</label>
+                    <label>Pricing Unit</label>
                     <span class="field-value">${record.Brkpein || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Condition Type</label>
+                    <label>Condition Type</label>
                     <span class="field-value">${record.Kschl || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Sales Organization</label>
+                    <label>Sales Organization</label>
                     <span class="field-value">${record.Vkorg || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Division</label>
+                    <label>Division</label>
                     <span class="field-value">${record.Spart || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Distribution Channel</label>
+                    <label>Distribution Channel</label>
                     <span class="field-value">${record.Vtweg || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Customer Price Group</label>
+                    <label>Customer Price Group</label>
                     <span class="field-value">${record.Konda || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Unit Of Measure</label>
+                    <label>Unit Of Measure</label>
                     <span class="field-value">${record.Meins || "-"}</span>
                 </div>
 
                 <div class="info-field">
-                    <label>BR Calculation Type</label>
-                    <span class="field-value">${record.Brkrech || "-"}</span>
+                    <label>Calculation Type</label>
+                    <span class="field-value">${record.Brkrech}</span>
                 </div>
 
-                <div class="info-field">
-                    <label>BR Valid From</label>
-                    <span class="field-value">${record.Brdatab || "-"}</span>
+               <div class="info-field">
+                <label>Valid From</label>
+               <span class="field-value">${record.Brdatab ? formatODataDate(record.Brdatab) : "-"}</span>
                 </div>
 
-                <div class="info-field">
-                    <label>BR Valid To</label>
-                    <span class="field-value">${record.Brdatai || "-"}</span>
-                </div>
+               <div class="info-field">
+               <label>Valid To</label>
+               <span class="field-value">${record.Brdatai ? formatODataDate(record.Brdatai) : "-"}</span>
+               </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 </div>
 ` : ''}
@@ -2097,7 +2352,7 @@ ${showOrder ? `
             </div>
 
             <div class="info-field">
-                <label>Claim Order</label>
+                <label>Backup Order</label>
                 <span class="field-value">${record.Claimorder === "X" ? "Yes" : "No"}</span>
             </div>
 
@@ -2163,78 +2418,115 @@ ${showOrder ? `
       }
     }
 
- closeReviewPopup();
-    // }
     function saveChanges() {
-
       console.log(originalData);
 
-      const payload =
-        JSON.parse(JSON.stringify(originalData));
+      const changepayload = {};
 
-      delete payload.__metadata;
+      // Create date fields as Null & other all fields with empty values
+      const dateFields = [
+        "B1datab",
+        "B1datbi",
+        "Brdatab",
+        "Brdatai"
+      ];
+
+      Object.keys(originalData).forEach(key => {
+
+        if (key === "__metadata") return;
+
+        if (dateFields.includes(key)) {
+          changepayload[key] = null;
+        } else {
+          changepayload[key] = "";
+        }
+
+      });
+
+      // Always send key fields
+      changepayload.Matnr = originalData.Matnr;
+      changepayload.Country = originalData.Country;
+
       changedFields.forEach(change => {
 
-        const backendField =
-          fieldMap[change.field];
+        if (
+          change.subCategory === "Barracuda Price Details" &&
+          change.field === "Material Price"
+        ) {
+          changepayload.B1Amount = change.after;
+          return;
+        }
 
+        if (
+          change.subCategory === "Barracuda Price Details" &&
+          change.field === "Currency"
+        ) {
+          changepayload.B1Currency = change.after;
+          return;
+        }
+
+        if (
+          change.subCategory === "Auto Reorder Price Details" &&
+          change.field === "Material Price"
+        ) {
+          changepayload.BRAmount = change.after;
+          return;
+        }
+
+        if (
+          change.subCategory === "Auto Reorder Price Details" &&
+          change.field === "Currency"
+        ) {
+          changepayload.BRCurrency = change.after;
+          return;
+        }
+        const backendField = fieldMap[change.field];
         if (!backendField) {
-          console.warn(
-            "No mapping found:",
-            change.field
-          );
+          console.warn("No mapping found:", change.field);
           return;
         }
 
         let value = change.after;
-
         if (value === "Yes") value = "X";
         if (value === "No") value = "";
 
         // Warranty Split
         if (
-          change.field === "StandardwarrantyLength" ||
-          change.field === "ExtendedwarrantyLength" ||
-          change.field === "BrothercarewarrantyLength" ||
-          change.field === "BrotherpluswarrantyLength"
+          change.field === "Standard Warranty Length" ||
+          change.field === "Extended Warranty Length" ||
+          change.field === "BrotherCare Warranty Length" ||
+          change.field === "BrotherPlus Warranty Length"
         ) {
+          const [length, unit] = value.split(" ");
 
-          const [length, unit] =
-            value.split(" ");
-
-          if (change.field === "StandardwarrantyLength") {
-            payload.StdWtyLen = length;
-            payload.StdWtyLenUnit = unit;
+          if (change.field === "Standard Warranty Length") {
+            changepayload.StdWtyLen = length;
+            changepayload.StdWtyLenUnit = unit;
           }
-
-          if (change.field === "ExtendedwarrantyLength") {
-            payload.ExtdWtyLen = length;
-            payload.ExtdWtyLenUnit = unit;
+          if (change.field === "Extended Warranty Length") {
+            changepayload.ExtdWtyLen = length;
+            changepayload.ExtdWtyLenUnit = unit;
           }
-
-          if (change.field === "BrothercarewarrantyLength") {
-            payload.BcareWtyLen = length;
-            payload.BcareWtyLenUnit = unit;
+          if (change.field === "BrotherCare Warranty Length") {
+            changepayload.BcareWtyLen = length;
+            changepayload.BcareWtyLenUnit = unit;
           }
-
-          if (change.field === "BrotherpluswarrantyLength") {
-            payload.BplusWtyLen = length;
-            payload.BplusWtyLenUnit = unit;
+          if (change.field === "BrotherPlus Warranty Length") {
+            changepayload.BplusWtyLen = length;
+            changepayload.BplusWtyLenUnit = unit;
           }
-
           return;
         }
 
-        payload[backendField] = value;
-
+        changepayload[backendField] = value;
       });
 
-      console.log(
-        "Payload:",
-        JSON.stringify(payload, null, 2)
-      );
+      console.log("changepayload:", JSON.stringify(changepayload, null, 2));
 
-      closeReviewPopup();
+      // Close the modal that lives in the PARENT
+      if (window.parent && typeof window.parent.closeModelChangeReview === "function") {
+        window.parent.closeModelChangeReview();
+      }
     }
     function formatODataDate(dateStr) {
 

@@ -1606,3 +1606,18 @@ body {
 .order-types-heading {
     margin-top: 8px;
 }
+.warranty-switch input:disabled + .warranty-slider {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: #334155;
+}
+
+
+.warranty-switch input:disabled + .warranty-slider::before {
+    background: #94a3b8;
+}
+
+
+.warranty-switch:has(input:disabled) {
+    cursor: not-allowed;
+}

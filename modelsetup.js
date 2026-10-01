@@ -210,12 +210,12 @@ function loadStep() {
             <div class="create-pricing-header">
 
                 <div class="create-pricing-title">
-                    B1 Price Details
+                    Barracuda Price Details
                 </div>
 
                 <div class="create-pricing-toggle">
 
-                    <span>B1 Price Setup</span>
+                    <span>Barracuda Price Setup</span>
 
                     <label class="warranty-switch">
 
@@ -241,7 +241,7 @@ function loadStep() {
                 <div class="grid">
 
                     <div class="form-group">
-                        <label>B1 Material Price</label>
+                        <label>Material Price</label>
                         <input
                             type="number"
                             id="b1Kbetr"
@@ -251,7 +251,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Currency</label>
+                        <label>Currency</label>
 
                         <select id="b1Konwa">
 
@@ -281,7 +281,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Pricing Unit</label>
+                        <label>Pricing Unit</label>
 
                         <input
                             type="number"
@@ -343,7 +343,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Unit Of Measure</label>
+                        <label>Unit Of Measure</label>
 
                         <input
                             type="text"
@@ -354,7 +354,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Calculation Type</label>
+                        <label>Calculation Type</label>
 
                         <input
                             type="text"
@@ -364,7 +364,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Valid From</label>
+                        <label>Valid From</label>
 
                         <input
                             type="date"
@@ -374,7 +374,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>B1 Valid To</label>
+                        <label>Valid To</label>
 
                         <input
                             type="date"
@@ -396,12 +396,12 @@ function loadStep() {
             <div class="create-pricing-header">
 
                 <div class="create-pricing-title">
-                    BR Price Details
+                    Auto Reorder Price Details
                 </div>
 
                 <div class="create-pricing-toggle">
 
-                    <span>BR Price Setup</span>
+                    <span>Auto Reorder Price Setup</span>
 
                     <label class="warranty-switch">
 
@@ -427,7 +427,7 @@ function loadStep() {
                 <div class="grid">
 
                     <div class="form-group">
-                        <label>BR Material Price</label>
+                        <label>Material Price</label>
 
                         <input
                             type="number"
@@ -439,7 +439,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Currency</label>
+                        <label>Currency</label>
 
                         <select id="brKonwa">
 
@@ -469,7 +469,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Pricing Unit</label>
+                        <label>Pricing Unit</label>
 
                         <input
                             type="number"
@@ -531,7 +531,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Unit Of Measure</label>
+                        <label>Unit Of Measure</label>
 
                         <input
                             type="text"
@@ -542,7 +542,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Calculation Type</label>
+                        <label>Calculation Type</label>
 
                         <input
                             type="text"
@@ -552,7 +552,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Valid From</label>
+                        <label>Valid From</label>
 
                         <input
                             type="date"
@@ -562,7 +562,7 @@ function loadStep() {
 
 
                     <div class="form-group">
-                        <label>BR Valid To</label>
+                        <label>Valid To</label>
 
                         <input
                             type="date"
@@ -614,125 +614,191 @@ function loadStep() {
 
     if (currentStep === 3) {
 
-        area.innerHTML = `
- 
-    <div class="card">
- 
-        <h3>Warranty Setup</h3>
+    area.innerHTML = `
 
-        ${modelContextBar()}
- 
-        <div class="grid">
- 
-            <div class="form-group">
+        <div class="card">
 
-    <label>Standard Warranty</label>
+            <h3>Warranty Setup</h3>
 
-    <div class="warranty-toggle-row">
+            ${modelContextBar()}
 
-        <span id="standardWarrantyText">
-            Off
-        </span>
+            <div class="grid">
 
-        <label class="warranty-switch">
+                <div class="form-group">
 
-            <input
-                type="checkbox"
-                id="standardWarranty"
-                onchange="toggleWarranty(
-                    'standardWarranty',
-                    'standardWarrantyText',
-                    'standardLength',
-                    'standardUnit'
-                )">
+                    <label>Standard Warranty</label>
 
-            <span class="warranty-slider"></span>
+                    <div class="warranty-toggle-row">
 
-        </label>
+                        <span id="standardWarrantyText">
+                            Off
+                        </span>
 
-    </div>
+                        <label class="warranty-switch">
 
-</div>
- 
-            <div class="form-group">
-                <label>Length</label>
-                <input
-                    type="number"
-                    id="standardLength"
-                    placeholder="1">
-            </div>
- 
-            <div class="form-group">
-                <label>Unit</label>
-                <select id="standardUnit">
-                    <option>YR</option>
-                    <option value="MO">MON</option>
-                </select>
-            </div>
- 
-            <div></div>
- 
-            <div class="form-group">
+                            <input
+    type="checkbox"
+    id="standardWarranty"
+    onchange="toggleWarranty(
+        'standardWarranty',
+        'standardWarrantyText',
+        'standardLength',
+        'standardUnit',
+        'standardSkuNo',
+        false
+    )">
 
-    <label>Extended Warranty</label>
+                            <span class="warranty-slider"></span>
 
-    <div class="warranty-toggle-row">
+                        </label>
 
-        <span id="extendedWarrantyText">
-            Off
-        </span>
+                    </div>
 
-        <label class="warranty-switch">
+                </div>
 
-            <input
-                type="checkbox"
-                id="extendedWarranty"
-                onchange="toggleWarranty(
-                    'extendedWarranty',
-                    'extendedWarrantyText',
-                    'extendedLength',
-                    'extendedUnit'
-                )">
 
-            <span class="warranty-slider"></span>
+                <div class="form-group">
 
-        </label>
+                    <label>Length</label>
 
-    </div>
+                    <input
+                        type="number"
+                        id="standardLength"
+                        placeholder="1">
 
-</div>
- 
-            <div class="form-group">
-                <label>Length</label>
-                <input
-                    type="number"
-                    id="extendedLength"
-                    placeholder="2">
-            </div>
- 
-            <div class="form-group">
-                <label>Unit</label>
-                <select id="extendedUnit">
-                    <option>YR</option>
-                    <option value="MO">MON</option>
-                </select>
-            </div>
- 
-            <div></div>
- 
-            <div class="form-group">
+                </div>
 
-    <label>Brother Care Warranty</label>
 
-    <div class="warranty-toggle-row">
+                <div class="form-group">
 
-        <span id="brotherCareWarrantyText">
-            Off
-        </span>
+                    <label>Unit</label>
 
-        <label class="warranty-switch">
+                    <select id="standardUnit">
 
-            <input
+                        <option value="">
+                            Select Unit
+                        </option>
+
+                        <option value="YR">
+                            YR
+                        </option>
+
+                        <option value="MO">
+                            MON
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Standard Warranty SKU</label>
+
+                    <input
+                        type="text"
+                        id="standardSkuNo"
+                        placeholder="Auto populated"
+                        disabled>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Extended Warranty</label>
+
+                    <div class="warranty-toggle-row">
+
+                        <span id="extendedWarrantyText">
+                            Off
+                        </span>
+
+                        <label class="warranty-switch">
+
+                            <input
+    type="checkbox"
+    id="extendedWarranty"
+    onchange="toggleWarranty(
+        'extendedWarranty',
+        'extendedWarrantyText',
+        'extendedLength',
+        'extendedUnit',
+        'extendedSkuNo',
+        false
+    )">
+
+                            <span class="warranty-slider"></span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Length</label>
+
+                    <input
+                        type="number"
+                        id="extendedLength"
+                        placeholder="2">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Unit</label>
+
+                    <select id="extendedUnit">
+
+                        <option value="">
+                            Select Unit
+                        </option>
+
+                        <option value="YR">
+                            YR
+                        </option>
+
+                        <option value="MO">
+                            MON
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Extended Warranty SKU</label>
+
+                    <input
+                        type="text"
+                        id="extendedSkuNo"
+                        placeholder="Auto populated"
+                        disabled>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Brother Care Warranty</label>
+
+                    <div class="warranty-toggle-row">
+
+                        <span id="brotherCareWarrantyText">
+                            Off
+                        </span>
+
+                        <label class="warranty-switch">
+
+                            <input
     type="checkbox"
     id="brotherCareWarranty"
     onchange="toggleWarranty(
@@ -740,51 +806,80 @@ function loadStep() {
         'brotherCareWarrantyText',
         'brotherCareLength',
         'brotherCareUnit',
+        'brotherCareSkuNo',
         true
     )">
 
-            <span class="warranty-slider"></span>
+                            <span class="warranty-slider"></span>
 
-        </label>
+                        </label>
 
-    </div>
+                    </div>
 
-</div>
- 
-            <div class="form-group">
-                <label>Length</label>
-                <input
-                    type="number"
-                    id="brotherCareLength"
-                    placeholder="1">
-            </div>
- 
-            <div class="form-group">
-                <label>Unit</label>
-                <select id="brotherCareUnit">
-    <option value="">Select Unit</option>
-    <option value="YR">YR</option>
-    <option value="MO">MON</option>
-</select>
-            </div>
- 
-            <div></div>
- 
-            
- 
-            <div class="form-group">
+                </div>
 
-    <label>Brother Plus Warranty</label>
 
-    <div class="warranty-toggle-row">
+                <div class="form-group">
 
-        <span id="brotherPlusWarrantyText">
-            Off
-        </span>
+                    <label>Length</label>
 
-        <label class="warranty-switch">
+                    <input
+                        type="number"
+                        id="brotherCareLength"
+                        placeholder="6">
 
-            <input
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Unit</label>
+
+                    <select id="brotherCareUnit">
+
+                        <option value="">
+                            Select Unit
+                        </option>
+
+                        <option value="YR">
+                            YR
+                        </option>
+
+                        <option value="MO">
+                            MON
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Brother Care SKU</label>
+
+                    <input
+                        type="text"
+                        id="brotherCareSkuNo"
+                        placeholder="Auto populated"
+                        disabled>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Brother Plus Warranty</label>
+
+                    <div class="warranty-toggle-row">
+
+                        <span id="brotherPlusWarrantyText">
+                            Off
+                        </span>
+
+                        <label class="warranty-switch">
+
+                            <input
     type="checkbox"
     id="brotherPlusWarranty"
     onchange="toggleWarranty(
@@ -792,60 +887,99 @@ function loadStep() {
         'brotherPlusWarrantyText',
         'brotherPlusLength',
         'brotherPlusUnit',
+        'brotherPlusSkuNo',
         true
     )">
 
-            <span class="warranty-slider"></span>
+                            <span class="warranty-slider"></span>
 
-        </label>
+                        </label>
 
-    </div>
+                    </div>
 
-</div>
- 
-            <div class="form-group">
-                <label>Length</label>
-                <input
-                    type="number"
-                    id="brotherPlusLength"
-                    placeholder="1">
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Length</label>
+
+                    <input
+                        type="number"
+                        id="brotherPlusLength"
+                        placeholder="6">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Unit</label>
+
+                    <select id="brotherPlusUnit">
+
+                        <option value="">
+                            Select Unit
+                        </option>
+
+                        <option value="YR">
+                            YR
+                        </option>
+
+                        <option value="MO">
+                            MON
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Brother Plus SKU</label>
+
+                    <input
+                        type="text"
+                        id="brotherPlusSkuNo"
+                        placeholder="Auto populated"
+                        disabled>
+
+                </div>
+
             </div>
- 
-            <div class="form-group">
-                <label>Unit</label>
-                <select id="brotherPlusUnit">
-    <option value="">Select Unit</option>
-    <option value="YR">YR</option>
-    <option value="MO">MON</option>
-</select>
+
+
+            <div class="btn-row">
+
+                <button
+                    class="btn back"
+                    onclick="backStep()">
+
+                    ← Back
+
+                </button>
+
+
+                <button
+                    class="btn next"
+                    onclick="nextStep()">
+
+                    Next →
+
+                </button>
+
             </div>
- 
+
         </div>
- 
-        <div class="btn-row">
- 
-            <button
-                class="btn back"
-                onclick="backStep()">
- 
-                ← Back
- 
-            </button>
- 
-            <button
-                class="btn next"
-                onclick="nextStep()">
- 
-                Next →
- 
-            </button>
- 
-        </div>
- 
-    </div>
- 
     `;
-    }
+    restoreStepData();
+
+applyWarrantyCountryRules();
+
+return;
+}
+
 
     if (currentStep === 4) {
 
@@ -1347,7 +1481,7 @@ function toggleCreatePricing(type) {
 
 
             showPricingError(
-                "BR Price Setup is already selected. Only one pricing setup can be created at a time."
+                "Auto Reorder Price Setup is already selected. Only one pricing setup can be created at a time."
             );
 
             return;
@@ -1395,7 +1529,7 @@ function toggleCreatePricing(type) {
 
 
             showPricingError(
-                "B1 Price Setup is already selected. Only one pricing setup can be created at a time."
+                "Barracuda Price Setup is already selected. Only one pricing setup can be created at a time."
             );
 
             return;
@@ -1756,7 +1890,6 @@ if (currentStep === 2) {
         );
     }
 
-
     // Show only selected pricing section
 
     toggleCreatePricing("b1");
@@ -1764,86 +1897,89 @@ if (currentStep === 2) {
     toggleCreatePricing("br");
 }
 
-
     // STEP 3 - Warranty
-    if (currentStep === 3) {
+    
+if (currentStep === 3) {
 
-        setValue(
-            "standardLength",
-            modelData.standardLength
-        );
+    setValue(
+        "standardLength",
+        modelData.standardLength
+    );
 
-        setValue(
-            "standardUnit",
-            modelData.standardUnit
-        );
+    setValue(
+        "standardUnit",
+        modelData.standardUnit
+    );
 
-        restoreWarranty(
-            "standardWarranty",
-            "standardWarrantyText",
-            "standardLength",
-            "standardUnit",
-            modelData.standardWarranty
-        );
-
-
-        setValue(
-            "extendedLength",
-            modelData.extendedLength
-        );
-
-        setValue(
-            "extendedUnit",
-            modelData.extendedUnit
-        );
-
-        restoreWarranty(
-            "extendedWarranty",
-            "extendedWarrantyText",
-            "extendedLength",
-            "extendedUnit",
-            modelData.extendedWarranty
-        );
+    restoreWarranty(
+        "standardWarranty",
+        "standardWarrantyText",
+        "standardLength",
+        "standardUnit",
+        "standardSkuNo",
+        modelData.standardWarranty
+    );
 
 
-        setValue(
-            "brotherCareLength",
-            modelData.brotherCareLength
-        );
+    setValue(
+        "extendedLength",
+        modelData.extendedLength
+    );
 
-        setValue(
-            "brotherCareUnit",
-            modelData.brotherCareUnit
-        );
+    setValue(
+        "extendedUnit",
+        modelData.extendedUnit
+    );
 
-        restoreWarranty(
-            "brotherCareWarranty",
-            "brotherCareWarrantyText",
-            "brotherCareLength",
-            "brotherCareUnit",
-            modelData.brotherCareWarranty,
-            true
-        );
+    restoreWarranty(
+        "extendedWarranty",
+        "extendedWarrantyText",
+        "extendedLength",
+        "extendedUnit",
+        "extendedSkuNo",
+        modelData.extendedWarranty
+    );
 
-        setValue(
-            "brotherPlusLength",
-            modelData.brotherPlusLength
-        );
 
-        setValue(
-            "brotherPlusUnit",
-            modelData.brotherPlusUnit
-        );
+    setValue(
+        "brotherCareLength",
+        modelData.brotherCareLength
+    );
 
-        restoreWarranty(
-            "brotherPlusWarranty",
-            "brotherPlusWarrantyText",
-            "brotherPlusLength",
-            "brotherPlusUnit",
-            modelData.brotherPlusWarranty,
-            true
-        );
-    }
+    setValue(
+        "brotherCareUnit",
+        modelData.brotherCareUnit
+    );
+
+    restoreWarranty(
+        "brotherCareWarranty",
+        "brotherCareWarrantyText",
+        "brotherCareLength",
+        "brotherCareUnit",
+        "brotherCareSkuNo",
+        modelData.brotherCareWarranty
+    );
+
+
+    setValue(
+        "brotherPlusLength",
+        modelData.brotherPlusLength
+    );
+
+    setValue(
+        "brotherPlusUnit",
+        modelData.brotherPlusUnit
+    );
+
+    restoreWarranty(
+        "brotherPlusWarranty",
+        "brotherPlusWarrantyText",
+        "brotherPlusLength",
+        "brotherPlusUnit",
+        "brotherPlusSkuNo",
+        modelData.brotherPlusWarranty
+    );
+}
 
 
     // STEP 4 - Compatibility
@@ -1893,7 +2029,7 @@ function nextStep() {
         ) {
 
             showPricingError(
-                "B1 and BR pricing cannot be created at the same time. Please select only one pricing setup."
+                "Barracuda and Auto Reorder pricing cannot be created at the same time. Please select only one pricing setup."
             );
 
             return;
@@ -2084,58 +2220,213 @@ function saveCurrentStepData() {
     }
 }
 
+   // STEP 3 - Warranty
+
     /*
-    STEP 3
-    Warranty
-    */
-    if (currentStep === 3) {
+STEP 3
+Warranty
+*/
+if (currentStep === 3) {
 
-        modelData.standardWarranty =
-            document.getElementById(
-                "standardWarranty"
-            )?.checked ? "X" : "";
+    modelData.standardWarranty =
+        document.getElementById(
+            "standardWarranty"
+        )?.checked
+            ? "X"
+            : "";
 
-        modelData.standardLength =
-            getValue("standardLength");
+    modelData.standardLength =
+        getValue("standardLength");
 
-        modelData.standardUnit =
-            getValue("standardUnit");
+    modelData.standardUnit =
+        getValue("standardUnit");
 
-
-        modelData.extendedWarranty =
-            document.getElementById(
-                "extendedWarranty"
-            )?.checked ? "X" : "";
-
-        modelData.extendedLength =
-            getValue("extendedLength");
-
-        modelData.extendedUnit =
-            getValue("extendedUnit");
+    modelData.standardSkuNo =
+        getValue("standardSkuNo");
 
 
-        modelData.brotherCareWarranty =
-            document.getElementById(
-                "brotherCareWarranty"
-            )?.checked ? "X" : "";
+    modelData.extendedWarranty =
+        document.getElementById(
+            "extendedWarranty"
+        )?.checked
+            ? "X"
+            : "";
 
-        modelData.brotherCareLength =
-            getValue("brotherCareLength");
+    modelData.extendedLength =
+        getValue("extendedLength");
 
-        modelData.brotherCareUnit =
-            getValue("brotherCareUnit");
+    modelData.extendedUnit =
+        getValue("extendedUnit");
 
-        modelData.brotherPlusWarranty =
-            document.getElementById(
-                "brotherPlusWarranty"
-            )?.checked ? "X" : "";
+    modelData.extendedSkuNo =
+        getValue("extendedSkuNo");
 
-        modelData.brotherPlusLength =
-            getValue("brotherPlusLength");
 
-        modelData.brotherPlusUnit =
-            getValue("brotherPlusUnit");
+    modelData.brotherCareWarranty =
+        document.getElementById(
+            "brotherCareWarranty"
+        )?.checked
+            ? "X"
+            : "";
+
+    modelData.brotherCareLength =
+        getValue("brotherCareLength");
+
+    modelData.brotherCareUnit =
+        getValue("brotherCareUnit");
+
+    modelData.brotherCareSkuNo =
+        getValue("brotherCareSkuNo");
+
+
+    modelData.brotherPlusWarranty =
+        document.getElementById(
+            "brotherPlusWarranty"
+        )?.checked
+            ? "X"
+            : "";
+
+    modelData.brotherPlusLength =
+        getValue("brotherPlusLength");
+
+    modelData.brotherPlusUnit =
+        getValue("brotherPlusUnit");
+
+    modelData.brotherPlusSkuNo =
+        getValue("brotherPlusSkuNo");
+
+
+    if (modelData.country === "US") {
+
+        modelData.brotherCareWarranty = "";
+        modelData.brotherCareLength = "";
+        modelData.brotherCareUnit = "";
+        modelData.brotherCareSkuNo = "";
     }
+
+
+    if (modelData.country === "CA") {
+
+        modelData.brotherPlusWarranty = "";
+        modelData.brotherPlusLength = "";
+        modelData.brotherPlusUnit = "";
+        modelData.brotherPlusSkuNo = "";
+    }
+}
+
+// if (currentStep === 3) {
+
+//     setValue(
+//         "standardLength",
+//         modelData.standardLength
+//     );
+
+//     setValue(
+//         "standardUnit",
+//         modelData.standardUnit
+//     );
+
+//     setValue(
+//         "standardSkuNo",
+//         modelData.standardSkuNo
+//     );
+
+//     restoreWarranty(
+//         "standardWarranty",
+//         "standardWarrantyText",
+//         "standardLength",
+//         "standardUnit",
+//         "standardSkuNo",
+//         "S",
+//         modelData.standardWarranty,
+//         modelData.standardSkuNo,
+//         false
+//     );
+
+
+//     setValue(
+//         "extendedLength",
+//         modelData.extendedLength
+//     );
+
+//     setValue(
+//         "extendedUnit",
+//         modelData.extendedUnit
+//     );
+
+//     setValue(
+//         "extendedSkuNo",
+//         modelData.extendedSkuNo
+//     );
+
+//     restoreWarranty(
+//         "extendedWarranty",
+//         "extendedWarrantyText",
+//         "extendedLength",
+//         "extendedUnit",
+//         "extendedSkuNo",
+//         "E",
+//         modelData.extendedWarranty,
+//         modelData.extendedSkuNo,
+//         false
+//     );
+
+
+//     setValue(
+//         "brotherCareLength",
+//         modelData.brotherCareLength
+//     );
+
+//     setValue(
+//         "brotherCareUnit",
+//         modelData.brotherCareUnit
+//     );
+
+//     setValue(
+//         "brotherCareSkuNo",
+//         modelData.brotherCareSkuNo
+//     );
+
+//     restoreWarranty(
+//         "brotherCareWarranty",
+//         "brotherCareWarrantyText",
+//         "brotherCareLength",
+//         "brotherCareUnit",
+//         "brotherCareSkuNo",
+//         "L",
+//         modelData.brotherCareWarranty,
+//         modelData.brotherCareSkuNo,
+//         true
+//     );
+
+
+//     setValue(
+//         "brotherPlusLength",
+//         modelData.brotherPlusLength
+//     );
+
+//     setValue(
+//         "brotherPlusUnit",
+//         modelData.brotherPlusUnit
+//     );
+
+//     setValue(
+//         "brotherPlusSkuNo",
+//         modelData.brotherPlusSkuNo
+//     );
+
+//     restoreWarranty(
+//         "brotherPlusWarranty",
+//         "brotherPlusWarrantyText",
+//         "brotherPlusLength",
+//         "brotherPlusUnit",
+//         "brotherPlusSkuNo",
+//         "C",
+//         modelData.brotherPlusWarranty,
+//         modelData.brotherPlusSkuNo,
+//         true
+//     );
+// }
 
     /*
     STEP 4
@@ -2339,45 +2630,80 @@ Brdatbi:
         : "",
 
         StdWtyType:
-            modelData.standardWarranty || "",
+    modelData.standardWarranty || "",
 
-        StdWtyLen:
-            modelData.standardLength || "",
+Swsku:
+    modelData.standardWarranty === "X"
+        ? modelData.standardSkuNo || ""
+        : "",
 
-        StdWtyLenUnit:
-            modelData.standardUnit || "",
+StdWtyLen:
+    modelData.standardWarranty === "X"
+        ? modelData.standardLength || ""
+        : "",
 
-
-        ExtdWtyType:
-            modelData.extendedWarranty || "",
-
-        ExtdWtyLen:
-            modelData.extendedLength || "",
-
-        ExtdWtyLenUnit:
-            modelData.extendedUnit || "",
-
-
-        BcareWtyType:
-            modelData.brotherCareWarranty || "",
-
-        BcareWtyLen:
-            modelData.brotherCareLength || "",
-
-        BcareWtyLenUnit:
-            modelData.brotherCareUnit || "",
+StdWtyLenUnit:
+    modelData.standardWarranty === "X"
+        ? modelData.standardUnit || ""
+        : "",
 
 
-        BplusWtyType:
-            modelData.brotherPlusWarranty || "",
+ExtdWtyType:
+    modelData.extendedWarranty || "",
 
-        BplusWtyLen:
-            modelData.brotherPlusLength || "",
+Ewsku:
+    modelData.extendedWarranty === "X"
+        ? modelData.extendedSkuNo || ""
+        : "",
 
-        BplusWtyLenUnit:
-            modelData.brotherPlusUnit || "",
+ExtdWtyLen:
+    modelData.extendedWarranty === "X"
+        ? modelData.extendedLength || ""
+        : "",
+
+ExtdWtyLenUnit:
+    modelData.extendedWarranty === "X"
+        ? modelData.extendedUnit || ""
+        : "",
 
 
+BcareWtyType:
+    modelData.brotherCareWarranty || "",
+
+Bcsku:
+    modelData.brotherCareWarranty === "X"
+        ? modelData.brotherCareSkuNo || ""
+        : "",
+
+BcareWtyLen:
+    modelData.brotherCareWarranty === "X"
+        ? modelData.brotherCareLength || ""
+        : "",
+
+BcareWtyLenUnit:
+    modelData.brotherCareWarranty === "X"
+        ? modelData.brotherCareUnit || ""
+        : "",
+
+
+BplusWtyType:
+    modelData.brotherPlusWarranty || "",
+
+Bpsku:
+    modelData.brotherPlusWarranty === "X"
+        ? modelData.brotherPlusSkuNo || ""
+        : "",
+
+BplusWtyLen:
+    modelData.brotherPlusWarranty === "X"
+        ? modelData.brotherPlusLength || ""
+        : "",
+
+BplusWtyLenUnit:
+    modelData.brotherPlusWarranty === "X"
+        ? modelData.brotherPlusUnit || ""
+        : "",
+        
         Amazondart:
             modelData.amazondart || "",
 
@@ -2883,11 +3209,305 @@ function toggleProgram(id) {
     }
 }
 
+function applyWarrantyCountryRules() {
+
+    const country =
+        modelData.country || "";
+
+
+    const brotherCareToggle =
+        document.getElementById(
+            "brotherCareWarranty"
+        );
+
+    const brotherPlusToggle =
+        document.getElementById(
+            "brotherPlusWarranty"
+        );
+
+
+    if (
+        !brotherCareToggle ||
+        !brotherPlusToggle
+    ) {
+
+        return;
+    }
+
+
+    if (country === "US") {
+
+        setWarrantyAvailability(
+            "brotherPlusWarranty",
+            "brotherPlusWarrantyText",
+            "brotherPlusLength",
+            "brotherPlusUnit",
+            "brotherPlusSkuNo",
+            true
+        );
+
+
+        setWarrantyAvailability(
+            "brotherCareWarranty",
+            "brotherCareWarrantyText",
+            "brotherCareLength",
+            "brotherCareUnit",
+            "brotherCareSkuNo",
+            false
+        );
+
+
+        return;
+    }
+
+
+    if (country === "CA") {
+
+        setWarrantyAvailability(
+            "brotherCareWarranty",
+            "brotherCareWarrantyText",
+            "brotherCareLength",
+            "brotherCareUnit",
+            "brotherCareSkuNo",
+            true
+        );
+
+
+        setWarrantyAvailability(
+            "brotherPlusWarranty",
+            "brotherPlusWarrantyText",
+            "brotherPlusLength",
+            "brotherPlusUnit",
+            "brotherPlusSkuNo",
+            false
+        );
+
+
+        return;
+    }
+
+
+    setWarrantyAvailability(
+        "brotherCareWarranty",
+        "brotherCareWarrantyText",
+        "brotherCareLength",
+        "brotherCareUnit",
+        "brotherCareSkuNo",
+        false
+    );
+
+
+    setWarrantyAvailability(
+        "brotherPlusWarranty",
+        "brotherPlusWarrantyText",
+        "brotherPlusLength",
+        "brotherPlusUnit",
+        "brotherPlusSkuNo",
+        false
+    );
+}
+
+function setWarrantyAvailability(
+    toggleId,
+    textId,
+    lengthId,
+    unitId,
+    skuId,
+    enabled
+) {
+
+    const toggle =
+        document.getElementById(
+            toggleId
+        );
+
+    const text =
+        document.getElementById(
+            textId
+        );
+
+    const length =
+        document.getElementById(
+            lengthId
+        );
+
+    const unit =
+        document.getElementById(
+            unitId
+        );
+
+    const sku =
+        document.getElementById(
+            skuId
+        );
+
+
+    if (!toggle) {
+        return;
+    }
+
+
+    toggle.disabled =
+        !enabled;
+
+
+    if (!enabled) {
+
+        toggle.checked =
+            false;
+
+
+        if (text) {
+
+            text.textContent =
+                "Unavailable";
+
+            text.style.color =
+                "#64748b";
+        }
+
+
+        if (length) {
+
+            length.value =
+                "";
+
+            length.disabled =
+                true;
+        }
+
+
+        if (unit) {
+
+            unit.value =
+                "";
+
+            unit.disabled =
+                true;
+        }
+
+
+        if (sku) {
+
+            sku.value =
+                "";
+
+            sku.disabled =
+                true;
+        }
+
+
+        if (
+            toggleId ===
+            "brotherCareWarranty"
+        ) {
+
+            modelData.brotherCareWarranty =
+                "";
+
+            modelData.brotherCareLength =
+                "";
+
+            modelData.brotherCareUnit =
+                "";
+
+            modelData.brotherCareSkuNo =
+                "";
+        }
+
+
+        if (
+            toggleId ===
+            "brotherPlusWarranty"
+        ) {
+
+            modelData.brotherPlusWarranty =
+                "";
+
+            modelData.brotherPlusLength =
+                "";
+
+            modelData.brotherPlusUnit =
+                "";
+
+            modelData.brotherPlusSkuNo =
+                "";
+        }
+
+
+        return;
+    }
+
+
+    if (text) {
+
+        if (toggle.checked) {
+
+            text.textContent =
+                "On";
+
+            text.style.color =
+                "#22c55e";
+
+        } else {
+
+            text.textContent =
+                "Off";
+
+            text.style.color =
+                "#94a3b8";
+        }
+    }
+
+
+    if (!toggle.checked) {
+
+        if (length) {
+            length.disabled =
+                true;
+        }
+
+
+        if (unit) {
+            unit.disabled =
+                true;
+        }
+
+
+        if (sku) {
+            sku.disabled =
+                true;
+        }
+    }
+}
+
+function getWarrantySku(toggleId) {
+
+    if (toggleId === "standardWarranty") {
+        return "BMGST_1";
+    }
+
+    if (toggleId === "extendedWarranty") {
+        return "D1142EPSP";
+    }
+
+    if (toggleId === "brotherCareWarranty") {
+        return "BCARE_6MTHS";
+    }
+
+    if (toggleId === "brotherPlusWarranty") {
+        return "BPLUS_6MTHS";
+    }
+
+    return "";
+}
+
 function toggleWarranty(
     toggleId,
     textId,
     lengthId,
     unitId,
+    skuId,
     autoSixMonths = false
 ) {
 
@@ -2903,6 +3523,9 @@ function toggleWarranty(
     const unit =
         document.getElementById(unitId);
 
+    const sku =
+        document.getElementById(skuId);
+
 
     if (!toggle) {
         return;
@@ -2912,8 +3535,21 @@ function toggleWarranty(
     if (toggle.checked) {
 
         if (text) {
+
             text.textContent = "On";
-            text.style.color = "#22c55e";
+
+            text.style.color =
+                "#22c55e";
+        }
+
+
+        if (length) {
+            length.disabled = false;
+        }
+
+
+        if (unit) {
+            unit.disabled = false;
         }
 
 
@@ -2921,32 +3557,30 @@ function toggleWarranty(
 
             if (length) {
                 length.value = "6";
-                length.disabled = false;
             }
-
 
             if (unit) {
                 unit.value = "MO";
-                unit.disabled = false;
             }
-
-        } else {
-
-            if (length) {
-                length.disabled = false;
-            }
+        }
 
 
-            if (unit) {
-                unit.disabled = false;
-            }
+        if (sku) {
+
+            sku.value =
+                getWarrantySku(
+                    toggleId
+                );
         }
 
     } else {
 
         if (text) {
+
             text.textContent = "Off";
-            text.style.color = "#94a3b8";
+
+            text.style.color =
+                "#94a3b8";
         }
 
 
@@ -2968,20 +3602,38 @@ function toggleWarranty(
 
             unit.disabled = true;
         }
+
+
+        if (sku) {
+            sku.value = "";
+        }
     }
 }
+
 
 function restoreWarranty(
     toggleId,
     textId,
     lengthId,
     unitId,
-    value,
-    autoSixMonths = false
+    skuId,
+    value
 ) {
 
     const toggle =
         document.getElementById(toggleId);
+
+    const text =
+        document.getElementById(textId);
+
+    const length =
+        document.getElementById(lengthId);
+
+    const unit =
+        document.getElementById(unitId);
+
+    const sku =
+        document.getElementById(skuId);
 
 
     if (!toggle) {
@@ -2993,11 +3645,60 @@ function restoreWarranty(
         value === "X";
 
 
-    toggleWarranty(
-        toggleId,
-        textId,
-        lengthId,
-        unitId,
-        autoSixMonths
-    );
+    if (toggle.checked) {
+
+        if (text) {
+
+            text.textContent =
+                "On";
+
+            text.style.color =
+                "#22c55e";
+        }
+
+
+        if (length) {
+            length.disabled = false;
+        }
+
+
+        if (unit) {
+            unit.disabled = false;
+        }
+
+
+        if (sku) {
+
+            sku.value =
+                getWarrantySku(
+                    toggleId
+                );
+        }
+
+    } else {
+
+        if (text) {
+
+            text.textContent =
+                "Off";
+
+            text.style.color =
+                "#94a3b8";
+        }
+
+
+        if (length) {
+            length.disabled = true;
+        }
+
+
+        if (unit) {
+            unit.disabled = true;
+        }
+
+
+        if (sku) {
+            sku.value = "";
+        }
+    }
 }
