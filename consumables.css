@@ -304,7 +304,7 @@ select {
 
     align-items: stretch;
 
-    height: 500px;
+    height: 530px;
 
     overflow: hidden;
 }
@@ -316,7 +316,7 @@ select {
 
 .consumable-product-card {
     width: 100%;
-    height: 500px;
+    height: 530px;
 
     display: flex;
     flex-direction: column;
@@ -462,7 +462,7 @@ select {
 
 .consumable-pricing-card {
     width: 100%;
-    height: 500px;
+    height: 530px;
 
     padding: 18px 20px;
 
@@ -612,7 +612,7 @@ select {
 
 
 .pricing-row {
-    min-height: 31px;
+    min-height: 29px;
 
     display: flex;
     align-items: center;
@@ -668,7 +668,7 @@ select {
     width: 100%;
     height: 1px;
 
-    margin: 9px 0;
+    margin: 7px 0;
 
     background: #273b55;
 }

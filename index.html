@@ -5465,6 +5465,22 @@ Example:
             );
         }
 
+         function closeModelChangeReview() {
+            const modal = document.getElementById("modelChangeReviewModal");
+            if (modal) modal.remove();
+            document.body.style.overflow = "";
+            const content = document.querySelector(".content");
+            if (content) content.style.overflowY = "auto";
+        }
+        function saveModelChangeFromReview() {
+            // Call the save function that lives inside the iframe
+            const frame = document.getElementById("modelChangeFrame");
+            if (frame && frame.contentWindow && typeof frame.contentWindow.saveChanges === "function") {
+                frame.contentWindow.saveChanges();
+            }
+            closeModelChangeReview();
+        }
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
 </body>

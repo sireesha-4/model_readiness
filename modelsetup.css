@@ -1621,3 +1621,803 @@ body {
 .warranty-switch:has(input:disabled) {
     cursor: not-allowed;
 }
+
+/* =========================================
+   STEP 5
+   ORDER TYPES + CONSUMABLES
+========================================= */
+
+.order-type-form {
+    width: 78%;
+    max-width: 900px;
+
+    margin-top: 12px;
+}
+
+
+.order-type-row {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, 360px)
+        minmax(320px, 500px);
+
+    gap: 14px;
+
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================
+   ORDER TYPE COLUMN
+========================================= */
+
+.order-type-column {
+    width: 100%;
+}
+
+
+.order-type-column > label,
+.order-consumable-column > label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 500;
+}
+
+
+/* =========================================
+   ORDER TOGGLE BOX
+========================================= */
+
+.order-toggle-box {
+    width: 100%;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 12px;
+
+    background: #0d1a2c;
+
+    border: 1px solid #33465f;
+
+    border-radius: 8px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+}
+
+
+.order-toggle-box:hover {
+    border-color: #475e7b;
+}
+
+
+/* =========================================
+   CONSUMABLE COLUMN
+========================================= */
+
+.order-consumable-column {
+    width: 100%;
+
+    transition:
+        opacity 0.2s ease;
+}
+
+
+.order-consumable-column input {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 13px;
+
+    background: #0d1a2c;
+
+    border: 1px solid #33465f;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: #ffffff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 13px;
+
+    box-sizing: border-box;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.order-consumable-column input::placeholder {
+    color: #64748b;
+}
+
+
+.order-consumable-column input:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            59,
+            130,
+            246,
+            0.10
+        );
+}
+
+
+/* =========================================
+   DISABLED CONSUMABLE
+========================================= */
+
+.order-consumable-disabled {
+    opacity: 0.45;
+}
+
+
+.order-consumable-column input:disabled {
+    cursor: not-allowed;
+
+    background: #0a1627;
+
+    color: #64748b;
+
+    border-color: #283b53;
+}
+
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
+.order-types-heading {
+    margin-top: 18px;
+    margin-bottom: 5px;
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================
+   ERROR MESSAGE
+========================================= */
+
+.order-type-error {
+    width: 100%;
+
+    display: none;
+
+    margin-top: 6px;
+    margin-bottom: 10px;
+
+    padding: 10px 13px;
+
+    background:
+        rgba(
+            239,
+            68,
+            68,
+            0.08
+        );
+
+    border:
+        1px solid
+        rgba(
+            239,
+            68,
+            68,
+            0.35
+        );
+
+    border-radius: 8px;
+
+    color: #fca5a5;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .order-type-row {
+        grid-template-columns:
+            1fr;
+
+        gap: 10px;
+    }
+}
+/* =========================================================
+   STEP 4
+   BARRACUDA CLASSIFICATION
+========================================================= */
+
+.compat-section-heading {
+
+    margin-top: 20px;
+    margin-bottom: 12px;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+/* ========================================
+   BARRACUDA DETAIL CONTAINER
+======================================== */
+
+.barracuda-extra-section {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(15, 28, 46, 0.96),
+            rgba(12, 27, 46, 0.96)
+        );
+
+    border:
+        1px solid #334155;
+
+    border-radius: 12px;
+
+    opacity: 0;
+
+    transform:
+        translateY(-8px);
+}
+
+
+.barracuda-extra-visible {
+
+    animation:
+        barracudaSectionIn
+        0.35s ease
+        forwards;
+}
+
+
+@keyframes barracudaSectionIn {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.barracuda-extra-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 15px;
+
+    margin-bottom: 17px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            148,
+            163,
+            184,
+            0.15
+        );
+}
+
+
+.barracuda-extra-title {
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    font-weight: 700;
+}
+
+
+.barracuda-extra-subtitle {
+
+    margin-top: 4px;
+
+    color: #64748b;
+
+    font-size: 11px;
+}
+
+
+/* ========================================
+   ACTIVE BADGE
+======================================== */
+
+.barracuda-active-badge {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        6px 10px;
+
+    color: #4ade80;
+
+    background:
+        rgba(
+            34,
+            197,
+            94,
+            0.08
+        );
+
+    border:
+        1px solid
+        rgba(
+            34,
+            197,
+            94,
+            0.20
+        );
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.barracuda-active-dot {
+
+    width: 6px;
+
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 8px
+        rgba(
+            34,
+            197,
+            94,
+            0.7
+        );
+}
+
+
+/* ========================================
+   CLASSIFICATION CHECKBOX GRID
+======================================== */
+
+.classification-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            6,
+            minmax(
+                110px,
+                1fr
+            )
+        );
+
+    gap: 10px;
+
+    margin-bottom: 22px;
+}
+
+
+/* Complete checkbox item */
+
+.classification-option {
+
+    position: relative;
+
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        0 12px;
+
+    background: #0d1a2c;
+
+    border:
+        1px solid #334155;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.classification-option:hover {
+
+    border-color: #3b82f6;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* Hide original checkbox */
+
+.classification-option input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* Custom checkbox */
+
+.classification-checkbox {
+
+    width: 19px;
+
+    height: 19px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        2px solid #64748b;
+
+    border-radius: 5px;
+
+    background: #071426;
+
+    color: transparent;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition:
+        0.2s ease;
+}
+
+
+.classification-label {
+
+    color: #cbd5e1;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+
+/* Selected checkbox */
+
+.classification-option
+input:checked
++
+.classification-checkbox {
+
+    background: #16a34a;
+
+    border-color: #22c55e;
+
+    color: #ffffff;
+
+    box-shadow:
+        0 0 8px
+        rgba(
+            34,
+            197,
+            94,
+            0.25
+        );
+}
+
+
+.classification-option:has(input:checked) {
+
+    background:
+        rgba(
+            34,
+            197,
+            94,
+            0.06
+        );
+
+    border-color:
+        rgba(
+            34,
+            197,
+            94,
+            0.55
+        );
+}
+
+
+.classification-option:has(input:checked)
+.classification-label {
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   DETAIL INPUTS
+======================================== */
+
+.barracuda-details-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        260px 180px;
+
+    gap: 14px;
+
+    justify-content: start;
+
+    padding-top: 12px;
+
+    margin-top: 10px;
+
+    border-top:
+        1px solid
+        rgba(148, 163, 184, 0.12);
+}
+
+
+.barracuda-details-grid .form-group {
+
+    width: 100%;
+}
+
+
+.barracuda-details-grid .form-group label {
+
+    margin-bottom: 5px;
+
+    font-size: 11px;
+
+    color: #94a3b8;
+}
+
+
+.barracuda-details-grid .form-group input {
+
+    width: 100%;
+
+    height: 34px;
+
+    padding: 0 10px;
+
+    font-size: 12px;
+
+    border-radius: 7px;
+
+    background: #0d1a2c;
+
+    border: 1px solid #334155;
+
+    color: #ffffff;
+}
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 1100px) {
+
+    .classification-grid {
+
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .classification-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+    }
+
+
+    .barracuda-details-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .barracuda-extra-header {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+}
+/* =========================================
+   REMOVE MODEL SETUP INNER SCROLLBAR
+========================================= */
+
+html,
+body {
+
+    overflow-x: hidden;
+
+}
+
+
+body {
+
+    overflow-y: visible;
+
+}
+
+
+.setup-page {
+
+    min-height: 100vh;
+
+    overflow: visible;
+
+}
+
+
+#contentArea {
+
+    overflow: visible;
+
+    height: auto;
+
+    max-height: none;
+
+}
+
+
+.card {
+
+    overflow: visible;
+
+    max-height: none;
+
+}
+.barracuda-extra-section {
+
+    margin-top: 16px;
+
+    padding: 14px 16px;
+
+    border-radius: 10px;
+}
+
+
+.barracuda-extra-header {
+
+    padding-bottom: 10px;
+
+    margin-bottom: 10px;
+}
+
+
+.barracuda-extra-title {
+
+    font-size: 13px;
+}
+
+
+.barracuda-extra-subtitle {
+
+    margin-top: 2px;
+
+    font-size: 9px;
+}
+/* =========================================
+   HIDE MODEL SETUP SCROLLBAR
+   SCROLLING STILL WORKS
+========================================= */
+
+html,
+body {
+
+    scrollbar-width: none;
+
+    -ms-overflow-style: none;
+}
+
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+
+    width: 0;
+
+    height: 0;
+
+    display: none;
+}

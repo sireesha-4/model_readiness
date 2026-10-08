@@ -23,8 +23,21 @@ function setConsumableText(
         return;
     }
 
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        element.textContent = "-";
+
+        return;
+    }
+
+
     element.textContent =
-        value || "-";
+        String(value);
 }
 
 
@@ -38,12 +51,15 @@ function showConsumableMessage(
             "consumableMessage"
         );
 
+
     if (!messageBox) {
         return;
     }
 
+
     messageBox.textContent =
         message;
+
 
     messageBox.className =
         "consumable-message " +
@@ -58,11 +74,14 @@ function hideConsumableMessage() {
             "consumableMessage"
         );
 
+
     if (!messageBox) {
         return;
     }
 
+
     messageBox.textContent = "";
+
 
     messageBox.className =
         "consumable-message";
@@ -76,10 +95,12 @@ function hideConsumableResult() {
             "consumableResult"
         );
 
+
     const initialMessage =
         document.getElementById(
             "pricingInitialMessage"
         );
+
 
     const pricingData =
         document.getElementById(
@@ -106,24 +127,6 @@ function hideConsumableResult() {
         initialMessage.style.display =
             "flex";
     }
-
-
-    setConsumableText(
-        "productConsumable",
-        "Brother Consumable"
-    );
-
-
-    setConsumableText(
-        "productType",
-        "Toner Cartridge"
-    );
-
-
-    setConsumableText(
-        "productDescription",
-        "Reliable consumable for consistent print quality."
-    );
 }
 
 
@@ -132,20 +135,30 @@ async function searchConsumable() {
     const consumable =
         getConsumableValue(
             "consumableSearch"
-        );
+        )
+            .toUpperCase();
+
 
     const country =
         getConsumableValue(
             "consumableCountry"
-        );
+        )
+            .toUpperCase();
+
 
     const program =
         getConsumableValue(
             "consumableProgram"
-        );
+        )
+            .toUpperCase();
 
 
     hideConsumableMessage();
+
+
+    // =========================================
+    // VALIDATION
+    // =========================================
 
 
     if (!consumable) {
@@ -181,6 +194,11 @@ async function searchConsumable() {
     }
 
 
+    setSearchButtonLoading(
+        true
+    );
+
+
     showConsumableMessage(
         "Searching SAP pricing information...",
         "loading"
@@ -188,6 +206,10 @@ async function searchConsumable() {
 
 
     try {
+
+        // =====================================
+        // NODE API URL
+        // =====================================
 
         const url =
             "/api/consumable/pricing" +
@@ -211,6 +233,10 @@ async function searchConsumable() {
         );
 
 
+        // =====================================
+        // CALL NODE
+        // =====================================
+
         const response =
             await fetch(url);
 
@@ -225,6 +251,10 @@ async function searchConsumable() {
         );
 
 
+        // =====================================
+        // ERROR
+        // =====================================
+
         if (!response.ok) {
 
             throw new Error(
@@ -233,6 +263,19 @@ async function searchConsumable() {
             );
         }
 
+
+        if (!result.success) {
+
+            throw new Error(
+                result.message ||
+                "Unable to retrieve pricing"
+            );
+        }
+
+
+        // =====================================
+        // GET NORMALIZED SAP DATA
+        // =====================================
 
         const sap =
             result.pricing || {};
@@ -249,8 +292,9 @@ async function searchConsumable() {
                 country,
 
             program:
-                result.program ||
-                program,
+                program === "B1"
+                    ? "Barracuda"
+                    : "Auto Reorder",
 
             conditionType:
                 sap.Kschl || "-",
@@ -258,20 +302,24 @@ async function searchConsumable() {
             salesOrg:
                 sap.Vkorg || "-",
 
-            distribution:
-                sap.Vtweg || "-",
+            customerPriceGroup:
+                sap.Konda || "-",
 
-            division:
-                sap.Spart || "-",
+            calculationType:
+                sap.Krech || "-",
 
             price:
-                formatConsumablePrice(
-                    sap.Kbetr,
-                    sap.Konwa
-                ),
+    formatPrice(
+        sap.Kbetr
+    ),
+    
+            currency:
+    sap.Konwa || "-",
 
             pricingUnit:
-                sap.Kpein || "-",
+                formatPricingUnit(
+                    sap.Kpein
+                ),
 
             unitOfMeasure:
                 sap.Kmein || "-",
@@ -284,14 +332,14 @@ async function searchConsumable() {
             validTo:
                 formatConsumableDate(
                     sap.Datbi
-                ),
-
-            type:
-                "Toner Cartridge",
-
-            description:
-                "Brother consumable product"
+                )
         };
+
+
+        console.log(
+            "Formatted Pricing Data:",
+            resultData
+        );
 
 
         hideConsumableMessage();
@@ -300,6 +348,7 @@ async function searchConsumable() {
         showConsumableResult(
             resultData
         );
+
 
     } catch (error) {
 
@@ -317,83 +366,165 @@ async function searchConsumable() {
             "Unable to retrieve pricing information.",
             "error"
         );
+
+
+    } finally {
+
+        setSearchButtonLoading(
+            false
+        );
     }
 }
 
 
-function formatConsumablePrice(
-    amount,
-    currency
+function setSearchButtonLoading(
+    loading
 ) {
 
+    const button =
+        document.querySelector(
+            ".consumable-search-btn"
+        );
+
+
+    if (!button) {
+        return;
+    }
+
+
+    button.disabled =
+        loading;
+
+
+    if (loading) {
+
+        button.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Searching';
+
+    } else {
+
+        button.innerHTML =
+            '<i class="fas fa-search"></i> Search';
+    }
+}
+
+
+function formatPrice(value) {
+
     if (
-        amount === undefined ||
-        amount === null ||
-        amount === ""
+        value === undefined ||
+        value === null ||
+        value === ""
     ) {
 
         return "-";
     }
 
 
-    const amountText =
-        String(amount);
-
-    const currencyText =
-        currency || "";
+    const number =
+        Number(value);
 
 
-    if (currencyText) {
+    if (
+        Number.isNaN(number)
+    ) {
 
-        return (
-            amountText +
-            " " +
-            currencyText
-        );
+        return String(value);
     }
 
 
-    return amountText;
+    return number.toFixed(2);
 }
 
 
-function formatConsumableDate(value) {
+function formatPricingUnit(
+    value
+) {
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return "-";
+    }
+
+
+    const number =
+        Number(value);
+
+
+    if (
+        Number.isNaN(number)
+    ) {
+
+        return String(value);
+    }
+
+
+    return String(
+        number
+    );
+}
+
+
+function formatConsumableDate(
+    value
+) {
 
     if (!value) {
         return "-";
     }
 
 
+    // SAP OData V2 Date
+    // /Date(1234567890000)/
+
     if (
         typeof value === "string" &&
         value.startsWith("/Date(")
     ) {
 
-        const match =
-            value.match(
-                /\/Date\((-?\d+)\)\//
-            );
+        const startIndex =
+            value.indexOf("(");
+
+
+        const endIndex =
+            value.indexOf(")");
 
 
         if (
-            match &&
-            match[1]
+            startIndex !== -1 &&
+            endIndex !== -1
         ) {
 
-            const date =
-                new Date(
-                    Number(match[1])
+            const timestamp =
+                value.substring(
+                    startIndex + 1,
+                    endIndex
                 );
+
+
+            const milliseconds =
+                Number(timestamp);
 
 
             if (
                 !Number.isNaN(
-                    date.getTime()
+                    milliseconds
                 )
             ) {
 
+                const date =
+                    new Date(
+                        milliseconds
+                    );
+
+
                 const year =
                     date.getUTCFullYear();
+
 
                 const month =
                     String(
@@ -402,6 +533,7 @@ function formatConsumableDate(value) {
                         2,
                         "0"
                     );
+
 
                 const day =
                     String(
@@ -424,21 +556,42 @@ function formatConsumableDate(value) {
     }
 
 
+    // YYYYMMDD
+
+    if (
+        typeof value === "string" &&
+        /^\d{8}$/.test(value)
+    ) {
+
+        return (
+            value.substring(0, 4) +
+            "-" +
+            value.substring(4, 6) +
+            "-" +
+            value.substring(6, 8)
+        );
+    }
+
+
     return String(value);
 }
 
 
-function showConsumableResult(data) {
+function showConsumableResult(
+    data
+) {
 
     const resultSection =
         document.getElementById(
             "consumableResult"
         );
 
+
     const initialMessage =
         document.getElementById(
             "pricingInitialMessage"
         );
+
 
     const pricingData =
         document.getElementById(
@@ -465,24 +618,6 @@ function showConsumableResult(data) {
         pricingData.style.display =
             "block";
     }
-
-
-    setConsumableText(
-        "productConsumable",
-        data.consumable
-    );
-
-
-    setConsumableText(
-        "productType",
-        data.type
-    );
-
-
-    setConsumableText(
-        "productDescription",
-        data.description
-    );
 
 
     setConsumableText(
@@ -516,20 +651,26 @@ function showConsumableResult(data) {
 
 
     setConsumableText(
-        "pricingDistribution",
-        data.distribution
+        "pricingCustomerPriceGroup",
+        data.customerPriceGroup
     );
 
 
     setConsumableText(
-        "pricingDivision",
-        data.division
+        "pricingCalculationType",
+        data.calculationType
     );
 
 
     setConsumableText(
         "pricingPrice",
         data.price
+    );
+
+
+    setConsumableText(
+        "pricingCurrency",
+        data.currency
     );
 
 
@@ -565,10 +706,12 @@ function resetConsumableSearch() {
             "consumableSearch"
         );
 
+
     const country =
         document.getElementById(
             "consumableCountry"
         );
+
 
     const program =
         document.getElementById(
@@ -577,61 +720,81 @@ function resetConsumableSearch() {
 
 
     if (consumable) {
+
         consumable.value = "";
     }
 
 
     if (country) {
+
         country.value = "";
     }
 
 
     if (program) {
+
         program.value = "";
     }
 
 
     hideConsumableMessage();
 
+
     hideConsumableResult();
 
 
     if (consumable) {
+
         consumable.focus();
     }
 }
 
+
 document.addEventListener(
     "DOMContentLoaded",
     function () {
+
+        console.log(
+            "Consumables JavaScript loaded"
+        );
+
 
         const consumable =
             document.getElementById(
                 "consumableSearch"
             );
 
+
         if (!consumable) {
             return;
         }
 
+
+        // Uppercase automatically
 
         consumable.addEventListener(
             "input",
             function () {
 
                 consumable.value =
-                    consumable.value.toUpperCase();
+                    consumable.value
+                        .toUpperCase();
             }
         );
 
+
+        // Search when Enter is pressed
 
         consumable.addEventListener(
             "keydown",
             function (event) {
 
-                if (event.key === "Enter") {
+                if (
+                    event.key === "Enter"
+                ) {
 
                     event.preventDefault();
+
 
                     searchConsumable();
                 }

@@ -365,6 +365,13 @@
       gap: 14px;
     }
 
+    .order-row {
+      display: grid;
+      grid-template-columns: 250px 300px;
+      gap: 40px;
+      align-items: center;
+    }
+
     .toggle-grid .info-field {
       display: grid;
 
@@ -893,6 +900,16 @@
       background: #0f1c2e;
       color: #ffffff;
     }
+
+    input[type="date"] {
+      color: #ffffff;
+      color-scheme: dark;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-inddicator {
+      cursor: pointer;
+      filter: invert(1);
+    }
   </style>
 </head>
 
@@ -926,7 +943,7 @@
         <select id="country" class="quick-country-select">
 
           <option value="">
-            Select country
+            Select Country
           </option>
 
           <option value="US">
@@ -992,19 +1009,8 @@
     const fieldMap = {
       "Material Number": "Matnr",
       "Country": "Country",
-      "Plant": "Werks",
-      "Material Type": "Mtart",
-      "Industry Sector": "Mbrsh",
-      "Material Group": "Matkl",
-      "Base Unit of Measure": "Meins",
-      "Division": "Spart",
-      "Ean / UPC": "Ean11",
-
       "Cross Plant Status": "Mstae",
       "Cross Distribution Status": "Mstav",
-      "Language": "Spras",
-      "Material Description": "Maktx",
-      "Distribution Channel": "Vtweg",
       "Distribution Material Status": "Vmsta",
       "Standard Warranty": "StdWtyType",
       "Standard Warranty Length": "StdWtyLen",
@@ -1026,20 +1032,27 @@
       "Auto Reorder": "Brrefresh",
       "Barracuda": "Barracuda",
       "Brother Plus": "Bplus",
-      "Barracuda Price Setup": "Selkzb1",
-      "Auto Reorder Price Setup": "Selkzbr",
-      "Barracuda Material Price": "B1Amount",
-      "Barracuda Currency": "B1Currency",
-      "Auto Reorder Material Price": "BRAmount",
-      "Auto Reorder Currency": "BRCurrency",
-      "Consumable": "Consumable",
-      "Drum Order": "DrumOrder",
+      // "Barracuda Material Price": "B1kbetr",
+      // "Barracuda Currency": "B1konwa",
+      // "Pricing Unit": "B1kpein",
+      // "Condition Type": "Kschl",
+      // "Unit of Measure": "B1kmein",
+      // "Calculation Type": "B1krech",
+      // "Valid From": "B1datab",
+      // "Valid To": "B1datbi",
+      // "Auto Reorder Material Price": "Brkbetr",
+      // "Auto Reorder Currency": "Brkonwa",
+      // "Pricing Unit": "Brkpein",
+      // "Condition Type": "Kschl",
+      // "Unit Of Measure": "Brkmein",
+      // "Calculation Type": "Brkrech",
+      // "Valid From": "Brdatab",
+      // "Valid To": "Brdatbi",
+      "Drum Order": "Drum",
       "Waste Toner": "WasteToner",
       "Belt Unit": "BeltUnit",
       "Backup Order": "Claimorder"
-
     };
-
 
     async function loadModelChange() {
       console.log("Search button clicked");
@@ -1051,8 +1064,6 @@
       const country =
         document.getElementById("country")
           .value.trim();
-
-
 
       const searchType =
         document.getElementById("searchType").value;
@@ -1066,7 +1077,7 @@
       }
       try {
         const response = await fetch(
-          `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+          `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
         );
 
         console.log("API called");
@@ -1129,6 +1140,100 @@
       const sectionName =
         section.querySelector("h3").innerText;
 
+      if (sectionName === "Order Type") {
+
+        if (!section.dataset.originalValues) {
+
+          const fields =
+            section.querySelectorAll(".info-field");
+
+          const values = [];
+          const keys = [];
+
+          fields.forEach(f => {
+
+            const label =
+              f.querySelector("label")?.innerText?.trim() || "";
+
+            let value = "-";
+
+            const toggleField =
+              f.querySelector('input[type="checkbox"]');
+
+            const valueField =
+              f.querySelector(".field-value");
+
+            if (toggleField) {
+
+              value =
+                toggleField.checked
+                  ? "Yes"
+                  : "No";
+
+            } else if (valueField) {
+
+              value =
+                valueField.innerText?.trim() || "-";
+            }
+
+            keys.push("-||" + label);
+            values.push(value);
+          });
+
+          section.dataset.originalKeys =
+            JSON.stringify(keys);
+
+          section.dataset.originalValues =
+            JSON.stringify(values);
+        }
+
+        const toggles =
+          section.querySelectorAll(
+            '.switch-wrapper input[type="checkbox"]'
+          );
+
+        toggles.forEach(toggle => {
+          toggle.disabled = false;
+        });
+
+        icon.innerHTML =
+          '<i class="fas fa-check"></i>';
+
+        icon.onclick = function () {
+          saveSection(this);
+        };
+
+        return;
+      }
+
+      // if (sectionName === "Order Type") {
+
+      //   const toggles =
+      //     section.querySelectorAll(
+      //       '.switch-wrapper input[type="checkbox"]'
+      //     );
+
+      //   toggles.forEach(toggle => {
+      //     toggle.disabled = false;
+      //   });
+
+      //   const toggleBtn =
+      //     section.querySelector(".toggle-icon");
+
+      //   if (toggleBtn) {
+      //     toggleBtn.style.display = "none";
+      //   }
+
+      //   icon.innerHTML =
+      //     '<i class="fas fa-check"></i>';
+
+      //   icon.onclick = function () {
+      //     saveSection(this);
+      //   };
+
+      //   return;
+      // }
+
       const isMaterialSection =
         sectionName === "Material Information";
 
@@ -1137,6 +1242,12 @@
 
       const toggleBtn =
         section.querySelector(".toggle-icon");
+      const consumableFields = [
+        "Drum Order Consumable",
+        "Waste Toner Consumable",
+        "Belt Unit Consumable",
+        "Backup Order Consumable"
+      ];
 
       /* Expand section if collapsed */
 
@@ -1154,16 +1265,45 @@
         const keys = [];
 
         fields.forEach(f => {
-          const label = f.querySelector("label")?.innerText?.trim() || "";
-          const value = f.querySelector(".field-value")?.innerText?.trim() || "-";
 
-          let sub = "-";
-          const subBlock = f.closest(".pricing-sub-block");
-          if (subBlock) {
-            sub = subBlock.querySelector(".pricing-sub-block-title")?.innerText?.trim() || "-";
+          const label =
+            f.querySelector("label")?.innerText?.trim() || "";
+
+          let value = "-";
+
+          const valueField =
+            f.querySelector(".field-value");
+
+          const toggleField =
+            f.querySelector('input[type="checkbox"]');
+
+          if (toggleField) {
+
+            value =
+              toggleField.checked
+                ? "Yes"
+                : "No";
+
+          } else if (valueField) {
+
+            value =
+              valueField.innerText?.trim() || "-";
           }
 
-          keys.push(sub + "||" + label);   // unique key
+          let sub = "-";
+
+          const subBlock =
+            f.closest(".pricing-sub-block");
+
+          if (subBlock) {
+
+            sub =
+              subBlock.querySelector(".pricing-sub-block-title")
+                ?.innerText?.trim() || "-";
+          }
+
+          keys.push(sub + "||" + label);
+
           values.push(value);
         });
 
@@ -1178,6 +1318,19 @@
 
       const displayFields =
         section.querySelectorAll(".field-value");
+      const readOnlyFields = [
+        "Plant",
+        "Material Type",
+        "Industry Sector",
+        "Material Group",
+        "Base Unit of Measure",
+        "Division",
+        "Ean / UPC",
+        "Language",
+        "Material Description",
+        "Distribution Channel",
+        "Consumable"
+      ];
 
       displayFields.forEach(field => {
 
@@ -1187,13 +1340,34 @@
             : field.innerText;
 
         const label = field.closest(".info-field").querySelector("label").innerText;
+        const displayOnlyFields = [
+          "Plant",
+          "Material Type",
+          "Industry Sector",
+          "Material Group",
+          "Base Unit of Measure",
+          "Division",
+          "Konda",
+          "Ean / UPC",
+          "Language",
+          "Sales Organization",
+          "Condition Type",
+          "Material Description",
+          "Distribution Channel",
+          "Consumable",
+          "Standard Warranty SKU",
+          "Extended Warranty SKU",
+          "BrotherCare SKU",
+          "BrotherPlus SKU"
+        ];
+
+
+        if (displayOnlyFields.includes(label)) {
+          field.classList.add("display-only");
+          return;
+        }
 
         const yesNoFields = [
-
-          "Standard Warranty",
-          "Extended Warranty",
-          "BrotherCare Warranty",
-          "BrotherPlus Warranty",
 
           "Amazon Dart",
           "Auto Reorder",
@@ -1220,54 +1394,68 @@
         ];
         if (warrantyFields.includes(label)) {
 
+          const toggleField =
+            field.closest(".info-field")
+              .previousElementSibling;
+
+          const warrantyToggle =
+            toggleField?.querySelector('input[type="checkbox"]');
+
+          const isWarrantyEnabled =
+            warrantyToggle?.checked;
+
           let numValue = "";
           let unitValue = "YR";
 
-          if (
-            (label === "BrothercarewarrantyLength" ||
-              label === "BrotherpluswarrantyLength") &&
-            !value
-          ) {
-            numValue = 6;
-            unitValue = "MONTH";
-          }
-
           if (value) {
 
-            const parts = value.split(" ");
+            const parts = value.trim().split(" ");
 
             numValue = parts[0] || "";
             unitValue = parts[1] || "YR";
           }
 
+          // OFF -> display mode
+          if (!isWarrantyEnabled) {
+
+            field.outerHTML = `
+            <span class="field-value">
+                ${value || "-"}
+            </span>
+        `;
+
+            return;
+          }
+
+          // ON -> editable
           field.outerHTML = `
-<div class="warranty-group"
-     data-warranty="${label.replace('Length', '')}">
+        <div class="warranty-group"
+             data-warranty="${label.replace('Length', '')}">
 
-    <input
-        class="warranty-number"
-        type="number"
-        min="0"
-        value="${numValue}">
+            <input
+                class="warranty-number"
+                type="number"
+                min="0"
+                value="${numValue}">
 
-    <select class="warranty-unit">
+            <select class="warranty-unit">
 
-        <option value="YR"
-            ${unitValue === "YR" ? "selected" : ""}>
-            YR
-        </option>
+                <option value="YR"
+                    ${unitValue === "YR" ? "selected" : ""}>
+                    YR
+                </option>
 
-        <option value="MONTH"
-            ${unitValue === "MONTH" ? "selected" : ""}>
-            Month
-        </option>
+                <option value="MONTH"
+                    ${unitValue === "MONTH" ? "selected" : ""}>
+                    Month
+                </option>
 
-    </select>
+            </select>
 
-</div>
-`;
+        </div>
+    `;
 
-
+          return;
         }
         else if (yesNoFields.includes(label)) {
 
@@ -1284,30 +1472,66 @@
             ${checked}
             data-toggle-label="${label}"
             onchange="
-                toggleWarrantyLength(this,'${label}');
-                togglePricingBlock(this,'${label}');
-            ">
+    toggleWarrantyLength(this,'${label}');
+    togglePricingBlock(this,'${label}');
+">
         <span class="slider"></span>
     </label>
 </div>
 `;
-        } else {
-          if (isMaterialSection) {   // material readonly
+        }
+
+
+        else if (consumableFields.includes(label)) {
+
+          field.outerHTML = `
+        <span
+            class="field-value consumable-display"
+            data-consumable-field="${label}">
+            ${value || "-"}
+        </span>
+    `;
+          return;
+        }
+        else if (
+          label === "Valid From" ||
+          label === "Valid To"
+        ) {
+
+          let dateValue = "";
+
+          if (value && value !== "-") {
+
+            const [day, month, year] = value.split("/");
+
+            dateValue = `${year}-${month}-${day}`;
+          }
+
+          field.outerHTML = `
+    <input
+      type="date"
+      value="${dateValue}">
+  `;
+        }
+        else {
+
+          const isReadOnlyField =
+            readOnlyFields.includes(label);
+
+          if (isReadOnlyField) {
 
             field.outerHTML =
               `<input type="text"
-                value="${value}"
-                readonly
-                class="material-readonly">`;
+       value="${value}"
+       readonly
+       class="material-readonly">`;
 
           } else {
 
             field.outerHTML =
               `<input type="text"
-                value="${value}">`;
-
+       value="${value}">`;
           }
-          ``
         }
       });
 
@@ -1322,6 +1546,10 @@
           toggle,
           warrantyType
         );
+
+        // toggleConsumableField(
+        //   toggle
+        // );
 
       });
       icon.innerHTML =
@@ -1359,139 +1587,6 @@
             toggle.checked ? "block" : "none";
         }
       }
-    }
-    function saveSection(icon) {
-
-      const section =
-        icon.closest(".change-section");
-      const toggle =
-        section.querySelector(".toggle-icon");
-
-      toggle.style.display = "flex";
-
-      const warrantyGroups =
-        section.querySelectorAll(".warranty-group");
-
-      warrantyGroups.forEach(group => {
-
-        const num =
-          group.querySelector(".warranty-number").value;
-
-        const unit =
-          group.querySelector(".warranty-unit").value;
-
-        const value =
-          num
-            ? `${num} ${unit}`
-            : "-";
-
-        group.outerHTML =
-          `<span class="field-value">${value}</span>`;
-      });
-
-      const controls =
-        section.querySelectorAll("input, select");
-
-      controls.forEach(control => {
-        if (control.type === "checkbox") {
-
-          const value =
-            control.checked
-              ? "Yes"
-              : "No";
-
-          control.closest(".switch").outerHTML =
-            `<span class="field-value">${value}</span>`;
-
-          return;
-        }
-
-        const value =
-          (control.value || "").trim() || "-";
-
-        control.outerHTML =
-          `<span class="field-value">${value}</span>`;
-      });
-      const originalValues =
-        JSON.parse(section.dataset.originalValues || "[]");
-
-      const originalLabels =
-        JSON.parse(section.dataset.originalLabels || "[]");
-
-      const fields =
-        section.querySelectorAll(".info-field");
-
-      const sectionName =
-        section.querySelector("h3").innerText;
-
-      let hasAnyChange = false;
-
-      fields.forEach(field => {
-        const label = field.querySelector("label")?.innerText?.trim();
-        if (!label) return;
-
-        const currentValue =
-          field.querySelector(".field-value")?.innerText?.trim() || "-";
-
-        // subCategory from DOM only (no hardcoding)
-        let subCategory = "-";
-        const subBlock = field.closest(".pricing-sub-block");
-        if (subBlock) {
-          subCategory =
-            subBlock.querySelector(".pricing-sub-block-title")?.innerText?.trim() || "-";
-        }
-
-        const originalKeys = JSON.parse(section.dataset.originalKeys || "[]");
-        const originalValues = JSON.parse(section.dataset.originalValues || "[]");
-
-        const key = subCategory + "||" + label;
-        const keyIndex = originalKeys.indexOf(key);
-        const originalValue =
-          keyIndex > -1 ? (originalValues[keyIndex] || "-") : currentValue;
-
-        const existingIndex = changedFields.findIndex(x =>
-          x.section === sectionName &&
-          x.field === label &&
-          (x.subCategory || "-") === subCategory
-        );
-
-        if (originalValue !== currentValue) {
-          hasAnyChange = true;
-
-          if (existingIndex > -1) {
-            changedFields[existingIndex].after = currentValue;
-          } else {
-            changedFields.push({
-              section: sectionName,
-              subCategory: subCategory,
-              field: label,
-              before: originalValue,
-              after: currentValue
-            });
-          }
-        } else {
-          if (existingIndex > -1) {
-            changedFields.splice(existingIndex, 1);
-          }
-        }
-      });
-
-      if (hasAnyChange) {
-        markAsChanged();
-      }
-      icon.innerHTML =
-        '<i class="fas fa-pen-to-square"></i>';
-
-      icon.onclick = function () {
-        enableEdit(this);
-      };
-
-      const toggleBtn =
-        section.querySelector(".toggle-icon");
-
-      toggleSection(toggleBtn);
-
-      console.log("Section Saved");
     }
     function markAsChanged() {
 
@@ -2011,11 +2106,19 @@ ${showWarranty ? `
   <!-- ========== STANDARD ========== -->
   <div class="info-field">
     <label>Standard Warranty</label>
-    <span class="field-value">${record.StandardWarranty === "X" ? "Yes" : "No"}</span>
+    <div class="switch-wrapper">
+<label class="switch">
+<input
+type="checkbox"
+${record.StdWtyType === "X" ? "checked" : ""}
+disabled>
+<span class="slider"></span>
+</label>
+</div>
   </div>
   <div class="info-field">
     <label>Standard Warranty Length</label>
-    <span class="field-value">${record.StandardwarrantyLength || "-"} ${record.StandardwarrantyUnit || ""}</span>
+    <span class="field-value">${record.StdWtyLen || "-"} ${record.StdWtyLenUnit || ""}</span>
   </div>
   <div class="info-field">
     <label>Standard Warranty SKU</label>
@@ -2025,11 +2128,19 @@ ${showWarranty ? `
   <!-- ========== EXTENDED ========== -->
   <div class="info-field">
     <label>Extended Warranty</label>
-    <span class="field-value">${record.ExtendedWarranty === "X" ? "Yes" : "No"}</span>
+    <div class="switch-wrapper">
+  <label class="switch">
+    <input
+      type="checkbox"
+      ${record.ExtdWtyType === "X" ? "checked" : ""}
+      disabled>
+    <span class="slider"></span>
+  </label>
+</div>
   </div>
   <div class="info-field">
     <label>Extended Warranty Length</label>
-    <span class="field-value">${record.ExtendedwarrantyLength || "-"} ${record.ExtendedwarrantyUnit || ""}</span>
+    <span class="field-value">${record.ExtdWtyLen || "-"} ${record.ExtdWtyLenUnit || ""}</span>
   </div>
   <div class="info-field">
     <label>Extended Warranty SKU</label>
@@ -2039,11 +2150,19 @@ ${showWarranty ? `
   <!-- ========== BROTHER CARE ========== -->
   <div class="info-field">
     <label>BrotherCare Warranty</label>
-    <span class="field-value">${record.BrothercareWarranty === "X" ? "Yes" : "No"}</span>
+   <div class="switch-wrapper">
+  <label class="switch">
+    <input
+      type="checkbox"
+      ${record.BcareWtyType === "X" ? "checked" : ""}
+      disabled>
+    <span class="slider"></span>
+  </label>
+</div>
   </div>
   <div class="info-field">
     <label>BrotherCare Warranty Length</label>
-    <span class="field-value">${record.BrothercarewarrantyLength || "-"} ${record.BrothercarewarrantyUnit || ""}</span>
+    <span class="field-value">${record.BcareWtyLen || "-"} ${record.BcareWtyLenUnit || ""}</span>
   </div>
   <div class="info-field">
     <label>BrotherCare SKU</label>
@@ -2053,11 +2172,19 @@ ${showWarranty ? `
   <!-- ========== BROTHER PLUS ========== -->
   <div class="info-field">
     <label>BrotherPlus Warranty</label>
-    <span class="field-value">${record.BrotherplusWarranty === "X" ? "Yes" : "No"}</span>
+   <div class="switch-wrapper">
+  <label class="switch">
+    <input
+      type="checkbox"
+      ${record.BplusWtyType === "X" ? "checked" : ""}
+      disabled>
+    <span class="slider"></span>
+  </label>
+</div>
   </div>
   <div class="info-field">
     <label>BrotherPlus Warranty Length</label>
-    <span class="field-value">${record.BrotherpluswarrantyLength || "-"} ${record.BrotherpluswarrantyUnit || ""}</span>
+    <span class="field-value">${record.BplusWtyLen || "-"} ${record.BplusWtyLenUnit || ""}</span>
   </div>
   <div class="info-field">
     <label>BrotherPlus SKU</label>
@@ -2075,10 +2202,6 @@ ${showCompatibility ? `
     <div class="change-header">
         <h3>Model Compatibility</h3>
         <div class="header-actions">
-            
-              <div class="edit-icon" onclick="enableEdit(this)">
-                <i class="fas fa-pen-to-square"></i>
-              </div>
 
               <div class="toggle-icon"
               onclick="toggleSection(this)">
@@ -2093,22 +2216,54 @@ ${showCompatibility ? `
 
             <div class="info-field">
                 <label>Amazon Dart</label>
-                <span class="field-value">${record.Amazondart === "X" ? "Yes" : "No"}</span>
+                <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.Amazondart === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>
             </div>
 
             <div class="info-field">
                 <label>Auto Reorder</label>
-                <span class="field-value">${record.Brrefresh === "X" ? "Yes" : "No"}</span>
+               <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.AutoReorder === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>
             </div>
 
             <div class="info-field">
                 <label>Barracuda</label>
-                <span class="field-value">${record.Barracuda === "X" ? "Yes" : "No"}</span>
+               <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.Barracuda === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>
             </div>
 
             <div class="info-field">
                 <label>Brother Plus</label>
-                <span class="field-value">${record.Bplus === "X" ? "Yes" : "No"}</span>
+                <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.Bplus === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>
             </div>
 
         </div>
@@ -2148,9 +2303,15 @@ ${showPricing ? `
 
             <div class="info-field">
                 <label>Barracuda Price Setup</label>
-                 <span class="field-value">
-                   ${record.Selkzb1 ? "Yes" : "No"}
-                 </span>             
+                 <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.Selkzb1 === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>           
             </div>
 
         </div>
@@ -2195,13 +2356,8 @@ ${showPricing ? `
                 </div>
 
                 <div class="info-field">
-                    <label>Customer Price Group</label>
-                    <span class="field-value">${record.Konda || "-"}</span>
-                </div>
-
-                <div class="info-field">
-                    <label>Unit Of Measure</label>
-                    <span class="field-value">${record.Meins || "-"}</span>
+                    <label>Unit of Measure</label>
+                    <span class="field-value">${record.B1kmein || "-"}</span>
                 </div>
 
                 <div class="info-field">
@@ -2234,9 +2390,15 @@ ${showPricing ? `
 
             <div class="info-field">
                 <label>Auto Reorder Price Setup</label>
-                <span class="field-value">
-                    ${record.Selkzbr === "X" ? "Yes" : "No"}
-                </span>
+                <div class="switch-wrapper">
+    <label class="switch">
+        <input
+            type="checkbox"
+            ${record.Selkzbr === "X" ? "checked" : ""}
+            disabled>
+        <span class="slider"></span>
+    </label>
+</div>
             </div>
 
         </div>
@@ -2286,7 +2448,7 @@ ${showPricing ? `
 
                 <div class="info-field">
                     <label>Unit Of Measure</label>
-                    <span class="field-value">${record.Meins || "-"}</span>
+                    <span class="field-value">${record.Brkmein || "-"}</span>
                 </div>
 
                 <div class="info-field">
@@ -2301,7 +2463,7 @@ ${showPricing ? `
 
                <div class="info-field">
                <label>Valid To</label>
-               <span class="field-value">${record.Brdatai ? formatODataDate(record.Brdatai) : "-"}</span>
+               <span class="field-value">${record.Brdatbi ? formatODataDate(record.Brdatbi) : "-"}</span>
                </div>
             </div>
         </div>
@@ -2330,32 +2492,86 @@ ${showOrder ? `
 
     <div class="change-content">
         <div class="toggle-grid">
-
-            <div class="info-field">
-                <label>Consumable</label>
-                 <span class="field-value">${record.Consumable || "-"}</span>
-            </div>
-
+            <div class="order-row">
             <div class="info-field">
                 <label>Drum Order</label>
-                <span class="field-value">${record.DrumOrder === "X" ? "Yes" : "No"}</span>
+               <div class="switch-wrapper">
+<label class="switch">
+<input
+type="checkbox"
+${record.Drum === "X" ? "checked" : ""}
+disabled>
+<span class="slider"></span>
+</label>
+</div>
             </div>
+
+             <div class="info-field">
+                <label>Drum Order Consumable</label>
+                 <span class="field-value">${record.Drconsumable || "-"}</span>
+                 
+            </div>
+        </div>
+            <div class="order-row">
 
             <div class="info-field">
                 <label>Waste Toner</label>
-                <span class="field-value">${record.WasteToner === "X" ? "Yes" : "No"}</span>
+                <div class="switch-wrapper">
+<label class="switch">
+<input
+type="checkbox"
+${record.WasteToner === "X" ? "checked" : ""}
+disabled>
+<span class="slider"></span>
+</label>
+</div>
             </div>
+
+             <div class="info-field">
+                <label>Waste Toner Consumable</label>
+                 <span class="field-value">${record.Wtconsumable || "-"}</span>
+            </div>
+        </div>
+            <div class="order-row">
 
             <div class="info-field">
                 <label>Belt Unit</label>
-                <span class="field-value">${record.BeltUnit === "X" ? "Yes" : "No"}</span>
+                <div class="switch-wrapper">
+<label class="switch">
+<input
+type="checkbox"
+${record.BeltUnit === "X" ? "checked" : ""}
+disabled>
+<span class="slider"></span>
+</label>
+</div>
             </div>
+
+             <div class="info-field">
+                <label>Belt Unit Consumable</label>
+                 <span class="field-value">${record.Buconsumable || "-"}</span>
+            </div>
+        </div>
+            <div class="order-row">
 
             <div class="info-field">
                 <label>Backup Order</label>
-                <span class="field-value">${record.Claimorder === "X" ? "Yes" : "No"}</span>
+                <div class="switch-wrapper">
+<label class="switch">
+<input
+type="checkbox"
+${record.Claimorder === "X" ? "checked" : ""}
+disabled>
+<span class="slider"></span>
+</label>
+</div>
             </div>
 
+             <div class="info-field">
+                <label>Backup Order Consumable</label>
+                 <span class="field-value">${record.Coconsumable || "-"}</span>
+            </div>
+        </div>
         </div>
     </div>
 </div>
@@ -2365,11 +2581,10 @@ ${showOrder ? `
 
     function toggleWarrantyLength(toggleElement, warrantyType) {
 
-      const infoField =
-        toggleElement.closest(".info-field");
+      const infoField = toggleElement.closest(".info-field");
 
-      const lengthFieldContainer =
-        infoField.nextElementSibling;
+      const lengthFieldContainer = infoField.nextElementSibling;
+      const skuFieldContainer = lengthFieldContainer?.nextElementSibling;
 
       if (!lengthFieldContainer) return;
 
@@ -2379,66 +2594,122 @@ ${showOrder ? `
       const unitSelect =
         lengthFieldContainer.querySelector(".warranty-unit");
 
-      const isEnabled =
-        toggleElement.checked;
+      const skuInput =
+        skuFieldContainer?.querySelector("input");
 
+      const isEnabled = toggleElement.checked;
+
+      // Enable / Disable Length
       if (numberInput) {
-
         numberInput.disabled = !isEnabled;
-
-        if (isEnabled && !numberInput.value) {
-
-          if (
-            warrantyType === "BrothercareWarranty" ||
-            warrantyType === "BrotherplusWarranty"
-          ) {
-
-            numberInput.value = 6;
-            unitSelect.value = "MONTH";
-
-          } else {
-
-            numberInput.value = 0;
-            unitSelect.value = "YR";
-          }
-        }
-
-        if (!isEnabled) {
-
-          numberInput.value = "";
-
-          if (unitSelect) {
-            unitSelect.value = "MONTH";
-          }
-        }
       }
 
       if (unitSelect) {
         unitSelect.disabled = !isEnabled;
       }
+
+      // Enable / Disable SKU
+      if (skuInput) {
+        skuInput.disabled = !isEnabled;
+      }
+
+      // Toggle OFF
+      if (!isEnabled) {
+
+        if (numberInput) numberInput.value = "";
+
+        if (unitSelect) {
+          unitSelect.value = "YR";
+        }
+
+        if (skuInput) {
+          skuInput.value = "";
+        }
+      }
+
+      // Toggle ON
+      else {
+
+        // only apply defaults if there is no value
+
+        if (numberInput && !numberInput.value) {
+
+          if (
+            warrantyType === "BrotherCare Warranty" ||
+            warrantyType === "BrotherPlus Warranty"
+          ) {
+
+            numberInput.value = 6;
+
+            if (unitSelect) {
+              unitSelect.value = "MONTH";
+            }
+
+          } else {
+
+            numberInput.value = 0;
+
+            if (unitSelect) {
+              unitSelect.value = "YR";
+            }
+          }
+        }
+      }
     }
 
-    function saveChanges() {
-      console.log(originalData);
+    function convertToODataDate(dateValue) {
+
+      if (!dateValue || dateValue === "-") {
+        return null;
+      }
+
+      let day, month, year;
+
+      if (dateValue.includes("/")) {
+
+        [day, month, year] = dateValue.split("/");
+
+      } else if (dateValue.includes("-")) {
+
+        [year, month, day] = dateValue.split("-");
+      } else {
+
+        return null;
+      }
+
+      const date = new Date(
+        Number(year),
+        Number(month) - 1,
+        Number(day)
+      );
+
+      return `/Date(${date.getTime()})/`;
+    }
+
+    async function saveChanges() {
+
+      console.log("originalData:", originalData);
 
       const changepayload = {};
 
-      // Create date fields as Null & other all fields with empty values
       const dateFields = [
         "B1datab",
         "B1datbi",
         "Brdatab",
-        "Brdatai"
+        "Brdatbi"
       ];
 
+      // Start with original backend values
       Object.keys(originalData).forEach(key => {
 
         if (key === "__metadata") return;
 
         if (dateFields.includes(key)) {
-          changepayload[key] = null;
+          changepayload[key] = originalData[key];
         } else {
-          changepayload[key] = "";
+
+          changepayload[key] = originalData[key] || "";
+
         }
 
       });
@@ -2449,44 +2720,80 @@ ${showOrder ? `
 
       changedFields.forEach(change => {
 
-        if (
-          change.subCategory === "Barracuda Price Details" &&
-          change.field === "Material Price"
-        ) {
-          changepayload.B1Amount = change.after;
-          return;
+
+        if (change.section === "Pricing Information") {
+
+          const pricingMap = {
+
+            "Barracuda Price Details": {
+              "Barracuda Price Setup": "Selkzb1",
+              "Material Price": "B1kbetr",
+              "Currency": "B1konwa",
+              "Pricing Unit": "B1kpein",
+              "Unit of Measure": "B1kmein",
+              "Unit Of Measure": "B1kmein",
+              "Calculation Type": "B1krech",
+              "Valid From": "B1datab",
+              "Valid To": "B1datbi"
+            },
+
+            "Auto Reorder Price Details": {
+              "Auto Reorder Price Setup": "Selkzbr",
+              "Material Price": "Brkbetr",
+              "Currency": "Brkonwa",
+              "Pricing Unit": "Brkpein",
+              "Customer Price Group": "Konda",
+              "Unit of Measure": "Brkmein",
+              "Unit Of Measure": "Brkmein",
+              "Calculation Type": "Brkrech",
+              "Valid From": "Brdatab",
+              "Valid To": "Brdatbi"
+            }
+
+          };
+
+          const backendField =
+            pricingMap[change.subCategory]?.[change.field];
+
+          if (backendField) {
+
+            let value = change.after;
+
+            if (value === "Yes") value = "X";
+            if (value === "No") value = "";
+
+            if (
+              backendField === "B1datab" ||
+              backendField === "B1datbi" ||
+              backendField === "Brdatab" ||
+              backendField === "Brdatbi"
+            ) {
+
+              changepayload[backendField] =
+                value === "-"
+                  ? null
+                  : convertToODataDate(value);
+
+            } else {
+
+              changepayload[backendField] = value;
+            }
+
+
+            return;
+          }
         }
 
-        if (
-          change.subCategory === "Barracuda Price Details" &&
-          change.field === "Currency"
-        ) {
-          changepayload.B1Currency = change.after;
-          return;
-        }
-
-        if (
-          change.subCategory === "Auto Reorder Price Details" &&
-          change.field === "Material Price"
-        ) {
-          changepayload.BRAmount = change.after;
-          return;
-        }
-
-        if (
-          change.subCategory === "Auto Reorder Price Details" &&
-          change.field === "Currency"
-        ) {
-          changepayload.BRCurrency = change.after;
-          return;
-        }
         const backendField = fieldMap[change.field];
+
         if (!backendField) {
           console.warn("No mapping found:", change.field);
           return;
         }
 
         let value = change.after;
+
+        // Toggle Conversion
         if (value === "Yes") value = "X";
         if (value === "No") value = "";
 
@@ -2497,34 +2804,75 @@ ${showOrder ? `
           change.field === "BrotherCare Warranty Length" ||
           change.field === "BrotherPlus Warranty Length"
         ) {
+
           const [length, unit] = value.split(" ");
 
           if (change.field === "Standard Warranty Length") {
             changepayload.StdWtyLen = length;
             changepayload.StdWtyLenUnit = unit;
           }
+
           if (change.field === "Extended Warranty Length") {
             changepayload.ExtdWtyLen = length;
             changepayload.ExtdWtyLenUnit = unit;
           }
+
           if (change.field === "BrotherCare Warranty Length") {
             changepayload.BcareWtyLen = length;
             changepayload.BcareWtyLenUnit = unit;
           }
+
           if (change.field === "BrotherPlus Warranty Length") {
             changepayload.BplusWtyLen = length;
             changepayload.BplusWtyLenUnit = unit;
           }
+
           return;
         }
 
         changepayload[backendField] = value;
+
       });
 
-      console.log("changepayload:", JSON.stringify(changepayload, null, 2));
+      console.log(
+        "changepayload:",
+        JSON.stringify(changepayload, null, 2)
+      );
 
-      // Close the modal that lives in the PARENT
-      if (window.parent && typeof window.parent.closeModelChangeReview === "function") {
+      try {
+
+
+        const response = await fetch(
+          "/api/model/change",
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(changepayload)
+          }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "Update Failed");
+        }
+
+        alert("Model updated successfully");
+
+
+      } catch (error) {
+
+        console.error("Update Failed", error);
+
+        alert("Update Failed");
+      }
+
+      if (
+        window.parent &&
+        typeof window.parent.closeModelChangeReview === "function"
+      ) {
         window.parent.closeModelChangeReview();
       }
     }
@@ -2539,6 +2887,237 @@ ${showOrder ? `
       const date = new Date(timestamp);
 
       return date.toLocaleDateString("en-GB");
+    }
+
+    function saveSection(icon) {
+
+      const section =
+        icon.closest(".change-section");
+
+      const sectionName =
+        section.querySelector("h3").innerText;
+
+      const toggle =
+        section.querySelector(".toggle-icon");
+
+      toggle.style.display = "flex";
+
+      const warrantyGroups =
+        section.querySelectorAll(".warranty-group");
+
+      warrantyGroups.forEach(group => {
+
+        const num =
+          group.querySelector(".warranty-number")?.value;
+
+        const unit =
+          group.querySelector(".warranty-unit")?.value;
+
+        const value =
+          num
+            ? `${num} ${unit}`
+            : "-";
+
+        group.outerHTML =
+          `<span class="field-value">${value}</span>`;
+      });
+
+      const controls =
+        section.querySelectorAll("input, select");
+
+      controls.forEach(control => {
+
+        if (control.type === "checkbox") {
+
+          if (sectionName === "Warranty Information" ||
+            sectionName === "Model Compatibility" ||
+            sectionName === "Pricing Information" ||
+            sectionName === "Order Type") {
+
+            const checked =
+              control.checked
+                ? "checked"
+                : "";
+
+            const wrapper =
+              control.closest(".switch-wrapper");
+
+            if (wrapper) {
+              wrapper.outerHTML = `
+                        <div class="switch-wrapper">
+                            <label class="switch">
+                                <input
+                                    type="checkbox"
+                                    ${checked}
+                                    disabled>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    `;
+            }
+
+          } else {
+
+            const value =
+              control.checked
+                ? "Yes"
+                : "No";
+
+            const wrapper =
+              control.closest(".switch-wrapper");
+
+            if (wrapper) {
+              wrapper.outerHTML =
+                `<span class="field-value">${value}</span>`;
+            }
+          }
+
+          return;
+        }
+
+        let value =
+          (control.value || "").trim() || "-";
+
+        if (
+          control.type === "date" &&
+          value !== "-"
+        ) {
+
+          const [year, month, day] =
+            value.split("-");
+
+          value =
+            `${day}/${month}/${year}`;
+        }
+
+        control.outerHTML =
+          `<span class="field-value">${value}</span>`;
+      });
+
+      const fields =
+        section.querySelectorAll(".info-field");
+
+      let hasAnyChange = false;
+
+      fields.forEach(field => {
+
+        const label =
+          field.querySelector("label")?.innerText?.trim();
+
+        if (!label) return;
+
+        let currentValue = "-";
+
+        const valueField =
+          field.querySelector(".field-value");
+
+        const toggleField =
+          field.querySelector('input[type="checkbox"]');
+
+        if (toggleField) {
+
+          currentValue =
+            toggleField.checked
+              ? "Yes"
+              : "No";
+
+        } else if (valueField) {
+
+          currentValue =
+            valueField.innerText?.trim() || "-";
+        }
+
+        let subCategory = "-";
+
+        const subBlock =
+          field.closest(".pricing-sub-block");
+
+        if (subBlock) {
+
+          subCategory =
+            subBlock.querySelector(".pricing-sub-block-title")
+              ?.innerText?.trim() || "-";
+        }
+
+        const originalKeys =
+          JSON.parse(section.dataset.originalKeys || "[]");
+
+        const originalValues =
+          JSON.parse(section.dataset.originalValues || "[]");
+
+        let key =
+          subCategory + "||" + label;
+
+        if (sectionName === "Order Type") {
+          key = "-||" + label;
+        }
+
+        const keyIndex =
+          originalKeys.indexOf(key);
+
+        const originalValue =
+          keyIndex > -1
+            ? (originalValues[keyIndex] || "-")
+            : currentValue;
+
+        console.log({
+          sectionName,
+          label,
+          key,
+          keyIndex,
+          originalValue,
+          currentValue
+        });
+
+        const existingIndex =
+          changedFields.findIndex(x =>
+            x.section === sectionName &&
+            x.field === label &&
+            (x.subCategory || "-") === subCategory
+          );
+
+        if (originalValue !== currentValue) {
+
+          hasAnyChange = true;
+
+          if (existingIndex > -1) {
+
+            changedFields[
+              existingIndex
+            ].after = currentValue;
+
+          } else {
+
+            changedFields.push({
+              section: sectionName,
+              subCategory: subCategory,
+              field: label,
+              before: originalValue,
+              after: currentValue
+            });
+          }
+
+        } else {
+
+          if (existingIndex > -1) {
+            changedFields.splice(existingIndex, 1);
+          }
+        }
+      });
+
+      if (hasAnyChange) {
+        markAsChanged();
+      }
+
+      icon.innerHTML =
+        '<i class="fas fa-pen-to-square"></i>';
+
+      icon.onclick = function () {
+        enableEdit(this);
+      };
+
+      console.log("Section Saved");
+      console.log("changedFields =", changedFields);
     }
 
   </script>
