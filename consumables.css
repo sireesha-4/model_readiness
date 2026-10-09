@@ -4,7 +4,6 @@
     box-sizing: border-box;
 }
 
-
 html,
 body {
     width: 100%;
@@ -18,13 +17,11 @@ body {
     background: #061224;
 }
 
-
 body {
     font-family: "Segoe UI", Arial, sans-serif;
 
     color: #e2e8f0;
 }
-
 
 button,
 input,
@@ -32,11 +29,9 @@ select {
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
-
 /* =========================================
    PAGE
 ========================================= */
-
 .consumables-page {
     width: 100%;
     height: 100vh;
@@ -48,7 +43,6 @@ select {
     background: #061224;
 }
 
-
 /* =========================================
    HEADER
 ========================================= */
@@ -56,7 +50,6 @@ select {
 .consumables-header {
     margin-bottom: 12px;
 }
-
 
 .consumables-header h1 {
     color: #ffffff;
@@ -67,7 +60,6 @@ select {
     letter-spacing: -0.4px;
 }
 
-
 .consumables-header p {
     margin-top: 4px;
 
@@ -76,11 +68,9 @@ select {
     font-size: 13px;
 }
 
-
 /* =========================================
    SEARCH CARD
 ========================================= */
-
 .consumables-search-card {
     width: 100%;
 
@@ -113,11 +103,9 @@ select {
         0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
-
 .search-field {
     min-width: 0;
 }
-
 
 .search-field label {
     display: block;
@@ -130,11 +118,9 @@ select {
     font-weight: 600;
 }
 
-
 .search-input-wrapper {
     position: relative;
 }
-
 
 .search-input-wrapper input,
 .search-field select {
@@ -159,11 +145,9 @@ select {
         box-shadow 0.2s ease;
 }
 
-
 .search-input-wrapper input {
     padding-right: 38px;
 }
-
 
 .search-input-wrapper i {
     position: absolute;
@@ -180,7 +164,6 @@ select {
     pointer-events: none;
 }
 
-
 .search-input-wrapper input:focus,
 .search-field select:focus {
     border-color: #3b82f6;
@@ -189,16 +172,13 @@ select {
         0 0 0 3px rgba(59, 130, 246, 0.10);
 }
 
-
 .search-input-wrapper input::placeholder {
     color: #64748b;
 }
 
-
 .search-field select {
     cursor: pointer;
 }
-
 
 .search-field select option {
     background: #0f1c2e;
@@ -206,17 +186,14 @@ select {
     color: #ffffff;
 }
 
-
 /* =========================================
    SEARCH BUTTONS
 ========================================= */
-
 .search-button-group {
     display: flex;
 
     gap: 9px;
 }
-
 
 .consumable-search-btn,
 .consumable-reset-btn {
@@ -245,7 +222,6 @@ select {
         transform 0.2s ease;
 }
 
-
 .consumable-search-btn {
     border: 1px solid #3b82f6;
 
@@ -261,13 +237,11 @@ select {
         0 5px 14px rgba(37, 99, 235, 0.25);
 }
 
-
 .consumable-search-btn:hover {
     background: #1d4ed8;
 
     transform: translateY(-1px);
 }
-
 
 .consumable-reset-btn {
     border: 1px solid #3b4b63;
@@ -277,7 +251,6 @@ select {
     color: #94a3b8;
 }
 
-
 .consumable-reset-btn:hover {
     color: #ffffff;
 
@@ -286,11 +259,9 @@ select {
     background: #15243a;
 }
 
-
 /* =========================================
    RESULT LAYOUT
 ========================================= */
-
 .consumable-result-section {
     width: 100%;
 
@@ -304,19 +275,17 @@ select {
 
     align-items: stretch;
 
-    height: 530px;
+    height: 570px;
 
-    overflow: hidden;
+    overflow: visible;
 }
-
 
 /* =========================================
    LEFT PRODUCT CARD
 ========================================= */
-
 .consumable-product-card {
     width: 100%;
-    height: 530px;
+    height: 570px;
 
     display: flex;
     flex-direction: column;
@@ -338,24 +307,14 @@ select {
     box-sizing: border-box;
 }
 
-
 /* =========================================
    PRODUCT IMAGE
-
-   IMPORTANT:
-   No filter
-   No shadow
-   No transform
-   No generated glow
-   No crop
 ========================================= */
-
 .product-image-area {
     width: 100%;
 
-    height: 405px;
-
-    flex: 0 0 405px;
+    height: 430px;
+    flex: 0 0 430px;
 
     display: flex;
     align-items: center;
@@ -372,7 +331,6 @@ select {
 
     box-sizing: border-box;
 }
-
 
 .consumable-main-image {
     display: block;
@@ -394,29 +352,27 @@ select {
     transform: none;
 }
 
-
 /* =========================================
    PRODUCT FEATURES
 ========================================= */
-
 .consumable-features {
-    flex: 0 0 72px;
+    flex: 1;
 
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 10px;
+    gap: 12px;
 
-    margin-top: 7px;
+    align-items: center;
 
-    padding-top: 6px;
+    margin-top: 8px;
 
-    border-top:
-        1px solid #294261;
+    padding: 10px 10px 6px;
+
+    border-top: 1px solid #294261;
 }
-
 
 .consumable-feature {
     display: flex;
@@ -425,44 +381,45 @@ select {
     align-items: center;
     justify-content: center;
 
-    gap: 4px;
-
-    padding: 0;
+    gap: 6px;
 }
 
-
 .feature-icon {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border: 1px solid rgba(34, 211, 238, 0.50);
-    border-radius: 8px;
+    border:
+        1px solid
+        rgba(34, 211, 238, 0.50);
 
-    background: rgba(14, 165, 233, 0.12);
+    border-radius: 9px;
+
+    background:
+        rgba(14, 165, 233, 0.12);
 
     color: #22d3ee;
 
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .feature-label {
     color: #cbd5e1;
-    font-size: 10.5px;
+
+    font-size: 12px;
     font-weight: 600;
+
+    text-align: center;
 }
-
-
 /* =========================================
    RIGHT PRICING CARD
 ========================================= */
-
 .consumable-pricing-card {
     width: 100%;
-    height: 530px;
+    height: 570px;
 
     padding: 18px 20px;
 
@@ -484,11 +441,9 @@ select {
         0 8px 22px rgba(0, 0, 0, 0.18);
 }
 
-
 /* =========================================
    PRICING HEADER
 ========================================= */
-
 .pricing-card-header {
     display: flex;
     align-items: center;
@@ -497,7 +452,6 @@ select {
 
     margin-bottom: 14px;
 }
-
 
 .pricing-title-icon {
     width: 32px;
@@ -519,14 +473,12 @@ select {
     font-size: 12px;
 }
 
-
 .pricing-card-header h2 {
     color: #ffffff;
 
     font-size: 16px;
     font-weight: 700;
 }
-
 
 .pricing-card-header p {
     margin-top: 2px;
@@ -536,11 +488,9 @@ select {
     font-size: 10px;
 }
 
-
 /* =========================================
    INITIAL PRICING MESSAGE
 ========================================= */
-
 .pricing-initial-message {
     height: calc(100% - 48px);
 
@@ -554,7 +504,6 @@ select {
 
     color: #64748b;
 }
-
 
 .pricing-empty-icon {
     width: 50px;
@@ -577,7 +526,6 @@ select {
     border: 1px solid rgba(59, 130, 246, 0.18);
 }
 
-
 .pricing-initial-message h3 {
     margin-bottom: 7px;
 
@@ -586,7 +534,6 @@ select {
     font-size: 15px;
     font-weight: 600;
 }
-
 
 .pricing-initial-message p {
     max-width: 350px;
@@ -597,11 +544,9 @@ select {
     line-height: 1.6;
 }
 
-
 /* =========================================
    PRICING DATA
 ========================================= */
-
 .pricing-context,
 .pricing-details-group {
     display: flex;
@@ -610,39 +555,39 @@ select {
     gap: 0;
 }
 
-
 .pricing-row {
-    min-height: 29px;
+    min-height: 31px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 24px;
 }
-
 
 .pricing-label {
-    color: #91a3b9;
+    color: #a8b8cc;
 
-    font-size: 11.5px;
+    font-size: 14px;
+    font-weight: 500;
+
+    line-height: 1.4;
 }
-
 
 .pricing-value {
     color: #e2e8f0;
 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
+
+    line-height: 1.4;
 
     text-align: right;
 }
 
-
 .blue-value {
     color: #60a5fa;
 }
-
 
 .program-badge {
     min-width: 38px;
@@ -663,7 +608,6 @@ select {
     font-weight: 700;
 }
 
-
 .pricing-divider {
     width: 100%;
     height: 1px;
@@ -673,11 +617,9 @@ select {
     background: #273b55;
 }
 
-
 .price-row {
     min-height: 35px;
 }
-
 
 .pricing-price {
     color: #22d3ee;
@@ -686,11 +628,9 @@ select {
     font-weight: 700;
 }
 
-
 /* =========================================
    MESSAGE
 ========================================= */
-
 .consumable-message {
     display: none;
 
@@ -706,7 +646,6 @@ select {
     font-weight: 600;
 }
 
-
 .consumable-message.error {
     display: block;
 
@@ -716,7 +655,6 @@ select {
 
     color: #fca5a5;
 }
-
 
 .consumable-message.loading {
     display: block;
@@ -728,18 +666,15 @@ select {
     color: #93c5fd;
 }
 
-
 /* =========================================
    RESPONSIVE
 ========================================= */
-
 @media (max-width: 1100px) {
 
     html,
     body {
         overflow-y: auto;
     }
-
 
     .consumables-page {
         height: auto;
@@ -748,17 +683,14 @@ select {
         overflow: visible;
     }
 
-
     .consumables-search-card {
         grid-template-columns:
             repeat(2, 1fr);
     }
 
-
     .search-button-group {
         align-self: end;
     }
-
 
     .consumable-result-section {
         height: auto;
@@ -768,13 +700,11 @@ select {
         overflow: visible;
     }
 
-
     .consumable-product-card,
     .consumable-pricing-card {
         height: 425px;
     }
 }
-
 
 @media (max-width: 650px) {
 
@@ -782,33 +712,27 @@ select {
         padding: 14px;
     }
 
-
     .consumables-search-card {
         grid-template-columns: 1fr;
     }
 
-
     .search-button-group {
         width: 100%;
     }
-
 
     .consumable-search-btn,
     .consumable-reset-btn {
         flex: 1;
     }
 
-
     .product-image-area {
         height: 300px;
         flex-basis: 300px;
     }
 
-
     .consumable-product-card {
         height: 380px;
     }
-
 
     .consumable-features {
         flex-basis: 60px;

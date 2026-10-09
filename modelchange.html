@@ -265,7 +265,8 @@
     }
 
     .info-field input:focus {
-      border-color: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
     @media(max-width:1200px) {
@@ -313,7 +314,8 @@
     }
 
     .info-field select:focus {
-      border-color: #ffffff;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
 
@@ -463,6 +465,12 @@
       cursor: not-allowed;
       background: #1e293b;
       color: #94a3b8;
+    }
+
+    .warranty-number:focus,
+    .warranty-unit:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
     }
 
     /* ===== 3-column Warranty Grid ===== */
@@ -910,6 +918,130 @@
       cursor: pointer;
       filter: invert(1);
     }
+
+    /* ===== Compatibility Layout ===== */
+    /* ===== Compatibility Layout ===== */
+    .compatibility-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .compatibility-left {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .compatibility-right {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    /* ===== Custom Checkboxes (Blue tick when checked) ===== */
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border: 2px solid #64748b;
+      border-radius: 4px;
+      background: #0f1c2e;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .checkbox-item input[type="checkbox"]:checked {
+      background: #2563eb;
+      /* Blue background when checked */
+      border-color: #2563eb;
+    }
+
+    .checkbox-item input[type="checkbox"]:checked::after {
+      content: "✓";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .checkbox-item input[type="checkbox"]:disabled {
+      opacity: 0.85;
+      cursor: default;
+    }
+
+    .checkbox-item label {
+      font-size: 14px;
+      color: #e2e8f0;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* ===== Side by side fields - shorter width ===== */
+    .side-by-side-fields {
+      display: flex;
+      gap: 20px;
+      margin-top: 6px;
+    }
+
+    .side-by-side-fields .info-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 180px;
+      /* ← shorter fixed width */
+    }
+
+    .side-by-side-fields .info-field .field-value,
+    .side-by-side-fields .info-field input {
+      width: 180px !important;
+      max-width: 180px;
+    }
+
+    .compatibility-readonly {
+      pointer-events: none !important;
+    }
+
+    .compatibility-readonly .switch {
+      pointer-events: none !important;
+    }
+
+    .compatibility-readonly .slider {
+      cursor: not-allowed !important;
+    }
+
+    .required {
+      color: #908f8f;
+      font-weight: 700;
+    }
+
+    input:disabled,
+    select:disabled,
+    .switch input:disabled,
+    .switch input:disabled+.slider {
+      cursor: not-allowed !important;
+    }
   </style>
 </head>
 
@@ -925,7 +1057,7 @@
     <div class="report-search-card">
 
       <div class="form-field">
-        <label>Model</label>
+        <label>Model <span class="required">*</span></label>
         <input type="text" id="changeModelSearch" placeholder="e.g. DCPL2550DW">
       </div>
 
@@ -937,7 +1069,7 @@
       <div class="form-field">
 
         <label>
-          Country
+          Country <span class="required">*</span>
         </label>
 
         <select id="country" class="quick-country-select">
@@ -954,13 +1086,6 @@
             Canada
           </option>
 
-          <option value="UK">
-            United Kingdom
-          </option>
-
-          <option value="JP">
-            Japan
-          </option>
 
         </select>
 
@@ -1032,27 +1157,27 @@
       "Auto Reorder": "Brrefresh",
       "Barracuda": "Barracuda",
       "Brother Plus": "Bplus",
-      // "Barracuda Material Price": "B1kbetr",
-      // "Barracuda Currency": "B1konwa",
-      // "Pricing Unit": "B1kpein",
-      // "Condition Type": "Kschl",
-      // "Unit of Measure": "B1kmein",
-      // "Calculation Type": "B1krech",
-      // "Valid From": "B1datab",
-      // "Valid To": "B1datbi",
-      // "Auto Reorder Material Price": "Brkbetr",
-      // "Auto Reorder Currency": "Brkonwa",
-      // "Pricing Unit": "Brkpein",
-      // "Condition Type": "Kschl",
-      // "Unit Of Measure": "Brkmein",
-      // "Calculation Type": "Brkrech",
-      // "Valid From": "Brdatab",
-      // "Valid To": "Brdatbi",
+      "Occasional": "B1occasional",
+      "Moderate": "B1moderate",
+      "Frequent": "B1frequent",
+      "High": "B1high",
+      "Power": "B1power",
+      "Product Type": "B1producttype",
+      "Product Warranty": "B1standardwarr",
       "Drum Order": "Drum",
       "Waste Toner": "WasteToner",
       "Belt Unit": "BeltUnit",
       "Backup Order": "Claimorder"
     };
+
+    function toggleBarracudaRightColumn(toggle) {
+      const section = toggle.closest(".change-content");
+      const rightColumn = section.querySelector(".compatibility-right");
+
+      if (rightColumn) {
+        rightColumn.style.display = toggle.checked ? "block" : "none";
+      }
+    }
 
     async function loadModelChange() {
       console.log("Search button clicked");
@@ -1187,6 +1312,13 @@
             JSON.stringify(values);
         }
 
+        const toggle =
+          section.querySelector(".toggle-icon");
+
+        if (toggle) {
+          toggle.style.display = "none";
+        }
+
         const toggles =
           section.querySelectorAll(
             '.switch-wrapper input[type="checkbox"]'
@@ -1206,33 +1338,32 @@
         return;
       }
 
-      // if (sectionName === "Order Type") {
+      // Keep Barracuda and Brother Plus always disabled
+      const nonEditableToggles = [
+        "Amazon Dart",
+        "Auto Reorder",
+        "Barracuda",
+        "Brother Plus",
 
-      //   const toggles =
-      //     section.querySelectorAll(
-      //       '.switch-wrapper input[type="checkbox"]'
-      //     );
+        "Standard Warranty",
+        "Extended Warranty",
+        "BrotherCare Warranty",
+        "BrotherPlus Warranty",
 
-      //   toggles.forEach(toggle => {
-      //     toggle.disabled = false;
-      //   });
+        "Barracuda Price Setup",
+        "Auto Reorder Price Setup"
+      ];
 
-      //   const toggleBtn =
-      //     section.querySelector(".toggle-icon");
+      section.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+        const label = toggle.closest(".info-field")?.querySelector("label")?.innerText?.trim();
 
-      //   if (toggleBtn) {
-      //     toggleBtn.style.display = "none";
-      //   }
+        if (nonEditableToggles.includes(label)) {
+          toggle.disabled = true;           // force stay disabled
+        } else {
+          toggle.disabled = false;          // enable others
+        }
+      });
 
-      //   icon.innerHTML =
-      //     '<i class="fas fa-check"></i>';
-
-      //   icon.onclick = function () {
-      //     saveSection(this);
-      //   };
-
-      //   return;
-      // }
 
       const isMaterialSection =
         sectionName === "Material Information";
@@ -1376,6 +1507,11 @@
 
           "Barracuda Price Setup",
           "Auto Reorder Price Setup",
+          "Occasional",
+          "Moderate",
+          "Frequent",
+          "High",
+          "Power",
 
           "Backup Order",
           "Drum Order",
@@ -1464,21 +1600,48 @@
               ? "checked"
               : "";
 
+          const readOnlyCompatibilityFields = [
+            "Amazon Dart",
+            "Auto Reorder",
+            "Barracuda",
+            "Brother Plus",
+
+            "Standard Warranty",
+            "Extended Warranty",
+            "BrotherCare Warranty",
+            "BrotherPlus Warranty",
+
+            "Barracuda Price Setup",
+            "Auto Reorder Price Setup"
+          ];
+
+
+          const disabledAttr =
+            readOnlyCompatibilityFields.includes(label)
+              ? "disabled"
+              : "";
+
+          const styleAttr =
+            readOnlyCompatibilityFields.includes(label)
+              ? 'style="pointer-events:none;"'
+              : "";
+
           field.outerHTML = `
-<div class="switch-wrapper">
-    <label class="switch">
-        <input
-            type="checkbox"
-            ${checked}
-            data-toggle-label="${label}"
-            onchange="
-    toggleWarrantyLength(this,'${label}');
-    togglePricingBlock(this,'${label}');
-">
-        <span class="slider"></span>
-    </label>
-</div>
-`;
+        <div class="switch-wrapper">
+            <label class="switch" ${styleAttr}>
+                <input
+                    type="checkbox"
+                    ${checked}
+                    ${disabledAttr}
+                    data-toggle-label="${label}"
+                    onchange="
+                        toggleWarrantyLength(this,'${label}');
+                        togglePricingBlock(this,'${label}');
+                    ">
+                <span class="slider"></span>
+            </label>
+        </div>
+    `;
         }
 
 
@@ -1564,7 +1727,21 @@
       const section =
         toggle.closest(".change-content");
 
+
+
       if (!section) return;
+
+      if (label === "Barracuda") {
+
+        const block =
+          section.querySelector("#barracudaDetails");
+
+        if (block) {
+
+          block.style.display =
+            toggle.checked ? "block" : "none";
+        }
+      }
 
       if (label === "Barracuda Price Setup") {
 
@@ -1957,6 +2134,7 @@
     function showChangeBlocks(record, searchType) {
 
       originalData = JSON.parse(JSON.stringify(record)); //Store the Original data
+      const showBarracudaDetails = record.Barracuda === "X";
       const isB1PriceSetup = record.Selkzb1 === "X";
 
       const isBRPriceSetup = record.Selkzbr === "X";
@@ -2110,7 +2288,7 @@ ${showWarranty ? `
 <label class="switch">
 <input
 type="checkbox"
-${record.StdWtyType === "X" ? "checked" : ""}
+${record.StdWtyType === "S" ? "checked" : ""}
 disabled>
 <span class="slider"></span>
 </label>
@@ -2154,7 +2332,7 @@ disabled>
   <label class="switch">
     <input
       type="checkbox"
-      ${record.BcareWtyType === "X" ? "checked" : ""}
+      ${record.BcareWtyType === "B" ? "checked" : ""}
       disabled>
     <span class="slider"></span>
   </label>
@@ -2176,7 +2354,7 @@ disabled>
   <label class="switch">
     <input
       type="checkbox"
-      ${record.BplusWtyType === "X" ? "checked" : ""}
+      ${record.BplusWtyType === "L" ? "checked" : ""}
       disabled>
     <span class="slider"></span>
   </label>
@@ -2199,78 +2377,121 @@ disabled>
 
 ${showCompatibility ? `
 <div class="change-section">
-    <div class="change-header">
-        <h3>Model Compatibility</h3>
-        <div class="header-actions">
-
-              <div class="toggle-icon"
-              onclick="toggleSection(this)">
-              <i class="fas fa-chevron-up"></i>
-             </div>
-
-           </div>
+  <div class="change-header">
+    <h3>Model Compatibility</h3>
+    <div class="header-actions">
+      <div class="edit-icon" onclick="enableEdit(this)">
+        <i class="fas fa-pen-to-square"></i>
+      </div>
+      <div class="toggle-icon" onclick="toggleSection(this)">
+        <i class="fas fa-chevron-up"></i>
+      </div>
     </div>
+  </div>
 
-    <div class="change-content">
-        <div class="toggle-grid">
+  <div class="change-content">
+    <div class="compatibility-layout">
 
-            <div class="info-field">
-                <label>Amazon Dart</label>
-                <div class="switch-wrapper">
-    <label class="switch">
-        <input
-            type="checkbox"
-            ${record.Amazondart === "X" ? "checked" : ""}
-            disabled>
-        <span class="slider"></span>
-    </label>
-</div>
-            </div>
-
-            <div class="info-field">
-                <label>Auto Reorder</label>
-               <div class="switch-wrapper">
-    <label class="switch">
-        <input
-            type="checkbox"
-            ${record.AutoReorder === "X" ? "checked" : ""}
-            disabled>
-        <span class="slider"></span>
-    </label>
-</div>
-            </div>
-
-            <div class="info-field">
-                <label>Barracuda</label>
-               <div class="switch-wrapper">
-    <label class="switch">
-        <input
-            type="checkbox"
-            ${record.Barracuda === "X" ? "checked" : ""}
-            disabled>
-        <span class="slider"></span>
-    </label>
-</div>
-            </div>
-
-            <div class="info-field">
-                <label>Brother Plus</label>
-                <div class="switch-wrapper">
-    <label class="switch">
-        <input
-            type="checkbox"
-            ${record.Bplus === "X" ? "checked" : ""}
-            disabled>
-        <span class="slider"></span>
-    </label>
-</div>
-            </div>
-
+      <!-- LEFT COLUMN - Always visible -->
+      <div class="compatibility-left">
+        <div class="info-field">
+          <label>Amazon Dart</label>
+          <div class="switch-wrapper">
+            <label class="switch">
+              <input type="checkbox" ${record.Amazondart === "X" ? "checked" : ""} disabled data-toggle-label="Amazon Dart">
+              <span class="slider"></span>
+            </label>
+          </div>
         </div>
+
+        <div class="info-field">
+          <label>Auto Reorder</label>
+          <div class="switch-wrapper">
+            <label class="switch">
+              <input type="checkbox" ${record.Brrefresh === "X" ? "checked" : ""} disabled data-toggle-label="Auto Reorder">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="info-field">
+          <label>Barracuda</label>
+          <div class="switch-wrapper compatibility-readonly">
+            <label class="switch">
+              <input type="checkbox" 
+                     ${record.Barracuda === "X" ? "checked" : ""} 
+                     disabled 
+                     data-toggle-label="Barracuda"
+                     onchange="toggleBarracudaRightColumn(this)">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="info-field">
+          <label>Brother Plus</label>
+          <div class="switch-wrapper compatibility-readonly">
+            <label class="switch">
+              <input type="checkbox" ${record.Bplus === "X" ? "checked" : ""} disabled data-toggle-label="Brother Plus">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN - Only visible when Barracuda is ON -->
+        <!-- RIGHT COLUMN -->
+<div class="compatibility-right" style="display: ${record.Barracuda === "X" ? "block" : "none"}">
+
+  <div class="checkbox-group">
+    <div class="checkbox-item">
+      <input type="checkbox" id="occasional" 
+             ${record.B1occasional === "X" ? "checked" : ""} disabled>
+      <label for="occasional">Occasional</label>
     </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="moderate" 
+             ${record.B1moderate === "X" ? "checked" : ""} disabled>
+      <label for="moderate">Moderate</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="frequent" 
+             ${record.B1frequent === "X" ? "checked" : ""} disabled>
+      <label for="frequent">Frequent</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="high" 
+             ${record.B1high === "X" ? "checked" : ""} disabled>
+      <label for="high">High</label>
+    </div>
+    <div class="checkbox-item">
+      <input type="checkbox" id="power" 
+             ${record.B1power === "X" ? "checked" : ""} disabled>
+      <label for="power">Power</label>
+    </div>
+  </div>
+
+  <!-- Shorter side-by-side fields -->
+  <div class="side-by-side-fields">
+    <div class="info-field">
+      <label>Product Type</label>
+      <span class="field-value">${record.B1producttype || "-"}</span>
+    </div>
+    <div class="info-field">
+      <label>Product Warranty</label>
+      <span class="field-value">
+  ${record.B1standardwarr != null && record.B1standardwarr !== ""
+            ? record.B1standardwarr + " Months"
+            : "-"}
+</span>
+    </div>
+  </div>
+
+</div>
+    </div>
+  </div>
 </div>
 ` : ''}
-
 ${showPricing ? `
 <div class="change-section">
     <div class="change-header">
@@ -2334,12 +2555,11 @@ ${showPricing ? `
                     <label>Pricing Unit</label>
                     <span class="field-value">${record.B1kpein || "-"}</span>
                 </div>
-
-                <div class="info-field">
-                    <label>Condition Type</label>
-                    <span class="field-value">${record.Kschl || "-"}</span>
+                 
+                 <div class="info-field">
+                    <label>Unit of Measure</label>
+                    <span class="field-value">${record.B1kmein || "-"}</span>
                 </div>
-
                 <div class="info-field">
                     <label>Sales Organization</label>
                     <span class="field-value">${record.Vkorg || "-"}</span>
@@ -2355,10 +2575,12 @@ ${showPricing ? `
                     <span class="field-value">${record.Vtweg || "-"}</span>
                 </div>
 
+               
                 <div class="info-field">
-                    <label>Unit of Measure</label>
-                    <span class="field-value">${record.B1kmein || "-"}</span>
+                    <label>Condition Type</label>
+                    <span class="field-value">${record.Kschl || "-"}</span>
                 </div>
+
 
                 <div class="info-field">
                     <label>Calculation Type</label>
@@ -2422,10 +2644,18 @@ ${showPricing ? `
                 </div>
 
                 <div class="info-field">
+                    <label>Unit Of Measure</label>
+                    <span class="field-value">${record.Brkmein || "-"}</span>
+                </div>
+
+                
+                 <div class="info-field">
                     <label>Condition Type</label>
                     <span class="field-value">${record.Kschl || "-"}</span>
                 </div>
+               
 
+ 
                 <div class="info-field">
                     <label>Sales Organization</label>
                     <span class="field-value">${record.Vkorg || "-"}</span>
@@ -2441,14 +2671,10 @@ ${showPricing ? `
                     <span class="field-value">${record.Vtweg || "-"}</span>
                 </div>
 
+                
                 <div class="info-field">
                     <label>Customer Price Group</label>
                     <span class="field-value">${record.Konda || "-"}</span>
-                </div>
-
-                <div class="info-field">
-                    <label>Unit Of Measure</label>
-                    <span class="field-value">${record.Brkmein || "-"}</span>
                 </div>
 
                 <div class="info-field">
@@ -2686,6 +2912,692 @@ disabled>
       return `/Date(${date.getTime()})/`;
     }
 
+    // success message after changes
+    function showSaveSuccessMessage() {
+
+  const reviewContent =
+    window.parent.document.querySelector(
+      ".review-content"
+    );
+
+  if (!reviewContent) {
+    return;
+  }
+
+  const existing =
+    window.parent.document.getElementById(
+      "saveSuccessMessage"
+    );
+
+  if (existing) {
+    existing.remove();
+  }
+
+  const successHTML = `
+    <div
+      id="saveSuccessMessage"
+      style="
+        margin-top:20px;
+        padding:20px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:18px;
+        border-radius:14px;
+        background:rgba(16,185,129,0.08);
+        border:1px solid rgba(16,185,129,0.35);
+      ">
+
+      <div
+        style="
+          width:60px;
+          height:60px;
+          border-radius:50%;
+          background:#16a34a;
+          color:white;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          font-size:28px;
+        ">
+        ✓
+      </div>
+
+      <div>
+        <div
+          style="
+            color:#22c55e;
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:4px;
+          ">
+          Changes Saved
+        </div>
+
+        <div
+          style="
+            color:#cbd5e1;
+            font-size:13px;
+          ">
+          Your changes have been saved successfully.
+        </div>
+      </div>
+
+    </div>
+  `;
+
+  reviewContent.insertAdjacentHTML(
+    "beforeend",
+    successHTML
+  );
+}
+
+function showSaveSuccessCard() {
+
+  const reviewModal =
+    window.parent.document.getElementById(
+      "modelChangeReviewModal"
+    );
+
+  if (!reviewModal) {
+    return;
+  }
+
+  const reviewContent =
+    reviewModal.querySelector(
+      ".review-content"
+    );
+
+  if (!reviewContent) {
+    return;
+  }
+
+  reviewContent.innerHTML = `
+
+    <div class="review-header">
+
+      <div class="review-title">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <span>
+          Changes Saved
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="review-divider"></div>
+
+    <div
+      style="
+        flex:1;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        gap:30px;
+      ">
+
+      <div
+        style="
+          width:110px;
+          height:110px;
+          border-radius:50%;
+          background:linear-gradient(
+            135deg,
+            #22c55e,
+            #16a34a
+          );
+
+          display:flex;
+          align-items:center;
+          justify-content:center;
+
+          box-shadow:
+            0 0 30px rgba(
+              34,
+              197,
+              94,
+              0.45
+            );
+        ">
+
+        <i
+          class="fas fa-check"
+          style="
+            color:white;
+            font-size:52px;
+          ">
+        </i>
+
+      </div>
+
+      <div>
+
+        <div
+          style="
+            color:#22c55e;
+            font-size:32px;
+            font-weight:700;
+            margin-bottom:8px;
+          ">
+
+          Changes Saved
+
+        </div>
+
+        <div
+          style="
+            color:#cbd5e1;
+            font-size:15px;
+            line-height:1.6;
+          ">
+
+          Your changes have been saved successfully.
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function showSuccessInsideReview() {
+
+  const modal =
+    window.parent.document.getElementById(
+      "modelChangeReviewModal"
+    );
+
+  if (!modal) {
+    return;
+  }
+
+  const reviewContent =
+    modal.querySelector(
+      ".review-content"
+    );
+
+  if (!reviewContent) {
+    return;
+  }
+
+  reviewContent.innerHTML = `
+
+    <div class="review-header">
+
+      <div class="review-title">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <span>
+          Review Changes
+        </span>
+
+      </div>
+
+    </div>
+
+    <div class="review-divider"></div>
+
+    <div
+      style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        min-height:220px;
+        gap:30px;
+      ">
+
+      <!-- LEFT SIDE -->
+
+      <div
+        style="
+          flex:1;
+          border:1px solid rgba(59,130,246,.25);
+          border-radius:12px;
+          overflow:hidden;
+        ">
+
+        <table
+          style="
+            width:100%;
+            border-collapse:collapse;
+          ">
+
+          <thead>
+
+            <tr
+              style="
+                background:rgba(
+                  37,
+                  99,
+                  235,
+                  .15
+                );
+              ">
+
+              <th style="padding:10px;color:#dbeafe;">
+                Status
+              </th>
+
+              <th style="padding:10px;color:#dbeafe;">
+                Result
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr>
+
+              <td
+                style="
+                  padding:16px;
+                  text-align:center;
+                ">
+
+                <i
+                  class="
+                    fa-regular
+                    fa-circle-check
+                  "
+                  style="
+                    color:#22c55e;
+                    font-size:22px;
+                  ">
+                </i>
+
+              </td>
+
+              <td
+                style="
+                  padding:16px;
+                  color:#e2e8f0;
+                ">
+
+                Model updated successfully
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+
+      <div
+        style="
+          width:260px;
+          text-align:center;
+        ">
+
+        <div
+          style="
+            width:100px;
+            height:100px;
+
+            margin:0 auto 18px;
+
+            border-radius:50%;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            background:
+              linear-gradient(
+                135deg,
+                #22c55e,
+                #16a34a
+              );
+
+            box-shadow:
+              0 0 35px rgba(
+                34,
+                197,
+                94,
+                .45
+              );
+          ">
+
+          <i
+            class="fas fa-check"
+            style="
+              color:white;
+              font-size:48px;
+            ">
+          </i>
+
+        </div>
+
+        <div
+          style="
+            color:#22c55e;
+            font-size:26px;
+            font-weight:700;
+            margin-bottom:8px;
+          ">
+
+          Changes Saved
+
+        </div>
+
+        <div
+          style="
+            color:#cbd5e1;
+            font-size:14px;
+          ">
+
+          Your changes have been
+          saved successfully.
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+function showUpdateSuccessPopup() {
+
+  const existing =
+    document.getElementById(
+      "updateSuccessPopup"
+    );
+
+  if (existing) {
+    existing.remove();
+  }
+
+window.parent.document.body.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div
+      id="updateSuccessPopup"
+      style="
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        background:rgba(0,0,0,.65);
+        backdrop-filter:blur(6px);
+
+        z-index:999999999;
+      ">
+
+      <div
+        style="
+          width:420px;
+          text-align:center;
+
+          padding:35px;
+
+          border-radius:20px;
+
+          background:#061224;
+
+          border:1px solid #2563eb;
+
+          box-shadow:
+            0 0 40px rgba(
+              37,
+              99,
+              235,
+              .25
+            );
+        ">
+
+        <div
+          style="
+            position:relative;
+
+            width:120px;
+            height:120px;
+
+            margin:0 auto 20px;
+          ">
+
+          <!-- Blast Dots -->
+
+<span style="
+position:absolute;
+top:0;
+left:20px;
+width:8px;
+height:8px;
+background:#22c55e;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+top:10px;
+left:85px;
+width:10px;
+height:10px;
+background:#3b82f6;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+top:18px;
+right:10px;
+width:8px;
+height:8px;
+background:#facc15;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+left:0;
+top:55px;
+width:9px;
+height:9px;
+background:#22c55e;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+right:0;
+top:55px;
+width:9px;
+height:9px;
+background:#3b82f6;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+bottom:15px;
+left:10px;
+width:8px;
+height:8px;
+background:#f97316;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+bottom:0;
+left:55px;
+width:10px;
+height:10px;
+background:#22c55e;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+bottom:10px;
+right:20px;
+width:8px;
+height:8px;
+background:#facc15;
+border-radius:50%;
+"></span>
+
+<span style="
+position:absolute;
+top:32px;
+left:30px;
+font-size:18px;
+color:#22c55e;
+">✦</span>
+
+<span style="
+position:absolute;
+top:22px;
+right:35px;
+font-size:16px;
+color:#60a5fa;
+">✦</span>
+
+<span style="
+position:absolute;
+bottom:28px;
+left:28px;
+font-size:15px;
+color:#facc15;
+">✦</span>
+
+<span style="
+position:absolute;
+bottom:20px;
+right:28px;
+font-size:18px;
+color:#22c55e;
+">✦</span>
+
+<!-- Success Circle -->
+
+          <div
+            style="
+              width:100px;
+              height:100px;
+
+              margin:auto;
+
+              border-radius:50%;
+
+              background:
+                linear-gradient(
+                  135deg,
+                  #22c55e,
+                  #16a34a
+                );
+
+              display:flex;
+              align-items:center;
+              justify-content:center;
+
+              box-shadow:
+                0 0 25px rgba(
+                  34,
+                  197,
+                  94,
+                  .6
+                );
+
+              animation:
+                successPulse 1.2s infinite;
+            ">
+
+            <i
+              class="fas fa-check"
+              style="
+                color:white;
+                font-size:50px;
+              ">
+            </i>
+
+          </div>
+
+        </div>
+
+        <h2
+          style="
+            color:#22c55e;
+            margin-bottom:10px;
+          ">
+          Changes Saved
+        </h2>
+
+        <p
+          style="
+            color:#cbd5e1;
+            margin-bottom:22px;
+          ">
+          Your changes have been saved successfully.
+        </p>
+
+        <button
+  onclick="
+    window.parent.document.getElementById(
+      'updateSuccessPopup'
+    ).remove();
+  "
+  style="
+    background:#16a34a;
+    color:white;
+    border:none;
+    padding:10px 24px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+  ">
+
+  Close
+
+</button>
+
+      </div>
+
+    </div>
+
+    <style>
+
+      @keyframes successPulse {
+
+        0% {
+          transform:scale(1);
+        }
+
+        50% {
+          transform:scale(1.08);
+        }
+
+        100% {
+          transform:scale(1);
+        }
+      }
+
+    </style>
+    `
+  );
+
+}
+
+    // 
+
     async function saveChanges() {
 
       console.log("originalData:", originalData);
@@ -2705,10 +3617,12 @@ disabled>
         if (key === "__metadata") return;
 
         if (dateFields.includes(key)) {
+
           changepayload[key] = originalData[key];
+
         } else {
 
-          changepayload[key] = originalData[key] || "";
+          changepayload[key] = originalData[key] ?? "";
 
         }
 
@@ -2762,6 +3676,10 @@ disabled>
             if (value === "Yes") value = "X";
             if (value === "No") value = "";
 
+            if (backendField === "B1standardwarr") {
+              value = Number(value);
+            }
+
             if (
               backendField === "B1datab" ||
               backendField === "B1datbi" ||
@@ -2797,6 +3715,16 @@ disabled>
         if (value === "Yes") value = "X";
         if (value === "No") value = "";
 
+        const warrantyTypeMap = {
+          StdWtyType: "S",
+          ExtdWtyType: "X",
+          BcareWtyType: "B",
+          BplusWtyType: "L"
+        };
+
+        if (Object.prototype.hasOwnProperty.call(warrantyTypeMap, backendField)) {
+          value = value ? warrantyTypeMap[backendField] : "";
+        }
         // Warranty Split
         if (
           change.field === "Standard Warranty Length" ||
@@ -2830,7 +3758,69 @@ disabled>
           return;
         }
 
-        changepayload[backendField] = value;
+        if (backendField === "B1standardwarr") {
+
+          let numericValue = parseInt(value, 10);
+
+          if (
+            value === "" ||
+            value === "-" ||
+            value == null ||
+            isNaN(numericValue)
+          ) {
+            numericValue = 0;
+          }
+
+          changepayload[backendField] = numericValue;
+
+          console.log(
+            "Converted B1standardwarr:",
+            value,
+            "-->",
+            numericValue,
+            typeof numericValue
+          );
+
+        } else {
+
+          changepayload[backendField] = value;
+
+        }
+
+      });
+
+      // Reset all flags
+      changepayload.MaterialFlag = "";
+      changepayload.PriceFlag = "";
+      changepayload.WarrantyFlag = "";
+      changepayload.OrdertypeFlag = "";
+      changepayload.CompatableFlag = "";
+
+      // Set flag based on changed section
+      changedFields.forEach(change => {
+
+        switch (change.section) {
+
+          case "Material Information":
+            changepayload.MaterialFlag = "X";
+            break;
+
+          case "Pricing Information":
+            changepayload.PriceFlag = "X";
+            break;
+
+          case "Warranty Information":
+            changepayload.WarrantyFlag = "X";
+            break;
+
+          case "Order Type":
+            changepayload.OrdertypeFlag = "X";
+            break;
+
+          case "Model Compatibility":
+            changepayload.CompatableFlag = "X";
+            break;
+        }
 
       });
 
@@ -2841,6 +3831,11 @@ disabled>
 
       try {
 
+        console.log("Sending payload:");
+        console.log(JSON.stringify(changepayload, null, 2));
+
+        console.log("B1standardwarr =", changepayload.B1standardwarr);
+        console.log("type =", typeof changepayload.B1standardwarr);
 
         const response = await fetch(
           "/api/model/change",
@@ -2853,28 +3848,53 @@ disabled>
           }
         );
 
-        const result = await response.json();
+        const responseText = await response.text();
 
-        if (!response.ok) {
-          throw new Error(result.message || "Update Failed");
+        console.log("Status:", response.status);
+        console.log("Response:", responseText);
+
+if (!response.ok) {
+  throw new Error(responseText);
+}
+
+showUpdateSuccessPopup();
+
+changedFields = [];
+hasChanges = false;
+
+document.getElementById(
+  "reviewChangesBtn"
+)?.remove();
+
+if (
+  window.parent &&
+  typeof window.parent.closeModelChangeReview === "function"
+) {
+
+  window.parent.closeModelChangeReview();
+}
+
+
+        // alert("Model updated successfully");
+
+        // changedFields = [];
+        // hasChanges = false;
+
+        const reviewBtn = document.getElementById("reviewChangesBtn");
+
+        if (reviewBtn) {
+          reviewBtn.remove();
         }
 
-        alert("Model updated successfully");
 
 
       } catch (error) {
 
         console.error("Update Failed", error);
 
-        alert("Update Failed");
+        alert(error.message);
       }
-
-      if (
-        window.parent &&
-        typeof window.parent.closeModelChangeReview === "function"
-      ) {
-        window.parent.closeModelChangeReview();
-      }
+     
     }
     function formatODataDate(dateStr) {
 
@@ -2998,6 +4018,68 @@ disabled>
         section.querySelectorAll(".info-field");
 
       let hasAnyChange = false;
+
+      if (sectionName === "Model Compatibility") {
+
+        const compatibilityChecks = [
+          { id: "occasional", field: "Occasional" },
+          { id: "moderate", field: "Moderate" },
+          { id: "frequent", field: "Frequent" },
+          { id: "high", field: "High" },
+          { id: "power", field: "Power" }
+        ];
+
+        compatibilityChecks.forEach(item => {
+
+          const checkbox =
+            section.querySelector(`#${item.id}`);
+
+          if (!checkbox) return;
+
+          const currentValue =
+            checkbox.checked ? "Yes" : "No";
+
+          const backendField =
+            fieldMap[item.field];
+
+          const originalValue =
+            originalData[backendField] === "X"
+              ? "Yes"
+              : "No";
+
+          const existingIndex =
+            changedFields.findIndex(x =>
+              x.section === "Model Compatibility" &&
+              x.field === item.field
+            );
+
+          if (originalValue !== currentValue) {
+
+            hasAnyChange = true;
+
+            if (existingIndex > -1) {
+
+              changedFields[existingIndex].after =
+                currentValue;
+
+            } else {
+
+              changedFields.push({
+                section: "Model Compatibility",
+                subCategory: "-",
+                field: item.field,
+                before: originalValue,
+                after: currentValue
+              });
+            }
+
+          } else if (existingIndex > -1) {
+
+            changedFields.splice(existingIndex, 1);
+          }
+
+        });
+      }
 
       fields.forEach(field => {
 

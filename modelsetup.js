@@ -34,12 +34,64 @@ function modelContextBar() {
     `;
 }
 
+function updateWizardProgress() {
+
+    const progressBar =
+        document.getElementById(
+            "wizardProgress"
+        );
+
+    if (!progressBar) {
+
+        return;
+    }
+
+    /*
+     * Step 1 = 16.67%
+     * Step 2 = 33.33%
+     * Step 3 = 50%
+     * Step 4 = 66.67%
+     * Step 5 = 83.33%
+     * Step 6 = 100%
+     */
+    const progress =
+        (
+            currentStep / 6
+        )
+        * 100;
+
+    progressBar.style.width =
+        progress + "%";
+}
+
 function loadStep() {
 
-    document.getElementById(
-        "stepText"
-    ).innerHTML =
-        `Step ${currentStep} of 6`;
+    /* =========================================
+       STEP COUNTER
+    ========================================= */
+
+    const stepText =
+        document.getElementById(
+            "stepText"
+        );
+
+    if (stepText) {
+
+        stepText.innerHTML =
+            `Step ${currentStep} of 6`;
+    }
+
+    /* =========================================
+       UPDATE PROGRESS RULER
+       IMPORTANT:
+       This must execute BEFORE any step return.
+    ========================================= */
+
+    updateWizardProgress();
+
+    /* =========================================
+       STEPPER CARDS
+    ========================================= */
 
     document
         .querySelectorAll(".step")
@@ -51,9 +103,19 @@ function loadStep() {
             );
 
             const circle =
-                step.querySelector(".circle");
+                step.querySelector(
+                    ".circle"
+                );
 
-            if (index + 1 < currentStep) {
+            if (!circle) {
+
+                return;
+            }
+
+            if (
+                index + 1 <
+                currentStep
+            ) {
 
                 step.classList.add(
                     "completed"
@@ -61,14 +123,17 @@ function loadStep() {
 
                 circle.innerHTML =
                     "✓";
-            }
-            else {
+
+            } else {
 
                 circle.innerHTML =
-                    (index + 1);
+                    index + 1;
             }
 
-            if (index + 1 === currentStep) {
+            if (
+                index + 1 ===
+                currentStep
+            ) {
 
                 step.classList.add(
                     "active"
@@ -76,137 +141,219 @@ function loadStep() {
             }
         });
 
+    /* =========================================
+       CONTENT AREA
+    ========================================= */
+
     const area =
         document.getElementById(
             "contentArea"
         );
 
+    if (!area) {
+
+        console.error(
+            "contentArea not found"
+        );
+
+        return;
+    }
+
     if (currentStep === 1) {
 
         area.innerHTML = `
- 
-    <div class="card">
- 
-        <h3>Material Information</h3>
- 
-        <div class="grid">
 
-    <div class="form-group">
-        <label>Material Number *</label>
-        <input type="text" id="matnr">
-    </div>
+        <div class="card">
 
-    <div class="form-group">
-    <label>Country *</label>
+            <h3>
+                Material Information
+            </h3>
 
-    <select id="country">
-        <option value="">Select Country</option>
-        <option value="US">US</option>
-        <option value="CA">CA</option>
-    </select>
-</div>
+            <div class="setup-flag-row">
 
-    <div class="form-group">
-        <label>Plant *</label>
-        <input type="text" id="werks">
-    </div>
+                <div class="setup-flag-info">
 
-    <div class="form-group">
-        <label>Material Type *</label>
-        <input type="text" id="mtart">
-    </div>
+                    <div class="setup-flag-title">
+                        Material Setup
+                    </div>
 
-    <div class="form-group">
-        <label>Industry Sector</label>
-        <input
-    type="text"
-    id="mbrsh"
-    value="${modelData.mbrsh || 'M'}">
-    </div>
+                    <div class="setup-flag-description">
+                        Enable material configuration
+                    </div>
 
-    <div class="form-group">
-        <label>Material Group</label>
-        <input type="text" id="matkl">
-    </div>
+                </div>
 
-    <div class="form-group">
-        <label>Base Unit Of Measure</label>
-        <input
-    type="text"
-    id="meins"
-    value="${modelData.meins || 'EA'}">
-    </div>
+                <label class="warranty-switch">
 
-    <div class="form-group">
-        <label>Division</label>
-        <input
-    type="text"
-    id="spart"
-    value="${modelData.spart || '10'}">
-    </div>
+                    <input
+                        type="checkbox"
+                        id="materialFlag"
+                        ${modelData.materialFlag === "X"
+                ? "checked"
+                : ""}>
 
-    <div class="form-group">
-        <label>EAN / UPC</label>
-        <input type="text" id="ean11">
-    </div>
+                    <span class="warranty-slider"></span>
 
-    <div class="form-group">
-        <label>Cross Plant Status</label>
-        <input type="text" id="mstae">
-    </div>
+                </label>
 
-    <div class="form-group">
-        <label>Cross Distribution Status</label>
-        <input type="text" id="mstav">
-    </div>
+            </div>
 
-    <div class="form-group">
-        <label>Language</label>
-        <input
-    type="text"
-    id="spras"
-    value="${modelData.spras || 'EN'}">
-    </div>
+            <div class="grid">
 
-    <div class="form-group">
-        <label>Material Description</label>
-        <input type="text" id="maktx">
-    </div>
+                <div class="form-group">
+                    <label>Material Number</label>
+                    <input type="text" id="matnr">
+                </div>
 
-    <div class="form-group">
-        <label>Distribution Channel</label>
-        <input
-    type="text"
-    id="vtweg"
-    value="${modelData.vtweg || '30'}">
-    </div>
+                <div class="form-group">
 
-    <div class="form-group">
-        <label>Distribution Material Status</label>
-        <input type="text" id="vmsta">
-    </div>
+                    <label>Country</label>
 
-</div>
- 
-        <div class="btn-row">
- 
-            <div></div>
- 
-            <button
-                class="btn next"
-                onclick="nextStep()">
- 
-                Next →
- 
-            </button>
- 
+                    <select id="country">
+
+                        <option value="">
+                            Select Country
+                        </option>
+
+                        <option value="US">
+                            US
+                        </option>
+
+                        <option value="CA">
+                            CA
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label>Plant</label>
+                    <input type="text" id="werks">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Material Type</label>
+                    <input type="text" id="mtart">
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Industry Sector
+                    </label>
+
+                    <input
+                        type="text"
+                        id="mbrsh"
+                        value="${modelData.mbrsh || "M"}">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Material Group</label>
+                    <input type="text" id="matkl">
+                </div>
+
+                <div class="form-group">
+
+                    <label>
+                        Base Unit Of Measure
+                    </label>
+
+                    <input
+                        type="text"
+                        id="meins"
+                        value="${modelData.meins || "EA"}">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>Division</label>
+
+                    <input
+                        type="text"
+                        id="spart"
+                        value="${modelData.spart || "10"}">
+
+                </div>
+
+                <div class="form-group">
+                    <label>EAN / UPC</label>
+                    <input type="text" id="ean11">
+                </div>
+
+                <div class="form-group">
+                    <label>Cross Plant Status</label>
+                    <input type="text" id="mstae">
+                </div>
+
+
+                <div class="form-group">
+                    <label>Cross Distribution Status</label>
+                    <input type="text" id="mstav">
+                </div>
+
+                <div class="form-group">
+
+                    <label>Language</label>
+
+                    <input
+                        type="text"
+                        id="spras"
+                        value="${modelData.spras || "EN"}">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Material Description</label>
+                    <input type="text" id="maktx">
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Distribution Channel
+                    </label>
+
+                    <input
+                        type="text"
+                        id="vtweg"
+                        value="${modelData.vtweg || "30"}">
+
+                </div>
+
+                <div class="form-group">
+                    <label>Distribution Material Status</label>
+                    <input type="text" id="vmsta">
+                </div>
+
+            </div>
+
+            <div class="btn-row">
+
+                <button
+                    class="btn next"
+                    onclick="nextStep()">
+
+                    Next →
+
+                </button>
+
+            </div>
+
         </div>
- 
-    </div>
- 
     `;
+
+        restoreStepData();
+
+        return;
     }
 
+    
     if (currentStep === 2) {
 
         area.innerHTML = `
@@ -215,8 +362,36 @@ function loadStep() {
 
         <h3>Price Setup</h3>
 
-        ${modelContextBar()}
+${modelContextBar()}
 
+<div class="setup-flag-row">
+
+    <div>
+
+        <div class="setup-flag-title">
+            Price Setup
+        </div>
+
+        <div class="setup-flag-description">
+            Enable pricing configuration
+        </div>
+
+    </div>
+
+    <label class="warranty-switch">
+
+        <input
+            type="checkbox"
+            id="priceFlag"
+            ${modelData.priceFlag === "X"
+                ? "checked"
+                : ""}>
+
+        <span class="warranty-slider"></span>
+
+    </label>
+
+</div>
 
         <!-- B1 PRICE SETUP -->
 
@@ -248,7 +423,6 @@ function loadStep() {
 
             </div>
 
-
             <div
                 id="b1PricingFields"
                 class="create-pricing-fields">
@@ -263,7 +437,6 @@ function loadStep() {
                             step="0.01"
                             placeholder="199.99">
                     </div>
-
 
                     <div class="form-group">
                         <label>Currency</label>
@@ -294,7 +467,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Pricing Unit</label>
 
@@ -304,7 +476,6 @@ function loadStep() {
     value="${modelData.b1Kpein || '1'}">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Condition Type</label>
@@ -316,7 +487,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Sales Organization</label>
 
@@ -325,7 +495,6 @@ function loadStep() {
                             id="Vkorg">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Division</label>
@@ -336,7 +505,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Distribution Channel</label>
 
@@ -346,7 +514,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Customer Price Group</label>
 
@@ -355,7 +522,6 @@ function loadStep() {
                             id="Konda">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Unit Of Measure</label>
@@ -367,7 +533,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
     <label>Calculation Type</label>
 
@@ -377,7 +542,6 @@ function loadStep() {
         value="${modelData.b1Krech || 'C'}">
 </div>
 
-
                     <div class="form-group">
                         <label>Valid From</label>
 
@@ -386,7 +550,6 @@ function loadStep() {
                             id="b1Datab">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Valid To</label>
@@ -435,7 +598,6 @@ function loadStep() {
 
             </div>
 
-
             <div
                 id="brPricingFields"
                 class="create-pricing-fields">
@@ -452,7 +614,6 @@ function loadStep() {
                             placeholder="199.99">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Currency</label>
@@ -483,7 +644,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Pricing Unit</label>
 
@@ -493,7 +653,6 @@ function loadStep() {
     value="${modelData.brKpein || '1'}">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Condition Type</label>
@@ -505,7 +664,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Sales Organization</label>
 
@@ -514,7 +672,6 @@ function loadStep() {
                             id="Vkorg">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Division</label>
@@ -525,7 +682,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Distribution Channel</label>
 
@@ -535,7 +691,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Customer Price Group</label>
 
@@ -544,7 +699,6 @@ function loadStep() {
                             id="Konda">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Unit Of Measure</label>
@@ -556,7 +710,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Calculation Type</label>
 
@@ -567,7 +720,6 @@ function loadStep() {
 
                     </div>
 
-
                     <div class="form-group">
                         <label>Valid From</label>
 
@@ -576,7 +728,6 @@ function loadStep() {
                             id="brDatab">
 
                     </div>
-
 
                     <div class="form-group">
                         <label>Valid To</label>
@@ -605,7 +756,6 @@ function loadStep() {
 
             </button>
 
-
             <button
                 class="btn next"
                 onclick="nextStep()">
@@ -620,7 +770,6 @@ function loadStep() {
 
     `;
 
-
         restoreStepData();
 
         toggleCreatePricing("b1");
@@ -632,15 +781,44 @@ function loadStep() {
 
     if (currentStep === 3) {
 
-    area.innerHTML = `
+        area.innerHTML = `
 
         <div class="card">
 
             <h3>Warranty Setup</h3>
 
-            ${modelContextBar()}
+${modelContextBar()}
 
-            <div class="grid">
+<div class="setup-flag-row">
+
+    <div>
+
+        <div class="setup-flag-title">
+            Warranty Setup
+        </div>
+
+        <div class="setup-flag-description">
+            Enable warranty configuration
+        </div>
+
+    </div>
+
+    <label class="warranty-switch">
+
+        <input
+            type="checkbox"
+            id="warrantyFlag"
+            ${modelData.warrantyFlag === "X"
+                ? "checked"
+                : ""}>
+
+        <span class="warranty-slider"></span>
+
+    </label>
+
+</div>
+
+<div class="grid">
 
                 <div class="form-group">
 
@@ -674,7 +852,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Length</label>
@@ -685,7 +862,6 @@ function loadStep() {
                         placeholder="1">
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -709,7 +885,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Standard Warranty SKU</label>
@@ -721,7 +896,6 @@ function loadStep() {
                         disabled>
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -755,7 +929,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Length</label>
@@ -766,7 +939,6 @@ function loadStep() {
                         placeholder="2">
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -790,7 +962,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Extended Warranty SKU</label>
@@ -802,7 +973,6 @@ function loadStep() {
                         disabled>
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -836,7 +1006,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Length</label>
@@ -847,7 +1016,6 @@ function loadStep() {
                         placeholder="6">
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -871,7 +1039,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Brother Care SKU</label>
@@ -883,7 +1050,6 @@ function loadStep() {
                         disabled>
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -917,7 +1083,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Length</label>
@@ -928,7 +1093,6 @@ function loadStep() {
                         placeholder="6">
 
                 </div>
-
 
                 <div class="form-group">
 
@@ -952,7 +1116,6 @@ function loadStep() {
 
                 </div>
 
-
                 <div class="form-group">
 
                     <label>Brother Plus SKU</label>
@@ -967,7 +1130,6 @@ function loadStep() {
 
             </div>
 
-
             <div class="btn-row">
 
                 <button
@@ -977,7 +1139,6 @@ function loadStep() {
                     ← Back
 
                 </button>
-
 
                 <button
                     class="btn next"
@@ -991,34 +1152,59 @@ function loadStep() {
 
         </div>
     `;
-    restoreStepData();
+        restoreStepData();
 
-applyWarrantyCountryRules();
+        applyWarrantyCountryRules();
 
-return;
-}
+        return;
+    }
 
 
     if (currentStep === 4) {
 
-    area.innerHTML = `
+        area.innerHTML = `
 
         <div class="card">
 
-            <h3>
-                Compatibility & Programs
-            </h3>
+           <h3>
+    Compatibility & Programs
+</h3>
 
-            ${modelContextBar()}
+${modelContextBar()}
 
 
-            <!-- =====================================
-                 EXISTING PROGRAMS
-            ====================================== -->
+<div class="setup-flag-row">
 
-            <div class="compat-section-heading">
-                Program Compatibility
-            </div>
+    <div>
+
+        <div class="setup-flag-title">
+            Compatibility Setup
+        </div>
+
+        <div class="setup-flag-description">
+            Enable compatibility and program configuration
+        </div>
+
+    </div>
+
+    <label class="warranty-switch">
+
+        <input
+            type="checkbox"
+            id="compatableFlag"
+            ${modelData.compatableFlag === "X"
+                ? "checked"
+                : ""}>
+
+        <span class="warranty-slider"></span>
+
+    </label>
+
+</div>
+
+<div class="compat-section-heading">
+    Program Compatibility
+</div>
 
             <div class="program-grid">
 
@@ -1166,8 +1352,7 @@ return;
                         <div class="barracuda-extra-title">
                             Barracuda Classification
                         </div>
-
-                        
+                    
                     </div>
 
                     <div class="barracuda-active-badge">
@@ -1195,8 +1380,8 @@ return;
                             type="checkbox"
                             id="basic"
                             ${modelData.basic === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1215,8 +1400,8 @@ return;
                             type="checkbox"
                             id="occasional"
                             ${modelData.occasional === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1228,15 +1413,14 @@ return;
 
                     </label>
 
-
                     <label class="classification-option">
 
                         <input
                             type="checkbox"
                             id="moderate"
                             ${modelData.moderate === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1248,15 +1432,14 @@ return;
 
                     </label>
 
-
                     <label class="classification-option">
 
                         <input
                             type="checkbox"
                             id="frequent"
                             ${modelData.frequent === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1268,15 +1451,14 @@ return;
 
                     </label>
 
-
                     <label class="classification-option">
 
                         <input
                             type="checkbox"
                             id="high"
                             ${modelData.high === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1288,15 +1470,14 @@ return;
 
                     </label>
 
-
                     <label class="classification-option">
 
                         <input
                             type="checkbox"
                             id="power"
                             ${modelData.power === "X"
-                                ? "checked"
-                                : ""}>
+                ? "checked"
+                : ""}>
 
                         <span class="classification-checkbox">
                             ✓
@@ -1309,7 +1490,6 @@ return;
                     </label>
 
                 </div>
-
 
                 <!-- =================================
                      DETAIL FIELDS
@@ -1336,7 +1516,6 @@ return;
 
     </div>
 
-
     <div class="form-group">
 
         <label>
@@ -1353,7 +1532,6 @@ return;
     </div>
 
 </div>
-
             </div>
 
 
@@ -1385,46 +1563,75 @@ return;
 
     `;
 
+        restoreProgramState(
+            "amazondart"
+        );
 
-    restoreProgramState(
-        "amazondart"
-    );
+        restoreProgramState(
+            "brrefresh"
+        );
 
-    restoreProgramState(
-        "brrefresh"
-    );
+        restoreProgramState(
+            "barracuda"
+        );
 
-    restoreProgramState(
-        "barracuda"
-    );
+        restoreProgramState(
+            "bplus"
+        );
 
-    restoreProgramState(
-        "bplus"
-    );
+        updateBarracudaExtraSection();
 
+        return;
+    }
 
-    updateBarracudaExtraSection();
+    if (currentStep === 5) {
 
-
-    return;
-}
-
-   if (currentStep === 5) {
-
-    area.innerHTML = `
+        area.innerHTML = `
 
         <div class="card">
 
             <h3>
-                Order Types & Consumables
-            </h3>
+    Order Types & Consumables
+</h3>
 
-            ${modelContextBar()}
+${modelContextBar()}
 
 
-            <div class="order-section-title order-types-heading">
-                Select Applicable Order Types
-            </div>
+<div class="setup-flag-row">
+
+    <div>
+
+        <div class="setup-flag-title">
+            Order Type Setup
+        </div>
+
+        <div class="setup-flag-description">
+            Enable order type and consumable configuration
+        </div>
+
+    </div>
+
+    <label class="warranty-switch">
+
+        <input
+            type="checkbox"
+            id="orderTypeFlag"
+            ${modelData.orderTypeFlag === "X"
+                ? "checked"
+                : ""}>
+
+        <span class="warranty-slider"></span>
+
+    </label>
+
+</div>
+
+
+<div class="order-section-title order-types-heading">
+
+    Select Applicable Order Types
+
+</div>
 
 
             <div class="order-type-form">
@@ -1454,8 +1661,8 @@ return;
                                     type="checkbox"
                                     id="drumOrder"
                                     ${modelData.drumOrder === "X"
-                                        ? "checked"
-                                        : ""}
+                ? "checked"
+                : ""}
                                     onchange="
                                         toggleOrderConsumable(
                                             'drumOrder',
@@ -1522,8 +1729,8 @@ return;
                                     type="checkbox"
                                     id="wasteToner"
                                     ${modelData.wasteToner === "X"
-                                        ? "checked"
-                                        : ""}
+                ? "checked"
+                : ""}
                                     onchange="
                                         toggleOrderConsumable(
                                             'wasteToner',
@@ -1540,7 +1747,6 @@ return;
                         </div>
 
                     </div>
-
 
                     <div
                         class="order-consumable-column"
@@ -1564,7 +1770,6 @@ return;
                     </div>
 
                 </div>
-
 
                 <!-- ================================= -->
                 <!-- BELT UNIT -->
@@ -1590,8 +1795,8 @@ return;
                                     type="checkbox"
                                     id="beltUnit"
                                     ${modelData.beltUnit === "X"
-                                        ? "checked"
-                                        : ""}
+                ? "checked"
+                : ""}
                                     onchange="
                                         toggleOrderConsumable(
                                             'beltUnit',
@@ -1633,7 +1838,6 @@ return;
 
                 </div>
 
-
                 <!-- ================================= -->
                 <!-- BACKUP ORDER -->
                 <!-- SAP FIELD = CLAIMORDER -->
@@ -1659,8 +1863,8 @@ return;
                                     type="checkbox"
                                     id="claimOrder"
                                     ${modelData.claimOrder === "X"
-                                        ? "checked"
-                                        : ""}
+                ? "checked"
+                : ""}
                                     onchange="
                                         toggleOrderConsumable(
                                             'claimOrder',
@@ -1705,13 +1909,11 @@ return;
 
             </div>
 
-
             <div
                 id="orderTypeError"
                 class="order-type-error"
                 style="display:none;">
             </div>
-
 
             <div class="btn-row">
 
@@ -1722,7 +1924,6 @@ return;
                     ← Back
 
                 </button>
-
 
                 <button
                     class="btn next"
@@ -1738,11 +1939,10 @@ return;
 
     `;
 
+        restoreOrderConsumables();
 
-    restoreOrderConsumables();
-
-    return;
-}
+        return;
+    }
 
     if (currentStep === 6) {
 
@@ -1784,13 +1984,12 @@ return;
     </h4>
 
     <p>
-        ${
-            modelData.selkzb1 === "X"
+        ${modelData.selkzb1 === "X"
                 ? "Barracuda Pricing Configured"
                 : modelData.selkzbr === "X"
                     ? "Auto Reorder Pricing Configured"
                     : "No Pricing Setup Selected"
-        }
+            }
     </p>
 
 </div>
@@ -1826,42 +2025,37 @@ return;
 
     <p>
         <b>Drum Order :</b>
-        ${
-            modelData.drumOrder === "X"
+        ${modelData.drumOrder === "X"
                 ? modelData.drConsumable || "-"
                 : "Not Selected"
-        }
+            }
     </p>
 
     <p>
         <b>Waste Toner :</b>
-        ${
-            modelData.wasteToner === "X"
+        ${modelData.wasteToner === "X"
                 ? modelData.wtConsumable || "-"
                 : "Not Selected"
-        }
+            }
     </p>
 
     <p>
         <b>Belt Unit :</b>
-        ${
-            modelData.beltUnit === "X"
+        ${modelData.beltUnit === "X"
                 ? modelData.buConsumable || "-"
                 : "Not Selected"
-        }
+            }
     </p>
 
     <p>
         <b>Backup Order :</b>
-        ${
-            modelData.claimOrder === "X"
+        ${modelData.claimOrder === "X"
                 ? modelData.coConsumable || "-"
                 : "Not Selected"
-        }
+            }
     </p>
 
 </div>
-
 
 </div>
 
@@ -1889,31 +2083,11 @@ return;
     `;
     }
 
-    const progress =
-
-        (
-            (currentStep - 1)
-            / 5
-        )
-        * 100;
-
-    const progressBar =
-        document.getElementById(
-            "wizardProgress"
-        );
-
-    if (progressBar) {
-
-        progressBar.style.width =
-            progress + "%";
-    }
-
     /*
     Restore previous values whenever
     a step is rendered again.
     */
     restoreStepData();
-
 
 }
 
@@ -1995,7 +2169,6 @@ function toggleCreatePricing(type) {
         return;
     }
 
-
     // B1 PRICE SETUP
 
     if (type === "b1") {
@@ -2039,10 +2212,9 @@ function toggleCreatePricing(type) {
 
         if (b1Toggle.checked) {
 
-    carryForwardPricingValues("b1");
-}
+            carryForwardPricingValues("b1");
+        }
     }
-
 
     // BR PRICE SETUP
 
@@ -2079,17 +2251,17 @@ function toggleCreatePricing(type) {
 
         if (brFields) {
 
-    brFields.style.display =
-        brToggle.checked
-            ? "block"
-            : "none";
-}
+            brFields.style.display =
+                brToggle.checked
+                    ? "block"
+                    : "none";
+        }
 
 
-if (brToggle.checked) {
+        if (brToggle.checked) {
 
-    carryForwardPricingValues("br");
-}
+            carryForwardPricingValues("br");
+        }
     }
 }
 
@@ -2233,7 +2405,6 @@ function restoreOrderConsumables() {
                 modelData.drConsumable || ""
         },
 
-
         {
             checkboxId:
                 "wasteToner",
@@ -2251,7 +2422,6 @@ function restoreOrderConsumables() {
                 modelData.wtConsumable || ""
         },
 
-
         {
             checkboxId:
                 "beltUnit",
@@ -2268,7 +2438,6 @@ function restoreOrderConsumables() {
             value:
                 modelData.buConsumable || ""
         },
-
 
         {
             checkboxId:
@@ -2318,7 +2487,6 @@ function restoreOrderConsumables() {
                 return;
             }
 
-
             checkbox.checked =
                 config.selected;
 
@@ -2329,7 +2497,6 @@ function restoreOrderConsumables() {
 
             input.disabled =
                 !config.selected;
-
 
             if (config.selected) {
 
@@ -2347,7 +2514,6 @@ function restoreOrderConsumables() {
     );
 }
 
-
 function validateOrderTypeConsumables() {
 
     const errorBox =
@@ -2356,7 +2522,6 @@ function validateOrderTypeConsumables() {
         );
 
     let message = "";
-
 
     if (
         modelData.drumOrder === "X" &&
@@ -2367,7 +2532,6 @@ function validateOrderTypeConsumables() {
             "Please enter a consumable for Drum Order.";
     }
 
-
     else if (
         modelData.wasteToner === "X" &&
         !modelData.wtConsumable
@@ -2376,7 +2540,6 @@ function validateOrderTypeConsumables() {
         message =
             "Please enter a consumable for Waste Toner.";
     }
-
 
     else if (
         modelData.beltUnit === "X" &&
@@ -2387,7 +2550,6 @@ function validateOrderTypeConsumables() {
             "Please enter a consumable for Belt Unit.";
     }
 
-
     else if (
         modelData.claimOrder === "X" &&
         !modelData.coConsumable
@@ -2396,7 +2558,6 @@ function validateOrderTypeConsumables() {
         message =
             "Please enter a consumable for Backup Order.";
     }
-
 
     if (!message) {
 
@@ -2412,7 +2573,6 @@ function validateOrderTypeConsumables() {
         return true;
     }
 
-
     if (errorBox) {
 
         errorBox.textContent =
@@ -2422,10 +2582,8 @@ function validateOrderTypeConsumables() {
             "block";
     }
 
-
     return false;
 }
-
 
 function restoreStepData() {
 
@@ -2436,326 +2594,319 @@ function restoreStepData() {
         setValue("country", modelData.country);
         setValue("werks", modelData.werks);
         setValue("mtart", modelData.mtart);
+
         setValue(
-"mbrsh",
-modelData.mbrsh || "M"
-);
+            "mbrsh",
+            modelData.mbrsh || "M"
+        );
         setValue("matkl", modelData.matkl);
         setValue(
-"meins",
-modelData.meins || "EA"
-);
+            "meins",
+            modelData.meins || "EA"
+        );
         setValue(
-"spart",
-modelData.spart || "10"
-);
+            "spart",
+            modelData.spart || "10"
+        );
         setValue("ean11", modelData.ean11);
         setValue("mstae", modelData.mstae);
         setValue("mstav", modelData.mstav);
         setValue(
-"spras",
-modelData.spras || "EN"
-);
+            "spras",
+            modelData.spras || "EN"
+        );
         setValue("maktx", modelData.maktx);
         setValue(
-"vtweg",
-modelData.vtweg || "30"
-);
+            "vtweg",
+            modelData.vtweg || "30"
+        );
         setValue("vmsta", modelData.vmsta);
     }
 
-
     // STEP 2 - Price Setup
     // STEP 2 - Price Setup
-if (currentStep === 2) {
+    if (currentStep === 2) {
 
-    const b1Toggle =
-        document.getElementById("b1PricingToggle");
+        const b1Toggle =
+            document.getElementById("b1PricingToggle");
 
-    const brToggle =
-        document.getElementById("brPricingToggle");
+        const brToggle =
+            document.getElementById("brPricingToggle");
 
-    const b1Block =
-        document.getElementById("b1PricingFields");
+        const b1Block =
+            document.getElementById("b1PricingFields");
 
-    const brBlock =
-        document.getElementById("brPricingFields");
+        const brBlock =
+            document.getElementById("brPricingFields");
 
 
-    // Restore toggle selections
+        // Restore toggle selections
 
-    if (b1Toggle) {
-        b1Toggle.checked =
-            modelData.selkzb1 === "X";
+        if (b1Toggle) {
+            b1Toggle.checked =
+                modelData.selkzb1 === "X";
+        }
+
+        if (brToggle) {
+            brToggle.checked =
+                modelData.selkzbr === "X";
+        }
+
+        // ========================================
+        // B1 PRICING
+        // ========================================
+
+        if (b1Block) {
+
+            const setB1Value =
+                function (selector, value) {
+
+                    const element =
+                        b1Block.querySelector(selector);
+
+                    if (element) {
+                        element.value =
+                            value ?? "";
+                    }
+                };
+
+
+            setB1Value(
+                "#b1Kbetr",
+                modelData.b1Kbetr
+            );
+
+            setB1Value(
+                "#b1Konwa",
+                modelData.b1Konwa
+            );
+
+            setB1Value(
+                "#b1Kpein",
+                modelData.b1Kpein || "1"
+            );
+
+            setB1Value(
+                "#Kschl",
+                modelData.Kschl || "ZPR0"
+            );
+
+            setB1Value(
+                "#Vkorg",
+                modelData.Vkorg
+            );
+
+            setB1Value(
+                "#Spart",
+                modelData.Spart ||
+                modelData.spart
+            );
+
+            setB1Value(
+                "#Vtweg",
+                modelData.Vtweg ||
+                modelData.vtweg
+            );
+
+            setB1Value(
+                "#Konda",
+                modelData.Konda
+            );
+
+            setB1Value(
+                "#b1Kmein",
+                modelData.b1Kmein ||
+                modelData.meins ||
+                "EA"
+            );
+
+            setB1Value(
+                "#b1Krech",
+                modelData.b1Krech || "C"
+            );
+
+            setB1Value(
+                "#b1Datab",
+                modelData.b1Datab
+            );
+
+            setB1Value(
+                "#b1Datbi",
+                modelData.b1Datbi ||
+                "9999-12-31"
+            );
+        }
+
+        // ========================================
+        // BR PRICING
+        // ========================================
+
+        if (brBlock) {
+
+            const setBRValue =
+                function (selector, value) {
+
+                    const element =
+                        brBlock.querySelector(selector);
+
+                    if (element) {
+                        element.value =
+                            value ?? "";
+                    }
+                };
+
+            setBRValue(
+                "#brKbetr",
+                modelData.brKbetr
+            );
+
+            setBRValue(
+                "#brKonwa",
+                modelData.brKonwa
+            );
+
+            setBRValue(
+                "#brKpein",
+                modelData.brKpein || "1"
+            );
+
+            setBRValue(
+                "#Kschl",
+                modelData.Kschl || "ZPR0"
+            );
+
+            setBRValue(
+                "#Vkorg",
+                modelData.Vkorg
+            );
+            setBRValue(
+                "#Spart",
+                modelData.Spart ||
+                modelData.spart
+            );
+
+            setBRValue(
+                "#Vtweg",
+                modelData.Vtweg ||
+                modelData.vtweg
+            );
+
+            setBRValue(
+                "#Konda",
+                modelData.Konda
+            );
+
+            setBRValue(
+                "#brKmein",
+                modelData.brKmein ||
+                modelData.meins ||
+                "EA"
+            );
+
+            setBRValue(
+                "#brKrech",
+                modelData.brKrech || "C"
+            );
+
+            setBRValue(
+                "#brDatab",
+                modelData.brDatab
+            );
+
+            setBRValue(
+                "#brDatbi",
+                modelData.brDatbi ||
+                "9999-12-31"
+            );
+        }
+
+        // Show only selected pricing section
+
+        toggleCreatePricing("b1");
+
+        toggleCreatePricing("br");
     }
-
-    if (brToggle) {
-        brToggle.checked =
-            modelData.selkzbr === "X";
-    }
-
-
-    // ========================================
-    // B1 PRICING
-    // ========================================
-
-    if (b1Block) {
-
-        const setB1Value =
-            function (selector, value) {
-
-                const element =
-                    b1Block.querySelector(selector);
-
-                if (element) {
-                    element.value =
-                        value ?? "";
-                }
-            };
-
-
-        setB1Value(
-            "#b1Kbetr",
-            modelData.b1Kbetr
-        );
-
-        setB1Value(
-            "#b1Konwa",
-            modelData.b1Konwa
-        );
-
-        setB1Value(
-"#b1Kpein",
-modelData.b1Kpein || "1"
-);
-
-       setB1Value(
-"#Kschl",
-modelData.Kschl || "ZPR0"
-);
-
-        setB1Value(
-    "#Vkorg",
-    modelData.Vkorg
-);
-
-        setB1Value(
-            "#Spart",
-            modelData.Spart ||
-            modelData.spart
-        );
-
-        setB1Value(
-            "#Vtweg",
-            modelData.Vtweg ||
-            modelData.vtweg
-        );
-
-        setB1Value(
-            "#Konda",
-            modelData.Konda
-        );
-
-        setB1Value(
-"#b1Kmein",
-modelData.b1Kmein ||
-modelData.meins ||
-"EA"
-);
-
-       setB1Value(
-"#b1Krech",
-modelData.b1Krech || "C"
-);
-
-        setB1Value(
-            "#b1Datab",
-            modelData.b1Datab
-        );
-
-        setB1Value(
-"#b1Datbi",
-modelData.b1Datbi ||
-"9999-12-31"
-);
-    }
-
-
-    // ========================================
-    // BR PRICING
-    // ========================================
-
-    if (brBlock) {
-
-        const setBRValue =
-            function (selector, value) {
-
-                const element =
-                    brBlock.querySelector(selector);
-
-                if (element) {
-                    element.value =
-                        value ?? "";
-                }
-            };
-
-
-        setBRValue(
-            "#brKbetr",
-            modelData.brKbetr
-        );
-
-        setBRValue(
-            "#brKonwa",
-            modelData.brKonwa
-        );
-
-        setBRValue(
-"#brKpein",
-modelData.brKpein || "1"
-);
-
-        setBRValue(
-"#Kschl",
-modelData.Kschl || "ZPR0"
-);
-
-        setBRValue(
-    "#Vkorg",
-    modelData.Vkorg
-);
-        setBRValue(
-            "#Spart",
-            modelData.Spart ||
-            modelData.spart
-        );
-
-        setBRValue(
-            "#Vtweg",
-            modelData.Vtweg ||
-            modelData.vtweg
-        );
-
-        setBRValue(
-            "#Konda",
-            modelData.Konda
-        );
-
-        setBRValue(
-"#brKmein",
-modelData.brKmein ||
-modelData.meins ||
-"EA"
-);
-
-        setBRValue(
-"#brKrech",
-modelData.brKrech || "C"
-);
-
-        setBRValue(
-            "#brDatab",
-            modelData.brDatab
-        );
-
-        setBRValue(
-"#brDatbi",
-modelData.brDatbi ||
-"9999-12-31"
-);
-    }
-
-    // Show only selected pricing section
-
-    toggleCreatePricing("b1");
-
-    toggleCreatePricing("br");
-}
 
     // STEP 3 - Warranty
-    
-if (currentStep === 3) {
 
-    setValue(
-        "standardLength",
-        modelData.standardLength
-    );
+    if (currentStep === 3) {
 
-    setValue(
-        "standardUnit",
-        modelData.standardUnit
-    );
+        setValue(
+            "standardLength",
+            modelData.standardLength
+        );
 
-    restoreWarranty(
-        "standardWarranty",
-        "standardWarrantyText",
-        "standardLength",
-        "standardUnit",
-        "standardSkuNo",
-        modelData.standardWarranty
-    );
+        setValue(
+            "standardUnit",
+            modelData.standardUnit
+        );
 
+        restoreWarranty(
+            "standardWarranty",
+            "standardWarrantyText",
+            "standardLength",
+            "standardUnit",
+            "standardSkuNo",
+            modelData.standardWarranty
+        );
 
-    setValue(
-        "extendedLength",
-        modelData.extendedLength
-    );
+        setValue(
+            "extendedLength",
+            modelData.extendedLength
+        );
 
-    setValue(
-        "extendedUnit",
-        modelData.extendedUnit
-    );
+        setValue(
+            "extendedUnit",
+            modelData.extendedUnit
+        );
 
-    restoreWarranty(
-        "extendedWarranty",
-        "extendedWarrantyText",
-        "extendedLength",
-        "extendedUnit",
-        "extendedSkuNo",
-        modelData.extendedWarranty
-    );
+        restoreWarranty(
+            "extendedWarranty",
+            "extendedWarrantyText",
+            "extendedLength",
+            "extendedUnit",
+            "extendedSkuNo",
+            modelData.extendedWarranty
+        );
 
+        setValue(
+            "brotherCareLength",
+            modelData.brotherCareLength
+        );
 
-    setValue(
-        "brotherCareLength",
-        modelData.brotherCareLength
-    );
+        setValue(
+            "brotherCareUnit",
+            modelData.brotherCareUnit
+        );
 
-    setValue(
-        "brotherCareUnit",
-        modelData.brotherCareUnit
-    );
+        restoreWarranty(
+            "brotherCareWarranty",
+            "brotherCareWarrantyText",
+            "brotherCareLength",
+            "brotherCareUnit",
+            "brotherCareSkuNo",
+            modelData.brotherCareWarranty
+        );
 
-    restoreWarranty(
-        "brotherCareWarranty",
-        "brotherCareWarrantyText",
-        "brotherCareLength",
-        "brotherCareUnit",
-        "brotherCareSkuNo",
-        modelData.brotherCareWarranty
-    );
+        setValue(
+            "brotherPlusLength",
+            modelData.brotherPlusLength
+        );
 
+        setValue(
+            "brotherPlusUnit",
+            modelData.brotherPlusUnit
+        );
 
-    setValue(
-        "brotherPlusLength",
-        modelData.brotherPlusLength
-    );
-
-    setValue(
-        "brotherPlusUnit",
-        modelData.brotherPlusUnit
-    );
-
-    restoreWarranty(
-        "brotherPlusWarranty",
-        "brotherPlusWarrantyText",
-        "brotherPlusLength",
-        "brotherPlusUnit",
-        "brotherPlusSkuNo",
-        modelData.brotherPlusWarranty
-    );
-}
-
+        restoreWarranty(
+            "brotherPlusWarranty",
+            "brotherPlusWarrantyText",
+            "brotherPlusLength",
+            "brotherPlusUnit",
+            "brotherPlusSkuNo",
+            modelData.brotherPlusWarranty
+        );
+    }
 
     // STEP 4 - Compatibility
     if (currentStep === 4) {
@@ -2786,17 +2937,13 @@ if (currentStep === 3) {
         restoreProgramState("bplus");
     }
 
-
     // STEP 5 - Order Types
 
 }
 
-
-
 function nextStep() {
 
     saveCurrentStepData();
-
 
     if (currentStep === 2) {
 
@@ -2813,7 +2960,6 @@ function nextStep() {
         }
     }
 
-
     // =====================================
     // STEP 5 VALIDATION
     // =====================================
@@ -2828,7 +2974,6 @@ function nextStep() {
         }
     }
 
-
     if (currentStep < 6) {
 
         currentStep++;
@@ -2836,7 +2981,6 @@ function nextStep() {
         loadStep();
     }
 }
-
 
 function backStep() {
 
@@ -2853,7 +2997,6 @@ function backStep() {
 }
 
 
-
 function getValue(id) {
 
     return document.getElementById(id)?.value || "";
@@ -2861,481 +3004,610 @@ function getValue(id) {
 
 function saveCurrentStepData() {
 
-    /*
-    STEP 1
-    Material Information
-    */
+    // =========================================
+    // STEP 1 - MATERIAL
+    // =========================================
+
     if (currentStep === 1) {
 
-        modelData.matnr = getValue("matnr");
-        modelData.werks = getValue("werks");
-        modelData.mtart = getValue("mtart");
-        modelData.mbrsh = getValue("mbrsh");
-        modelData.matkl = getValue("matkl");
-        modelData.meins = getValue("meins");
-        modelData.spart = getValue("spart");
-        modelData.ean11 = getValue("ean11");
+        modelData.matnr =
+            getValue("matnr");
 
-        modelData.mstae = getValue("mstae");
-        modelData.mstav = getValue("mstav");
+        modelData.country =
+            getValue("country");
 
-        modelData.spras = getValue("spras");
-        modelData.maktx = getValue("maktx");
-        modelData.vtweg = getValue("vtweg");
-        modelData.vmsta = getValue("vmsta");
+        modelData.werks =
+            getValue("werks");
 
-        modelData.country = getValue("country");
+        modelData.mtart =
+            getValue("mtart");
+
+        modelData.materialFlag =
+            document.getElementById(
+                "materialFlag"
+            )?.checked
+                ? "X"
+                : "";
+
+        modelData.mbrsh =
+            getValue("mbrsh");
+
+        modelData.matkl =
+            getValue("matkl");
+
+        modelData.meins =
+            getValue("meins");
+
+        modelData.spart =
+            getValue("spart");
+
+        modelData.ean11 =
+            getValue("ean11");
+
+        modelData.mstae =
+            getValue("mstae");
+
+        modelData.mstav =
+            getValue("mstav");
+
+        modelData.spras =
+            getValue("spras");
+
+        modelData.maktx =
+            getValue("maktx");
+
+        modelData.vtweg =
+            getValue("vtweg");
+
+        modelData.vmsta =
+            getValue("vmsta");
+
+        return;
     }
 
-    /*
-    STEP 2
-    Pricing
-    */
-  if (currentStep === 2) {
+    // =========================================
+    // STEP 2 - PRICING
+    // =========================================
 
-    const b1Toggle =
-        document.getElementById("b1PricingToggle");
+    if (currentStep === 2) {
 
-    const brToggle =
-        document.getElementById("brPricingToggle");
-
-
-    modelData.selkzb1 =
-        b1Toggle && b1Toggle.checked
-            ? "X"
-            : "";
-
-
-    modelData.selkzbr =
-        brToggle && brToggle.checked
-            ? "X"
-            : "";
-
-
-    /* ==============================
-       B1 PRICING
-    ============================== */
-
-    if (modelData.selkzb1 === "X") {
-
-        const block =
+        const priceFlag =
             document.getElementById(
-                "b1PricingFields"
+                "priceFlag"
+            );
+
+        const b1Toggle =
+            document.getElementById(
+                "b1PricingToggle"
+            );
+
+        const brToggle =
+            document.getElementById(
+                "brPricingToggle"
             );
 
 
-        modelData.b1Kbetr =
-            block.querySelector("#b1Kbetr")?.value || "";
+        modelData.priceFlag =
+            priceFlag?.checked
+                ? "X"
+                : "";
 
-        modelData.b1Konwa =
-            block.querySelector("#b1Konwa")?.value || "";
 
-        modelData.b1Kpein =
-            block.querySelector("#b1Kpein")?.value || "";
+        modelData.selkzb1 =
+            b1Toggle?.checked
+                ? "X"
+                : "";
 
-        modelData.Kschl =
-            block.querySelector("#Kschl")?.value || "";
 
-        modelData.Vkorg =
-            block.querySelector("#Vkorg")?.value || "";
+        modelData.selkzbr =
+            brToggle?.checked
+                ? "X"
+                : "";
 
-        modelData.Spart =
-            block.querySelector("#Spart")?.value || "";
 
-        modelData.Vtweg =
-            block.querySelector("#Vtweg")?.value || "";
+        // -------------------------
+        // B1 PRICING
+        // -------------------------
 
-        modelData.Konda =
-            block.querySelector("#Konda")?.value || "";
+        if (modelData.selkzb1 === "X") {
 
-        modelData.b1Kmein =
-            block.querySelector("#b1Kmein")?.value || "";
+            const block =
+                document.getElementById(
+                    "b1PricingFields"
+                );
 
-        modelData.b1Krech =
-            block.querySelector("#b1Krech")?.value || "";
 
-        modelData.b1Datab =
-            block.querySelector("#b1Datab")?.value || "";
+            if (block) {
 
-        modelData.b1Datbi =
-            block.querySelector("#b1Datbi")?.value || "";
+                modelData.b1Kbetr =
+                    block.querySelector(
+                        "#b1Kbetr"
+                    )?.value || "";
+
+                modelData.b1Konwa =
+                    block.querySelector(
+                        "#b1Konwa"
+                    )?.value || "";
+
+                modelData.b1Kpein =
+                    block.querySelector(
+                        "#b1Kpein"
+                    )?.value || "";
+
+                modelData.Kschl =
+                    block.querySelector(
+                        "#Kschl"
+                    )?.value || "";
+
+                modelData.Vkorg =
+                    block.querySelector(
+                        "#Vkorg"
+                    )?.value || "";
+
+                modelData.Spart =
+                    block.querySelector(
+                        "#Spart"
+                    )?.value || "";
+
+                modelData.Vtweg =
+                    block.querySelector(
+                        "#Vtweg"
+                    )?.value || "";
+
+                modelData.Konda =
+                    block.querySelector(
+                        "#Konda"
+                    )?.value || "";
+
+                modelData.b1Kmein =
+                    block.querySelector(
+                        "#b1Kmein"
+                    )?.value || "";
+
+                modelData.b1Krech =
+                    block.querySelector(
+                        "#b1Krech"
+                    )?.value || "";
+
+                modelData.b1Datab =
+                    block.querySelector(
+                        "#b1Datab"
+                    )?.value || "";
+
+                modelData.b1Datbi =
+                    block.querySelector(
+                        "#b1Datbi"
+                    )?.value || "";
+            }
+
+        } else {
+
+            modelData.b1Kbetr = "";
+            modelData.b1Konwa = "";
+            modelData.b1Kpein = "";
+            modelData.b1Kmein = "";
+            modelData.b1Krech = "";
+            modelData.b1Datab = "";
+            modelData.b1Datbi = "";
+        }
+
+        // -------------------------
+        // BR PRICING
+        // -------------------------
+
+        if (modelData.selkzbr === "X") {
+
+            const block =
+                document.getElementById(
+                    "brPricingFields"
+                );
+
+            if (block) {
+
+                modelData.brKbetr =
+                    block.querySelector(
+                        "#brKbetr"
+                    )?.value || "";
+
+                modelData.brKonwa =
+                    block.querySelector(
+                        "#brKonwa"
+                    )?.value || "";
+
+                modelData.brKpein =
+                    block.querySelector(
+                        "#brKpein"
+                    )?.value || "";
+
+                modelData.Kschl =
+                    block.querySelector(
+                        "#Kschl"
+                    )?.value || "";
+
+                modelData.Vkorg =
+                    block.querySelector(
+                        "#Vkorg"
+                    )?.value || "";
+
+                modelData.Spart =
+                    block.querySelector(
+                        "#Spart"
+                    )?.value || "";
+
+                modelData.Vtweg =
+                    block.querySelector(
+                        "#Vtweg"
+                    )?.value || "";
+
+                modelData.Konda =
+                    block.querySelector(
+                        "#Konda"
+                    )?.value || "";
+
+                modelData.brKmein =
+                    block.querySelector(
+                        "#brKmein"
+                    )?.value || "";
+
+                modelData.brKrech =
+                    block.querySelector(
+                        "#brKrech"
+                    )?.value || "";
+
+                modelData.brDatab =
+                    block.querySelector(
+                        "#brDatab"
+                    )?.value || "";
+
+                modelData.brDatbi =
+                    block.querySelector(
+                        "#brDatbi"
+                    )?.value || "";
+            }
+
+        } else {
+
+            modelData.brKbetr = "";
+            modelData.brKonwa = "";
+            modelData.brKpein = "";
+            modelData.brKmein = "";
+            modelData.brKrech = "";
+            modelData.brDatab = "";
+            modelData.brDatbi = "";
+        }
+
+        // Child selection automatically enables PRICE_FLAG
+        if (
+            modelData.selkzb1 === "X" ||
+            modelData.selkzbr === "X"
+        ) {
+
+            modelData.priceFlag = "X";
+        }
+
+
+        return;
     }
 
+    // =========================================
+    // STEP 3 - WARRANTY
+    // =========================================
 
-    /* ==============================
-       BR PRICING
-    ============================== */
+    if (currentStep === 3) {
 
-    if (modelData.selkzbr === "X") {
-
-        const block =
+        modelData.warrantyFlag =
             document.getElementById(
-                "brPricingFields"
-            );
+                "warrantyFlag"
+            )?.checked
+                ? "X"
+                : "";
+
+        modelData.standardWarranty =
+            document.getElementById(
+                "standardWarranty"
+            )?.checked
+                ? "X"
+                : "";
+
+        modelData.standardLength =
+            getValue("standardLength");
+
+        modelData.standardUnit =
+            getValue("standardUnit");
+
+        modelData.standardSkuNo =
+            getValue("standardSkuNo");
+
+        modelData.extendedWarranty =
+            document.getElementById(
+                "extendedWarranty"
+            )?.checked
+                ? "X"
+                : "";
+
+        modelData.extendedLength =
+            getValue("extendedLength");
+
+        modelData.extendedUnit =
+            getValue("extendedUnit");
+
+        modelData.extendedSkuNo =
+            getValue("extendedSkuNo");
 
 
-        modelData.brKbetr =
-            block.querySelector("#brKbetr")?.value || "";
+        modelData.brotherCareWarranty =
+            document.getElementById(
+                "brotherCareWarranty"
+            )?.checked
+                ? "X"
+                : "";
 
-        modelData.brKonwa =
-            block.querySelector("#brKonwa")?.value || "";
+        modelData.brotherCareLength =
+            getValue("brotherCareLength");
 
-        modelData.brKpein =
-            block.querySelector("#brKpein")?.value || "";
+        modelData.brotherCareUnit =
+            getValue("brotherCareUnit");
 
-        modelData.Kschl =
-            block.querySelector("#Kschl")?.value || "";
+        modelData.brotherCareSkuNo =
+            getValue("brotherCareSkuNo");
 
-        modelData.Vkorg =
-            block.querySelector("#Vkorg")?.value || "";
+        modelData.brotherPlusWarranty =
+            document.getElementById(
+                "brotherPlusWarranty"
+            )?.checked
+                ? "X"
+                : "";
 
-        modelData.Spart =
-            block.querySelector("#Spart")?.value || "";
+        modelData.brotherPlusLength =
+            getValue("brotherPlusLength");
 
-        modelData.Vtweg =
-            block.querySelector("#Vtweg")?.value || "";
+        modelData.brotherPlusUnit =
+            getValue("brotherPlusUnit");
 
-        modelData.Konda =
-            block.querySelector("#Konda")?.value || "";
+        modelData.brotherPlusSkuNo =
+            getValue("brotherPlusSkuNo");
 
-        modelData.brKmein =
-            block.querySelector("#brKmein")?.value || "";
+        // US rule
+        if (modelData.country === "US") {
 
-        modelData.brKrech =
-            block.querySelector("#brKrech")?.value || "";
+            modelData.brotherCareWarranty = "";
+            modelData.brotherCareLength = "";
+            modelData.brotherCareUnit = "";
+            modelData.brotherCareSkuNo = "";
+        }
 
-        modelData.brDatab =
-            block.querySelector("#brDatab")?.value || "";
+        // Canada rule
+        if (modelData.country === "CA") {
 
-        modelData.brDatbi =
-            block.querySelector("#brDatbi")?.value || "";
-    }
-}
+            modelData.brotherPlusWarranty = "";
+            modelData.brotherPlusLength = "";
+            modelData.brotherPlusUnit = "";
+            modelData.brotherPlusSkuNo = "";
+        }
 
-   // STEP 3 - Warranty
+        // Child selection automatically enables WARRANTY_FLAG
+        if (
+            modelData.standardWarranty === "X" ||
+            modelData.extendedWarranty === "X" ||
+            modelData.brotherCareWarranty === "X" ||
+            modelData.brotherPlusWarranty === "X"
+        ) {
 
-    /*
-STEP 3
-Warranty
-*/
-if (currentStep === 3) {
+            modelData.warrantyFlag = "X";
+        }
 
-    modelData.standardWarranty =
-        document.getElementById(
-            "standardWarranty"
-        )?.checked
-            ? "X"
-            : "";
-
-    modelData.standardLength =
-        getValue("standardLength");
-
-    modelData.standardUnit =
-        getValue("standardUnit");
-
-    modelData.standardSkuNo =
-        getValue("standardSkuNo");
-
-
-    modelData.extendedWarranty =
-        document.getElementById(
-            "extendedWarranty"
-        )?.checked
-            ? "X"
-            : "";
-
-    modelData.extendedLength =
-        getValue("extendedLength");
-
-    modelData.extendedUnit =
-        getValue("extendedUnit");
-
-    modelData.extendedSkuNo =
-        getValue("extendedSkuNo");
-
-
-    modelData.brotherCareWarranty =
-        document.getElementById(
-            "brotherCareWarranty"
-        )?.checked
-            ? "X"
-            : "";
-
-    modelData.brotherCareLength =
-        getValue("brotherCareLength");
-
-    modelData.brotherCareUnit =
-        getValue("brotherCareUnit");
-
-    modelData.brotherCareSkuNo =
-        getValue("brotherCareSkuNo");
-
-
-    modelData.brotherPlusWarranty =
-        document.getElementById(
-            "brotherPlusWarranty"
-        )?.checked
-            ? "X"
-            : "";
-
-    modelData.brotherPlusLength =
-        getValue("brotherPlusLength");
-
-    modelData.brotherPlusUnit =
-        getValue("brotherPlusUnit");
-
-    modelData.brotherPlusSkuNo =
-        getValue("brotherPlusSkuNo");
-
-
-    if (modelData.country === "US") {
-
-        modelData.brotherCareWarranty = "";
-        modelData.brotherCareLength = "";
-        modelData.brotherCareUnit = "";
-        modelData.brotherCareSkuNo = "";
+        return;
     }
 
+    // =========================================
+    // STEP 4 - COMPATIBILITY
+    // =========================================
 
-    if (modelData.country === "CA") {
-
-        modelData.brotherPlusWarranty = "";
-        modelData.brotherPlusLength = "";
-        modelData.brotherPlusUnit = "";
-        modelData.brotherPlusSkuNo = "";
-    }
-}
-
-
-    /*
-    STEP 4
-    Compatibility
-    */
     if (currentStep === 4) {
 
-    // =====================================
-    // EXISTING PROGRAMS
-    // =====================================
-
-    modelData.amazondart =
-        getValue(
-            "amazondart"
-        );
-
-    modelData.brrefresh =
-        getValue(
-            "brrefresh"
-        );
-
-    modelData.barracuda =
-        getValue(
-            "barracuda"
-        );
-
-    modelData.bplus =
-        getValue(
-            "bplus"
-        );
-
-
-    // =====================================
-    // BARRACUDA DETAILS
-    // =====================================
-
-    if (
-        modelData.barracuda === "X"
-    ) {
-
-        modelData.basic =
+        modelData.compatableFlag =
             document.getElementById(
-                "basic"
+                "compatableFlag"
             )?.checked
                 ? "X"
                 : "";
 
+        modelData.amazondart =
+            getValue("amazondart");
 
-        modelData.occasional =
-            document.getElementById(
-                "occasional"
-            )?.checked
-                ? "X"
-                : "";
+        modelData.brrefresh =
+            getValue("brrefresh");
+
+        modelData.barracuda =
+            getValue("barracuda");
+
+        modelData.bplus =
+            getValue("bplus");
+
+        // -------------------------
+        // BARRACUDA
+        // -------------------------
+
+        if (modelData.barracuda === "X") {
+
+            modelData.basic =
+                document.getElementById(
+                    "basic"
+                )?.checked
+                    ? "X"
+                    : "";
+
+            modelData.occasional =
+                document.getElementById(
+                    "occasional"
+                )?.checked
+                    ? "X"
+                    : "";
+
+            modelData.moderate =
+                document.getElementById(
+                    "moderate"
+                )?.checked
+                    ? "X"
+                    : "";
+
+            modelData.frequent =
+                document.getElementById(
+                    "frequent"
+                )?.checked
+                    ? "X"
+                    : "";
+
+            modelData.high =
+                document.getElementById(
+                    "high"
+                )?.checked
+                    ? "X"
+                    : "";
+
+            modelData.power =
+                document.getElementById(
+                    "power"
+                )?.checked
+                    ? "X"
+                    : "";
 
 
-        modelData.moderate =
-            document.getElementById(
-                "moderate"
-            )?.checked
-                ? "X"
-                : "";
+            modelData.productType =
+                getValue(
+                    "productType"
+                )
+                    .trim()
+                    .toUpperCase();
 
 
-        modelData.frequent =
-            document.getElementById(
-                "frequent"
-            )?.checked
-                ? "X"
-                : "";
+            modelData.standardWarr =
+                getValue(
+                    "standardWarr"
+                )
+                    .trim();
 
+        } else {
 
-        modelData.high =
-            document.getElementById(
-                "high"
-            )?.checked
-                ? "X"
-                : "";
+            modelData.basic = "";
+            modelData.occasional = "";
+            modelData.moderate = "";
+            modelData.frequent = "";
+            modelData.high = "";
+            modelData.power = "";
 
+            modelData.productType = "";
+            modelData.standardWarr = "";
+        }
 
-        modelData.power =
-            document.getElementById(
-                "power"
-            )?.checked
-                ? "X"
-                : "";
+        // Child selection automatically enables COMPATABLE_FLAG
+        if (
+            modelData.amazondart === "X" ||
+            modelData.brrefresh === "X" ||
+            modelData.barracuda === "X" ||
+            modelData.bplus === "X"
+        ) {
 
+            modelData.compatableFlag = "X";
+        }
 
-        modelData.productType =
-            getValue(
-                "productType"
-            )
-                .trim()
-                .toUpperCase();
-
-
-        modelData.standardWarr =
-            getValue(
-                "standardWarr"
-            )
-                .trim();
-
-    } else {
-
-
-        // Barracuda not selected
-
-        modelData.basic =
-            "";
-
-        modelData.occasional =
-            "";
-
-        modelData.moderate =
-            "";
-
-        modelData.frequent =
-            "";
-
-        modelData.high =
-            "";
-
-        modelData.power =
-            "";
-
-        modelData.channel =
-            "";
-
-        modelData.productType =
-            "";
-
-        modelData.standardWarr =
-            "";
+        return;
     }
-}
 
-    /*
-    STEP 5
-    Order Types
-    */
+    // =========================================
+    // STEP 5 - ORDER TYPES
+    // =========================================
+
     if (currentStep === 5) {
 
-    // =====================================
-    // DRUM ORDER
-    // =====================================
+        modelData.orderTypeFlag =
+            document.getElementById(
+                "orderTypeFlag"
+            )?.checked
+                ? "X"
+                : "";
 
-    modelData.drumOrder =
-        document.getElementById(
-            "drumOrder"
-        )?.checked
-            ? "X"
-            : "";
+        // Drum
+        modelData.drumOrder =
+            document.getElementById(
+                "drumOrder"
+            )?.checked
+                ? "X"
+                : "";
 
+        modelData.drConsumable =
+            modelData.drumOrder === "X"
+                ? getValue(
+                    "drConsumable"
+                )
+                    .trim()
+                    .toUpperCase()
+                : "";
 
-    modelData.drConsumable =
-        modelData.drumOrder === "X"
-            ? getValue(
-                "drConsumable"
-            )
-                .trim()
-                .toUpperCase()
-            : "";
+        // Waste toner
+        modelData.wasteToner =
+            document.getElementById(
+                "wasteToner"
+            )?.checked
+                ? "X"
+                : "";
 
+        modelData.wtConsumable =
+            modelData.wasteToner === "X"
+                ? getValue(
+                    "wtConsumable"
+                )
+                    .trim()
+                    .toUpperCase()
+                : "";
 
-    // =====================================
-    // WASTE TONER
-    // =====================================
+        // Belt unit
+        modelData.beltUnit =
+            document.getElementById(
+                "beltUnit"
+            )?.checked
+                ? "X"
+                : "";
 
-    modelData.wasteToner =
-        document.getElementById(
-            "wasteToner"
-        )?.checked
-            ? "X"
-            : "";
+        modelData.buConsumable =
+            modelData.beltUnit === "X"
+                ? getValue(
+                    "buConsumable"
+                )
+                    .trim()
+                    .toUpperCase()
+                : "";
 
+        // Backup order
+        modelData.claimOrder =
+            document.getElementById(
+                "claimOrder"
+            )?.checked
+                ? "X"
+                : "";
 
-    modelData.wtConsumable =
-        modelData.wasteToner === "X"
-            ? getValue(
-                "wtConsumable"
-            )
-                .trim()
-                .toUpperCase()
-            : "";
+        modelData.coConsumable =
+            modelData.claimOrder === "X"
+                ? getValue(
+                    "coConsumable"
+                )
+                    .trim()
+                    .toUpperCase()
+                : "";
 
+        // Child selection automatically enables ORDERTYPE_FLAG
+        if (
+            modelData.drumOrder === "X" ||
+            modelData.wasteToner === "X" ||
+            modelData.beltUnit === "X" ||
+            modelData.claimOrder === "X"
+        ) {
 
-    // =====================================
-    // BELT UNIT
-    // =====================================
+            modelData.orderTypeFlag = "X";
+        }
 
-    modelData.beltUnit =
-        document.getElementById(
-            "beltUnit"
-        )?.checked
-            ? "X"
-            : "";
-
-
-    modelData.buConsumable =
-        modelData.beltUnit === "X"
-            ? getValue(
-                "buConsumable"
-            )
-                .trim()
-                .toUpperCase()
-            : "";
-
-
-    // =====================================
-    // BACKUP ORDER
-    // SAP = CLAIMORDER
-    // =====================================
-
-    modelData.claimOrder =
-        document.getElementById(
-            "claimOrder"
-        )?.checked
-            ? "X"
-            : "";
-
-
-    modelData.coConsumable =
-        modelData.claimOrder === "X"
-            ? getValue(
-                "coConsumable"
-            )
-                .trim()
-                .toUpperCase()
-            : "";
-}
+        return;
+    }
 }
 
 async function saveModel() {
@@ -3345,7 +3617,6 @@ async function saveModel() {
 
     const isBRPricing =
         modelData.selkzbr === "X";
-
 
     // =====================================================
     // COMMON MODEL / MATERIAL DATA
@@ -3361,6 +3632,9 @@ async function saveModel() {
 
         Mtart:
             modelData.mtart || "",
+
+        MaterialFlag:
+            modelData.materialFlag || "",
 
         Mbrsh:
             modelData.mbrsh || "",
@@ -3406,12 +3680,14 @@ async function saveModel() {
             modelData.Vkorg || ""
     };
 
-
     // =====================================================
     // WARRANTY DATA
     // =====================================================
 
     const warrantyPayload = {
+
+        WarrantyFlag:
+            modelData.warrantyFlag || "",
 
         StdWtyType:
             modelData.standardWarranty === "X"
@@ -3433,7 +3709,6 @@ async function saveModel() {
                 ? modelData.standardUnit || ""
                 : "",
 
-
         ExtdWtyType:
             modelData.extendedWarranty === "X"
                 ? "X"
@@ -3454,7 +3729,6 @@ async function saveModel() {
                 ? modelData.extendedUnit || ""
                 : "",
 
-
         BcareWtyType:
             modelData.brotherCareWarranty === "X"
                 ? "B"
@@ -3474,7 +3748,6 @@ async function saveModel() {
             modelData.brotherCareWarranty === "X"
                 ? modelData.brotherCareUnit || ""
                 : "",
-
 
         BplusWtyType:
             modelData.brotherPlusWarranty === "X"
@@ -3497,86 +3770,74 @@ async function saveModel() {
                 : ""
     };
 
-
-    // =====================================================
-    // COMPATIBILITY / PROGRAM DATA
-    // =====================================================
-
     const programPayload = {
 
-    // =====================================
-    // EXISTING
-    // =====================================
+        CompatableFlag:
+            modelData.compatableFlag || "",
 
-    Amazondart:
-        modelData.amazondart || "",
+        Amazondart:
+            modelData.amazondart || "",
 
-    Brrefresh:
-        modelData.brrefresh || "",
+        Brrefresh:
+            modelData.brrefresh || "",
 
-    Barracuda:
-        modelData.barracuda || "",
+        Barracuda:
+            modelData.barracuda || "",
 
-    Bplus:
-        modelData.bplus || "",
+        Bplus:
+            modelData.bplus || "",
 
+        B1basic:
+            modelData.barracuda === "X"
+                ? modelData.basic || ""
+                : "",
 
-    // =====================================
-    // NEW BARRACUDA CLASSIFICATION
-    // =====================================
+        B1occasional:
+            modelData.barracuda === "X"
+                ? modelData.occasional || ""
+                : "",
 
-    Basic:
-        modelData.barracuda === "X"
-            ? modelData.basic || ""
-            : "",
+        B1moderate:
+            modelData.barracuda === "X"
+                ? modelData.moderate || ""
+                : "",
 
-    Occasional:
-        modelData.barracuda === "X"
-            ? modelData.occasional || ""
-            : "",
+        B1frequent:
+            modelData.barracuda === "X"
+                ? modelData.frequent || ""
+                : "",
 
-    Moderate:
-        modelData.barracuda === "X"
-            ? modelData.moderate || ""
-            : "",
+        B1high:
+            modelData.barracuda === "X"
+                ? modelData.high || ""
+                : "",
 
-    Frequent:
-        modelData.barracuda === "X"
-            ? modelData.frequent || ""
-            : "",
+        B1power:
+            modelData.barracuda === "X"
+                ? modelData.power || ""
+                : "",
 
-    High:
-        modelData.barracuda === "X"
-            ? modelData.high || ""
-            : "",
+        B1producttype:
+            modelData.barracuda === "X"
+                ? modelData.productType || ""
+                : "",
 
-    Power:
-        modelData.barracuda === "X"
-            ? modelData.power || ""
-            : "",
-
-
-    // =====================================
-    // NEW BARRACUDA DETAILS
-    // =====================================
-
-    Producttype:
-        modelData.barracuda === "X"
-            ? modelData.productType || ""
-            : "",
-
-    Standardwarr:
-        modelData.barracuda === "X"
-            ? modelData.standardWarr || ""
-            : ""
-};
-
+        B1standardwarr:
+            modelData.barracuda === "X"
+                ? Number(
+                    modelData.standardWarr || 0
+                )
+                : 0
+    };
 
     // =====================================================
     // ORDER TYPES + CONSUMABLES
     // =====================================================
 
     const orderTypePayload = {
+
+        OrdertypeFlag:
+            modelData.orderTypeFlag || "",
 
         Drum:
             modelData.drumOrder || "",
@@ -3586,7 +3847,6 @@ async function saveModel() {
                 ? modelData.drConsumable || ""
                 : "",
 
-
         WasteToner:
             modelData.wasteToner || "",
 
@@ -3594,7 +3854,6 @@ async function saveModel() {
             modelData.wasteToner === "X"
                 ? modelData.wtConsumable || ""
                 : "",
-
 
         BeltUnit:
             modelData.beltUnit || "",
@@ -3604,7 +3863,6 @@ async function saveModel() {
                 ? modelData.buConsumable || ""
                 : "",
 
-
         Claimorder:
             modelData.claimOrder || "",
 
@@ -3613,7 +3871,6 @@ async function saveModel() {
                 ? modelData.coConsumable || ""
                 : ""
     };
-
 
     // =====================================================
     // COMMON API CALL FUNCTION
@@ -3640,7 +3897,6 @@ async function saveModel() {
             )
         );
 
-
         const response =
             await fetch(
                 "/api/model/create",
@@ -3659,10 +3915,8 @@ async function saveModel() {
                 }
             );
 
-
         const responseText =
             await response.text();
-
 
         console.log(
             requestName +
@@ -3670,16 +3924,13 @@ async function saveModel() {
             response.status
         );
 
-
         console.log(
             requestName +
             " RAW RESPONSE:",
             responseText
         );
 
-
         let result = {};
-
 
         if (responseText) {
 
@@ -3699,7 +3950,6 @@ async function saveModel() {
             }
         }
 
-
         if (!response.ok) {
 
             throw new Error(
@@ -3710,7 +3960,6 @@ async function saveModel() {
                 " failed"
             );
         }
-
 
         if (
             result.success === false
@@ -3723,10 +3972,8 @@ async function saveModel() {
             );
         }
 
-
         return result;
     }
-
 
     try {
 
@@ -3741,14 +3988,12 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Country) {
 
             throw new Error(
                 "Country is required."
             );
         }
-
 
         if (!commonPayload.Werks) {
 
@@ -3757,14 +4002,12 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Mtart) {
 
             throw new Error(
                 "Material Type is required."
             );
         }
-
 
         if (!commonPayload.Mbrsh) {
 
@@ -3773,14 +4016,12 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Matkl) {
 
             throw new Error(
                 "Material Group is required."
             );
         }
-
 
         if (!commonPayload.Meins) {
 
@@ -3789,14 +4030,12 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Spart) {
 
             throw new Error(
                 "Division is required."
             );
         }
-
 
         if (!commonPayload.Spras) {
 
@@ -3805,7 +4044,6 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Maktx) {
 
             throw new Error(
@@ -3813,14 +4051,12 @@ async function saveModel() {
             );
         }
 
-
         if (!commonPayload.Vtweg) {
 
             throw new Error(
                 "Distribution Channel is required."
             );
         }
-
 
         if (
             (
@@ -3835,7 +4071,6 @@ async function saveModel() {
             );
         }
 
-
         // =================================================
         // REQUEST 1
         //
@@ -3844,20 +4079,12 @@ async function saveModel() {
         //
         // PRICING IS OFF
         // =================================================
-
         const createPayload = {
 
             ...commonPayload,
 
-
-            // =========================================
-            // IMPORTANT
-            //
-            // Keep Vkorg / Vtweg / Spart.
-            // Backend needs these for material Sales View.
-            //
-            // Only pricing selection flags are OFF.
-            // =========================================
+            PriceFlag:
+                modelData.priceFlag || "",
 
             Kschl: "",
 
@@ -3867,71 +4094,32 @@ async function saveModel() {
 
             Konda: "",
 
-
-            // =========================================
-            // B1 PRICING OFF
-            // =========================================
-
             B1kbetr: "",
-
             B1konwa: "",
-
             B1kpein: "",
-
             B1kmein: "",
-
             B1krech: "",
-
             B1datab: "",
-
             B1datbi: "",
 
-
-            // =========================================
-            // BR PRICING OFF
-            // =========================================
-
             Brkbetr: "",
-
             Brkonwa: "",
-
             Brkpein: "",
-
             Brkmein: "",
-
             Brkrech: "",
-
             Brdatab: "",
-
             Brdatbi: "",
-
-
-            // =========================================
-            // WARRANTY
-            // =========================================
 
             ...warrantyPayload,
 
-
-            // =========================================
-            // PROGRAMS
-            // =========================================
-
             ...programPayload,
-
-
-            // =========================================
-            // ORDER TYPES
-            // =========================================
 
             ...orderTypePayload
         };
 
-
         console.log(
             "REQUEST 1 PAYLOAD:"
         );
-
 
         console.log(
             JSON.stringify(
@@ -3941,17 +4129,14 @@ async function saveModel() {
             )
         );
 
-
         await postModelPayload(
             createPayload,
             "REQUEST 1 - MATERIAL CREATE"
         );
 
-
         console.log(
             "Material created successfully."
         );
-
 
         // =================================================
         // USER DID NOT SELECT PRICING
@@ -3971,12 +4156,10 @@ async function saveModel() {
                 "MODEL CREATION COMPLETE"
             );
 
-
             showSuccessPage();
 
             return;
         }
-
 
         // =================================================
         // WAIT BEFORE PRICING REQUEST
@@ -3985,7 +4168,6 @@ async function saveModel() {
         console.log(
             "Waiting for SAP material commit..."
         );
-
 
         await new Promise(
             function (resolve) {
@@ -3997,24 +4179,32 @@ async function saveModel() {
             }
         );
 
-
         // =================================================
         // REQUEST 2
-        //
         // EXISTING MATERIAL + PRICING
-        //
         // Other configuration flags are blank because
         // Request 1 already stored those values.
         // =================================================
-
         const pricingPayload = {
 
             ...commonPayload,
 
+            // =====================================
+            // SETUP FLAGS
+            // =====================================
 
-            // =========================================
-            // PRICING COMMON DATA
-            // =========================================
+            PriceFlag:
+                modelData.priceFlag || "",
+
+            WarrantyFlag: "",
+
+            CompatableFlag: "",
+
+            OrdertypeFlag: "",
+
+            // =====================================
+            // PRICING COMMON
+            // =====================================
 
             Kschl:
                 modelData.Kschl ||
@@ -4033,10 +4223,9 @@ async function saveModel() {
             Konda:
                 modelData.Konda || "",
 
-
-            // =========================================
-            // B1 / BARRACUDA
-            // =========================================
+            // =====================================
+            // B1 PRICING
+            // =====================================
 
             B1kbetr:
                 isB1Pricing
@@ -4050,166 +4239,139 @@ async function saveModel() {
 
             B1kpein:
                 isB1Pricing
-                    ? modelData.b1Kpein ||
-                      "1"
+                    ? modelData.b1Kpein || "1"
                     : "",
 
             B1kmein:
                 isB1Pricing
                     ? modelData.b1Kmein ||
-                      modelData.meins ||
-                      "EA"
+                    modelData.meins ||
+                    "EA"
                     : "",
 
             B1krech:
                 isB1Pricing
-                    ? modelData.b1Krech ||
-                      "C"
+                    ? modelData.b1Krech || "C"
                     : "",
 
             B1datab:
                 isB1Pricing
-                    ? modelData.b1Datab ||
-                      ""
+                    ? modelData.b1Datab || ""
                     : "",
 
             B1datbi:
                 isB1Pricing
                     ? modelData.b1Datbi ||
-                      "9999-12-31"
+                    "9999-12-31"
                     : "",
 
-
-            // =========================================
-            // BR / AUTO REORDER
-            // =========================================
+            // =====================================
+            // BR PRICING
+            // =====================================
 
             Brkbetr:
                 isBRPricing
-                    ? modelData.brKbetr ||
-                      ""
+                    ? modelData.brKbetr || ""
                     : "",
 
             Brkonwa:
                 isBRPricing
-                    ? modelData.brKonwa ||
-                      ""
+                    ? modelData.brKonwa || ""
                     : "",
 
             Brkpein:
                 isBRPricing
-                    ? modelData.brKpein ||
-                      "1"
+                    ? modelData.brKpein || "1"
                     : "",
 
             Brkmein:
                 isBRPricing
                     ? modelData.brKmein ||
-                      modelData.meins ||
-                      "EA"
+                    modelData.meins ||
+                    "EA"
                     : "",
 
             Brkrech:
                 isBRPricing
-                    ? modelData.brKrech ||
-                      "C"
+                    ? modelData.brKrech || "C"
                     : "",
 
             Brdatab:
                 isBRPricing
-                    ? modelData.brDatab ||
-                      ""
+                    ? modelData.brDatab || ""
                     : "",
 
             Brdatbi:
                 isBRPricing
                     ? modelData.brDatbi ||
-                      "9999-12-31"
+                    "9999-12-31"
                     : "",
 
 
-            // =========================================
-            // WARRANTY OFF IN REQUEST 2
-            // =========================================
+            // =====================================
+            // WARRANTY OFF
+            // =====================================
 
             StdWtyType: "",
-
             Swsku: "",
-
             StdWtyLen: "",
-
             StdWtyLenUnit: "",
 
-
             ExtdWtyType: "",
-
             Ewsku: "",
-
             ExtdWtyLen: "",
-
             ExtdWtyLenUnit: "",
 
-
             BcareWtyType: "",
-
             Bcsku: "",
-
             BcareWtyLen: "",
-
             BcareWtyLenUnit: "",
 
-
             BplusWtyType: "",
-
             Bpsku: "",
-
             BplusWtyLen: "",
-
             BplusWtyLenUnit: "",
 
-
-            // =========================================
-            // PROGRAMS OFF IN REQUEST 2
-            // =========================================
+            // =====================================
+            // COMPATIBILITY OFF
+            // =====================================
 
             Amazondart: "",
-
             Brrefresh: "",
-
             Barracuda: "",
+
+            B1basic: "",
+            B1occasional: "",
+            B1moderate: "",
+            B1frequent: "",
+            B1high: "",
+            B1power: "",
+
+            B1producttype: "",
+            B1standardwarr: 0,
 
             Bplus: "",
 
-
-            // =========================================
-            // ORDER TYPES OFF IN REQUEST 2
-            // =========================================
+            // =====================================
+            // ORDER TYPES OFF
+            // =====================================
 
             Drum: "",
-
             Drconsumable: "",
 
-
             WasteToner: "",
-
             Wtconsumable: "",
 
-
             BeltUnit: "",
-
             Buconsumable: "",
 
-
             Claimorder: "",
-
             Coconsumable: ""
         };
-
 
         console.log(
             "REQUEST 2 PAYLOAD:"
         );
-
 
         console.log(
             JSON.stringify(
@@ -4219,41 +4381,33 @@ async function saveModel() {
             )
         );
 
-
         await postModelPayload(
             pricingPayload,
             "REQUEST 2 - PRICING CREATE"
         );
 
-
         console.log(
             "Pricing created successfully."
         );
-
 
         console.log(
             "=========================================="
         );
 
-
         console.log(
             "MODEL CREATION COMPLETE"
         );
-
 
         console.log(
             "Material:",
             modelData.matnr
         );
 
-
         console.log(
             "=========================================="
         );
 
-
         showSuccessPage();
-
 
     } catch (error) {
 
@@ -4261,21 +4415,17 @@ async function saveModel() {
             "=========================================="
         );
 
-
         console.error(
             "CREATE MODEL ERROR:"
         );
-
 
         console.error(
             error
         );
 
-
         console.error(
             "=========================================="
         );
-
 
         alert(
             error.message ||
@@ -4283,7 +4433,6 @@ async function saveModel() {
         );
     }
 }
-
 
 function friendlyStatus(value) {
 
@@ -4354,7 +4503,6 @@ View Created Model
  
 </button>
  
- 
             <button
                 class="btn save"
                 onclick="location.reload()">
@@ -4366,7 +4514,6 @@ View Created Model
         </div>
  
        
- 
         <div id="createdModelPanel"
      class="created-model-panel"
      style="display:none">
@@ -4389,8 +4536,7 @@ View Created Model
         <p>
     <b>Price :</b>
 
-    ${
-        modelData.selkzb1 === "X"
+    ${modelData.selkzb1 === "X"
             ? (
                 (modelData.b1Kbetr || "-") +
                 " " +
@@ -4403,7 +4549,7 @@ View Created Model
                     (modelData.brKonwa || "")
                 )
                 : "-"
-    }
+        }
 </p>
 
 <p>
@@ -4451,10 +4597,9 @@ View Created Model
     <p>
         <b>Drum Order :</b>
 
-        ${
-            modelData.drumOrder === "X"
-                ? modelData.drConsumable || "-"
-                : "Not Selected"
+        ${modelData.drumOrder === "X"
+            ? modelData.drConsumable || "-"
+            : "Not Selected"
         }
     </p>
 
@@ -4462,40 +4607,33 @@ View Created Model
     <p>
         <b>Waste Toner :</b>
 
-        ${
-            modelData.wasteToner === "X"
-                ? modelData.wtConsumable || "-"
-                : "Not Selected"
+        ${modelData.wasteToner === "X"
+            ? modelData.wtConsumable || "-"
+            : "Not Selected"
         }
     </p>
-
 
     <p>
         <b>Belt Unit :</b>
 
-        ${
-            modelData.beltUnit === "X"
-                ? modelData.buConsumable || "-"
-                : "Not Selected"
+        ${modelData.beltUnit === "X"
+            ? modelData.buConsumable || "-"
+            : "Not Selected"
         }
     </p>
-
 
     <p>
         <b>Backup Order :</b>
 
-        ${
-            modelData.claimOrder === "X"
-                ? modelData.coConsumable || "-"
-                : "Not Selected"
+        ${modelData.claimOrder === "X"
+            ? modelData.coConsumable || "-"
+            : "Not Selected"
         }
     </p>
 
 </div>
  
 </div>
- 
-           
  
         </div>
  
@@ -4517,7 +4655,6 @@ function toggleCreatedModelDetails() {
             : "none";
 
 }
-
 
 function goDashboard() {
 
@@ -4550,7 +4687,6 @@ function toggleProgram(id) {
             id + "Status"
         );
 
-
     if (
         !card ||
         !input
@@ -4558,7 +4694,6 @@ function toggleProgram(id) {
 
         return;
     }
-
 
     // =====================================
     // TURN OFF
@@ -4570,18 +4705,15 @@ function toggleProgram(id) {
 
         input.value = "";
 
-
         card.classList.remove(
             "active"
         );
-
 
         if (icon) {
 
             icon.innerHTML =
                 "◇";
         }
-
 
         if (status) {
 
@@ -4590,7 +4722,6 @@ function toggleProgram(id) {
         }
 
     }
-
 
     // =====================================
     // TURN ON
@@ -4601,11 +4732,9 @@ function toggleProgram(id) {
         input.value =
             "X";
 
-
         card.classList.add(
             "active"
         );
-
 
         if (icon) {
 
@@ -4613,14 +4742,12 @@ function toggleProgram(id) {
                 "◆";
         }
 
-
         if (status) {
 
             status.innerHTML =
                 "Configured";
         }
     }
-
 
     // =====================================
     // BARRACUDA SPECIAL HANDLING
@@ -4636,7 +4763,6 @@ function toggleProgram(id) {
         modelData.barracuda =
             input.value;
 
-
         updateBarracudaExtraSection();
     }
 }
@@ -4648,12 +4774,10 @@ function updateBarracudaExtraSection() {
             "barracuda"
         );
 
-
     const section =
         document.getElementById(
             "barracudaExtraSection"
         );
-
 
     if (
         !barracudaInput ||
@@ -4663,10 +4787,8 @@ function updateBarracudaExtraSection() {
         return;
     }
 
-
     const isBarracudaSelected =
         barracudaInput.value === "X";
-
 
     // =====================================
     // SHOW
@@ -4677,14 +4799,12 @@ function updateBarracudaExtraSection() {
         section.style.display =
             "block";
 
-
         /*
          * Trigger entrance animation again.
          */
         section.classList.remove(
             "barracuda-extra-visible"
         );
-
 
         requestAnimationFrame(
             function () {
@@ -4695,10 +4815,8 @@ function updateBarracudaExtraSection() {
             }
         );
 
-
         return;
     }
-
 
     // =====================================
     // HIDE
@@ -4707,11 +4825,9 @@ function updateBarracudaExtraSection() {
     section.style.display =
         "none";
 
-
     section.classList.remove(
         "barracuda-extra-visible"
     );
-
 
     /*
      * User removed Barracuda.
@@ -4744,7 +4860,6 @@ function updateBarracudaExtraSection() {
     modelData.standardWarr =
         "";
 
-
     /*
      * Also clear current DOM controls.
      */
@@ -4765,7 +4880,6 @@ function updateBarracudaExtraSection() {
 
     ];
 
-
     checkboxIds.forEach(
         function (checkboxId) {
 
@@ -4773,7 +4887,6 @@ function updateBarracudaExtraSection() {
                 document.getElementById(
                     checkboxId
                 );
-
 
             if (checkbox) {
 
@@ -4783,7 +4896,6 @@ function updateBarracudaExtraSection() {
         }
     );
 
-
     const fieldIds = [
 
         "productType",
@@ -4792,7 +4904,6 @@ function updateBarracudaExtraSection() {
 
     ];
 
-
     fieldIds.forEach(
         function (fieldId) {
 
@@ -4800,7 +4911,6 @@ function updateBarracudaExtraSection() {
                 document.getElementById(
                     fieldId
                 );
-
 
             if (field) {
 
@@ -4832,7 +4942,6 @@ function toggleOrderConsumable(
             inputId
         );
 
-
     if (
         !checkbox ||
         !group ||
@@ -4842,7 +4951,6 @@ function toggleOrderConsumable(
         return;
     }
 
-
     if (checkbox.checked) {
 
         group.classList.remove(
@@ -4851,7 +4959,6 @@ function toggleOrderConsumable(
 
         input.disabled =
             false;
-
 
         setTimeout(
             function () {
@@ -4892,7 +4999,6 @@ function applyWarrantyCountryRules() {
             "brotherPlusWarranty"
         );
 
-
     if (
         !brotherCareToggle ||
         !brotherPlusToggle
@@ -4900,7 +5006,6 @@ function applyWarrantyCountryRules() {
 
         return;
     }
-
 
     if (country === "US") {
 
@@ -4913,7 +5018,6 @@ function applyWarrantyCountryRules() {
             true
         );
 
-
         setWarrantyAvailability(
             "brotherCareWarranty",
             "brotherCareWarrantyText",
@@ -4923,10 +5027,8 @@ function applyWarrantyCountryRules() {
             false
         );
 
-
         return;
     }
-
 
     if (country === "CA") {
 
@@ -4939,7 +5041,6 @@ function applyWarrantyCountryRules() {
             true
         );
 
-
         setWarrantyAvailability(
             "brotherPlusWarranty",
             "brotherPlusWarrantyText",
@@ -4949,10 +5050,8 @@ function applyWarrantyCountryRules() {
             false
         );
 
-
         return;
     }
-
 
     setWarrantyAvailability(
         "brotherCareWarranty",
@@ -4962,7 +5061,6 @@ function applyWarrantyCountryRules() {
         "brotherCareSkuNo",
         false
     );
-
 
     setWarrantyAvailability(
         "brotherPlusWarranty",
@@ -5013,16 +5111,13 @@ function setWarrantyAvailability(
         return;
     }
 
-
     toggle.disabled =
         !enabled;
-
 
     if (!enabled) {
 
         toggle.checked =
             false;
-
 
         if (text) {
 
@@ -5033,7 +5128,6 @@ function setWarrantyAvailability(
                 "#64748b";
         }
 
-
         if (length) {
 
             length.value =
@@ -5042,7 +5136,6 @@ function setWarrantyAvailability(
             length.disabled =
                 true;
         }
-
 
         if (unit) {
 
@@ -5053,7 +5146,6 @@ function setWarrantyAvailability(
                 true;
         }
 
-
         if (sku) {
 
             sku.value =
@@ -5062,7 +5154,6 @@ function setWarrantyAvailability(
             sku.disabled =
                 true;
         }
-
 
         if (
             toggleId ===
@@ -5081,7 +5172,6 @@ function setWarrantyAvailability(
             modelData.brotherCareSkuNo =
                 "";
         }
-
 
         if (
             toggleId ===
@@ -5105,7 +5195,6 @@ function setWarrantyAvailability(
         return;
     }
 
-
     if (text) {
 
         if (toggle.checked) {
@@ -5126,7 +5215,6 @@ function setWarrantyAvailability(
         }
     }
 
-
     if (!toggle.checked) {
 
         if (length) {
@@ -5134,12 +5222,10 @@ function setWarrantyAvailability(
                 true;
         }
 
-
         if (unit) {
             unit.disabled =
                 true;
         }
-
 
         if (sku) {
             sku.disabled =
@@ -5193,11 +5279,9 @@ function toggleWarranty(
     const sku =
         document.getElementById(skuId);
 
-
     if (!toggle) {
         return;
     }
-
 
     if (toggle.checked) {
 
@@ -5209,16 +5293,13 @@ function toggleWarranty(
                 "#22c55e";
         }
 
-
         if (length) {
             length.disabled = false;
         }
 
-
         if (unit) {
             unit.disabled = false;
         }
-
 
         if (autoSixMonths) {
 
@@ -5230,7 +5311,6 @@ function toggleWarranty(
                 unit.value = "MO";
             }
         }
-
 
         if (sku) {
 
@@ -5250,7 +5330,6 @@ function toggleWarranty(
                 "#94a3b8";
         }
 
-
         if (length) {
 
             if (autoSixMonths) {
@@ -5259,7 +5338,6 @@ function toggleWarranty(
 
             length.disabled = true;
         }
-
 
         if (unit) {
 
@@ -5270,13 +5348,11 @@ function toggleWarranty(
             unit.disabled = true;
         }
 
-
         if (sku) {
             sku.value = "";
         }
     }
 }
-
 
 function restoreWarranty(
     toggleId,
@@ -5307,10 +5383,8 @@ function restoreWarranty(
         return;
     }
 
-
     toggle.checked =
         value === "X";
-
 
     if (toggle.checked) {
 
@@ -5323,16 +5397,13 @@ function restoreWarranty(
                 "#22c55e";
         }
 
-
         if (length) {
             length.disabled = false;
         }
 
-
         if (unit) {
             unit.disabled = false;
         }
-
 
         if (sku) {
 
@@ -5353,19 +5424,89 @@ function restoreWarranty(
                 "#94a3b8";
         }
 
-
         if (length) {
             length.disabled = true;
         }
 
-
         if (unit) {
             unit.disabled = true;
         }
-
 
         if (sku) {
             sku.value = "";
         }
     }
 }
+// =========================================
+// AUTO UPPERCASE FOR ALL TEXT INPUTS
+// =========================================
+
+document.addEventListener(
+    "input",
+    function (event) {
+
+        const field =
+            event.target;
+
+        if (
+            !field ||
+            field.tagName !== "INPUT"
+        ) {
+            return;
+        }
+
+        if (
+            field.type === "text"
+        ) {
+
+            field.value =
+                field.value.toUpperCase();
+        }
+    }
+);
+// =========================================
+// AUTO UPPERCASE FOR MODEL SETUP (For specific fields)
+// =========================================
+
+// document.addEventListener(
+//     "input",
+//     function (event) {
+
+//         const field =
+//             event.target;
+
+//         if (!field) {
+//             return;
+//         }
+
+//         const upperCaseFields = [
+
+//             "matnr",
+//             "matkl",
+//             "ean11",
+//             "maktx",
+
+//             "standardSkuNo",
+//             "extendedSkuNo",
+//             "brotherCareSkuNo",
+//             "brotherPlusSkuNo",
+
+//             "productType",
+
+//             "drConsumable",
+//             "wtConsumable",
+//             "buConsumable",
+//             "coConsumable"
+//         ];
+
+//         if (
+//             upperCaseFields.includes(
+//                 field.id
+//             )
+//         ) {
+
+//             field.value =
+//                 field.value.toUpperCase();
+//         }
+//     }
+// );

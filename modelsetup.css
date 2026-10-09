@@ -494,7 +494,6 @@ textarea {
  
 }
  
- 
 .success-card h2{
  
     color:#22c55e;
@@ -1323,7 +1322,6 @@ textarea {
 }
 
 /* Checkmark */
-
 .order-checkbox::after {
     content: "✓";
 
@@ -1338,7 +1336,6 @@ textarea {
 }
 
 /* Label */
-
 .order-check-text {
     color: #cbd5e1;
 
@@ -1364,7 +1361,6 @@ textarea {
 }
 
 /* Selected complete row */
-
 .order-check-item:has(input:checked) {
     background:
         rgba(34, 197, 94, 0.06);
@@ -1379,7 +1375,6 @@ textarea {
 }
 
 /* Hover */
-
 .order-check-item:hover {
     border-color: #3b82f6;
 
@@ -1390,7 +1385,6 @@ textarea {
 }
 
 /* Responsive */
-
 @media (max-width: 900px) {
 
     .order-check-grid {
@@ -1424,7 +1418,6 @@ html {
     box-sizing: border-box;
 }
 
-
 body {
     width: 100%;
     min-width: 0;
@@ -1456,11 +1449,9 @@ body {
     border-radius: 12px;
 }
 
-
 .create-pricing-block:first-of-type {
     margin-top: 20px;
 }
-
 
 .create-pricing-header {
     width: 100%;
@@ -1471,7 +1462,6 @@ body {
     margin-bottom: 14px;
 }
 
-
 .create-pricing-title {
     color: #60a5fa;
 
@@ -1480,7 +1470,6 @@ body {
 
     margin-bottom: 14px;
 }
-
 
 .create-pricing-toggle {
     display: flex;
@@ -1493,11 +1482,9 @@ body {
     font-size: 13px;
 }
 
-
 .create-pricing-toggle .warranty-switch {
     flex-shrink: 0;
 }
-
 
 .create-pricing-fields {
     display: none;
@@ -1505,11 +1492,9 @@ body {
     margin-top: 18px;
 }
 
-
 .create-pricing-fields .grid {
     margin-top: 0;
 }
-
 
 @media (max-width: 1100px) {
 
@@ -1564,7 +1549,6 @@ body {
     margin: 0 0 22px 0;
 }
 
-
 .consumable-field input {
     width: 100%;
     height: 42px;
@@ -1589,7 +1573,6 @@ body {
         box-shadow 0.2s ease;
 }
 
-
 .consumable-field input:focus {
     border-color: #3b82f6;
 
@@ -1597,11 +1580,9 @@ body {
         0 0 0 3px rgba(59, 130, 246, 0.10);
 }
 
-
 .consumable-field input::placeholder {
     color: #64748b;
 }
-
 
 .order-types-heading {
     margin-top: 8px;
@@ -1612,11 +1593,9 @@ body {
     background: #334155;
 }
 
-
 .warranty-switch input:disabled + .warranty-slider::before {
     background: #94a3b8;
 }
-
 
 .warranty-switch:has(input:disabled) {
     cursor: not-allowed;
@@ -1634,7 +1613,6 @@ body {
     margin-top: 12px;
 }
 
-
 .order-type-row {
     width: 100%;
 
@@ -1651,7 +1629,6 @@ body {
     margin-bottom: 12px;
 }
 
-
 /* =========================================
    ORDER TYPE COLUMN
 ========================================= */
@@ -1659,7 +1636,6 @@ body {
 .order-type-column {
     width: 100%;
 }
-
 
 .order-type-column > label,
 .order-consumable-column > label {
@@ -1672,7 +1648,6 @@ body {
     font-size: 12px;
     font-weight: 500;
 }
-
 
 /* =========================================
    ORDER TOGGLE BOX
@@ -1702,11 +1677,9 @@ body {
     box-sizing: border-box;
 }
 
-
 .order-toggle-box:hover {
     border-color: #475e7b;
 }
-
 
 /* =========================================
    CONSUMABLE COLUMN
@@ -1718,7 +1691,6 @@ body {
     transition:
         opacity 0.2s ease;
 }
-
 
 .order-consumable-column input {
     width: 100%;
@@ -1751,11 +1723,9 @@ body {
         background 0.2s ease;
 }
 
-
 .order-consumable-column input::placeholder {
     color: #64748b;
 }
-
 
 .order-consumable-column input:focus {
     border-color: #3b82f6;
@@ -1770,7 +1740,6 @@ body {
         );
 }
 
-
 /* =========================================
    DISABLED CONSUMABLE
 ========================================= */
@@ -1778,7 +1747,6 @@ body {
 .order-consumable-disabled {
     opacity: 0.45;
 }
-
 
 .order-consumable-column input:disabled {
     cursor: not-allowed;
@@ -1789,7 +1757,6 @@ body {
 
     border-color: #283b53;
 }
-
 
 /* =========================================
    SECTION TITLE
@@ -1804,7 +1771,6 @@ body {
     font-size: 12px;
     font-weight: 600;
 }
-
 
 /* =========================================
    ERROR MESSAGE
@@ -1847,7 +1813,6 @@ body {
     box-sizing: border-box;
 }
 
-
 /* =========================================
    RESPONSIVE
 ========================================= */
@@ -1881,7 +1846,6 @@ body {
     letter-spacing: 0.6px;
 }
 
-
 /* ========================================
    BARRACUDA DETAIL CONTAINER
 ======================================== */
@@ -1910,7 +1874,6 @@ body {
         translateY(-8px);
 }
 
-
 .barracuda-extra-visible {
 
     animation:
@@ -1918,7 +1881,6 @@ body {
         0.35s ease
         forwards;
 }
-
 
 @keyframes barracudaSectionIn {
 
@@ -1930,7 +1892,6 @@ body {
             translateY(0);
     }
 }
-
 
 /* ========================================
    HEADER
@@ -1960,7 +1921,6 @@ body {
         );
 }
 
-
 .barracuda-extra-title {
 
     color: #ffffff;
@@ -1970,7 +1930,6 @@ body {
     font-weight: 700;
 }
 
-
 .barracuda-extra-subtitle {
 
     margin-top: 4px;
@@ -1979,7 +1938,6 @@ body {
 
     font-size: 11px;
 }
-
 
 /* ========================================
    ACTIVE BADGE
@@ -2022,7 +1980,6 @@ body {
     font-weight: 600;
 }
 
-
 .barracuda-active-dot {
 
     width: 6px;
@@ -2042,7 +1999,6 @@ body {
             0.7
         );
 }
-
 
 /* ========================================
    CLASSIFICATION CHECKBOX GRID
@@ -2065,7 +2021,6 @@ body {
 
     margin-bottom: 22px;
 }
-
 
 /* Complete checkbox item */
 
@@ -2099,7 +2054,6 @@ body {
         transform 0.2s ease;
 }
 
-
 .classification-option:hover {
 
     border-color: #3b82f6;
@@ -2107,7 +2061,6 @@ body {
     transform:
         translateY(-1px);
 }
-
 
 /* Hide original checkbox */
 
@@ -2119,7 +2072,6 @@ body {
 
     pointer-events: none;
 }
-
 
 /* Custom checkbox */
 
@@ -2154,7 +2106,6 @@ body {
         0.2s ease;
 }
 
-
 .classification-label {
 
     color: #cbd5e1;
@@ -2163,7 +2114,6 @@ body {
 
     font-weight: 600;
 }
-
 
 /* Selected checkbox */
 
@@ -2188,7 +2138,6 @@ input:checked
         );
 }
 
-
 .classification-option:has(input:checked) {
 
     background:
@@ -2208,13 +2157,11 @@ input:checked
         );
 }
 
-
 .classification-option:has(input:checked)
 .classification-label {
 
     color: #ffffff;
 }
-
 
 /* ========================================
    DETAIL INPUTS
@@ -2240,12 +2187,10 @@ input:checked
         rgba(148, 163, 184, 0.12);
 }
 
-
 .barracuda-details-grid .form-group {
 
     width: 100%;
 }
-
 
 .barracuda-details-grid .form-group label {
 
@@ -2255,7 +2200,6 @@ input:checked
 
     color: #94a3b8;
 }
-
 
 .barracuda-details-grid .form-group input {
 
@@ -2276,7 +2220,6 @@ input:checked
     color: #ffffff;
 }
 
-
 /* ========================================
    RESPONSIVE
 ======================================== */
@@ -2293,7 +2236,6 @@ input:checked
     }
 }
 
-
 @media (max-width: 700px) {
 
     .classification-grid {
@@ -2305,13 +2247,11 @@ input:checked
             );
     }
 
-
     .barracuda-details-grid {
 
         grid-template-columns:
             1fr;
     }
-
 
     .barracuda-extra-header {
 
@@ -2333,13 +2273,10 @@ body {
 
 }
 
-
 body {
 
     overflow-y: visible;
-
 }
-
 
 .setup-page {
 
@@ -2348,7 +2285,6 @@ body {
     overflow: visible;
 
 }
-
 
 #contentArea {
 
@@ -2359,7 +2295,6 @@ body {
     max-height: none;
 
 }
-
 
 .card {
 
@@ -2377,7 +2312,6 @@ body {
     border-radius: 10px;
 }
 
-
 .barracuda-extra-header {
 
     padding-bottom: 10px;
@@ -2385,12 +2319,10 @@ body {
     margin-bottom: 10px;
 }
 
-
 .barracuda-extra-title {
 
     font-size: 13px;
 }
-
 
 .barracuda-extra-subtitle {
 
@@ -2411,7 +2343,6 @@ body {
     -ms-overflow-style: none;
 }
 
-
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
 
@@ -2420,4 +2351,103 @@ body::-webkit-scrollbar {
     height: 0;
 
     display: none;
+}
+/* =========================================
+   SETUP MASTER FLAGS
+========================================= */
+
+/* =========================================
+   SETUP MASTER FLAG - MEDIUM SIZE
+========================================= */
+
+.setup-flag-row {
+
+    width: 340px;
+    max-width: 100%;
+
+    min-height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    margin: 12px 0 20px;
+
+    padding: 9px 14px;
+
+    background: #0f1c2e;
+
+    border: 1px solid #334155;
+    border-radius: 9px;
+
+    box-sizing: border-box;
+}
+
+.setup-flag-info {
+
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.setup-flag-title {
+
+    color: #e2e8f0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    line-height: 1.3;
+}
+
+.setup-flag-description {
+
+    margin-top: 3px;
+
+    color: #64748b;
+
+    font-size: 9px;
+
+    line-height: 1.25;
+}
+
+/* =========================================
+   SETUP FLAG TOGGLE
+========================================= */
+
+.setup-flag-row .warranty-switch {
+
+    width: 44px;
+    height: 24px;
+
+    flex: 0 0 44px;
+
+    margin: 0;
+}
+
+.setup-flag-row .warranty-slider {
+
+    border-radius: 24px;
+}
+
+.setup-flag-row .warranty-slider::before {
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+}
+
+.setup-flag-row
+.warranty-switch
+input:checked
++
+.warranty-slider::before {
+
+    transform: translateX(20px);
 }

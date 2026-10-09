@@ -10,7 +10,6 @@ function getConsumableValue(id) {
     return element.value.trim();
 }
 
-
 function setConsumableText(
     id,
     value
@@ -23,7 +22,6 @@ function setConsumableText(
         return;
     }
 
-
     if (
         value === undefined ||
         value === null ||
@@ -35,11 +33,9 @@ function setConsumableText(
         return;
     }
 
-
     element.textContent =
         String(value);
 }
-
 
 function showConsumableMessage(
     message,
@@ -51,11 +47,9 @@ function showConsumableMessage(
             "consumableMessage"
         );
 
-
     if (!messageBox) {
         return;
     }
-
 
     messageBox.textContent =
         message;
@@ -66,7 +60,6 @@ function showConsumableMessage(
         type;
 }
 
-
 function hideConsumableMessage() {
 
     const messageBox =
@@ -74,19 +67,15 @@ function hideConsumableMessage() {
             "consumableMessage"
         );
 
-
     if (!messageBox) {
         return;
     }
 
-
     messageBox.textContent = "";
-
 
     messageBox.className =
         "consumable-message";
 }
-
 
 function hideConsumableResult() {
 
@@ -95,18 +84,15 @@ function hideConsumableResult() {
             "consumableResult"
         );
 
-
     const initialMessage =
         document.getElementById(
             "pricingInitialMessage"
         );
 
-
     const pricingData =
         document.getElementById(
             "pricingData"
         );
-
 
     if (resultSection) {
 
@@ -114,13 +100,11 @@ function hideConsumableResult() {
             "grid";
     }
 
-
     if (pricingData) {
 
         pricingData.style.display =
             "none";
     }
-
 
     if (initialMessage) {
 
@@ -128,7 +112,6 @@ function hideConsumableResult() {
             "flex";
     }
 }
-
 
 async function searchConsumable() {
 
@@ -138,13 +121,11 @@ async function searchConsumable() {
         )
             .toUpperCase();
 
-
     const country =
         getConsumableValue(
             "consumableCountry"
         )
             .toUpperCase();
-
 
     const program =
         getConsumableValue(
@@ -152,14 +133,11 @@ async function searchConsumable() {
         )
             .toUpperCase();
 
-
     hideConsumableMessage();
-
 
     // =========================================
     // VALIDATION
     // =========================================
-
 
     if (!consumable) {
 
@@ -171,7 +149,6 @@ async function searchConsumable() {
         return;
     }
 
-
     if (!country) {
 
         showConsumableMessage(
@@ -181,7 +158,6 @@ async function searchConsumable() {
 
         return;
     }
-
 
     if (!program) {
 
@@ -193,17 +169,14 @@ async function searchConsumable() {
         return;
     }
 
-
     setSearchButtonLoading(
         true
     );
-
 
     showConsumableMessage(
         "Searching SAP pricing information...",
         "loading"
     );
-
 
     try {
 
@@ -226,12 +199,10 @@ async function searchConsumable() {
                 program
             );
 
-
         console.log(
             "Calling Consumable API:",
             url
         );
-
 
         // =====================================
         // CALL NODE
@@ -240,16 +211,13 @@ async function searchConsumable() {
         const response =
             await fetch(url);
 
-
         const result =
             await response.json();
-
 
         console.log(
             "Consumable API Response:",
             result
         );
-
 
         // =====================================
         // ERROR
@@ -263,7 +231,6 @@ async function searchConsumable() {
             );
         }
 
-
         if (!result.success) {
 
             throw new Error(
@@ -272,14 +239,12 @@ async function searchConsumable() {
             );
         }
 
-
         // =====================================
         // GET NORMALIZED SAP DATA
         // =====================================
 
         const sap =
             result.pricing || {};
-
 
         const resultData = {
 
@@ -335,20 +300,16 @@ async function searchConsumable() {
                 )
         };
 
-
         console.log(
             "Formatted Pricing Data:",
             resultData
         );
 
-
         hideConsumableMessage();
-
 
         showConsumableResult(
             resultData
         );
-
 
     } catch (error) {
 
@@ -357,16 +318,13 @@ async function searchConsumable() {
             error
         );
 
-
         hideConsumableResult();
-
 
         showConsumableMessage(
             error.message ||
             "Unable to retrieve pricing information.",
             "error"
         );
-
 
     } finally {
 
@@ -375,7 +333,6 @@ async function searchConsumable() {
         );
     }
 }
-
 
 function setSearchButtonLoading(
     loading
@@ -386,15 +343,12 @@ function setSearchButtonLoading(
             ".consumable-search-btn"
         );
 
-
     if (!button) {
         return;
     }
 
-
     button.disabled =
         loading;
-
 
     if (loading) {
 
@@ -408,7 +362,6 @@ function setSearchButtonLoading(
     }
 }
 
-
 function formatPrice(value) {
 
     if (
@@ -420,10 +373,8 @@ function formatPrice(value) {
         return "-";
     }
 
-
     const number =
         Number(value);
-
 
     if (
         Number.isNaN(number)
@@ -432,10 +383,8 @@ function formatPrice(value) {
         return String(value);
     }
 
-
     return number.toFixed(2);
 }
-
 
 function formatPricingUnit(
     value
@@ -450,10 +399,8 @@ function formatPricingUnit(
         return "-";
     }
 
-
     const number =
         Number(value);
-
 
     if (
         Number.isNaN(number)
@@ -462,12 +409,10 @@ function formatPricingUnit(
         return String(value);
     }
 
-
     return String(
         number
     );
 }
-
 
 function formatConsumableDate(
     value
@@ -476,7 +421,6 @@ function formatConsumableDate(
     if (!value) {
         return "-";
     }
-
 
     // SAP OData V2 Date
     // /Date(1234567890000)/
@@ -489,10 +433,8 @@ function formatConsumableDate(
         const startIndex =
             value.indexOf("(");
 
-
         const endIndex =
             value.indexOf(")");
-
 
         if (
             startIndex !== -1 &&
@@ -505,10 +447,8 @@ function formatConsumableDate(
                     endIndex
                 );
 
-
             const milliseconds =
                 Number(timestamp);
-
 
             if (
                 !Number.isNaN(
@@ -521,10 +461,8 @@ function formatConsumableDate(
                         milliseconds
                     );
 
-
                 const year =
                     date.getUTCFullYear();
-
 
                 const month =
                     String(
@@ -534,7 +472,6 @@ function formatConsumableDate(
                         "0"
                     );
 
-
                 const day =
                     String(
                         date.getUTCDate()
@@ -542,7 +479,6 @@ function formatConsumableDate(
                         2,
                         "0"
                     );
-
 
                 return (
                     year +
@@ -554,7 +490,6 @@ function formatConsumableDate(
             }
         }
     }
-
 
     // YYYYMMDD
 
@@ -572,10 +507,8 @@ function formatConsumableDate(
         );
     }
 
-
     return String(value);
 }
-
 
 function showConsumableResult(
     data
@@ -586,18 +519,15 @@ function showConsumableResult(
             "consumableResult"
         );
 
-
     const initialMessage =
         document.getElementById(
             "pricingInitialMessage"
         );
 
-
     const pricingData =
         document.getElementById(
             "pricingData"
         );
-
 
     if (resultSection) {
 
@@ -605,13 +535,11 @@ function showConsumableResult(
             "grid";
     }
 
-
     if (initialMessage) {
 
         initialMessage.style.display =
             "none";
     }
-
 
     if (pricingData) {
 
@@ -619,85 +547,71 @@ function showConsumableResult(
             "block";
     }
 
-
     setConsumableText(
         "pricingConsumable",
         data.consumable
     );
-
 
     setConsumableText(
         "pricingCountry",
         data.country
     );
 
-
     setConsumableText(
         "pricingProgram",
         data.program
     );
-
 
     setConsumableText(
         "pricingConditionType",
         data.conditionType
     );
 
-
     setConsumableText(
         "pricingSalesOrg",
         data.salesOrg
     );
-
 
     setConsumableText(
         "pricingCustomerPriceGroup",
         data.customerPriceGroup
     );
 
-
     setConsumableText(
         "pricingCalculationType",
         data.calculationType
     );
-
 
     setConsumableText(
         "pricingPrice",
         data.price
     );
 
-
     setConsumableText(
         "pricingCurrency",
         data.currency
     );
-
 
     setConsumableText(
         "pricingUnit",
         data.pricingUnit
     );
 
-
     setConsumableText(
         "pricingUom",
         data.unitOfMeasure
     );
-
 
     setConsumableText(
         "pricingValidFrom",
         data.validFrom
     );
 
-
     setConsumableText(
         "pricingValidTo",
         data.validTo
     );
 }
-
 
 function resetConsumableSearch() {
 
@@ -706,49 +620,40 @@ function resetConsumableSearch() {
             "consumableSearch"
         );
 
-
     const country =
         document.getElementById(
             "consumableCountry"
         );
-
 
     const program =
         document.getElementById(
             "consumableProgram"
         );
 
-
     if (consumable) {
 
         consumable.value = "";
     }
-
 
     if (country) {
 
         country.value = "";
     }
 
-
     if (program) {
 
         program.value = "";
     }
 
-
     hideConsumableMessage();
 
-
     hideConsumableResult();
-
 
     if (consumable) {
 
         consumable.focus();
     }
 }
-
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -758,17 +663,14 @@ document.addEventListener(
             "Consumables JavaScript loaded"
         );
 
-
         const consumable =
             document.getElementById(
                 "consumableSearch"
             );
 
-
         if (!consumable) {
             return;
         }
-
 
         // Uppercase automatically
 
@@ -782,7 +684,6 @@ document.addEventListener(
             }
         );
 
-
         // Search when Enter is pressed
 
         consumable.addEventListener(
@@ -794,7 +695,6 @@ document.addEventListener(
                 ) {
 
                     event.preventDefault();
-
 
                     searchConsumable();
                 }

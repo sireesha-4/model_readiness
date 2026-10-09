@@ -2736,7 +2736,7 @@
                 <i class="fas fa-cog"></i> <span>Model Setup</span>
             </div>
             <div class="menu-item" onclick="showPage('modelChange', this)">
-                <i class="fas fa-sync-alt"></i> <span>Model Change</span>
+                <i class="fas fa-sync-alt"></i> <span>Model Update</span>
             </div>
             <div
     class="menu-item"
@@ -3739,35 +3739,38 @@
 
 
         document.addEventListener(
-            "DOMContentLoaded",
-            function () {
+    "DOMContentLoaded",
+    function () {
 
-                const modelInput =
-                    document.getElementById(
-                        "model"
-                    );
+        const modelInput =
+            document.getElementById("model");
 
+        if (modelInput) {
 
-                if (modelInput) {
+            modelInput.addEventListener(
+                "input",
+                function () {
 
-                    modelInput.addEventListener(
-                        "keydown",
-                        function (event) {
-
-                            if (
-                                event.key === "Enter"
-                            ) {
-
-                                event.preventDefault();
-
-                                searchModel();
-                            }
-                        }
-                    );
+                    modelInput.value =
+                        modelInput.value.toUpperCase();
                 }
+            );
 
-            }
-        );
+            modelInput.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key === "Enter") {
+
+                        event.preventDefault();
+
+                        searchModel();
+                    }
+                }
+            );
+        }
+    }
+);
 
         async function searchModel() {
 
@@ -5480,6 +5483,39 @@ Example:
             }
             closeModelChangeReview();
         }
+
+        // Letters change to uppercase
+
+        document.addEventListener(
+    "input",
+    function (event) {
+
+        const target =
+            event.target;
+
+        if (!target) {
+            return;
+        }
+
+        const upperCaseFields = [
+
+            "model",
+            "reportModelSearch"
+        ];
+
+        if (
+            upperCaseFields.includes(
+                target.id
+            )
+        ) {
+
+            target.value =
+                target.value.toUpperCase();
+        }
+    }
+);
+
+        // 
 
     </script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
