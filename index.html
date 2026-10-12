@@ -1994,6 +1994,24 @@
             text-align: center;
         }
 
+        /* Sticky Model Column */
+.report-table th:nth-child(1),
+.report-table td:nth-child(1) {
+    position: sticky;
+    left: 0;
+    background: #162238;
+    z-index: 3;
+}
+
+/* Sticky Country Column */
+.report-table th:nth-child(2),
+.report-table td:nth-child(2) {
+    position: sticky;
+    left: 110px; /* adjust based on Model column width */
+    background: #162238;
+    z-index: 3;
+}
+
         .yes-icon {
             color: #2dd4bf;
             font-weight: 700;
@@ -2665,6 +2683,21 @@
                 opacity: 1;
             }
         }
+
+        .cards-toggle-btn {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cards-toggle-btn:hover {
+    background: #1d4ed8;
+}
     </style>
 </head>
 
@@ -3117,15 +3150,7 @@
                             <option value="CA">
                                 Canada
                             </option>
- 
-                            <option value="UK">
-                                United Kingdom
-                            </option>
- 
-                            <option value="JP">
-                                Japan
-                            </option>
- 
+                            
                         </select>
  
                     </div>
@@ -3143,17 +3168,18 @@
                     <span id="modelCount">0 Models Found</span>
                 </div>
 
-                <!-- Cards Grid -->
-                <div id="modelCards" class="model-cards"></div>
+                <!-- Consolidated Report Toggle -->
+<!-- <div id="reportTableSection"></div>
+    <span>
+        <i class="fas fa-table"></i>
+        Hide Consolidated Report
+    </span>
+    <span id="toggleIcon">▲</span>
+</div> -->
 
-                <!-- Toggle -->
-                <div class="report-toggle" onclick="toggleReportTable()">
-                    <span><i class="fas fa-table"></i> View Consolidated Report</span>
-                    <span id="toggleIcon">▼</span>
-                </div>
+<!-- Table Section -->
+<div id="reportTableSection">
 
-                <!-- Table Section -->
-                <div id="reportTableSection" style="display:none">
                     <div class="table-header">
                         <div>
                             <h2>Consolidated Model Report</h2>
@@ -3199,6 +3225,29 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- Model Cards Toggle -->
+<div style="text-align:right;margin:15px 0;">
+    <button
+        id="cardsToggleBtn"
+        class="export-btn"
+        onclick="toggleModelCards()">
+
+        View Model Cards ▼
+    </button>
+</div>
+
+<div
+    id="modelCardsContainer"
+    style="display:none;">
+
+    <div
+        id="modelCards"
+        class="model-cards">
+    </div>
+
+</div>
+
             </div>
             <!-- Model Setup Page (placeholder) -->
             <!-- =====================================================
@@ -4178,7 +4227,21 @@
                 ).innerHTML =
                     `📋 Search Results : ${results.length} Models`;
                 buildCards(results);
-                buildReportTable(results);
+buildReportTable(results);
+
+document.getElementById(
+    "reportTableSection"
+).style.display = "block";
+
+document.getElementById(
+    "modelCardsContainer"
+).style.display = "none";
+
+document.getElementById(
+    "cardsToggleBtn"
+).innerHTML =
+    "View Model Cards ▼";
+
             } catch (error) {
                 alert(error.message);
             }
@@ -4188,7 +4251,7 @@
             document.getElementById("modelCards").innerHTML = results.map(r => {
                 const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
                 const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BrothercareWarranty, r.BrotherplusWarranty].filter(x => x === "X").length;
-                const orders = [r.BackupOrder, r.DrumOrder, r.WasteToner, r.BeltUnit].filter(x => x === "X").length;
+                const orders = [r.Claimorder, r.DrumOrder, r.WasteToner, r.BeltUnit].filter(x => x === "X").length;
                 const pricing = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
 
                 const status = warranty >= 2 ? "Ready" : "Review";
@@ -4424,7 +4487,7 @@
 
                     <td>
     ${showStatus(
-                        r.BackupOrder
+                        r.Claimorder
                     )}
 </td>
 
@@ -4456,6 +4519,14 @@
             document.getElementById(
                 "modelCount"
             ).innerHTML = "0 Models Found";
+
+         document.getElementById(
+    "reportTableSection"
+).style.display = "none";
+
+document.getElementById(
+    "modelCardsContainer"
+).style.display = "none";
         }
 
         function exportModelReport() {
@@ -4697,6 +4768,38 @@
                 icon.innerHTML = "▼";
             }
         }
+
+        function toggleModelCards() {
+
+    const cards =
+        document.getElementById(
+            "modelCardsContainer"
+        );
+
+    const btn =
+        document.getElementById(
+            "cardsToggleBtn"
+        );
+
+    if (
+        cards.style.display === "none"
+    ) {
+
+        cards.style.display =
+            "block";
+
+        btn.innerHTML =
+            "Hide Model Cards ▲";
+
+    } else {
+
+        cards.style.display =
+            "none";
+
+        btn.innerHTML =
+            "View Model Cards ▼";
+    }
+}
 
         function showWarranty(
             warrantyFlag,

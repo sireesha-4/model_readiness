@@ -1157,6 +1157,7 @@
       "Auto Reorder": "Brrefresh",
       "Barracuda": "Barracuda",
       "Brother Plus": "Bplus",
+      "Basic" : "B1basic",
       "Occasional": "B1occasional",
       "Moderate": "B1moderate",
       "Frequent": "B1frequent",
@@ -1507,6 +1508,7 @@
 
           "Barracuda Price Setup",
           "Auto Reorder Price Setup",
+          "Basic",
           "Occasional",
           "Moderate",
           "Frequent",
@@ -2444,6 +2446,11 @@ ${showCompatibility ? `
 <div class="compatibility-right" style="display: ${record.Barracuda === "X" ? "block" : "none"}">
 
   <div class="checkbox-group">
+    <div class="checkbox-item">
+      <input type="checkbox" id="basic" 
+             ${record.B1basic === "X" ? "checked" : ""} disabled>
+      <label for="basic">Basic</label>
+    </div>
     <div class="checkbox-item">
       <input type="checkbox" id="occasional" 
              ${record.B1occasional === "X" ? "checked" : ""} disabled>
@@ -4022,6 +4029,7 @@ if (
       if (sectionName === "Model Compatibility") {
 
         const compatibilityChecks = [
+          { id: "basic", field: "Basic" },
           { id: "occasional", field: "Occasional" },
           { id: "moderate", field: "Moderate" },
           { id: "frequent", field: "Frequent" },

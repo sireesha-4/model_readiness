@@ -560,12 +560,17 @@
         }
 
         .info-row {
+
             display: flex;
             align-items: center;
             justify-content: space-between;
-            min-height: 38px;
+            /* min-height: 38px; */
             gap: 12px;
-            border-bottom: 1px solid #1e293b;
+            /* border-bottom: 1px solid #1e293b; */
+            padding: 12px 16px;
+            text-align: left;
+            color: #e2e8f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .info-row:last-child {
@@ -664,6 +669,7 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
+            align-items: start;
         }
 
         .data-card {
@@ -671,6 +677,7 @@
             border: 1px solid #334155;
             border-radius: 10px;
             overflow: hidden;
+            height: fit-content;
         }
 
         .data-card-header {
@@ -793,6 +800,25 @@
                 border-bottom: 1px solid #334155;
                 padding-bottom: 8px;
             }
+        }
+
+
+        .sample-model {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* min-height: 38px; */
+            gap: 12px;
+            /* border-bottom: 1px solid #1e293b; */
+            padding: 12px 16px;
+            font-size: 12px;
+            text-align: left;
+            color: #e2e8f0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .sample-model-row:last-child {
+            border-bottom: none;
         }
     </style>
 
@@ -1029,7 +1055,7 @@
 
                 const response =
                     await fetch(
-                        `/api/model?model=${encodeURIComponent(matnr || "")}&country=${encodeURIComponent(country || "")}`
+                        `/api/model/get?model=${encodeURIComponent(matnr)}&country=${encodeURIComponent(country)}`
                     );
 
                 if (!response.ok) {
@@ -1168,7 +1194,7 @@
             <div class="details-kpi programs">
                 <div class="details-kpi-icon"><i class="fas fa-box"></i></div>
                 <div class="details-kpi-content">
-                    <div class="details-kpi-label">Programs</div>
+                    <div class="details-kpi-label">Compatible Programs</div>
                     <div class="details-kpi-value">${programCount}</div>
                     <div class="details-kpi-desc">Available</div>
                 </div>
@@ -1224,13 +1250,13 @@
                             <button
                                 class="tab"
                                 data-tab="programs">
-                                ▦ Programs
+                                ▦ Compatible Programs
                             </button>
 
                             <button
                                 class="tab"
                                 data-tab="warranty">
-                                ♢ Warranty
+                                ♢ Warranty Details
                             </button>
 
                             <button
@@ -1326,22 +1352,22 @@
         🛒 Sample Model Details
     </div>
 
-                                    <div class="info-body">
- <div class="info-row">
-            ${safeValue(r.B1smatnr)}
-        </div>
+    <div class="info-body">
 
-        <div class="info-row">
-            ${safeValue(r.Demomatnr)}
-        </div>
+        ${[
+                            r.B1smatnr,
+                            r.Demomatnr,
+                            r.Samplematnr
+                        ]
+                            .filter(v => v && v.trim() !== "")
+                            .map(v => `
+            <div class="sample-model">
+                ${v}
+            </div>
+        `)
+                            .join("")}
 
-
-               <div class="info-row">
-            ${safeValue(r.Samplematnr)}
-        </div>
-
-
-     </div>
+    </div>
 </div>
 ` : ''}
 
@@ -1398,7 +1424,102 @@
                         </div>
 
 
-                        <!-- PROGRAMS -->
+                        <!-- WARRANTY -->
+
+                        <div
+                            id="warrantyTab"
+                            class="tab-panel"
+                            style="display:none;">
+
+                                        <div class="data-section">
+
+
+                                <div class="data-card">
+
+                                    <div class="data-card-header">
+                                        🛡 Warranty Configuration
+                                    </div>
+
+
+                                    <div class="data-card-body">
+
+                                        <div class="data-row">
+
+                                          <span class="data-label">
+                                              Standard Warranty
+                                          </span>
+
+                                          ${r.StdWtyType === "S"
+                        ? `<span class="status-yes">
+                                                  ${r.StdWtyLen || 0}
+                                          ${r.StdWtyLenUnit || ""}
+                                                 </span>`
+                        : `<span class="status-no">NO</span>`
+                    }
+                                      
+                                      </div>
+
+
+    <div class="data-row">
+
+    <span class="data-label">
+        Extended Warranty
+    </span>
+
+    ${r.ExtdWtyType === "X"
+                        ? `<span class="status-yes">
+              ${r.ExtdWtyLen || 0}
+              ${r.ExtdWtyLenUnit || ""}
+           </span>`
+                        : `<span class="status-no">NO</span>`
+                    }
+
+</div>
+
+
+<div class="data-row">
+
+    <span class="data-label">
+        BrotherPlus Warranty
+    </span>
+
+    ${r.BplusWtyType === "L"
+                        ? `<span class="status-yes">
+              ${r.BplusWtyLen || 0}
+              ${r.BplusWtyLenUnit || ""}
+           </span>`
+                        : `<span class="status-no">NO</span>`
+                    }
+
+</div>
+
+<div class="data-row">
+
+    <span class="data-label">
+        BrotherCare Warranty
+    </span>
+
+    ${r.BcareWtyType === "B"
+                        ? `<span class="status-yes">
+              ${r.BcareWtyLen || 0}
+              ${r.BcareWtyLenUnit || ""}
+           </span>`
+                        : `<span class="status-no">NO</span>`
+                    }
+
+</div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                         <!-- PROGRAMS -->
 
                         <div
                             id="programsTab"
@@ -1459,147 +1580,138 @@
 
                                         </div>
 
-
                                     </div>
 
                                 </div>
 
+                                ${r.Barracuda === "X" ? `
+                                                        <div class="data-card">
+                                                            <div class="data-card-header">
+                                                                🎯 Barracuda Details
+                                                            </div>
+
+                                <div class="data-card-body">
+
+                                    <div class="info-row">
+                                        <span class="info-label">Basic</span>
+                                        <span class="info-value">${iconValue(r.B1basic)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Occasional</span>
+                                        <span class="info-value">${iconValue(r.B1occasional)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Moderate</span>
+                                        <span class="info-value">${iconValue(r.B1moderate)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Frequent</span>
+                                        <span class="info-value">${iconValue(r.B1frequent)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">High</span>
+                                        <span class="info-value">${iconValue(r.B1high)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Power</span>
+                                        <span class="info-value">${iconValue(r.B1power)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Product Type</span>
+                                        <span class="info-value">${safeValue(r.B1producttype)}</span>
+                                    </div>
+
+                                    <div class="info-row">
+                                        <span class="info-label">Product Warranty</span>
+                                        <span class="info-value">
+                                            ${r.B1standardwarr ? r.B1standardwarr + " Months" : "-"}
+                                       </span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            ` : ""}
+
                             </div>
 
-                        </div>
+                        </div>                       
 
 
-                        <!-- WARRANTY -->
+                        <!-- PRICING -->
 
                         <div
-                            id="warrantyTab"
+                            id="pricingTab"
                             class="tab-panel"
                             style="display:none;">
 
-                                        <div class="data-section">
+            
+                            <div class="data-section">
 
 
                                 <div class="data-card">
 
                                     <div class="data-card-header">
-                                        🛡 Warranty Configuration
+                                        ◇ Pricing Configuration
                                     </div>
 
 
                                     <div class="data-card-body">
 
+                                  <div class="data-row">
+                                      <span class="data-label">
+                                          Barracuda Price Setup
+                                      </span>
 
-                                        <div class="data-row">
+                                      <span class="data-value">
+                                          ${r.Selkzb1 === "X" && Number(r.B1kbetr) > 0
+                                                          ? `
+                                                  
+                                                  <span style="margin-left:8px;">
+                                                      (${r.B1kbetr || ""} ${r.B1konwa || ""})
+                                                  </span>
+                                                  <span class="status-yes">YES</span>
+                                                `
+                                                          : `<span class="status-no">NO</span>`
+                                                      }
+                                      </span>
+                                  </div>
 
-                                            <span class="data-label">
-                                                Standard Warranty
-                                            </span>
+                                  <div class="data-row">
+                                      <span class="data-label">
+                                          Auto Reorder Price Setup
+                                      </span>
 
-                                            ${iconValue(r.StandardWarranty)}
+                                     <span class="data-value">
+                                      ${r.Selkzbr === "X" && Number(r.Brkbetr) > 0
+                                                          ? `
+            
+                                              <span style="margin-left:8px;color:#e2e8f0;">
+                                                  (${r.Brkbetr} ${r.Brkonwa})
+                                              </span>
+                                              <span class="status-yes">YES</span>
+                                            `
+                                                          : `<span class="status-no">NO</span>`
+                                                      }
+                                  </span>
+                                  </div>
 
-                                        </div>
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Standard Warranty Length
-                                            </span>
-
-                                            <span class="data-value">
-    ${r.StandardwarrantyLength
-                        ? `${r.StandardwarrantyLength} ${safeValue(r.StandardwarrantyUnit)}`
-                        : "-"
-                    }
-</span>
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Extended Warranty
-                                            </span>
-
-                                            ${iconValue(r.ExtendedWarranty)}
-
-                                        </div>
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Extended Warranty Length
-                                            </span>
-
-                                           <span class="data-value">
-    ${r.ExtendedwarrantyLength
-                        ? `${r.ExtendedwarrantyLength} ${safeValue(r.ExtendedwarrantyUnit)}`
-                        : "-"
-                    }
-</span>
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                BrotherPlus Warranty
-                                            </span>
-
-                                            ${iconValue(r.BrotherplusWarranty)}
-
-                                        </div>
-
-                                         <div class="data-row">
-
-                                            <span class="data-label">
-                                                BrotherPlus Warranty Length
-                                            </span>
-
-                                            <span class="data-value">
-    ${r.BrotherpluswarrantyLength
-                        ? `${r.BrotherpluswarrantyLength} ${safeValue(r.BrotherpluswarrantyUnit)}`
-                        : "-"
-                    }
-</span>
-                                        </div>
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                BrotherCare Warranty
-                                            </span>
-
-                                            ${iconValue(r.BrothercareWarranty)}
-
-                                        </div>
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Brothercare Warranty Length
-                                            </span>
-
-                                            <span class="data-value">
-    ${r.BrothercarewarrantyLength
-                        ? `${r.BrothercarewarrantyLength} ${safeValue(r.BrothercarewarrantyUnit)}`
-                        : "-"
-                    }
-</span>
-                                        </div>
-
+                                        
 
                                     </div>
 
                                 </div>
 
-
                             </div>
 
                         </div>
 
-
+                        
                         <!-- ORDER SETUP -->
 
                         <div
@@ -1627,7 +1739,7 @@
                                                 Drum Order
                                             </span>
 
-                                            ${iconValue(r.DrumOrder)}
+                                            ${iconValue(r.Drum)}
 
                                         </div>
 
@@ -1664,57 +1776,6 @@
 
                                         </div>
 
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- PRICING -->
-
-                        <div
-                            id="pricingTab"
-                            class="tab-panel"
-                            style="display:none;">
-
-            
-                            <div class="data-section">
-
-
-                                <div class="data-card">
-
-                                    <div class="data-card-header">
-                                        ◇ Pricing Configuration
-                                    </div>
-
-
-                                    <div class="data-card-body">
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Barracuda Price Setup
-                                            </span>
-                                        
-                     ${iconValue(r.B1priceSetup)}
-                                            
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">    
-                                                Auto Reorder Price Setup
-                                            </span>
-
-                                     ${iconValue(r.BrpriceSetup)}
-
-                                        </div>
 
                                     </div>
 
