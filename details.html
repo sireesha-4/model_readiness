@@ -820,6 +820,27 @@
         .sample-model-row:last-child {
             border-bottom: none;
         }
+
+        .order-grid-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .order-grid-row .data-label {
+            width: 180px;
+        }
+
+        .order-grid-row .status-yes,
+        .order-grid-row .status-no {
+            margin-right: 12px;
+        }
+        .order-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
     </style>
 
 </head>
@@ -1105,21 +1126,21 @@
 
 
                 const warrantyCount =
-                    countEnabled([
-                        r.StandardWarranty,
-                        r.ExtendedWarranty,
-                        r.BarracudaWarranty
-                    ]);
+                    [
+                        r.StdWtyType === "S",
+                        r.ExtdWtyType === "X",
+                        r.BplusWtyType === "L",
+                        r.BcareWtyType === "B"
+                    ].filter(Boolean).length;
 
 
                 const orderCount =
-                    countEnabled([
-
-                        r.DrumOrder,
-                        r.WasteToner,
-                        r.BeltUnit,
-                        r.Claimorder
-                    ]);
+                    [
+                        r.Drum === "X",
+                        r.WasteToner === "X",
+                        r.BeltUnit === "X",
+                        r.Claimorder === "X"
+                    ].filter(Boolean).length;
 
 
                 /*
@@ -1127,10 +1148,12 @@
                  * configuration values instead of hard-coding "2".
                  */
 
-                const setupCount = countEnabled([
-                    r.B1priceSetup,
-                    r.BrpriceSetup
-                ]);
+                const setupCount =
+                    [
+                        r.Selkzb1 === "X",
+                        r.Selkzbr === "X"
+                    ].filter(Boolean).length;
+
 
 
                 /* =====================================================
@@ -1212,7 +1235,7 @@
             <div class="details-kpi setup">
                 <div class="details-kpi-icon"><i class="fas fa-cog"></i></div>
                 <div class="details-kpi-content">
-                    <div class="details-kpi-label">Setup</div>
+                    <div class="details-kpi-label">Price Setup</div>
                     <div class="details-kpi-value">${setupCount}</div>
                     <div class="details-kpi-desc">Configured</div>
                 </div>
@@ -1587,7 +1610,7 @@
                                 ${r.Barracuda === "X" ? `
                                                         <div class="data-card">
                                                             <div class="data-card-header">
-                                                                🎯 Barracuda Details
+                                                                🎯 Barracuda Plans/Warranty Details
                                                             </div>
 
                                 <div class="data-card-body">
@@ -1660,48 +1683,45 @@
                                         ◇ Pricing Configuration
                                     </div>
 
-
                                     <div class="data-card-body">
 
                                   <div class="data-row">
                                       <span class="data-label">
-                                          Barracuda Price Setup
+                                          Model Price
                                       </span>
 
                                       <span class="data-value">
                                           ${r.Selkzb1 === "X" && Number(r.B1kbetr) > 0
-                                                          ? `
+                        ? `
                                                   
                                                   <span style="margin-left:8px;">
-                                                      (${r.B1kbetr || ""} ${r.B1konwa || ""})
+                                                      ( ${r.B1kbetr || ""} ${r.B1konwa || ""} )
                                                   </span>
                                                   <span class="status-yes">YES</span>
                                                 `
-                                                          : `<span class="status-no">NO</span>`
-                                                      }
+                        : `<span class="status-no">NO</span>`
+                    }
                                       </span>
                                   </div>
 
                                   <div class="data-row">
                                       <span class="data-label">
-                                          Auto Reorder Price Setup
+                                          Consumable Price
                                       </span>
 
                                      <span class="data-value">
                                       ${r.Selkzbr === "X" && Number(r.Brkbetr) > 0
-                                                          ? `
+                        ? `
             
                                               <span style="margin-left:8px;color:#e2e8f0;">
-                                                  (${r.Brkbetr} ${r.Brkonwa})
+                                                  ( ${r.Brkbetr} ${r.Brkonwa} )
                                               </span>
                                               <span class="status-yes">YES</span>
                                             `
-                                                          : `<span class="status-no">NO</span>`
-                                                      }
+                        : `<span class="status-no">NO</span>`
+                    }
                                   </span>
                                   </div>
-
-                                        
 
                                     </div>
 
@@ -1732,51 +1752,75 @@
 
                                     <div class="data-card-body">
 
+						<div class="data-row">
+                                      <span class="data-label">
+                                           Drum Order
+                                      </span>
+                                      <span class="data-value">
+                                          ${r.Drum === "X" 
+                        ? `
+                                                  
+                                                  <span style="margin-left:8px;">
+                                                      ( ${r.Drconsumable} )
+                                                  </span>
+                                                  <span class="status-yes">YES</span>
+                                                `
+                                 : `<span class="status-no">NO</span>`
+                    }
+                                      </span>
+                                  </div>
 
-                                        <div class="data-row">
+						<div class="data-row">
+                                      <span class="data-label">
+                                          Waste Toner
+                                      </span>
+                                      <span class="data-value">
+                                          ${r.WasteToner === "X" ? `
+                                                  
+                                                  <span style="margin-left:8px;">
+                                                      ( ${r.Wtconsumable} )
+                                                  </span>
+                                                  <span class="status-yes">YES</span>
+                                                `
+                                 : `<span class="status-no">NO</span>`
+                    }
+                                      </span>
+                                  </div>
 
-                                            <span class="data-label">
-                                                Drum Order
-                                            </span>
+						<div class="data-row">
+                                      <span class="data-label">
+                                         Belt Unit
+                                      </span>
+                                      <span class="data-value">
+                                          ${r.BeltUnit === "X" ? `
+                                                  
+                                                  <span style="margin-left:8px;">
+                                                      ( ${r.Buconsumable} )
+                                                  </span>
+                                                  <span class="status-yes">YES</span>
+                                                `
+                                 : `<span class="status-no">NO</span>`
+                    }
+                                      </span>
+                                  </div>
 
-                                            ${iconValue(r.Drum)}
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Waste Toner
-                                            </span>
-
-                                            ${iconValue(r.WasteToner)}
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Belt Unit
-                                            </span>
-
-                                            ${iconValue(r.BeltUnit)}
-
-                                        </div>
-
-
-                                        <div class="data-row">
-
-                                            <span class="data-label">
-                                                Backup Order
-                                            </span>
-
-                                            ${iconValue(r.Claimorder)}
-
-                                        </div>
-
-
+						<div class="data-row">
+                                      <span class="data-label">
+                                         Backup Order
+                                      </span>
+                                      <span class="data-value">
+                                          ${r.Claimorder === "X" ? `
+                                                  
+                                                  <span style="margin-left:8px;">
+                                                      ( ${r.Coconsumable} )
+                                                  </span>
+                                                  <span class="status-yes">YES</span>
+                                                `
+                                 : `<span class="status-no">NO</span>`
+                    }
+                                      </span>
+                                  </div>
+                                  
                                     </div>
 
                                 </div>

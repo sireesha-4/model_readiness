@@ -2458,3 +2458,12 @@ input:checked
 
     transform: translateX(20px);
 }
+.field-error {
+    border: 1px solid #ef4444 !important;
+}
+
+.error-text {
+    margin-top: 4px;
+    color: #f87171;
+    font-size: 11px;
+}
