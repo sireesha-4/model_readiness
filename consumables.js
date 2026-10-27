@@ -32,9 +32,22 @@ function setConsumableText(
  
         return;
     }
- 
+
+    if (
+    element.tagName === "INPUT"
+) {
+
+    element.value =
+        String(value);
+
+} else {
+
     element.textContent =
         String(value);
+}
+ 
+    // element.textContent =
+    //     String(value);
 }
  
 function showConsumableMessage(
@@ -514,6 +527,8 @@ function showConsumableResult(
     data
 ) {
  
+    window.currentPricingData = data;
+
     const resultSection =
         document.getElementById(
             "consumableResult"
@@ -652,6 +667,205 @@ function resetConsumableSearch() {
     if (consumable) {
  
         consumable.focus();
+    }
+}
+
+function enablePriceEdit() {
+
+    const input =
+        document.getElementById(
+            "pricingPrice"
+        );
+
+    const editBtn =
+        document.getElementById(
+            "editPriceBtn"
+        );
+
+    const saveBtn =
+        document.getElementById(
+            "savePriceBtn"
+        );
+
+    input.removeAttribute(
+        "readonly"
+    );
+
+    input.focus();
+
+    editBtn.style.display =
+        "none";
+
+    saveBtn.style.display =
+        "inline-flex";
+}
+
+async function savePrice() {
+
+    const price =
+        document.getElementById(
+            "pricingPrice"
+        ).value;
+
+    const consumable =
+        document.getElementById(
+            "pricingConsumable"
+        ).textContent.trim();
+
+    const country =
+        document.getElementById(
+            "pricingCountry"
+        ).textContent.trim();
+
+    const program =
+        document.getElementById(
+            "pricingProgram"
+        ).textContent.trim();
+
+    let selkzb1 = "";
+    let selkzbr = "";
+
+    if (program === "Barracuda") {
+
+        selkzb1 = "X";
+
+    } else {
+
+        selkzbr = "X";
+    }
+
+    const current =
+    window.currentPricingData || {};
+
+const payload = {
+
+    Consumable:
+        consumable,
+
+    Country:
+        country,
+
+    Kschl:
+        current.conditionType,
+
+    Vkorg:
+        current.salesOrg,
+
+    Selkzb1:
+        selkzb1,
+
+    Selkzbr:
+        selkzbr
+};
+
+if (selkzb1 === "X") {
+
+    payload.B1kbetr =
+        price;
+
+    payload.B1konwa =
+        current.currency;
+
+    payload.B1kpein =
+        current.pricingUnit;
+
+    payload.B1kmein =
+        current.unitOfMeasure;
+
+    payload.B1krech =
+        current.calculationType;
+}
+
+if (selkzbr === "X") {
+
+    payload.Brkbetr =
+        price;
+
+    payload.Brkonwa =
+        current.currency;
+
+    payload.Brkpein =
+        current.pricingUnit;
+
+    payload.Brkmein =
+        current.unitOfMeasure;
+
+    payload.Brkrech =
+        current.calculationType;
+}
+
+    if (selkzb1 === "X") {
+
+        payload.B1kbetr =
+            price;
+    }
+
+    if (selkzbr === "X") {
+
+        payload.Brkbetr =
+            price;
+    }
+
+    console.log(
+        "UPDATE PAYLOAD",
+        payload
+    );
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/consumable/updatePrice",
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+                }
+            );
+
+        const text =
+            await response.text();
+
+        console.log(
+            "UPDATE RESPONSE",
+            text
+        );
+
+        if (!response.ok) {
+
+            throw new Error(text);
+        }
+
+        showConsumableMessage(
+    "Price updated successfully.",
+    "success"
+);
+
+setTimeout(
+    function () {
+
+        hideConsumableMessage();
+
+    },
+    3000
+);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showConsumableMessage(
+            error.message,
+            "error"
+        );
     }
 }
  

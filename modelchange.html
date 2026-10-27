@@ -2,1791 +2,1749 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <title>Model Change</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: transparent;
-      color: #e2e8f0;
-      height: auto;
-      margin: 0;
-      padding: 24px;
-      min-height: auto;
-      overflow: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 100%;
-      min-height: auto;
-      overflow: visible;
-    }
-
-    .report-header {
-      margin-bottom: 20px;
-    }
-
-    .report-header h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 4px;
-    }
-
-    .report-header p {
-      font-size: 13px;
-      color: #94a3b8;
-    }
-
-    .report-search-card {
-      background: #162238;
-      border: 1px solid #243b55;
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin-bottom: 20px;
-      display: flex;
-      gap: 14px;
-      align-items: end;
-      flex-wrap: wrap;
-    }
-
-    .report-search-card .form-field {
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .report-search-card label {
-      display: block;
-      font-size: 12px;
-      color: #94a3b8;
-      margin-bottom: 6px;
-    }
-
-    .report-search-card input {
-      width: 100%;
-      padding: 11px 14px;
-      background: #0f1c2e;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      color: #e2e8f0;
-      font-size: 13.5px;
-      outline: none;
-      box-sizing: border-box;
-    }
-
-    .report-search-card input:focus {
-      border-color: #2563eb;
-    }
-
-    .report-search-card select {
-      width: 100%;
-      padding: 11px 14px;
-      background: #0f1c2e;
-      border: 1px solid #334155;
-      border-radius: 10px;
-      color: #e2e8f0;
-      font-size: 13.5px;
-      outline: none;
-      appearance: auto;
-    }
-
-    .report-search-card select:focus {
-      border-color: #2563eb;
-    }
-
-    .report-search-actions {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-search {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 11px 20px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 13.5px;
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-
-    .btn-search:hover {
-      background: #1d4ed8;
-    }
-
-    .btn-reset {
-      background: transparent;
-      color: #94a3b8;
-      border: 1px solid #334155;
-      padding: 11px 18px;
-      border-radius: 10px;
-      font-weight: 500;
-      font-size: 13.5px;
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-reset:hover {
-      background: rgba(255, 255, 255, .05);
-      color: #e2e8f0;
-    }
-
-    /* building blcks */
-    .change-section {
-      background: #162238;
-      border: 1px solid #243b55;
-      border-radius: 14px;
-      padding: 12px 18px;
-      margin-bottom: 12px;
-    }
-
-    .change-section:hover {
-      border-color: #2f6df6;
-    }
-
-    .change-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .change-header h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: #f1f5f9;
-    }
-
-    .change-content {
-      min-height: auto;
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      margin-top: 12px;
-      padding-top: 12px;
-    }
-
-    .edit-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(37, 99, 235, .12);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #60a5fa;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .edit-icon:hover {
-      background: #2563eb;
-      color: white;
-    }
-
-    .edit-icon.save-mode {
-      color: #22c55e;
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .toggle-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(37, 99, 235, .12);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #60a5fa;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .toggle-icon:hover {
-      background: #2563eb;
-      color: #fff;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .info-field {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .info-field label {
-      font-size: 12px;
-      color: #94a3b8;
-      margin-bottom: 6px;
-    }
-
-    .info-field input {
-      width: 100%;
-      height: 34px;
-      padding: 0 12px;
-      background: #0f1c2e;
-      border: 1px solid #64748b;
-      /* normal border */
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 13px;
-      outline: none;
-
-      transition: border-color 0.2s ease;
-    }
-
-    .info-field input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-    }
-
-    @media(max-width:1200px) {
-      .info-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media(max-width:768px) {
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .display-field {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .field-label {
-      font-size: 12px;
-      color: #94a3b8;
-    }
-
-    .field-value {
-      font-size: 15px;
-      color: #e6ecf1;
-      font-weight: 500;
-      min-height: 24px;
-      display: block;
-    }
-
-    .info-field select {
-      width: 100%;
-      height: 34px;
-      padding: 0 12px;
-      background: #0f1c2e;
-      border: 1px solid #64748b;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 13px;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .info-field select:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-    }
-
-
-    .switch {
-      position: relative;
-      display: inline-block;
-      width: 56px;
-      height: 30px;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      inset: 0;
-      background: #374151;
-      transition: .3s;
-      border-radius: 30px;
-    }
-
-    .slider:before {
-      position: absolute;
-      content: "";
-      width: 22px;
-      height: 22px;
-      left: 4px;
-      bottom: 4px;
-      background: white;
-      transition: .3s;
-      border-radius: 50%;
-    }
-
-    .switch input:checked+.slider {
-      background: #159a15;
-    }
-
-    .switch input:checked+.slider:before {
-      transform: translateX(26px);
-    }
-
-    .toggle-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .order-row {
-      display: grid;
-      grid-template-columns: 250px 300px;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .toggle-grid .info-field {
-      display: grid;
-
-      grid-template-columns:
-        170px 70px;
-
-      align-items: center;
-
-      column-gap: 24px;
-    }
-
-    .toggle-grid .info-field label {
-      margin: 0;
-      font-size: 13px;
-    }
-
-    .toggle-grid .switch {
-      margin: 0;
-    }
-
-    .switch-wrapper {
-      display: flex;
-      align-items: center;
-    }
-
-    .review-container {
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 24px;
-    }
-
-    .btn-review {
-      background: #f59e0b;
-      color: #fff;
-      border: none;
-      border-radius: 10px;
-      padding: 12px 22px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .btn-review:hover {
-      background: #d97706;
-    }
-
-    /* ===== Warranty number + unit group ===== */
-    .warranty-group {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      max-width: 220px;
-    }
-
-    .warranty-number {
-      flex: 0 0 90px;
-      min-width: 90px;
-      max-width: 110px;
-      height: 34px;
-      padding: 0 10px;
-      background: #0f1c2e;
-      border: 1px solid #64748b;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 13px;
-      outline: none;
-    }
-
-    .warranty-unit {
-      flex: 0 0 100px;
-      min-width: 100px;
-      height: 34px;
-      padding: 0 8px;
-      background: #0f1c2e;
-      border: 1px solid #64748b;
-      border-radius: 8px;
-      color: #ffffff;
-      font-size: 13px;
-      outline: none;
-    }
-
-    .warranty-number:disabled,
-    .warranty-unit:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background: #1e293b;
-      color: #94a3b8;
-    }
-
-    .warranty-number:focus,
-    .warranty-unit:focus {
-      border-color: #2563eb;
-      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
-    }
-
-    /* ===== 3-column Warranty Grid ===== */
-    .warranty-grid {
-      display: grid;
-      grid-template-columns: 200px 240px 320px;
-      /* Toggle | Length | Material */
-      gap: 18px 24px;
-      align-items: start;
-      justify-content: start;
-    }
-
-    .warranty-grid .info-field {
-      min-width: 0;
-    }
-
-    /* Toggle column – keep compact */
-    .warranty-grid .info-field:nth-child(3n + 1) {
-      max-width: 200px;
-    }
-
-    /* Length column – number + unit side by side */
-    .warranty-grid .info-field:nth-child(3n + 2) .warranty-group,
-    .warranty-grid .info-field:nth-child(3n + 2) .field-value {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    /* Material column – fixed width, no stretch */
-    .warranty-grid .info-field:nth-child(3n) input,
-    .warranty-grid .info-field:nth-child(3n) .field-value {
-      width: 100%;
-      max-width: 320px;
-    }
-
-    /* Responsive */
-    @media (max-width: 1100px) {
-      .warranty-grid {
-        grid-template-columns: 180px 220px 280px;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .warranty-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .warranty-grid .info-field:nth-child(3n) {
-        grid-column: 1 / -1;
-        /* Material takes full width on medium screens */
-      }
-    }
-
-    @media (max-width: 600px) {
-      .warranty-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .review-modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-
-      background: rgba(0, 0, 0, 0.78);
-      backdrop-filter: blur(10px);
-      align-items: center;
-      display: flex;
-      justify-content: center;
-      overflow: hidden;
-
-      z-index: 2147483647;
-    }
-
-    .review-content {
-      width: 980px;
-      max-width: 95%;
-      max-height: 85vh;
-
-      background:
-        radial-gradient(circle at top left,
-          rgba(37, 99, 235, .18),
-          #020817 65%);
-
-      border: 1px solid rgba(59, 130, 246, .45);
-      border-radius: 22px;
-
-      padding: 28px;
-
-      overflow: hidden;
-    }
-
-    .review-header {
-
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin-bottom: 18px;
-    }
-
-    .review-title {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-
-      color: #178eb6;
-
-      font-size: 24px;
-      font-weight: 700;
-
-      text-shadow:
-        0 0 4px rgba(34, 199, 255, .25);
-    }
-
-
-    .review-title i {
-      font-size: 48px;
-      color: #178eb6;
-    }
-
-    .review-close-icon {
-
-      background: transparent;
-      border: none;
-
-      color: #94a3b8;
-
-      font-size: 28px;
-
-      cursor: pointer;
-    }
-
-    .review-close-icon:hover {
-      color: #ffffff;
-    }
-
-    .review-divider {
-
-      height: 1px;
-
-      margin-bottom: 20px;
-
-      background:
-        linear-gradient(to right,
-          transparent,
-          #3b82f6,
-          transparent);
-    }
-
-    .review-table {
-
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-
-      border-radius: 14px;
-    }
-
-    .review-table th {
-
-      background:
-        linear-gradient(180deg,
-          rgba(37, 99, 235, .22),
-          rgba(15, 23, 42, .95));
-
-      color: #dbeafe;
-
-      padding: 16px 14px;
-
-      text-align: left;
-
-      font-size: 14px;
-
-      border: 1px solid rgba(59, 130, 246, .2);
-    }
-
-    .review-table td {
-
-      padding: 14px;
-
-      color: #e2e8f0;
-
-      border: 1px solid rgba(59, 130, 246, .15);
-    }
-
-    .review-table tr:hover {
-
-      background:
-        rgba(37, 99, 235, .05);
-    }
-
-    .before-value {
-      color: #cbd5e1;
-      text-align: center;
-    }
-
-    .after-value {
-      color: #f8fafc;
-      font-weight: 600;
-      text-align: center;
-    }
-
-    .yes-value {
-      color: #4ade80;
-    }
-
-    .no-value {
-      color: #ef4444;
-    }
-
-    .status-cell {
-      text-align: center;
-      vertical-align: middle;
-    }
-
-    .status-yes {
-      color: #57e37d;
-      font-size: 28px;
-
-    }
-
-    .status-no {
-      color: #ff4d4f;
-      font-size: 28px;
-    }
-
-    .review-close-btn:hover {
-
-      background: #2563eb;
-
-      box-shadow:
-        0 0 10px rgba(59, 130, 246, .6),
-        0 0 20px rgba(59, 130, 246, .3);
-    }
-
-    .category-cell {
-
-      width: 220px;
-
-      font-weight: 700;
-
-      color: #f8fafc;
-
-      vertical-align: middle;
-
-      line-height: 1.5;
-
-      background:
-        rgba(37, 99, 235, .08);
-    }
-
-    .status-yes {
-      color: #4ade80;
-      font-size: 22px;
-    }
-
-    .status-no {
-      color: #ef4444;
-      font-size: 22px;
-    }
-
-    .review-actions {
-      flex-shrink: 0;
-
-      margin-top: 16px;
-
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .review-save-btn {
-
-      min-width: 220px;
-      height: 48px;
-
-      border: none;
-      border-radius: 10px;
-
-      background: #0e6f31;
-
-      color: white;
-
-      font-size: 16px;
-      font-weight: 600;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      box-shadow: none;
-
-      transition: background .2s ease;
-    }
-
-    .review-save-btn:hover {
-      background: #0e6f31;
-      transform: translateY(-2px);
-    }
-
-    .review-save-btn:active {
-
-      transform: translateY(0);
-    }
-
-    .review-table-wrapper {
-      max-height: 420px;
-
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      border-radius: 14px;
-    }
-
-    .review-table-wrapper::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .review-table-wrapper::-webkit-scrollbar-track {
-      background: #07101f;
-      border-radius: 10px;
-    }
-
-    .review-table-wrapper::-webkit-scrollbar-thumb {
-      background: #2563eb;
-      border-radius: 10px;
-    }
-
-    .review-table-wrapper::-webkit-scrollbar-thumb:hover {
-      background: #3b82f6;
-    }
-
-    .review-table thead th {
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 2;
-    }
-
-    .pricing-layout {
-      display: grid !important;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px 30px;
-    }
-
-    .pricing-layout .info-field {
-      display: flex !important;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .toggle-grid.pricing-layout {
-      display: grid !important;
-      grid-template-columns: 220px 220px 120px;
-      gap: 20px 16px;
-    }
-
-    .toggle-grid.pricing-layout .field-value {
-      width: 100%;
-    }
-
-
-    .toggle-grid.pricing-layout .info-field {
-      display: flex !important;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .pricing-sub-block {
-      margin-top: 16px;
-      padding: 16px;
-      background: #0f1c2e;
-      border: 1px solid #334155;
-      border-radius: 10px;
-    }
-
-    .pricing-sub-block-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: #60a5fa;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #334155;
-    }
-
-    .pricing-details {
-      margin-top: 16px;
-    }
-
-    .pricing-details.hidden {
-      display: none;
-    }
-
-    .material-readonly {
-      background: #0f1c2e;
-      color: #ffffff;
-      cursor: not-allowed;
-    }
-
-    .material-readonly:focus {
-      outline: none;
-    }
-
-    .quick-country-select {
-      width: 100%;
-      height: 46px;
-
-      padding: 0 14px;
-
-      border: 1px solid #31465f;
-      border-radius: 9px;
-
-      background: rgba(8, 24, 42, 0.88);
-
-      color: #dbeafe;
-
-      font-size: 13px;
-
-      outline: none;
-
-      cursor: pointer;
-    }
-
-
-    .quick-country-select option {
-      background: #0f1c2e;
-      color: #ffffff;
-    }
-
-    input[type="date"] {
-      color: #ffffff;
-      color-scheme: dark;
-    }
-
-    input[type="date"]::-webkit-calendar-picker-inddicator {
-      cursor: pointer;
-      filter: invert(1);
-    }
-
-    /* ===== Compatibility Layout ===== */
-    /* ===== Compatibility Layout ===== */
-    .compatibility-layout {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 50px;
-      align-items: start;
-    }
-
-    .compatibility-left {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .compatibility-right {
-      margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    /* ===== Custom Checkboxes (Blue tick when checked) ===== */
-    .checkbox-group {
-      display: flex;
-      flex-direction: column;
-      gap: 13px;
-    }
-
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .checkbox-item input[type="checkbox"] {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      border: 2px solid #64748b;
-      border-radius: 4px;
-      background: #0f1c2e;
-      cursor: pointer;
-      position: relative;
-      transition: all 0.2s ease;
-      flex-shrink: 0;
-    }
-
-    .checkbox-item input[type="checkbox"]:checked {
-      background: #2563eb;
-      /* Blue background when checked */
-      border-color: #2563eb;
-    }
-
-    .checkbox-item input[type="checkbox"]:checked::after {
-      content: "✓";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .checkbox-item input[type="checkbox"]:disabled {
-      opacity: 0.85;
-      cursor: default;
-    }
-
-    .checkbox-item label {
-      font-size: 14px;
-      color: #e2e8f0;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    /* ===== Side by side fields - shorter width ===== */
-    .side-by-side-fields {
-      display: flex;
-      gap: 20px;
-      margin-top: 6px;
-    }
-
-    .side-by-side-fields .info-field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      width: 180px;
-      /* ← shorter fixed width */
-    }
-
-    .side-by-side-fields .info-field .field-value,
-    .side-by-side-fields .info-field input {
-      width: 180px !important;
-      max-width: 180px;
-    }
-
-    .compatibility-readonly {
-      pointer-events: none !important;
-    }
-
-    .compatibility-readonly .switch {
-      pointer-events: none !important;
-    }
-
-    .compatibility-readonly .slider {
-      cursor: not-allowed !important;
-    }
-
-    .required {
-      color: #908f8f;
-      font-weight: 700;
-    }
-
-    input:disabled,
-    select:disabled,
-    .switch input:disabled,
-    .switch input:disabled+.slider {
-      cursor: not-allowed !important;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Model Change</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: transparent;
+            color: #e2e8f0;
+            height: auto;
+            margin: 0;
+            padding: 24px;
+            min-height: auto;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            min-height: auto;
+            overflow: visible;
+        }
+
+        .report-header {
+            margin-bottom: 20px;
+        }
+
+        .report-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 4px;
+        }
+
+        .report-header p {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .report-search-card {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 16px;
+            padding: 20px 22px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 14px;
+            align-items: end;
+            flex-wrap: wrap;
+        }
+
+        .report-search-card .form-field {
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .report-search-card label {
+            display: block;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .report-search-card input {
+            width: 100%;
+            padding: 11px 14px;
+            background: #0f1c2e;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 13.5px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .report-search-card input:focus {
+            border-color: #2563eb;
+        }
+
+        .report-search-card select {
+            width: 100%;
+            padding: 11px 14px;
+            background: #0f1c2e;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-size: 13.5px;
+            outline: none;
+            appearance: auto;
+        }
+
+        .report-search-card select:focus {
+            border-color: #2563eb;
+        }
+
+        .report-search-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-search {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 11px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 13.5px;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+
+        .btn-search:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-reset {
+            background: transparent;
+            color: #94a3b8;
+            border: 1px solid #334155;
+            padding: 11px 18px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 13.5px;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-reset:hover {
+            background: rgba(255, 255, 255, .05);
+            color: #e2e8f0;
+        }
+
+        /* building blcks */
+        .change-section {
+            background: #162238;
+            border: 1px solid #243b55;
+            border-radius: 14px;
+            padding: 12px 18px;
+            margin-bottom: 12px;
+        }
+
+        .change-section:hover {
+            border-color: #2f6df6;
+        }
+
+        .change-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .change-header h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+
+        .change-content {
+            min-height: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            margin-top: 12px;
+            padding-top: 12px;
+        }
+
+        .edit-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, .12);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #60a5fa;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .edit-icon:hover {
+            background: #2563eb;
+            color: white;
+        }
+
+        .edit-icon.save-mode {
+            color: #22c55e;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: rgba(37, 99, 235, .12);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #60a5fa;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .toggle-icon:hover {
+            background: #2563eb;
+            color: #fff;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .info-field {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-field label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+
+        .info-field input {
+            width: 100%;
+            height: 34px;
+            padding: 0 12px;
+            background: #0f1c2e;
+            border: 1px solid #64748b;
+            /* normal border */
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+
+            transition: border-color 0.2s ease;
+        }
+
+        .info-field input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        @media(max-width:1200px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .display-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .field-label {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .field-value {
+            font-size: 15px;
+            color: #e6ecf1;
+            font-weight: 500;
+            min-height: 24px;
+            display: block;
+        }
+
+        .info-field select {
+            width: 100%;
+            height: 34px;
+            padding: 0 12px;
+            background: #0f1c2e;
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .info-field select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 56px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: #374151;
+            transition: .3s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            width: 22px;
+            height: 22px;
+            left: 4px;
+            bottom: 4px;
+            background: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        .switch input:checked+.slider {
+            background: #159a15;
+        }
+
+        .switch input:checked+.slider:before {
+            transform: translateX(26px);
+        }
+
+        .toggle-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .order-row {
+            display: grid;
+            grid-template-columns: 250px 300px;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .toggle-grid .info-field {
+            display: grid;
+
+            grid-template-columns:
+                170px 70px;
+
+            align-items: center;
+
+            column-gap: 24px;
+        }
+
+        .toggle-grid .info-field label {
+            margin: 0;
+            font-size: 13px;
+        }
+
+        .toggle-grid .switch {
+            margin: 0;
+        }
+
+        .switch-wrapper {
+            display: flex;
+            align-items: center;
+        }
+
+        .review-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 24px;
+        }
+
+        .btn-review {
+            background: #f59e0b;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 22px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-review:hover {
+            background: #d97706;
+        }
+
+        /* ===== Warranty number + unit group ===== */
+        .warranty-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            max-width: 220px;
+        }
+
+        .warranty-number {
+            flex: 0 0 90px;
+            min-width: 90px;
+            max-width: 110px;
+            height: 34px;
+            padding: 0 10px;
+            background: #0f1c2e;
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .warranty-unit {
+            flex: 0 0 100px;
+            min-width: 100px;
+            height: 34px;
+            padding: 0 8px;
+            background: #0f1c2e;
+            border: 1px solid #64748b;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .warranty-number:disabled,
+        .warranty-unit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #1e293b;
+            color: #94a3b8;
+        }
+
+        .warranty-number:focus,
+        .warranty-unit:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        /* ===== Country-based dimmed warranty rows ===== */
+        .warranty-row-disabled {
+            opacity: 0.45;
+            pointer-events: none;
+            filter: grayscale(0.6);
+        }
+
+        .warranty-row-disabled .switch,
+        .warranty-row-disabled input,
+        .warranty-row-disabled select {
+            cursor: not-allowed !important;
+        }
+
+        .warranty-row-disabled .field-value,
+        .warranty-row-disabled label {
+            color: #64748b !important;
+        }
+
+        /* ===== 3-column Warranty Grid ===== */
+        .warranty-grid {
+            display: grid;
+            grid-template-columns: 200px 240px 320px;
+            /* Toggle | Length | Material */
+            gap: 18px 24px;
+            align-items: start;
+            justify-content: start;
+        }
+
+        .warranty-grid .info-field {
+            min-width: 0;
+        }
+
+        /* Toggle column – keep compact */
+        .warranty-grid .info-field:nth-child(3n + 1) {
+            max-width: 200px;
+        }
+
+        /* Length column – number + unit side by side */
+        .warranty-grid .info-field:nth-child(3n + 2) .warranty-group,
+        .warranty-grid .info-field:nth-child(3n + 2) .field-value {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Material column – fixed width, no stretch */
+        .warranty-grid .info-field:nth-child(3n) input,
+        .warranty-grid .info-field:nth-child(3n) .field-value {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .warranty-grid {
+                grid-template-columns: 180px 220px 280px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .warranty-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .warranty-grid .info-field:nth-child(3n) {
+                grid-column: 1 / -1;
+                /* Material takes full width on medium screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .warranty-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .warranty-error {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 4px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .review-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(10px);
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+
+            z-index: 2147483647;
+        }
+
+        .review-content {
+            width: 980px;
+            max-width: 95%;
+            max-height: 85vh;
+
+            background:
+                radial-gradient(circle at top left,
+                    rgba(37, 99, 235, .18),
+                    #020817 65%);
+
+            border: 1px solid rgba(59, 130, 246, .45);
+            border-radius: 22px;
+
+            padding: 28px;
+
+            overflow: hidden;
+        }
+
+        .review-header {
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 18px;
+        }
+
+        .review-title {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            color: #178eb6;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            text-shadow:
+                0 0 4px rgba(34, 199, 255, .25);
+        }
+
+
+        .review-title i {
+            font-size: 48px;
+            color: #178eb6;
+        }
+
+        .review-close-icon {
+
+            background: transparent;
+            border: none;
+
+            color: #94a3b8;
+
+            font-size: 28px;
+
+            cursor: pointer;
+        }
+
+        .review-close-icon:hover {
+            color: #ffffff;
+        }
+
+        .review-divider {
+
+            height: 1px;
+
+            margin-bottom: 20px;
+
+            background:
+                linear-gradient(to right,
+                    transparent,
+                    #3b82f6,
+                    transparent);
+        }
+
+        .review-table {
+
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+
+            border-radius: 14px;
+        }
+
+        .review-table th {
+
+            background:
+                linear-gradient(180deg,
+                    rgba(37, 99, 235, .22),
+                    rgba(15, 23, 42, .95));
+
+            color: #dbeafe;
+
+            padding: 16px 14px;
+
+            text-align: left;
+
+            font-size: 14px;
+
+            border: 1px solid rgba(59, 130, 246, .2);
+        }
+
+        .review-table td {
+
+            padding: 14px;
+
+            color: #e2e8f0;
+
+            border: 1px solid rgba(59, 130, 246, .15);
+        }
+
+        .review-table tr:hover {
+
+            background:
+                rgba(37, 99, 235, .05);
+        }
+
+        .before-value {
+            color: #cbd5e1;
+            text-align: center;
+        }
+
+        .after-value {
+            color: #f8fafc;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .yes-value {
+            color: #4ade80;
+        }
+
+        .no-value {
+            color: #ef4444;
+        }
+
+        .status-cell {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .status-yes {
+            color: #57e37d;
+            font-size: 28px;
+
+        }
+
+        .status-no {
+            color: #ff4d4f;
+            font-size: 28px;
+        }
+
+        .review-close-btn:hover {
+
+            background: #2563eb;
+
+            box-shadow:
+                0 0 10px rgba(59, 130, 246, .6),
+                0 0 20px rgba(59, 130, 246, .3);
+        }
+
+        .category-cell {
+
+            width: 220px;
+
+            font-weight: 700;
+
+            color: #f8fafc;
+
+            vertical-align: middle;
+
+            line-height: 1.5;
+
+            background:
+                rgba(37, 99, 235, .08);
+        }
+
+        .status-yes {
+            color: #4ade80;
+            font-size: 22px;
+        }
+
+        .status-no {
+            color: #ef4444;
+            font-size: 22px;
+        }
+
+        .review-actions {
+            flex-shrink: 0;
+
+            margin-top: 16px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .review-save-btn {
+
+            min-width: 220px;
+            height: 48px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #0e6f31;
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            box-shadow: none;
+
+            transition: background .2s ease;
+        }
+
+        .review-save-btn:hover {
+            background: #0e6f31;
+            transform: translateY(-2px);
+        }
+
+        .review-save-btn:active {
+
+            transform: translateY(0);
+        }
+
+        .review-table-wrapper {
+            max-height: 420px;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            border-radius: 14px;
+        }
+
+        .review-table-wrapper::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .review-table-wrapper::-webkit-scrollbar-track {
+            background: #07101f;
+            border-radius: 10px;
+        }
+
+        .review-table-wrapper::-webkit-scrollbar-thumb {
+            background: #2563eb;
+            border-radius: 10px;
+        }
+
+        .review-table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+
+        .review-table thead th {
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 2;
+        }
+
+        .pricing-layout {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px 30px;
+        }
+
+        .pricing-layout .info-field {
+            display: flex !important;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .toggle-grid.pricing-layout {
+            display: grid !important;
+            grid-template-columns: 220px 220px 120px;
+            gap: 20px 16px;
+        }
+
+        .toggle-grid.pricing-layout .field-value {
+            width: 100%;
+        }
+
+
+        .toggle-grid.pricing-layout .info-field {
+            display: flex !important;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .pricing-sub-block {
+            margin-top: 16px;
+            padding: 16px;
+            background: #0f1c2e;
+            border: 1px solid #334155;
+            border-radius: 10px;
+        }
+
+        .pricing-sub-block-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #60a5fa;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .pricing-details {
+            margin-top: 16px;
+        }
+
+        .pricing-details.hidden {
+            display: none;
+        }
+
+        .material-readonly {
+            background: #0f1c2e;
+            color: #ffffff;
+            cursor: not-allowed;
+        }
+
+        .material-readonly:focus {
+            outline: none;
+        }
+
+        .quick-country-select {
+            width: 100%;
+            height: 46px;
+
+            padding: 0 14px;
+
+            border: 1px solid #31465f;
+            border-radius: 9px;
+
+            background: rgba(8, 24, 42, 0.88);
+
+            color: #dbeafe;
+
+            font-size: 13px;
+
+            outline: none;
+
+            cursor: pointer;
+        }
+
+
+        .quick-country-select option {
+            background: #0f1c2e;
+            color: #ffffff;
+        }
+
+        input[type="date"] {
+            color: #ffffff;
+            color-scheme: dark;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-inddicator {
+            cursor: pointer;
+            filter: invert(1);
+        }
+
+        /* ===== Compatibility Layout ===== */
+        /* ===== Compatibility Layout ===== */
+        .compatibility-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .compatibility-left {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .compatibility-right {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* ===== Custom Checkboxes (Blue tick when checked) ===== */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #64748b;
+            border-radius: 4px;
+            background: #0f1c2e;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked {
+            background: #2563eb;
+            /* Blue background when checked */
+            border-color: #2563eb;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .checkbox-item input[type="checkbox"]:disabled {
+            opacity: 0.85;
+            cursor: default;
+        }
+
+        .checkbox-item label {
+            font-size: 14px;
+            color: #e2e8f0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* ===== Side by side fields - shorter width ===== */
+        .side-by-side-fields {
+            display: flex;
+            gap: 20px;
+            margin-top: 6px;
+        }
+
+        .side-by-side-fields .info-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            width: 180px;
+            /* ← shorter fixed width */
+        }
+
+        .side-by-side-fields .info-field .field-value,
+        .side-by-side-fields .info-field input {
+            width: 180px !important;
+            max-width: 180px;
+        }
+
+        .compatibility-readonly {
+            pointer-events: none !important;
+        }
+
+        .compatibility-readonly .switch {
+            pointer-events: none !important;
+        }
+
+        .compatibility-readonly .slider {
+            cursor: not-allowed !important;
+        }
+
+        .required {
+            color: #908f8f;
+            font-weight: 700;
+        }
+
+        input:disabled,
+        select:disabled,
+        .switch input:disabled,
+        .switch input:disabled+.slider {
+            cursor: not-allowed !important;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container">
-    <!-- Header (words unchanged) -->
-    <div class="report-header">
-      <h1>Model Change</h1>
-      <p>Search and update model configuration details.</p>
-    </div>
+    <div class="container">
+        <!-- Header (words unchanged) -->
+        <div class="report-header">
+            <h1>Model Update</h1>
+            <p>Search and update model configuration details.</p>
+        </div>
 
-    <!-- Search Section - now matches Model Report -->
-    <div class="report-search-card">
+        <!-- Search Section - now matches Model Report -->
+        <div class="report-search-card">
 
-      <div class="form-field">
-        <label>Model <span class="required">*</span></label>
-        <input type="text" id="changeModelSearch" placeholder="e.g. DCPL2550DW">
-      </div>
+            <div class="form-field">
+                <label>Model <span class="required">*</span></label>
+                <input type="text" id="changeModelSearch" placeholder="e.g. DCPL2550DW">
+            </div>
 
-      <!-- <div class="form-field">
+            <!-- <div class="form-field">
         <label>Country</label>
         <input type="text" id="changeCountrySearch" placeholder="e.g. US">
       </div> -->
 
-      <div class="form-field">
+            <div class="form-field">
 
-        <label>
-          Country <span class="required">*</span>
-        </label>
+                <label>
+                    Country <span class="required">*</span>
+                </label>
 
-        <select id="country" class="quick-country-select">
+                <select id="country" class="quick-country-select">
 
-          <option value="">
-            Select Country
-          </option>
+                    <option value="US">
+                        United States
+                    </option>
 
-          <option value="US">
-            United States
-          </option>
-
-          <option value="CA">
-            Canada
-          </option>
+                    <option value="CA">
+                        Canada
+                    </option>
 
 
-        </select>
+                </select>
 
-      </div>
+            </div>
 
-      <div class="form-field">
-        <label>Search Type</label>
+            <div class="form-field">
+                <label>Search Type</label>
 
-        <select id="searchType">
-          <option value="full">Full Details</option>
-          <option value="material">Material Info</option>
-          <option value="warranty">Warranty Info</option>
-          <option value="compatibility">Model Compatibility</option>
-          <option value="pricing">Pricing Info</option>
-          <option value="order">Order Info</option>
-        </select>
-      </div>
+                <select id="searchType">
+                    <option value="full">Full Details</option>
+                    <option value="material">Material Info</option>
+                    <option value="warranty">Warranty Info</option>
+                    <option value="compatibility">Model Compatibility</option>
+                    <option value="pricing">Pricing Info</option>
+                    <option value="order">Order Info</option>
+                </select>
+            </div>
 
-      <div class="report-search-actions">
+            <div class="report-search-actions">
 
-        <button class="btn-search" onclick="loadModelChange()">
-          <i class="fas fa-search"></i>
-          Search
-        </button>
+                <button class="btn-search" onclick="loadModelChange()">
+                    <i class="fas fa-search"></i>
+                    Search
+                </button>
 
-        <button class="btn-reset" onclick="resetModelChange()">
-          <i class="fas fa-undo"></i>
-          Reset
-        </button>
+                <button class="btn-reset" onclick="resetModelChange()">
+                    <i class="fas fa-undo"></i>
+                    Reset
+                </button>
 
-      </div>
+            </div>
 
+        </div>
+
+        <div id="modelChangeResult"></div>
     </div>
 
-    <div id="modelChangeResult"></div>
-  </div>
+    <script>
 
-  <script>
+        let originalData = null;
+        let hasChanges = false;
+        let changedFields = [];
+        let currentData = null;
+        let sectionOriginalValues = {};
 
-    let originalData = null;
-    let hasChanges = false;
-    let changedFields = [];
-    let currentData = null;
-    let sectionOriginalValues = {};
-
-    const fieldMap = {
-      "Material Number": "Matnr",
-      "Country": "Country",
-      "Cross Plant Status": "Mstae",
-      "Cross Distribution Status": "Mstav",
-      "Distribution Material Status": "Vmsta",
-      "Standard Warranty": "StdWtyType",
-      "Standard Warranty Length": "StdWtyLen",
-      "Standard Warranty Unit": "StdWtyLenUnit",
-      "Extended Warranty": "ExtdWtyType",
-      "Extended Warranty Length": "ExtdWtyLen",
-      "Extended Warranty Unit": "ExtdWtyLenUnit",
-      "BrotherCare Warranty": "BcareWtyType",
-      "BrotherCare Warranty Length": "BcareWtyLen",
-      "BrotherCare Warranty Unit": "BcareWtyLenUnit",
-      "BrotherPlus Warranty": "BplusWtyType",
-      "BrotherPlus Warranty Length": "BplusWtyLen",
-      "BrotherPlus Warranty Unit": "BplusWtyLenUnit",
-      "Standard Warranty SKU": "Swsku",
-      "Extended Warranty SKU": "Ewsku",
-      "BrotherCare SKU": "Bcsku",
-      "BrotherPlus SKU": "Bpsku",
-      "Amazon Dart": "Amazondart",
-      "Auto Reorder": "Brrefresh",
-      "Barracuda": "Barracuda",
-      "Brother Plus": "Bplus",
-      "Basic" : "B1basic",
-      "Occasional": "B1occasional",
-      "Moderate": "B1moderate",
-      "Frequent": "B1frequent",
-      "High": "B1high",
-      "Power": "B1power",
-      "Product Type": "B1producttype",
-      "Product Warranty": "B1standardwarr",
-      "Drum Order": "Drum",
-      "Waste Toner": "WasteToner",
-      "Belt Unit": "BeltUnit",
-      "Backup Order": "Claimorder"
-    };
-
-    function toggleBarracudaRightColumn(toggle) {
-      const section = toggle.closest(".change-content");
-      const rightColumn = section.querySelector(".compatibility-right");
-
-      if (rightColumn) {
-        rightColumn.style.display = toggle.checked ? "block" : "none";
-      }
-    }
-
-    async function loadModelChange() {
-      console.log("Search button clicked");
-
-      const model =
-        document.getElementById("changeModelSearch")
-          .value.trim();
-
-      const country =
-        document.getElementById("country")
-          .value.trim();
-
-      const searchType =
-        document.getElementById("searchType").value;
-
-      console.log("Model:", model);
-      console.log("Country:", country);
-
-      if (!model || !country) {
-        alert("Please enter Model, Country and Flag");
-        return;
-      }
-      try {
-        const response = await fetch(
-          `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
-        );
-
-        console.log("API called");
-        const data = await response.json();
-        console.log("Response:", data);
-        const record = data.d;
-        console.log("FIRST RECORD");
-        console.log(record);
-
-        if (!record) {
-
-          document.getElementById("modelChangeResult")
-            .innerHTML =
-            "<div>No data found</div>";
-          return;
-        }
-
-        originalData =
-          JSON.parse(JSON.stringify(record));
-
-        hasChanges = false;
-        changedFields = [];
-
-        const oldBtn =
-          document.getElementById("reviewChangesBtn");
-
-        if (oldBtn) {
-          oldBtn.remove();
-        }
-        showChangeBlocks(record, searchType);
-      }
-      catch (error) {
-        console.error("Search Error:", error);
-        alert(error.message || "Search failed");
-      }
-    }
-    function resetModelChange() {
-
-      document.getElementById(
-        "changeModelSearch"
-      ).value = "";
-
-      document.getElementById(
-        "country"
-      ).value = "";
-
-      document.getElementById(
-        "searchType"
-      ).value = "full";
-
-      document.getElementById(
-        "modelChangeResult"
-      ).innerHTML = "";
-    }
-
-    function enableEdit(icon) {
-
-      const section =
-        icon.closest(".change-section");
-      const sectionName =
-        section.querySelector("h3").innerText;
-
-      if (sectionName === "Order Type") {
-
-        if (!section.dataset.originalValues) {
-
-          const fields =
-            section.querySelectorAll(".info-field");
-
-          const values = [];
-          const keys = [];
-
-          fields.forEach(f => {
-
-            const label =
-              f.querySelector("label")?.innerText?.trim() || "";
-
-            let value = "-";
-
-            const toggleField =
-              f.querySelector('input[type="checkbox"]');
-
-            const valueField =
-              f.querySelector(".field-value");
-
-            if (toggleField) {
-
-              value =
-                toggleField.checked
-                  ? "Yes"
-                  : "No";
-
-            } else if (valueField) {
-
-              value =
-                valueField.innerText?.trim() || "-";
-            }
-
-            keys.push("-||" + label);
-            values.push(value);
-          });
-
-          section.dataset.originalKeys =
-            JSON.stringify(keys);
-
-          section.dataset.originalValues =
-            JSON.stringify(values);
-        }
-
-        const toggle =
-          section.querySelector(".toggle-icon");
-
-        if (toggle) {
-          toggle.style.display = "none";
-        }
-
-        const toggles =
-          section.querySelectorAll(
-            '.switch-wrapper input[type="checkbox"]'
-          );
-
-        toggles.forEach(toggle => {
-          toggle.disabled = false;
-        });
-
-        icon.innerHTML =
-          '<i class="fas fa-check"></i>';
-
-        icon.onclick = function () {
-          saveSection(this);
+        const fieldMap = {
+            "Material Number": "Matnr",
+            "Country": "Country",
+            "Ean / UPC": "Ean11",
+            "Cross Plant Status": "Mstae",
+            "Cross Distribution Status": "Mstav",
+            "Distribution Material Status": "Vmsta",
+            "Standard Warranty": "StdWtyType",
+            "Standard Warranty Length": "StdWtyLen",
+            "Standard Warranty Unit": "StdWtyLenUnit",
+            "Extended Warranty": "ExtdWtyType",
+            "Extended Warranty Length": "ExtdWtyLen",
+            "Extended Warranty Unit": "ExtdWtyLenUnit",
+            "BrotherCare Warranty": "BcareWtyType",
+            "BrotherCare Warranty Length": "BcareWtyLen",
+            "BrotherCare Warranty Unit": "BcareWtyLenUnit",
+            "BrotherPlus Warranty": "BplusWtyType",
+            "BrotherPlus Warranty Length": "BplusWtyLen",
+            "BrotherPlus Warranty Unit": "BplusWtyLenUnit",
+            "Standard Warranty SKU": "Swsku",
+            "Extended Warranty SKU": "Ewsku",
+            "BrotherCare SKU": "Bcsku",
+            "BrotherPlus SKU": "Bpsku",
+            "Amazon Dart": "Amazondart",
+            "Auto Reorder": "Brrefresh",
+            "Barracuda": "Barracuda",
+            "Brother Plus": "Bplus",
+            "Basic": "B1basic",
+            "Occasional": "B1occasional",
+            "Moderate": "B1moderate",
+            "Frequent": "B1frequent",
+            "High": "B1high",
+            "Power": "B1power",
+            "Product Type": "B1producttype",
+            "Product Warranty": "B1standardwarr",
+            "Drum Order": "Drum",
+            "Waste Toner": "WasteToner",
+            "Belt Unit": "BeltUnit",
+            "Backup Order": "Claimorder",
+            "Drum Order Consumable": "Drconsumable",
+            "Waste Toner Consumable": "Wtconsumable",
+            "Belt Unit Consumable": "Buconsumable",
+            "Backup Order Consumable": "Coconsumable",
         };
 
-        return;
-      }
+        function toggleBarracudaRightColumn(toggle) {
+            const section = toggle.closest(".change-content");
+            const rightColumn = section.querySelector(".compatibility-right");
 
-      // Keep Barracuda and Brother Plus always disabled
-      const nonEditableToggles = [
-        "Amazon Dart",
-        "Auto Reorder",
-        "Barracuda",
-        "Brother Plus",
-
-        "Standard Warranty",
-        "Extended Warranty",
-        "BrotherCare Warranty",
-        "BrotherPlus Warranty",
-
-        "Barracuda Price Setup",
-        "Auto Reorder Price Setup"
-      ];
-
-      section.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
-        const label = toggle.closest(".info-field")?.querySelector("label")?.innerText?.trim();
-
-        if (nonEditableToggles.includes(label)) {
-          toggle.disabled = true;           // force stay disabled
-        } else {
-          toggle.disabled = false;          // enable others
-        }
-      });
-
-
-      const isMaterialSection =
-        sectionName === "Material Information";
-
-      const content =
-        section.querySelector(".change-content");
-
-      const toggleBtn =
-        section.querySelector(".toggle-icon");
-      const consumableFields = [
-        "Drum Order Consumable",
-        "Waste Toner Consumable",
-        "Belt Unit Consumable",
-        "Backup Order Consumable"
-      ];
-
-      /* Expand section if collapsed */
-
-      if (content.style.display === "none") {
-
-        content.style.display = "block";
-
-        toggleBtn.querySelector("i").className =
-          "fas fa-chevron-up";
-      }
-
-      if (!section.dataset.originalValues) {
-        const fields = section.querySelectorAll(".info-field");
-        const values = [];
-        const keys = [];
-
-        fields.forEach(f => {
-
-          const label =
-            f.querySelector("label")?.innerText?.trim() || "";
-
-          let value = "-";
-
-          const valueField =
-            f.querySelector(".field-value");
-
-          const toggleField =
-            f.querySelector('input[type="checkbox"]');
-
-          if (toggleField) {
-
-            value =
-              toggleField.checked
-                ? "Yes"
-                : "No";
-
-          } else if (valueField) {
-
-            value =
-              valueField.innerText?.trim() || "-";
-          }
-
-          let sub = "-";
-
-          const subBlock =
-            f.closest(".pricing-sub-block");
-
-          if (subBlock) {
-
-            sub =
-              subBlock.querySelector(".pricing-sub-block-title")
-                ?.innerText?.trim() || "-";
-          }
-
-          keys.push(sub + "||" + label);
-
-          values.push(value);
-        });
-
-        section.dataset.originalValues = JSON.stringify(values);
-        section.dataset.originalKeys = JSON.stringify(keys);
-      }
-
-      const toggle =
-        section.querySelector(".toggle-icon");
-
-      toggle.style.display = "none";
-
-      const displayFields =
-        section.querySelectorAll(".field-value");
-      const readOnlyFields = [
-        "Plant",
-        "Material Type",
-        "Industry Sector",
-        "Material Group",
-        "Base Unit of Measure",
-        "Division",
-        "Ean / UPC",
-        "Language",
-        "Material Description",
-        "Distribution Channel",
-        "Consumable"
-      ];
-
-      displayFields.forEach(field => {
-
-        const value =
-          field.innerText === "-"
-            ? ""
-            : field.innerText;
-
-        const label = field.closest(".info-field").querySelector("label").innerText;
-        const displayOnlyFields = [
-          "Plant",
-          "Material Type",
-          "Industry Sector",
-          "Material Group",
-          "Base Unit of Measure",
-          "Division",
-          "Konda",
-          "Ean / UPC",
-          "Language",
-          "Sales Organization",
-          "Condition Type",
-          "Material Description",
-          "Distribution Channel",
-          "Consumable",
-          "Standard Warranty SKU",
-          "Extended Warranty SKU",
-          "BrotherCare SKU",
-          "BrotherPlus SKU"
-        ];
-
-
-        if (displayOnlyFields.includes(label)) {
-          field.classList.add("display-only");
-          return;
+            if (rightColumn) {
+                rightColumn.style.display = toggle.checked ? "block" : "none";
+            }
         }
 
-        const yesNoFields = [
+        async function loadModelChange() {
+            console.log("Search button clicked");
 
-          "Amazon Dart",
-          "Auto Reorder",
-          "Barracuda",
-          "Brother Plus",
+            const model =
+                document.getElementById("changeModelSearch")
+                    .value.trim();
 
-          "Barracuda Price Setup",
-          "Auto Reorder Price Setup",
-          "Basic",
-          "Occasional",
-          "Moderate",
-          "Frequent",
-          "High",
-          "Power",
+            const country =
+                document.getElementById("country")
+                    .value.trim();
 
-          "Backup Order",
-          "Drum Order",
-          "Waste Toner",
-          "Belt Unit"
+            const searchType =
+                document.getElementById("searchType").value;
 
-        ];
+            console.log("Model:", model);
+            console.log("Country:", country);
 
-        const warrantyFields = [
+            if (!model || !country) {
+                alert("Please enter Model, Country and Flag");
+                return;
+            }
+            try {
+                const response = await fetch(
+                    `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+                );
 
-          "Standard Warranty Length",
-          "Extended Warranty Length",
-          "BrotherCare Warranty Length",
-          "BrotherPlus Warranty Length"
+                console.log("API called");
+                const data = await response.json();
+                console.log("Response:", data);
+                const record = data.d;
+                console.log("FIRST RECORD");
+                console.log(record);
 
-        ];
-        if (warrantyFields.includes(label)) {
+                if (!record) {
 
-          const toggleField =
-            field.closest(".info-field")
-              .previousElementSibling;
+                    document.getElementById("modelChangeResult")
+                        .innerHTML =
+                        "<div>No data found</div>";
+                    return;
+                }
 
-          const warrantyToggle =
-            toggleField?.querySelector('input[type="checkbox"]');
+                originalData =
+                    JSON.parse(JSON.stringify(record));
 
-          const isWarrantyEnabled =
-            warrantyToggle?.checked;
+                hasChanges = false;
+                changedFields = [];
 
-          let numValue = "";
-          let unitValue = "YR";
+                const oldBtn =
+                    document.getElementById("reviewChangesBtn");
 
-          if (value) {
-
-            const parts = value.trim().split(" ");
-
-            numValue = parts[0] || "";
-            unitValue = parts[1] || "YR";
-          }
-
-          // OFF -> display mode
-          if (!isWarrantyEnabled) {
-
-            field.outerHTML = `
-            <span class="field-value">
-                ${value || "-"}
-            </span>
-        `;
-
-            return;
-          }
-
-          // ON -> editable
-          field.outerHTML = `
-        <div class="warranty-group"
-             data-warranty="${label.replace('Length', '')}">
-
-            <input
-                class="warranty-number"
-                type="number"
-                min="0"
-                value="${numValue}">
-
-            <select class="warranty-unit">
-
-                <option value="YR"
-                    ${unitValue === "YR" ? "selected" : ""}>
-                    YR
-                </option>
-
-                <option value="MONTH"
-                    ${unitValue === "MONTH" ? "selected" : ""}>
-                    Month
-                </option>
-
-            </select>
-
-        </div>
-    `;
-
-          return;
+                if (oldBtn) {
+                    oldBtn.remove();
+                }
+                showChangeBlocks(record, searchType);
+            }
+            catch (error) {
+                console.error("Search Error:", error);
+                alert(error.message || "Search failed");
+            }
         }
-        else if (yesNoFields.includes(label)) {
+        function resetModelChange() {
 
-          const checked =
-            value === "Yes"
-              ? "checked"
-              : "";
+            document.getElementById(
+                "changeModelSearch"
+            ).value = "";
 
-          const readOnlyCompatibilityFields = [
-            "Amazon Dart",
-            "Auto Reorder",
-            "Barracuda",
-            "Brother Plus",
+            document.getElementById(
+                "country"
+            ).value = "US";
 
-            "Standard Warranty",
-            "Extended Warranty",
-            "BrotherCare Warranty",
-            "BrotherPlus Warranty",
+            document.getElementById(
+                "searchType"
+            ).value = "full";
 
-            "Barracuda Price Setup",
-            "Auto Reorder Price Setup"
-          ];
+            document.getElementById(
+                "modelChangeResult"
+            ).innerHTML = "";
+        }
 
+        function enableEdit(icon) {
 
-          const disabledAttr =
-            readOnlyCompatibilityFields.includes(label)
-              ? "disabled"
-              : "";
+            const section = icon.closest(".change-section");
+            const sectionName = section.querySelector("h3").innerText;
 
-          const styleAttr =
-            readOnlyCompatibilityFields.includes(label)
-              ? 'style="pointer-events:none;"'
-              : "";
+            // =====================================================
+            // SPECIAL CASE: Order Type
+            // =====================================================
+            if (sectionName === "Order Type") {
 
-          field.outerHTML = `
+                if (!section.dataset.originalValues) {
+                    const fields = section.querySelectorAll(".info-field");
+                    const values = [];
+                    const keys = [];
+
+                    fields.forEach(f => {
+                        const label = f.querySelector("label")?.innerText?.trim() || "";
+                        let value = "-";
+
+                        const toggleField = f.querySelector('input[type="checkbox"]');
+                        const valueField = f.querySelector(".field-value");
+
+                        if (toggleField) {
+                            value = toggleField.checked ? "Yes" : "No";
+                        } else if (valueField) {
+                            value = valueField.innerText?.trim() || "-";
+                        }
+
+                        keys.push("-||" + label);
+                        values.push(value);
+                    });
+
+                    section.dataset.originalKeys = JSON.stringify(keys);
+                    section.dataset.originalValues = JSON.stringify(values);
+                }
+
+                const toggle = section.querySelector(".toggle-icon");
+                if (toggle) toggle.style.display = "none";
+
+                // Enable all order toggles
+                const toggles = section.querySelectorAll('.switch-wrapper input[type="checkbox"]');
+                toggles.forEach(t => {
+                    t.disabled = false;
+                    // Attach the live handler so turning ON/OFF updates the consumable field
+                    t.onchange = function () {
+                        handleOrderToggle(this);
+                    };
+                });
+
+                // Convert Consumable fields according to current toggle state
+                const orderMap = {
+                    "Drum Order": "Drum Order Consumable",
+                    "Waste Toner": "Waste Toner Consumable",
+                    "Belt Unit": "Belt Unit Consumable",
+                    "Backup Order": "Backup Order Consumable"
+                };
+
+                Object.keys(orderMap).forEach(toggleLabel => {
+                    const consumableLabel = orderMap[toggleLabel];
+
+                    // Find the toggle
+                    const toggleInput = Array.from(section.querySelectorAll('input[type="checkbox"]'))
+                        .find(inp => {
+                            const lbl = inp.closest(".info-field")?.querySelector("label")?.innerText?.trim();
+                            return lbl === toggleLabel;
+                        });
+
+                    if (!toggleInput) return;
+
+                    // Find the consumable field
+                    const consumableField = Array.from(section.querySelectorAll(".info-field"))
+                        .find(f => f.querySelector("label")?.innerText?.trim() === consumableLabel);
+
+                    if (!consumableField) return;
+
+                    const valueSpan = consumableField.querySelector(".field-value");
+                    const currentValue = valueSpan ? (valueSpan.innerText === "-" ? "" : valueSpan.innerText) : "";
+
+                    if (toggleInput.checked) {
+                        // Toggle is ON → make consumable editable
+                        if (valueSpan) {
+                            valueSpan.outerHTML = `<input type="text" value="${currentValue}" class="order-consumable-input">`;
+                        }
+                    } else {
+                        // Toggle is OFF → keep as display "-"
+                        if (valueSpan) {
+                            valueSpan.innerText = "-";
+                        }
+                    }
+                });
+
+                icon.innerHTML = '<i class="fas fa-check"></i>';
+                icon.onclick = function () { saveSection(this); };
+                return;
+            }
+            function handleOrderToggle(toggle) {
+                const section = toggle.closest(".change-section");
+                if (!section) return;
+
+                const toggleLabel = toggle.closest(".info-field")?.querySelector("label")?.innerText?.trim();
+                if (!toggleLabel) return;
+
+                const orderMap = {
+                    "Drum Order": "Drum Order Consumable",
+                    "Waste Toner": "Waste Toner Consumable",
+                    "Belt Unit": "Belt Unit Consumable",
+                    "Backup Order": "Backup Order Consumable"
+                };
+
+                const consumableLabel = orderMap[toggleLabel];
+                if (!consumableLabel) return;
+
+                const consumableField = Array.from(section.querySelectorAll(".info-field"))
+                    .find(f => f.querySelector("label")?.innerText?.trim() === consumableLabel);
+
+                if (!consumableField) return;
+
+                const existingInput = consumableField.querySelector("input.order-consumable-input");
+                const existingSpan = consumableField.querySelector(".field-value");
+
+                if (toggle.checked) {
+                    // Turned ON → make editable
+                    const currentVal = existingSpan
+                        ? (existingSpan.innerText === "-" ? "" : existingSpan.innerText)
+                        : (existingInput ? existingInput.value : "");
+
+                    if (existingSpan) {
+                        existingSpan.outerHTML = `<input type="text" value="${currentVal}" class="order-consumable-input">`;
+                    } else if (existingInput) {
+                        existingInput.disabled = false;
+                    }
+                } else {
+                    // Turned OFF → force back to "-"
+                    if (existingInput) {
+                        existingInput.outerHTML = `<span class="field-value">-</span>`;
+                    } else if (existingSpan) {
+                        existingSpan.innerText = "-";
+                    }
+                }
+            }
+
+            // =====================================================
+            // NORMAL SECTIONS (including Warranty)
+            // =====================================================
+
+            // These toggles must ALWAYS stay disabled
+            const nonEditableToggles = [
+                // "Amazon Dart",
+                // "Consumable",
+                // "Barracuda",
+                // "Brother Plus",
+                // "Model Price Setup",
+                // "Consumable Price Setup"
+            ];
+
+            // Apply country dimming first
+            if (sectionName === "Warranty Information") {
+                applyCountryWarrantyRestrictions();
+            }
+
+            // Enable / disable toggles
+            section.querySelectorAll('input[type="checkbox"]').forEach(toggle => {
+                const label = toggle.closest(".info-field")?.querySelector("label")?.innerText?.trim();
+
+                // Keep permanently non-editable ones disabled
+                if (nonEditableToggles.includes(label)) {
+                    toggle.disabled = true;
+                    return;
+                }
+
+                // For Warranty section → respect country restriction
+                if (sectionName === "Warranty Information") {
+                    const warrantyKey = toggle.closest(".info-field")?.dataset?.warranty;
+                    if (warrantyKey && !isWarrantyAllowed(warrantyKey)) {
+                        toggle.disabled = true;               // stay disabled + dimmed
+                    } else {
+                        toggle.disabled = false;              // allow editing
+                    }
+                } else {
+                    toggle.disabled = false;
+                }
+            });
+
+            // Expand section if collapsed
+            const content = section.querySelector(".change-content");
+            const toggleBtn = section.querySelector(".toggle-icon");
+
+            if (content.style.display === "none") {
+                content.style.display = "block";
+                if (toggleBtn) {
+                    toggleBtn.querySelector("i").className = "fas fa-chevron-up";
+                }
+            }
+
+            // Snapshot original values (only once)
+            if (!section.dataset.originalValues) {
+                const fields = section.querySelectorAll(".info-field");
+                const values = [];
+                const keys = [];
+
+                fields.forEach(f => {
+                    const label = f.querySelector("label")?.innerText?.trim() || "";
+                    let value = "-";
+
+                    const valueField = f.querySelector(".field-value");
+                    const toggleField = f.querySelector('input[type="checkbox"]');
+
+                    if (toggleField) {
+                        value = toggleField.checked ? "Yes" : "No";
+                    } else if (valueField) {
+                        value = valueField.innerText?.trim() || "-";
+                    }
+
+                    let sub = "-";
+                    const subBlock = f.closest(".pricing-sub-block");
+                    if (subBlock) {
+                        sub = subBlock.querySelector(".pricing-sub-block-title")?.innerText?.trim() || "-";
+                    }
+
+                    keys.push(sub + "||" + label);
+                    values.push(value);
+                });
+
+                section.dataset.originalValues = JSON.stringify(values);
+                section.dataset.originalKeys = JSON.stringify(keys);
+            }
+
+            // Hide the expand/collapse icon while editing
+            const toggle = section.querySelector(".toggle-icon");
+            if (toggle) toggle.style.display = "none";
+
+            // =====================================================
+            // Convert display fields → editable controls
+            // =====================================================
+            const displayFields = section.querySelectorAll(".field-value");
+
+            const readOnlyFields = [
+                "Plant", "Material Type", "Industry Sector", "Material Group",
+                "Base Unit of Measure", "Division", "Language",
+                "Material Description", "Distribution Channel", "Consumable"
+            ];
+
+            const displayOnlyFields = [
+                "Material Number",
+                "Country",
+                "Plant",
+                "Material Type",
+                "Industry Sector",
+                "Material Group",
+                "Base Unit of Measure",
+                "Division",
+                "Cross Plant Status",
+                "Cross Distribution Status",
+                "Language",
+                "Material Description",
+                "Distribution Channel",
+                "Distribution Material Status",
+                "Konda",
+                "Sales Organization",
+                "Condition Type",
+                "Consumable",
+                // SKUs stay as display-only (managed by handleWarrantyToggle)
+                "Standard Warranty SKU", "Extended Warranty SKU",
+                "BrotherCare SKU", "BrotherPlus SKU" ,
+                 "Valid From",
+                "Valid To"
+            ];
+
+            const yesNoFields = [
+                "Amazon Dart", "Auto Reorder", "Barracuda", "Brother Plus",
+                "Model Price Setup", "Consumable Price Setup",
+                "Basic", "Occasional", "Moderate", "Frequent", "High", "Power",
+                "Backup Order", "Drum Order", "Waste Toner", "Belt Unit"
+            ];
+
+            const consumableFields = [
+                "Drum Order Consumable", "Waste Toner Consumable",
+                "Belt Unit Consumable", "Backup Order Consumable"
+            ];
+
+            displayFields.forEach(field => {
+
+                const value = field.innerText === "-" ? "" : field.innerText;
+                const label = field.closest(".info-field")?.querySelector("label")?.innerText?.trim();
+
+                if (!label) return;
+
+                // ---------- Display-only fields (never become inputs) ----------
+                if (displayOnlyFields.includes(label)) {
+                    field.classList.add("display-only");
+                    return;
+                }
+
+                // ---------- WARRANTY LENGTH FIELDS ----------
+                // We deliberately do NOT convert them here.
+                // handleWarrantyToggle is the single source of truth.
+                if (
+                    label === "Standard Warranty Length" ||
+                    label === "Extended Warranty Length" ||
+                    label === "BrotherCare Warranty Length" ||
+                    label === "BrotherPlus Warranty Length"
+                ) {
+                    // Leave as-is. handleWarrantyToggle will manage them.
+                    return;
+                }
+
+                // ---------- Yes/No toggles ----------
+                if (yesNoFields.includes(label)) {
+
+                    const checked = value === "Yes" ? "checked" : "";
+
+                    const readOnlyCompatibilityFields = [
+
+                    ];
+
+                    const disabledAttr = readOnlyCompatibilityFields.includes(label) ? "disabled" : "";
+                    const styleAttr = readOnlyCompatibilityFields.includes(label) ? 'style="pointer-events:none;"' : "";
+
+                    field.outerHTML = `
         <div class="switch-wrapper">
-            <label class="switch" ${styleAttr}>
-                <input
-                    type="checkbox"
-                    ${checked}
-                    ${disabledAttr}
-                    data-toggle-label="${label}"
-                    onchange="
-                        toggleWarrantyLength(this,'${label}');
-                        togglePricingBlock(this,'${label}');
-                    ">
-                <span class="slider"></span>
-            </label>
+          <label class="switch" ${styleAttr}>
+            <input type="checkbox"
+                   ${checked}
+                   ${disabledAttr}
+                   data-toggle-label="${label}"
+                   onchange="togglePricingBlock(this,'${label}')">
+            <span class="slider"></span>
+          </label>
         </div>
-    `;
-        }
+      `;
+                    return;
+                }
 
-
-        else if (consumableFields.includes(label)) {
-
-          field.outerHTML = `
-        <span
-            class="field-value consumable-display"
-            data-consumable-field="${label}">
-            ${value || "-"}
+                // ---------- Consumable fields ----------
+                if (consumableFields.includes(label)) {
+                    field.outerHTML = `
+        <span class="field-value consumable-display"
+              data-consumable-field="${label}">
+          ${value || "-"}
         </span>
-    `;
-          return;
+      `;
+                    return;
+                }
+
+                // ---------- Date fields ----------
+                if (label === "Valid From" || label === "Valid To") {
+                    let dateValue = "";
+                    if (value && value !== "-") {
+                        const [day, month, year] = value.split("/");
+                        dateValue = `${year}-${month}-${day}`;
+                    }
+                    field.outerHTML = `<input type="date" value="${dateValue}">`;
+                    return;
+                }
+
+                // ---------- Normal text fields ----------
+                const isReadOnlyField = readOnlyFields.includes(label);
+
+                if (isReadOnlyField) {
+                    field.outerHTML = `
+        <input type="text"
+               value="${value}"
+               readonly
+               class="material-readonly">
+      `;
+                } else {
+                    field.outerHTML = `<input type="text" value="${value}">`;
+                }
+            });
+
+            // Change icon to save mode
+            icon.innerHTML = '<i class="fas fa-check"></i>';
+            icon.onclick = function () {
+                saveSection(this);
+            };
+
+            // =====================================================
+            // After converting fields – force warranty rows to correct state
+            // =====================================================
+            if (sectionName === "Warranty Information") {
+
+                // Re-apply country dimming (important)
+                applyCountryWarrantyRestrictions();
+
+                // For every warranty toggle that is currently ON → make length editable
+                section.querySelectorAll('input[data-toggle-label]').forEach(toggle => {
+                    if (toggle.disabled) return;               // skip dimmed ones
+
+                    // Call our new handler so the length/SKU are correctly set up
+                    handleWarrantyToggle(toggle);
+                });
+            }
+
+
         }
-        else if (
-          label === "Valid From" ||
-          label === "Valid To"
-        ) {
 
-          let dateValue = "";
+        function togglePricingBlock(toggle, label) {
 
-          if (value && value !== "-") {
+            const section =
+                toggle.closest(".change-content");
 
-            const [day, month, year] = value.split("/");
 
-            dateValue = `${year}-${month}-${day}`;
-          }
 
-          field.outerHTML = `
-    <input
-      type="date"
-      value="${dateValue}">
-  `;
+            if (!section) return;
+
+            if (label === "Barracuda") {
+
+                const block =
+                    section.querySelector("#barracudaDetails");
+
+                if (block) {
+
+                    block.style.display =
+                        toggle.checked ? "block" : "none";
+                }
+            }
+
+            if (label === "Model Price Setup") {
+
+                const block =
+                    section.querySelector("#b1PricingDetails");
+
+                if (block) {
+                    block.style.display =
+                        toggle.checked ? "block" : "none";
+                }
+            }
+
+            if (label === "Consumable Price Setup") {
+
+                const block =
+                    section.querySelector("#brPricingDetails");
+
+                if (block) {
+                    block.style.display =
+                        toggle.checked ? "block" : "none";
+                }
+            }
         }
-        else {
+        function markAsChanged() {
 
-          const isReadOnlyField =
-            readOnlyFields.includes(label);
+            if (hasChanges) return;
 
-          if (isReadOnlyField) {
+            hasChanges = true;
 
-            field.outerHTML =
-              `<input type="text"
-       value="${value}"
-       readonly
-       class="material-readonly">`;
-
-          } else {
-
-            field.outerHTML =
-              `<input type="text"
-       value="${value}">`;
-          }
+            showReviewButton();
         }
-      });
+        function showReviewButton() {
 
-      section.querySelectorAll(
-        'input[data-toggle-label]'
-      ).forEach(toggle => {
+            const existing =
+                document.getElementById("reviewChangesBtn");
 
-        const warrantyType =
-          toggle.dataset.toggleLabel;
+            if (existing) return;
 
-        toggleWarrantyLength(
-          toggle,
-          warrantyType
-        );
-
-        // toggleConsumableField(
-        //   toggle
-        // );
-
-      });
-      icon.innerHTML =
-        '<i class="fas fa-check"></i>';
-
-      icon.onclick = function () {
-        saveSection(this);
-      };
-    }
-    function togglePricingBlock(toggle, label) {
-
-      const section =
-        toggle.closest(".change-content");
-
-
-
-      if (!section) return;
-
-      if (label === "Barracuda") {
-
-        const block =
-          section.querySelector("#barracudaDetails");
-
-        if (block) {
-
-          block.style.display =
-            toggle.checked ? "block" : "none";
-        }
-      }
-
-      if (label === "Barracuda Price Setup") {
-
-        const block =
-          section.querySelector("#b1PricingDetails");
-
-        if (block) {
-          block.style.display =
-            toggle.checked ? "block" : "none";
-        }
-      }
-
-      if (label === "Auto Reorder Price Setup") {
-
-        const block =
-          section.querySelector("#brPricingDetails");
-
-        if (block) {
-          block.style.display =
-            toggle.checked ? "block" : "none";
-        }
-      }
-    }
-    function markAsChanged() {
-
-      if (hasChanges) return;
-
-      hasChanges = true;
-
-      showReviewButton();
-    }
-    function showReviewButton() {
-
-      const existing =
-        document.getElementById("reviewChangesBtn");
-
-      if (existing) return;
-
-      document
-        .getElementById("modelChangeResult")
-        .insertAdjacentHTML(
-          "beforeend",
-          `
+            document
+                .getElementById("modelChangeResult")
+                .insertAdjacentHTML(
+                    "beforeend",
+                    `
       <div class="review-container">
 
         <button
@@ -1801,28 +1759,28 @@
 
       </div>
       `
-        );
-    }
-    function reviewChanges() {
+                );
+        }
+        function reviewChanges() {
 
-      if (changedFields.length === 0) {
+            if (changedFields.length === 0) {
 
-        alert("No changes found.");
+                alert("No changes found.");
 
-        return;
-      }
-      console.log("changedFields =", changedFields);
+                return;
+            }
+            console.log("changedFields =", changedFields);
 
-      showReviewPopup(changedFields);
-    }
-    function showReviewPopup(changes) {
-      if (changes.length === 0) {
-        alert("No changes detected.");
-        return;
-      }
+            showReviewPopup(changedFields);
+        }
+        function showReviewPopup(changes) {
+            if (changes.length === 0) {
+                alert("No changes detected.");
+                return;
+            }
 
-      // Build the modal HTML (same as before)
-      let html = `
+            // Build the modal HTML (same as before)
+            let html = `
     <div class="review-modal" id="modelChangeReviewModal">
       <div class="review-content">
         <div class="review-header">
@@ -1850,75 +1808,75 @@
             <tbody>
   `;
 
-      // Group: section → subCategory → items
-      const grouped = {};
+            // Group: section → subCategory → items
+            const grouped = {};
 
-      changes.forEach(change => {
-        const section = change.section;
-        const sub = change.subCategory || "-";
+            changes.forEach(change => {
+                const section = change.section;
+                const sub = change.subCategory || "-";
 
-        if (!grouped[section]) grouped[section] = {};
-        if (!grouped[section][sub]) grouped[section][sub] = [];
-        grouped[section][sub].push(change);
-      });
+                if (!grouped[section]) grouped[section] = {};
+                if (!grouped[section][sub]) grouped[section][sub] = [];
+                grouped[section][sub].push(change);
+            });
 
-      Object.keys(grouped).forEach(section => {
-        const subGroups = grouped[section];
-        const subKeys = Object.keys(subGroups);
+            Object.keys(grouped).forEach(section => {
+                const subGroups = grouped[section];
+                const subKeys = Object.keys(subGroups);
 
-        // total rows in this section (for Category rowspan)
-        let sectionRowCount = 0;
-        subKeys.forEach(sub => {
-          sectionRowCount += subGroups[sub].length;
-        });
+                // total rows in this section (for Category rowspan)
+                let sectionRowCount = 0;
+                subKeys.forEach(sub => {
+                    sectionRowCount += subGroups[sub].length;
+                });
 
-        let sectionFirstRow = true;
+                let sectionFirstRow = true;
 
-        subKeys.forEach(sub => {
-          const items = subGroups[sub];
-          const subRowCount = items.length;
+                subKeys.forEach(sub => {
+                    const items = subGroups[sub];
+                    const subRowCount = items.length;
 
-          items.forEach((change, index) => {
-            html += `<tr>`;
+                    items.forEach((change, index) => {
+                        html += `<tr>`;
 
-            // Category – only on the first row of the whole section
-            if (sectionFirstRow) {
-              html += `
+                        // Category – only on the first row of the whole section
+                        if (sectionFirstRow) {
+                            html += `
           <td rowspan="${sectionRowCount}" class="category-cell">
             ${section}
           </td>
         `;
-              sectionFirstRow = false;
-            }
+                            sectionFirstRow = false;
+                        }
 
-            // Sub Category – only on the first row of this sub group
-            if (index === 0) {
-              html += `
+                        // Sub Category – only on the first row of this sub group
+                        if (index === 0) {
+                            html += `
           <td rowspan="${subRowCount}" class="category-cell">
             ${sub}
           </td>
         `;
-            }
+                        }
 
-            html += `
+                        html += `
         <td>${change.field}</td>
         <td class="before-value">${change.before}</td>
         <td class="${change.after === "Yes" ? "after-value yes-value" :
-                change.after === "No" ? "after-value no-value" : "after-value"
-              }">
+                                change.after === "No" ? "after-value no-value" : "after-value"
+                            }">
           ${change.after}
         </td>
         <td class="status-cell">
           ${change.after === "No"
-                ? '<i class="fa-regular fa-circle-xmark status-no"></i>'
-                : '<i class="fa-regular fa-circle-check status-yes"></i>'
-              }
+                                ? '<i class="fa-regular fa-circle-xmark status-no"></i>'
+                                : '<i class="fa-regular fa-circle-check status-yes"></i>'
+                            }
         </td>
       </tr>`;
-          });
-        });
-      });
-      html += `
+                    });
+                });
+            });
+            html += `
             </tbody>
           </table>
         </div>
@@ -1932,27 +1890,27 @@
     </div>
   `;
 
-      // Inject styles into parent if they are not already present
-      injectReviewStylesToParent();
+            // Inject styles into parent if they are not already present
+            injectReviewStylesToParent();
 
-      // Append modal to the PARENT document
+            // Append modal to the PARENT document
 
-      window.parent.document.body.insertAdjacentHTML("beforeend", html);
+            window.parent.document.body.insertAdjacentHTML("beforeend", html);
 
-      // Prevent background scrolling
-      window.parent.document.body.style.overflow = "hidden";
-      const parentContent = window.parent.document.querySelector(".content");
-      if (parentContent) {
-        parentContent.style.overflowY = "hidden";
-      }
-    }
+            // Prevent background scrolling
+            window.parent.document.body.style.overflow = "hidden";
+            const parentContent = window.parent.document.querySelector(".content");
+            if (parentContent) {
+                parentContent.style.overflowY = "hidden";
+            }
+        }
 
-    function injectReviewStylesToParent() {
-      if (window.parent.document.getElementById("modelChangeReviewStyles")) return;
+        function injectReviewStylesToParent() {
+            if (window.parent.document.getElementById("modelChangeReviewStyles")) return;
 
-      const style = window.parent.document.createElement("style");
-      style.id = "modelChangeReviewStyles";
-      style.textContent = `
+            const style = window.parent.document.createElement("style");
+            style.id = "modelChangeReviewStyles";
+            style.textContent = `
     .review-modal {
       position: fixed;
       top: 0;
@@ -2097,81 +2055,81 @@
       transform: translateY(0);
     }
   `;
-      window.parent.document.head.appendChild(style);
-    }
+            window.parent.document.head.appendChild(style);
+        }
 
-    function closeReviewPopup() {
-      // This will be called from parent, but keep a local version for safety
-      const modal = document.querySelector(".review-modal");
-      if (modal) modal.remove();
-    }
-
-
-    function toggleSection(btn) {
-
-      const section =
-        btn.closest(".change-section");
-
-      const content =
-        section.querySelector(".change-content");
-
-      const icon =
-        btn.querySelector("i");
-
-      if (content.style.display === "none") {
-
-        content.style.display = "block";
-
-        icon.className =
-          "fas fa-chevron-up";
-
-      } else {
-
-        content.style.display = "none";
-
-        icon.className =
-          "fas fa-chevron-down";
-      }
-    }
-    function showChangeBlocks(record, searchType) {
-
-      originalData = JSON.parse(JSON.stringify(record)); //Store the Original data
-      const showBarracudaDetails = record.Barracuda === "X";
-      const isB1PriceSetup = record.Selkzb1 === "X";
-
-      const isBRPriceSetup = record.Selkzbr === "X";
+        function closeReviewPopup() {
+            // This will be called from parent, but keep a local version for safety
+            const modal = document.querySelector(".review-modal");
+            if (modal) modal.remove();
+        }
 
 
-      const showMaterial =
-        searchType === "full" ||
-        searchType === "material";
+        function toggleSection(btn) {
 
-      const showWarranty =
-        searchType === "full" ||
-        searchType === "warranty";
+            const section =
+                btn.closest(".change-section");
 
-      const showCompatibility =
-        searchType === "full" ||
-        searchType === "compatibility";
+            const content =
+                section.querySelector(".change-content");
 
-      const showPricing =
-        searchType === "full" ||
-        searchType === "pricing";
+            const icon =
+                btn.querySelector("i");
 
-      const showOrder =
-        searchType === "full" ||
-        searchType === "order";
+            if (content.style.display === "none") {
 
-      document.getElementById("modelChangeResult").innerHTML = `
+                content.style.display = "block";
+
+                icon.className =
+                    "fas fa-chevron-up";
+
+            } else {
+
+                content.style.display = "none";
+
+                icon.className =
+                    "fas fa-chevron-down";
+            }
+        }
+        function showChangeBlocks(record, searchType) {
+
+            originalData = JSON.parse(JSON.stringify(record)); //Store the Original data
+            const showBarracudaDetails = record.Barracuda === "X";
+            const isB1PriceSetup = record.Selkzb1 === "X";
+
+            const isBRPriceSetup = record.Selkzbr === "X";
+
+
+            const showMaterial =
+                searchType === "full" ||
+                searchType === "material";
+
+            const showWarranty =
+                searchType === "full" ||
+                searchType === "warranty";
+
+            const showCompatibility =
+                searchType === "full" ||
+                searchType === "compatibility";
+
+            const showPricing =
+                searchType === "full" ||
+                searchType === "pricing";
+
+            const showOrder =
+                searchType === "full" ||
+                searchType === "order";
+
+            document.getElementById("modelChangeResult").innerHTML = `
 ${showMaterial ? `
 <div class="change-section">
     <div class="change-header">
     <h3>Material Information</h3>
          <div class="header-actions">
-             
-             
-
-              <div class="toggle-icon"
+            <div class="edit-icon" onclick="enableEdit(this)">
+              <i class="fas fa-pen-to-square"></i>
+            </div>
+            <div class="toggle-icon"
               onclick="toggleSection(this)">
               <i class="fas fa-chevron-up"></i>
              </div>
@@ -2262,117 +2220,117 @@ ${showMaterial ? `
 </div>
 ` : ''}
 
-
 ${showWarranty ? `
-<div class="change-section">
-    <div class="change-header">
-        <h3>Warranty Information</h3>
-       <div class="header-actions">
-            
-              <div class="edit-icon" onclick="enableEdit(this)">
-                <i class="fas fa-pen-to-square"></i>
-              </div>
-              <div class="toggle-icon"
-              onclick="toggleSection(this)">
-              <i class="fas fa-chevron-up"></i>
-             </div>
-
-           </div>
+<div class="change-section" id="warrantySection">
+  <div class="change-header">
+    <h3>Warranty Information</h3>
+    <div class="header-actions">
+      <div class="edit-icon" onclick="enableEdit(this)">
+        <i class="fas fa-pen-to-square"></i>
+      </div>
+      <div class="toggle-icon" onclick="toggleSection(this)">
+        <i class="fas fa-chevron-up"></i>
+      </div>
     </div>
-
-    <div class="change-content">
-        <div class="warranty-grid">
-
-  <!-- ========== STANDARD ========== -->
-  <div class="info-field">
-    <label>Standard Warranty</label>
-    <div class="switch-wrapper">
-<label class="switch">
-<input
-type="checkbox"
-${record.StdWtyType === "S" ? "checked" : ""}
-disabled>
-<span class="slider"></span>
-</label>
-</div>
-  </div>
-  <div class="info-field">
-    <label>Standard Warranty Length</label>
-    <span class="field-value">${record.StdWtyLen || "-"} ${record.StdWtyLenUnit || ""}</span>
-  </div>
-  <div class="info-field">
-    <label>Standard Warranty SKU</label>
-    <span class="field-value">${record.Swsku || "-"}</span>
   </div>
 
-  <!-- ========== EXTENDED ========== -->
-  <div class="info-field">
-    <label>Extended Warranty</label>
-    <div class="switch-wrapper">
-  <label class="switch">
-    <input
-      type="checkbox"
-      ${record.ExtdWtyType === "X" ? "checked" : ""}
-      disabled>
-    <span class="slider"></span>
-  </label>
-</div>
-  </div>
-  <div class="info-field">
-    <label>Extended Warranty Length</label>
-    <span class="field-value">${record.ExtdWtyLen || "-"} ${record.ExtdWtyLenUnit || ""}</span>
-  </div>
-  <div class="info-field">
-    <label>Extended Warranty SKU</label>
-    <span class="field-value">${record.Ewsku || "-"}</span>
-  </div>
+  <div class="change-content">
+    <div class="warranty-grid" id="warrantyGrid">
 
-  <!-- ========== BROTHER CARE ========== -->
-  <div class="info-field">
-    <label>BrotherCare Warranty</label>
-   <div class="switch-wrapper">
-  <label class="switch">
-    <input
-      type="checkbox"
-      ${record.BcareWtyType === "B" ? "checked" : ""}
-      disabled>
-    <span class="slider"></span>
-  </label>
-</div>
-  </div>
-  <div class="info-field">
-    <label>BrotherCare Warranty Length</label>
-    <span class="field-value">${record.BcareWtyLen || "-"} ${record.BcareWtyLenUnit || ""}</span>
-  </div>
-  <div class="info-field">
-    <label>BrotherCare SKU</label>
-    <span class="field-value">${record.Bcsku || "-"}</span>
-  </div>
+      <!-- ========== STANDARD ========== -->
+      <div class="info-field" data-warranty="Standard">
+        <label>Standard Warranty</label>
+        <div class="switch-wrapper">
+          <label class="switch">
+            <input type="checkbox"
+                   ${record.StdWtyType === "S" ? "checked" : ""}
+                   disabled
+                   data-toggle-label="Standard Warranty"
+                   onchange="handleWarrantyToggle(this)">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="info-field" data-warranty="Standard">
+        <label>Standard Warranty Length</label>
+        <span class="field-value">${record.StdWtyLen || "-"} ${record.StdWtyLenUnit || ""}</span>
+      </div>
+      <div class="info-field" data-warranty="Standard">
+        <label>Standard Warranty SKU</label>
+        <span class="field-value">${record.Swsku || "-"}</span>
+      </div>
 
-  <!-- ========== BROTHER PLUS ========== -->
-  <div class="info-field">
-    <label>BrotherPlus Warranty</label>
-   <div class="switch-wrapper">
-  <label class="switch">
-    <input
-      type="checkbox"
-      ${record.BplusWtyType === "L" ? "checked" : ""}
-      disabled>
-    <span class="slider"></span>
-  </label>
-</div>
-  </div>
-  <div class="info-field">
-    <label>BrotherPlus Warranty Length</label>
-    <span class="field-value">${record.BplusWtyLen || "-"} ${record.BplusWtyLenUnit || ""}</span>
-  </div>
-  <div class="info-field">
-    <label>BrotherPlus SKU</label>
-    <span class="field-value">${record.Bpsku || "-"}</span>
-  </div>
+      <!-- ========== EXTENDED ========== -->
+      <div class="info-field" data-warranty="Extended">
+        <label>Extended Warranty</label>
+        <div class="switch-wrapper">
+          <label class="switch">
+            <input type="checkbox"
+                   ${record.ExtdWtyType === "X" ? "checked" : ""}
+                   disabled
+                   data-toggle-label="Extended Warranty"
+                   onchange="handleWarrantyToggle(this)">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="info-field" data-warranty="Extended">
+        <label>Extended Warranty Length</label>
+        <span class="field-value">${record.ExtdWtyLen || "-"} ${record.ExtdWtyLenUnit || ""}</span>
+      </div>
+      <div class="info-field" data-warranty="Extended">
+        <label>Extended Warranty SKU</label>
+        <span class="field-value">${record.Ewsku || "-"}</span>
+      </div>
 
-</div>
+      <!-- ========== BROTHER CARE ========== -->
+      <div class="info-field" data-warranty="BrotherCare" id="bcToggleField">
+        <label>BrotherCare Warranty</label>
+        <div class="switch-wrapper">
+          <label class="switch">
+            <input type="checkbox"
+                   ${record.BcareWtyType === "B" ? "checked" : ""}
+                   disabled
+                   data-toggle-label="BrotherCare Warranty"
+                   onchange="handleWarrantyToggle(this)">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="info-field" data-warranty="BrotherCare" id="bcLengthField">
+        <label>BrotherCare Warranty Length</label>
+        <span class="field-value">${record.BcareWtyLen || "-"} ${record.BcareWtyLenUnit || ""}</span>
+      </div>
+      <div class="info-field" data-warranty="BrotherCare" id="bcSkuField">
+        <label>BrotherCare SKU</label>
+        <span class="field-value">${record.Bcsku || "-"}</span>
+      </div>
+
+      <!-- ========== BROTHER PLUS ========== -->
+      <div class="info-field" data-warranty="BrotherPlus" id="bpToggleField">
+        <label>BrotherPlus Warranty</label>
+        <div class="switch-wrapper">
+          <label class="switch">
+            <input type="checkbox"
+                   ${record.BplusWtyType === "L" ? "checked" : ""}
+                   disabled
+                   data-toggle-label="BrotherPlus Warranty"
+                   onchange="handleWarrantyToggle(this)">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="info-field" data-warranty="BrotherPlus" id="bpLengthField">
+        <label>BrotherPlus Warranty Length</label>
+        <span class="field-value">${record.BplusWtyLen || "-"} ${record.BplusWtyLenUnit || ""}</span>
+      </div>
+      <div class="info-field" data-warranty="BrotherPlus" id="bpSkuField">
+        <label>BrotherPlus SKU</label>
+        <span class="field-value">${record.Bpsku || "-"}</span>
+      </div>
+
     </div>
+  </div>
 </div>
 ` : ''}
 
@@ -2418,11 +2376,10 @@ ${showCompatibility ? `
 
         <div class="info-field">
           <label>Barracuda</label>
-          <div class="switch-wrapper compatibility-readonly">
-            <label class="switch">
-              <input type="checkbox" 
-                     ${record.Barracuda === "X" ? "checked" : ""} 
-                     disabled 
+            <div class="switch-wrapper">
+              <label class="switch">
+              <input type="checkbox" ${record.Barracuda === "X" ? "checked" : ""} 
+                    disabled data-toggle-label="Barracuda"
                      data-toggle-label="Barracuda"
                      onchange="toggleBarracudaRightColumn(this)">
               <span class="slider"></span>
@@ -2432,9 +2389,9 @@ ${showCompatibility ? `
 
         <div class="info-field">
           <label>Brother Plus</label>
-          <div class="switch-wrapper compatibility-readonly">
+           <div class="switch-wrapper">
             <label class="switch">
-              <input type="checkbox" ${record.Bplus === "X" ? "checked" : ""} disabled data-toggle-label="Brother Plus">
+              <input type="checkbox" ${record.Bplus === "X" ? "checked" : ""} disabled data-toggle-label="Bplus" >
               <span class="slider"></span>
             </label>
           </div>
@@ -2488,8 +2445,8 @@ ${showCompatibility ? `
       <label>Product Warranty</label>
       <span class="field-value">
   ${record.B1standardwarr != null && record.B1standardwarr !== ""
-            ? record.B1standardwarr + " Months"
-            : "-"}
+                        ? record.B1standardwarr + " Months"
+                        : "-"}
 </span>
     </div>
   </div>
@@ -2524,19 +2481,21 @@ ${showPricing ? `
     <div class="pricing-sub-block">
 
         <div class="pricing-sub-block-title">
-            Barracuda Price Details
+            Model Price Details
         </div>
 
         <div class="toggle-grid">
 
             <div class="info-field">
-                <label>Barracuda Price Setup</label>
+                <label>Model Price Setup</label>
                  <div class="switch-wrapper">
     <label class="switch">
         <input
             type="checkbox"
             ${record.Selkzb1 === "X" ? "checked" : ""}
-            disabled>
+            disabled
+            data-toggle-label="Model Price Setup"
+    onchange="togglePricingBlock(this,'Model Price Setup')">
         <span class="slider"></span>
     </label>
 </div>           
@@ -2612,19 +2571,21 @@ ${showPricing ? `
     <div class="pricing-sub-block">
 
         <div class="pricing-sub-block-title">
-            Auto Reorder Price Details
+            Consumable Price Details
         </div>
 
         <div class="toggle-grid">
 
             <div class="info-field">
-                <label>Auto Reorder Price Setup</label>
+                <label>Consumable Price Setup</label>
                 <div class="switch-wrapper">
     <label class="switch">
         <input
             type="checkbox"
             ${record.Selkzbr === "X" ? "checked" : ""}
-            disabled>
+            disabled
+            data-toggle-label="Consumable Price Setup"
+    onchange="togglePricingBlock(this,'Consumable Price Setup')">
         <span class="slider"></span>
     </label>
 </div>
@@ -2810,137 +2771,411 @@ disabled>
 </div>
 ` : ''}
 `;
-    }
+            // After document.getElementById("modelChangeResult").innerHTML = `...`;
 
-    function toggleWarrantyLength(toggleElement, warrantyType) {
-
-      const infoField = toggleElement.closest(".info-field");
-
-      const lengthFieldContainer = infoField.nextElementSibling;
-      const skuFieldContainer = lengthFieldContainer?.nextElementSibling;
-
-      if (!lengthFieldContainer) return;
-
-      const numberInput =
-        lengthFieldContainer.querySelector(".warranty-number");
-
-      const unitSelect =
-        lengthFieldContainer.querySelector(".warranty-unit");
-
-      const skuInput =
-        skuFieldContainer?.querySelector("input");
-
-      const isEnabled = toggleElement.checked;
-
-      // Enable / Disable Length
-      if (numberInput) {
-        numberInput.disabled = !isEnabled;
-      }
-
-      if (unitSelect) {
-        unitSelect.disabled = !isEnabled;
-      }
-
-      // Enable / Disable SKU
-      if (skuInput) {
-        skuInput.disabled = !isEnabled;
-      }
-
-      // Toggle OFF
-      if (!isEnabled) {
-
-        if (numberInput) numberInput.value = "";
-
-        if (unitSelect) {
-          unitSelect.value = "YR";
+            if (showWarranty) {
+                // small delay so DOM is ready
+                setTimeout(() => {
+                    applyCountryWarrantyRestrictions();
+                }, 50);
+            }
         }
 
-        if (skuInput) {
-          skuInput.value = "";
+        // =====================================================
+        // WARRANTY HELPERS
+        // =====================================================
+
+        function getCountry() {
+            return (document.getElementById("country")?.value || originalData?.Country || "").toUpperCase();
         }
-      }
 
-      // Toggle ON
-      else {
+        function isWarrantyAllowed(warrantyKey) {
+            const country = getCountry();
+            // CA → SW, EW, BC only
+            // US → SW, EW, BP only
+            if (warrantyKey === "BrotherCare") return country === "CA";
+            if (warrantyKey === "BrotherPlus") return country === "US";
+            return true; // Standard & Extended always allowed
+        }
 
-        // only apply defaults if there is no value
+        function applyCountryWarrantyRestrictions() {
+            const country = getCountry();
 
-        if (numberInput && !numberInput.value) {
+            // BrotherCare – only for CA
+            const bcFields = document.querySelectorAll('[data-warranty="BrotherCare"]');
+            bcFields.forEach(f => {
+                if (country === "US") {
+                    f.classList.add("warranty-row-disabled");
+                } else {
+                    f.classList.remove("warranty-row-disabled");
+                }
+            });
 
-          if (
-            warrantyType === "BrotherCare Warranty" ||
-            warrantyType === "BrotherPlus Warranty"
-          ) {
+            // BrotherPlus – only for US
+            const bpFields = document.querySelectorAll('[data-warranty="BrotherPlus"]');
+            bpFields.forEach(f => {
+                if (country === "CA") {
+                    f.classList.add("warranty-row-disabled");
+                } else {
+                    f.classList.remove("warranty-row-disabled");
+                }
+            });
+        }
+        function clampWarrantyLength(input) {
+            let val = parseInt(input.value, 10);
+            if (isNaN(val) || val < 0) val = 0;
+            if (val > 2) val = 2;
+            input.value = val;
+        }
 
-            numberInput.value = 6;
+        function getWarrantySku(type, length) {
+            const len = parseInt(length, 10);
+            if (!len || isNaN(len)) return "";
 
-            if (unitSelect) {
-              unitSelect.value = "MONTH";
+            if (type === "Standard Warranty") {
+                if (len === 1) return "BMGST_1";
+                if (len === 2) return "BMGST_2";
+            }
+            if (type === "Extended Warranty") {
+                if (len === 1) return "E1141EPSP";
+                if (len === 2) return "E1142EPSP";
+            }
+            if (type === "BrotherCare Warranty") {
+                return "BCARE_6MTHS";
+            }
+            if (type === "BrotherPlus Warranty") {
+                return "BPLUS_6MTHS";
+            }
+            return "";
+        }
+        function validateSwEwTotal() {
+            // Find the two length inputs
+            const swGroup = document.querySelector('.warranty-group[data-warranty="Standard Warranty"]');
+            const ewGroup = document.querySelector('.warranty-group[data-warranty="Extended Warranty"]');
+
+            // Clear previous errors first
+            document.querySelectorAll(".warranty-error").forEach(el => el.remove());
+
+            if (!swGroup && !ewGroup) return true; // nothing to validate
+
+            let swVal = 0;
+            let ewVal = 0;
+
+            if (swGroup) {
+                const input = swGroup.querySelector(".warranty-number");
+                swVal = parseInt(input?.value || "0", 10) || 0;
+            }
+            if (ewGroup) {
+                const input = ewGroup.querySelector(".warranty-number");
+                ewVal = parseInt(input?.value || "0", 10) || 0;
             }
 
-          } else {
+            // Only validate when both are ON (both groups exist)
+            if (!swGroup || !ewGroup) return true;
 
-            numberInput.value = 0;
+            const total = swVal + ewVal;
+
+            if (total !== 3) {
+                // Show error under both rows
+                const msg = `Standard + Extended must total 3 years (currently ${swVal} + ${ewVal} = ${total})`;
+
+                [swGroup, ewGroup].forEach(group => {
+                    const field = group.closest(".info-field");
+                    if (field && !field.querySelector(".warranty-error")) {
+                        const err = document.createElement("span");
+                        err.className = "warranty-error";
+                        err.innerText = msg;
+                        field.appendChild(err);
+                    }
+                });
+                return false;
+            }
+
+            // Also enforce the exact combinations you asked for
+            // (SW=1 → EW must be 2)  or  (SW=2 → EW must be 1)
+            if (!((swVal === 1 && ewVal === 2) || (swVal === 2 && ewVal === 1))) {
+                const msg = `Allowed combinations only: SW=1 + EW=2  or  SW=2 + EW=1`;
+
+                [swGroup, ewGroup].forEach(group => {
+                    const field = group.closest(".info-field");
+                    if (field && !field.querySelector(".warranty-error")) {
+                        const err = document.createElement("span");
+                        err.className = "warranty-error";
+                        err.innerText = msg;
+                        field.appendChild(err);
+                    }
+                });
+                return false;
+            }
+
+            return true;
+        }
+
+        function handleWarrantyToggle(toggle) {
+            const label = toggle.dataset.toggleLabel;
+            const isOn = toggle.checked;
+
+            const infoField = toggle.closest(".info-field");
+            const lengthField = infoField.nextElementSibling;
+            const skuField = lengthField?.nextElementSibling;
+
+            if (!lengthField || !skuField) return;
+
+            // ===== TURNED OFF → clear everything =====
+            if (!isOn) {
+                if (lengthField.querySelector(".warranty-group") || lengthField.querySelector(".field-value")) {
+                    lengthField.innerHTML = `
+        <label>${lengthField.querySelector("label").innerText}</label>
+        <span class="field-value">-</span>
+      `;
+                }
+
+                const skuSpan = skuField.querySelector(".field-value") || skuField.querySelector("input");
+                if (skuSpan) {
+                    if (skuSpan.tagName === "INPUT") {
+                        skuSpan.value = "";
+                        skuSpan.disabled = true;
+                    } else {
+                        skuSpan.innerText = "-";
+                    }
+                }
+                return;
+            }
+
+            // ===== TURNED ON =====
+            const isEditMode = !!document.querySelector(".change-section .edit-icon .fa-check");
+
+            if (isEditMode) {
+
+                // Preserve existing length value if present (from span or already-editable group)
+                let existingNum = "";
+                let existingUnit = "YR";
+                const existingSpan = lengthField.querySelector(".field-value");
+                const existingGroup = lengthField.querySelector(".warranty-group");
+                if (existingSpan && existingSpan.innerText && existingSpan.innerText !== "-") {
+                    const parts = existingSpan.innerText.trim().split(/\s+/);
+                    existingNum = parts[0] || "";
+                    existingUnit = parts[1] || "YR";
+                } else if (existingGroup) {
+                    existingNum = existingGroup.querySelector(".warranty-number")?.value || "";
+                    existingUnit = existingGroup.querySelector(".warranty-unit")?.value || "YR";
+                }
+
+                // Preserve existing SKU value if present
+                let existingSku = "";
+                const existingSkuSpan = skuField.querySelector(".field-value");
+                const existingSkuInput = skuField.querySelector("input.warranty-sku-input, input[type='text']");
+                if (existingSkuSpan && existingSkuSpan.innerText && existingSkuSpan.innerText !== "-") {
+                    existingSku = existingSkuSpan.innerText.trim();
+                } else if (existingSkuInput && existingSkuInput.value) {
+                    existingSku = existingSkuInput.value.trim();
+                }
+
+                const isFixedMonth = (label === "BrotherCare Warranty" || label === "BrotherPlus Warranty");
+
+                let defaultNum = existingNum || "0";
+                let defaultUnit = existingUnit || "YR";
+
+                if (isFixedMonth) {
+                    defaultNum = "6";
+                    defaultUnit = "MO";
+                }
+
+                // ---------- BrotherCare / BrotherPlus ----------
+                if (isFixedMonth) {
+                    lengthField.innerHTML = `
+<label>${lengthField.querySelector("label").innerText}</label>
+<span class="field-value">6 MO</span>
+`;
+                }
+                // ---------- Standard / Extended ----------
+                else {
+                    lengthField.innerHTML = `
+<label>${lengthField.querySelector("label").innerText}</label>
+<div class="warranty-group" data-warranty="${label}">
+<input class="warranty-number" type="number" min="0" max="2"
+   value="${defaultNum}"
+   oninput="clampWarrantyLength(this); updateWarrantySku(this); validateSwEwTotal();">
+  <select class="warranty-unit" onchange="updateWarrantySku(this); validateSwEwTotal();">
+    <option value="YR" ${defaultUnit === "YR" ? "selected" : ""}>YR</option>
+  </select>
+</div>
+`;
+                }
+
+                // SKU – prefer existing value, fall back to auto-generated
+                const skuLabel = skuField.querySelector("label").innerText;
+                const autoSku = getWarrantySku(label, defaultNum);
+                const skuToUse = existingSku || autoSku || "";
+
+                if (label === "Standard Warranty" || label === "Extended Warranty") {
+                    skuField.innerHTML = `
+  <label>${skuLabel}</label>
+  <input type="text" class="warranty-sku-input" value="${skuToUse}">
+`;
+                } else {
+                    skuField.innerHTML = `
+  <label>${skuLabel}</label>
+  <span class="field-value">${skuToUse || "-"}</span>
+`;
+                }
+            }
+        }
+
+        function updateWarrantySku(el) {
+            const group = el.closest(".warranty-group");
+            if (!group) return;
+
+            const type = group.dataset.warranty; // "Standard Warranty" etc.
+            const numberInput = group.querySelector(".warranty-number");
+            const unitSelect = group.querySelector(".warranty-unit");
+
+            const length = numberInput?.value || "";
+            const sku = getWarrantySku(type, length);
+
+            // Find the SKU field (next sibling of length field)
+            const lengthField = group.closest(".info-field");
+            const skuField = lengthField?.nextElementSibling;
+
+            if (skuField) {
+                const span = skuField.querySelector(".field-value");
+                const input = skuField.querySelector("input.warranty-sku-input");
+
+                if (span) span.innerText = sku || "-";
+                if (input) input.value = sku || "";
+            }
+        }
+
+        function toggleWarrantyLength(toggleElement, warrantyType) {
+
+            const infoField = toggleElement.closest(".info-field");
+
+            const lengthFieldContainer = infoField.nextElementSibling;
+            const skuFieldContainer = lengthFieldContainer?.nextElementSibling;
+
+            if (!lengthFieldContainer) return;
+
+            const numberInput =
+                lengthFieldContainer.querySelector(".warranty-number");
+
+            const unitSelect =
+                lengthFieldContainer.querySelector(".warranty-unit");
+
+            const skuInput =
+                skuFieldContainer?.querySelector("input");
+
+            const isEnabled = toggleElement.checked;
+
+            // Enable / Disable Length
+            if (numberInput) {
+                numberInput.disabled = !isEnabled;
+            }
 
             if (unitSelect) {
-              unitSelect.value = "YR";
+                unitSelect.disabled = !isEnabled;
             }
-          }
+
+            // Enable / Disable SKU
+            if (skuInput) {
+                skuInput.disabled = !isEnabled;
+            }
+
+            // Toggle OFF
+            if (!isEnabled) {
+
+                if (numberInput) numberInput.value = "";
+
+                if (unitSelect) {
+                    unitSelect.value = "YR";
+                }
+
+                if (skuInput) {
+                    skuInput.value = "";
+                }
+            }
+
+            // Toggle ON
+            else {
+
+                // only apply defaults if there is no value
+
+                if (numberInput && !numberInput.value) {
+
+                    if (
+                        warrantyType === "BrotherCare Warranty" ||
+                        warrantyType === "BrotherPlus Warranty"
+                    ) {
+
+                        numberInput.value = 6;
+
+                        if (unitSelect) {
+                            unitSelect.value = "MO";
+                        }
+
+                    } else {
+
+                        numberInput.value = 0;
+
+                        if (unitSelect) {
+                            unitSelect.value = "YR";
+                        }
+                    }
+                }
+            }
         }
-      }
-    }
 
-    function convertToODataDate(dateValue) {
 
-      if (!dateValue || dateValue === "-") {
-        return null;
-      }
+        function convertToODataDate(dateValue) {
 
-      let day, month, year;
+            if (!dateValue || dateValue === "-") {
+                return null;
+            }
 
-      if (dateValue.includes("/")) {
+            let day, month, year;
 
-        [day, month, year] = dateValue.split("/");
+            if (dateValue.includes("/")) {
 
-      } else if (dateValue.includes("-")) {
+                [day, month, year] = dateValue.split("/");
 
-        [year, month, day] = dateValue.split("-");
-      } else {
+            } else if (dateValue.includes("-")) {
 
-        return null;
-      }
+                [year, month, day] = dateValue.split("-");
+            } else {
 
-      const date = new Date(
-        Number(year),
-        Number(month) - 1,
-        Number(day)
-      );
+                return null;
+            }
 
-      return `/Date(${date.getTime()})/`;
-    }
+            const date = new Date(
+                Number(year),
+                Number(month) - 1,
+                Number(day)
+            );
 
-    // success message after changes
-    function showSaveSuccessMessage() {
+            return `/Date(${date.getTime()})/`;
+        }
 
-  const reviewContent =
-    window.parent.document.querySelector(
-      ".review-content"
-    );
+        // success message after changes
+        function showSaveSuccessMessage() {
 
-  if (!reviewContent) {
-    return;
-  }
+            const reviewContent =
+                window.parent.document.querySelector(
+                    ".review-content"
+                );
 
-  const existing =
-    window.parent.document.getElementById(
-      "saveSuccessMessage"
-    );
+            if (!reviewContent) {
+                return;
+            }
 
-  if (existing) {
-    existing.remove();
-  }
+            const existing =
+                window.parent.document.getElementById(
+                    "saveSuccessMessage"
+                );
 
-  const successHTML = `
+            if (existing) {
+                existing.remove();
+            }
+
+            const successHTML = `
     <div
       id="saveSuccessMessage"
       style="
@@ -2993,33 +3228,33 @@ disabled>
     </div>
   `;
 
-  reviewContent.insertAdjacentHTML(
-    "beforeend",
-    successHTML
-  );
-}
+            reviewContent.insertAdjacentHTML(
+                "beforeend",
+                successHTML
+            );
+        }
 
-function showSaveSuccessCard() {
+        function showSaveSuccessCard() {
 
-  const reviewModal =
-    window.parent.document.getElementById(
-      "modelChangeReviewModal"
-    );
+            const reviewModal =
+                window.parent.document.getElementById(
+                    "modelChangeReviewModal"
+                );
 
-  if (!reviewModal) {
-    return;
-  }
+            if (!reviewModal) {
+                return;
+            }
 
-  const reviewContent =
-    reviewModal.querySelector(
-      ".review-content"
-    );
+            const reviewContent =
+                reviewModal.querySelector(
+                    ".review-content"
+                );
 
-  if (!reviewContent) {
-    return;
-  }
+            if (!reviewContent) {
+                return;
+            }
 
-  reviewContent.innerHTML = `
+            reviewContent.innerHTML = `
 
     <div class="review-header">
 
@@ -3109,29 +3344,29 @@ function showSaveSuccessCard() {
 
     </div>
   `;
-}
+        }
 
-function showSuccessInsideReview() {
+        function showSuccessInsideReview() {
 
-  const modal =
-    window.parent.document.getElementById(
-      "modelChangeReviewModal"
-    );
+            const modal =
+                window.parent.document.getElementById(
+                    "modelChangeReviewModal"
+                );
 
-  if (!modal) {
-    return;
-  }
+            if (!modal) {
+                return;
+            }
 
-  const reviewContent =
-    modal.querySelector(
-      ".review-content"
-    );
+            const reviewContent =
+                modal.querySelector(
+                    ".review-content"
+                );
 
-  if (!reviewContent) {
-    return;
-  }
+            if (!reviewContent) {
+                return;
+            }
 
-  reviewContent.innerHTML = `
+            reviewContent.innerHTML = `
 
     <div class="review-header">
 
@@ -3313,22 +3548,22 @@ function showSuccessInsideReview() {
 
     </div>
   `;
-}
+        }
 
-function showUpdateSuccessPopup() {
+        function showUpdateSuccessPopup() {
 
-  const existing =
-    document.getElementById(
-      "updateSuccessPopup"
-    );
+            const existing =
+                document.getElementById(
+                    "updateSuccessPopup"
+                );
 
-  if (existing) {
-    existing.remove();
-  }
+            if (existing) {
+                existing.remove();
+            }
 
-window.parent.document.body.insertAdjacentHTML(
-    "beforeend",
-    `
+            window.parent.document.body.insertAdjacentHTML(
+                "beforeend",
+                `
     <div
       id="updateSuccessPopup"
       style="
@@ -3599,618 +3834,933 @@ color:#22c55e;
 
     </style>
     `
-  );
-
-}
-
-    // 
-
-    async function saveChanges() {
-
-      console.log("originalData:", originalData);
-
-      const changepayload = {};
-
-      const dateFields = [
-        "B1datab",
-        "B1datbi",
-        "Brdatab",
-        "Brdatbi"
-      ];
-
-      // Start with original backend values
-      Object.keys(originalData).forEach(key => {
-
-        if (key === "__metadata") return;
-
-        if (dateFields.includes(key)) {
-
-          changepayload[key] = originalData[key];
-
-        } else {
-
-          changepayload[key] = originalData[key] ?? "";
-
-        }
-
-      });
-
-      // Always send key fields
-      changepayload.Matnr = originalData.Matnr;
-      changepayload.Country = originalData.Country;
-
-      changedFields.forEach(change => {
-
-
-        if (change.section === "Pricing Information") {
-
-          const pricingMap = {
-
-            "Barracuda Price Details": {
-              "Barracuda Price Setup": "Selkzb1",
-              "Material Price": "B1kbetr",
-              "Currency": "B1konwa",
-              "Pricing Unit": "B1kpein",
-              "Unit of Measure": "B1kmein",
-              "Unit Of Measure": "B1kmein",
-              "Calculation Type": "B1krech",
-              "Valid From": "B1datab",
-              "Valid To": "B1datbi"
-            },
-
-            "Auto Reorder Price Details": {
-              "Auto Reorder Price Setup": "Selkzbr",
-              "Material Price": "Brkbetr",
-              "Currency": "Brkonwa",
-              "Pricing Unit": "Brkpein",
-              "Customer Price Group": "Konda",
-              "Unit of Measure": "Brkmein",
-              "Unit Of Measure": "Brkmein",
-              "Calculation Type": "Brkrech",
-              "Valid From": "Brdatab",
-              "Valid To": "Brdatbi"
-            }
-
-          };
-
-          const backendField =
-            pricingMap[change.subCategory]?.[change.field];
-
-          if (backendField) {
-
-            let value = change.after;
-
-            if (value === "Yes") value = "X";
-            if (value === "No") value = "";
-
-            if (backendField === "B1standardwarr") {
-              value = Number(value);
-            }
-
-            if (
-              backendField === "B1datab" ||
-              backendField === "B1datbi" ||
-              backendField === "Brdatab" ||
-              backendField === "Brdatbi"
-            ) {
-
-              changepayload[backendField] =
-                value === "-"
-                  ? null
-                  : convertToODataDate(value);
-
-            } else {
-
-              changepayload[backendField] = value;
-            }
-
-
-            return;
-          }
-        }
-
-        const backendField = fieldMap[change.field];
-
-        if (!backendField) {
-          console.warn("No mapping found:", change.field);
-          return;
-        }
-
-        let value = change.after;
-
-        // Toggle Conversion
-        if (value === "Yes") value = "X";
-        if (value === "No") value = "";
-
-        const warrantyTypeMap = {
-          StdWtyType: "S",
-          ExtdWtyType: "X",
-          BcareWtyType: "B",
-          BplusWtyType: "L"
-        };
-
-        if (Object.prototype.hasOwnProperty.call(warrantyTypeMap, backendField)) {
-          value = value ? warrantyTypeMap[backendField] : "";
-        }
-        // Warranty Split
-        if (
-          change.field === "Standard Warranty Length" ||
-          change.field === "Extended Warranty Length" ||
-          change.field === "BrotherCare Warranty Length" ||
-          change.field === "BrotherPlus Warranty Length"
-        ) {
-
-          const [length, unit] = value.split(" ");
-
-          if (change.field === "Standard Warranty Length") {
-            changepayload.StdWtyLen = length;
-            changepayload.StdWtyLenUnit = unit;
-          }
-
-          if (change.field === "Extended Warranty Length") {
-            changepayload.ExtdWtyLen = length;
-            changepayload.ExtdWtyLenUnit = unit;
-          }
-
-          if (change.field === "BrotherCare Warranty Length") {
-            changepayload.BcareWtyLen = length;
-            changepayload.BcareWtyLenUnit = unit;
-          }
-
-          if (change.field === "BrotherPlus Warranty Length") {
-            changepayload.BplusWtyLen = length;
-            changepayload.BplusWtyLenUnit = unit;
-          }
-
-          return;
-        }
-
-        if (backendField === "B1standardwarr") {
-
-          let numericValue = parseInt(value, 10);
-
-          if (
-            value === "" ||
-            value === "-" ||
-            value == null ||
-            isNaN(numericValue)
-          ) {
-            numericValue = 0;
-          }
-
-          changepayload[backendField] = numericValue;
-
-          console.log(
-            "Converted B1standardwarr:",
-            value,
-            "-->",
-            numericValue,
-            typeof numericValue
-          );
-
-        } else {
-
-          changepayload[backendField] = value;
-
-        }
-
-      });
-
-      // Reset all flags
-      changepayload.MaterialFlag = "";
-      changepayload.PriceFlag = "";
-      changepayload.WarrantyFlag = "";
-      changepayload.OrdertypeFlag = "";
-      changepayload.CompatableFlag = "";
-
-      // Set flag based on changed section
-      changedFields.forEach(change => {
-
-        switch (change.section) {
-
-          case "Material Information":
-            changepayload.MaterialFlag = "X";
-            break;
-
-          case "Pricing Information":
-            changepayload.PriceFlag = "X";
-            break;
-
-          case "Warranty Information":
-            changepayload.WarrantyFlag = "X";
-            break;
-
-          case "Order Type":
-            changepayload.OrdertypeFlag = "X";
-            break;
-
-          case "Model Compatibility":
-            changepayload.CompatableFlag = "X";
-            break;
-        }
-
-      });
-
-      console.log(
-        "changepayload:",
-        JSON.stringify(changepayload, null, 2)
-      );
-
-      try {
-
-        console.log("Sending payload:");
-        console.log(JSON.stringify(changepayload, null, 2));
-
-        console.log("B1standardwarr =", changepayload.B1standardwarr);
-        console.log("type =", typeof changepayload.B1standardwarr);
-
-        const response = await fetch(
-          "/api/model/change",
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(changepayload)
-          }
-        );
-
-        const responseText = await response.text();
-
-        console.log("Status:", response.status);
-        console.log("Response:", responseText);
-
-if (!response.ok) {
-  throw new Error(responseText);
-}
-
-showUpdateSuccessPopup();
-
-changedFields = [];
-hasChanges = false;
-
-document.getElementById(
-  "reviewChangesBtn"
-)?.remove();
-
-if (
-  window.parent &&
-  typeof window.parent.closeModelChangeReview === "function"
-) {
-
-  window.parent.closeModelChangeReview();
-}
-
-
-        // alert("Model updated successfully");
-
-        // changedFields = [];
-        // hasChanges = false;
-
-        const reviewBtn = document.getElementById("reviewChangesBtn");
-
-        if (reviewBtn) {
-          reviewBtn.remove();
-        }
-
-
-
-      } catch (error) {
-
-        console.error("Update Failed", error);
-
-        alert(error.message);
-      }
-     
-    }
-    function formatODataDate(dateStr) {
-
-      if (!dateStr) return "-";
-
-      const timestamp = parseInt(
-        dateStr.match(/\d+/)[0]
-      );
-
-      const date = new Date(timestamp);
-
-      return date.toLocaleDateString("en-GB");
-    }
-
-    function saveSection(icon) {
-
-      const section =
-        icon.closest(".change-section");
-
-      const sectionName =
-        section.querySelector("h3").innerText;
-
-      const toggle =
-        section.querySelector(".toggle-icon");
-
-      toggle.style.display = "flex";
-
-      const warrantyGroups =
-        section.querySelectorAll(".warranty-group");
-
-      warrantyGroups.forEach(group => {
-
-        const num =
-          group.querySelector(".warranty-number")?.value;
-
-        const unit =
-          group.querySelector(".warranty-unit")?.value;
-
-        const value =
-          num
-            ? `${num} ${unit}`
-            : "-";
-
-        group.outerHTML =
-          `<span class="field-value">${value}</span>`;
-      });
-
-      const controls =
-        section.querySelectorAll("input, select");
-
-      controls.forEach(control => {
-
-        if (control.type === "checkbox") {
-
-          if (sectionName === "Warranty Information" ||
-            sectionName === "Model Compatibility" ||
-            sectionName === "Pricing Information" ||
-            sectionName === "Order Type") {
-
-            const checked =
-              control.checked
-                ? "checked"
-                : "";
-
-            const wrapper =
-              control.closest(".switch-wrapper");
-
-            if (wrapper) {
-              wrapper.outerHTML = `
-                        <div class="switch-wrapper">
-                            <label class="switch">
-                                <input
-                                    type="checkbox"
-                                    ${checked}
-                                    disabled>
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                    `;
-            }
-
-          } else {
-
-            const value =
-              control.checked
-                ? "Yes"
-                : "No";
-
-            const wrapper =
-              control.closest(".switch-wrapper");
-
-            if (wrapper) {
-              wrapper.outerHTML =
-                `<span class="field-value">${value}</span>`;
-            }
-          }
-
-          return;
-        }
-
-        let value =
-          (control.value || "").trim() || "-";
-
-        if (
-          control.type === "date" &&
-          value !== "-"
-        ) {
-
-          const [year, month, day] =
-            value.split("-");
-
-          value =
-            `${day}/${month}/${year}`;
-        }
-
-        control.outerHTML =
-          `<span class="field-value">${value}</span>`;
-      });
-
-      const fields =
-        section.querySelectorAll(".info-field");
-
-      let hasAnyChange = false;
-
-      if (sectionName === "Model Compatibility") {
-
-        const compatibilityChecks = [
-          { id: "basic", field: "Basic" },
-          { id: "occasional", field: "Occasional" },
-          { id: "moderate", field: "Moderate" },
-          { id: "frequent", field: "Frequent" },
-          { id: "high", field: "High" },
-          { id: "power", field: "Power" }
-        ];
-
-        compatibilityChecks.forEach(item => {
-
-          const checkbox =
-            section.querySelector(`#${item.id}`);
-
-          if (!checkbox) return;
-
-          const currentValue =
-            checkbox.checked ? "Yes" : "No";
-
-          const backendField =
-            fieldMap[item.field];
-
-          const originalValue =
-            originalData[backendField] === "X"
-              ? "Yes"
-              : "No";
-
-          const existingIndex =
-            changedFields.findIndex(x =>
-              x.section === "Model Compatibility" &&
-              x.field === item.field
             );
 
-          if (originalValue !== currentValue) {
+        }
 
-            hasAnyChange = true;
+        // 
 
-            if (existingIndex > -1) {
+        async function saveChanges() {
 
-              changedFields[existingIndex].after =
-                currentValue;
+            console.log("originalData:", originalData);
 
-            } else {
+            const changepayload = {};
 
-              changedFields.push({
-                section: "Model Compatibility",
-                subCategory: "-",
-                field: item.field,
-                before: originalValue,
-                after: currentValue
-              });
+            // -------------------------------------------------
+            // 1. Always send Material Information + keys
+            // -------------------------------------------------
+            const materialFields = [
+                "Matnr", "Country", "Werks", "Mtart", "Mbrsh", "Matkl",
+                "Meins", "Spart", "Ean11", "Mstae", "Mstav", "Spras",
+                "Maktx", "Vtweg", "Vmsta"
+            ];
+
+            materialFields.forEach(key => {
+                changepayload[key] = originalData[key] ?? "";
+            });
+
+            // Always keep these two
+            changepayload.Matnr = originalData.Matnr;
+            changepayload.Country = originalData.Country;
+
+            // -------------------------------------------------
+            // 2. Initialise all Flags to empty
+            // -------------------------------------------------
+            changepayload.MaterialFlag = "";
+            changepayload.PriceFlag = "";
+            changepayload.WarrantyFlag = "";
+            changepayload.OrdertypeFlag = "";
+            changepayload.CompatableFlag = "";
+
+            // -------------------------------------------------
+            // 3. Only the fields that appear in Review Changes
+            //    will be written into the payload below
+            // -------------------------------------------------
+
+            changedFields.forEach(change => {
+
+
+                if (change.section === "Pricing Information") {
+
+                    const pricingMap = {
+
+                        "Model Price Details": {
+                            "Model Price Setup": "Selkzb1",
+                            "Material Price": "B1kbetr",
+                            "Currency": "B1konwa",
+                            "Pricing Unit": "B1kpein",
+                            "Unit of Measure": "B1kmein",
+                            "Unit Of Measure": "B1kmein",
+                            "Calculation Type": "B1krech",
+                            "Valid From": "B1datab",
+                            "Valid To": "B1datbi"
+                        },
+
+                        "Consumable Price Details": {
+                            "Consumable Price Setup": "Selkzbr",
+                            "Material Price": "Brkbetr",
+                            "Currency": "Brkonwa",
+                            "Pricing Unit": "Brkpein",
+                            "Customer Price Group": "Konda",
+                            "Unit of Measure": "Brkmein",
+                            "Unit Of Measure": "Brkmein",
+                            "Calculation Type": "Brkrech",
+                            "Valid From": "Brdatab",
+                            "Valid To": "Brdatbi"
+                        }
+
+                    };
+
+                    const backendField =
+                        pricingMap[change.subCategory]?.[change.field];
+
+                    if (backendField) {
+
+                        let value = change.after;
+
+                        // Toggle Conversion
+                        if (value === "Yes") value = "X";
+                        if (value === "No") value = "";
+
+                        if (backendField === "B1standardwarr") {
+                            value = Number(value);
+                        }
+
+                        if (
+                            backendField === "B1datab" ||
+                            backendField === "B1datbi" ||
+                            backendField === "Brdatab" ||
+                            backendField === "Brdatbi"
+                        ) {
+
+                            changepayload[backendField] =
+                                value === "-"
+                                    ? null
+                                    : convertToODataDate(value);
+
+                        } else {
+
+                            changepayload[backendField] = value;
+                        }
+
+
+                        return;
+                    }
+                }
+
+
+
+                const backendField = fieldMap[change.field];
+
+                if (!backendField) {
+                    console.warn("No mapping found:", change.field);
+                    return;
+                }
+
+                let value = change.after;
+
+                // Toggle Conversion
+                if (value === "Yes") {
+                    value = "X";
+                } else if (value === "No") {
+                    // Model Compatibility & Order Type → send '-' when toggle is OFF
+                    if (change.section === "Model Compatibility" || change.section === "Order Type") {
+                        value = "-";
+                    } else {
+                        value = "";
+                    }
+                }
+
+                const warrantyTypeMap = {
+                    StdWtyType: "S",
+                    ExtdWtyType: "X",
+                    BcareWtyType: "B",
+                    BplusWtyType: "L"
+                };
+
+                if (Object.prototype.hasOwnProperty.call(warrantyTypeMap, backendField)) {
+                    // Always send the type code (S / X / B / L) even when the toggle is OFF
+                    value = warrantyTypeMap[backendField];
+                }
+                // Warranty Split
+                if (
+                    change.field === "Standard Warranty Length" ||
+                    change.field === "Extended Warranty Length" ||
+                    change.field === "BrotherCare Warranty Length" ||
+                    change.field === "BrotherPlus Warranty Length"
+                ) {
+
+                    const [length, unit] = value.split(" ");
+
+                    if (
+                        change.field === "Standard Warranty Length" ||
+                        change.field === "Extended Warranty Length" ||
+                        change.field === "BrotherCare Warranty Length" ||
+                        change.field === "BrotherPlus Warranty Length"
+                    ) {
+                        let length = "0";
+                        let unit = "YR";
+
+                        if (value && value !== "-" && value.trim() !== "") {
+                            const parts = value.trim().split(/\s+/);
+                            length = parts[0] || "0";
+                            unit = parts[1] || "YR";
+                        }
+
+                        // Never send "-" to backend
+                        if (length === "-" || length === "" || isNaN(parseInt(length, 10))) {
+                            length = "0";
+                        }
+
+                        if (change.field === "Standard Warranty Length") {
+                            changepayload.StdWtyLen = length;
+                            changepayload.StdWtyLenUnit = unit === "-" ? "YR" : unit;
+                        }
+
+                        if (change.field === "Extended Warranty Length") {
+                            changepayload.ExtdWtyLen = length;
+                            changepayload.ExtdWtyLenUnit = unit === "-" ? "YR" : unit;
+                        }
+
+                        if (change.field === "BrotherCare Warranty Length") {
+                            changepayload.BcareWtyLen = length;
+                            changepayload.BcareWtyLenUnit = unit === "-" ? "MO" : unit;
+                        }
+
+                        if (change.field === "BrotherPlus Warranty Length") {
+                            changepayload.BplusWtyLen = length;
+                            changepayload.BplusWtyLenUnit = unit === "-" ? "MO" : unit;
+                        }
+
+                        return;
+                    }
+                }
+
+                // -------------------------------------------------
+                // Force the related Warranty Type whenever Length / SKU is changed
+                // -------------------------------------------------
+                const warrantyTypeForceMap = {
+                    "Standard Warranty Length": { typeField: "StdWtyType", typeValue: "S" },
+                    "Standard Warranty SKU": { typeField: "StdWtyType", typeValue: "S" },
+                    "Extended Warranty Length": { typeField: "ExtdWtyType", typeValue: "X" },
+                    "Extended Warranty SKU": { typeField: "ExtdWtyType", typeValue: "X" },
+                    "BrotherCare Warranty Length": { typeField: "BcareWtyType", typeValue: "B" },
+                    "BrotherCare SKU": { typeField: "BcareWtyType", typeValue: "B" },
+                    "BrotherPlus Warranty Length": { typeField: "BplusWtyType", typeValue: "L" },
+                    "BrotherPlus SKU": { typeField: "BplusWtyType", typeValue: "L" }
+                };
+
+                if (warrantyTypeForceMap[change.field]) {
+                    const { typeField, typeValue } = warrantyTypeForceMap[change.field];
+                    changepayload[typeField] = typeValue;
+                }
+
+                if (backendField === "B1standardwarr") {
+
+                    let numericValue = parseInt(value, 10);
+
+                    if (
+                        value === "" ||
+                        value === "-" ||
+                        value == null ||
+                        isNaN(numericValue)
+                    ) {
+                        numericValue = 0;
+                    }
+
+                    changepayload[backendField] = numericValue;
+
+                    console.log(
+                        "Converted B1standardwarr:",
+                        value,
+                        "-->",
+                        numericValue,
+                        typeof numericValue
+                    );
+
+                } else {
+
+                    changepayload[backendField] = value;
+
+                }
+                // -------------------------------------------------
+                // When any field of a warranty is changed,
+                // force the full set (Type + Length + Unit + SKU) into the payload
+                // -------------------------------------------------
+                const warrantyGroupMap = {
+                    "Standard Warranty": {
+                        type: { field: "StdWtyType", value: "S" },
+                        length: "StdWtyLen",
+                        unit: "StdWtyLenUnit",
+                        sku: "Swsku"
+                    },
+                    "Extended Warranty": {
+                        type: { field: "ExtdWtyType", value: "X" },
+                        length: "ExtdWtyLen",
+                        unit: "ExtdWtyLenUnit",
+                        sku: "Ewsku"
+                    },
+                    "BrotherCare Warranty": {
+                        type: { field: "BcareWtyType", value: "B" },
+                        length: "BcareWtyLen",
+                        unit: "BcareWtyLenUnit",
+                        sku: "Bcsku"
+                    },
+                    "BrotherPlus Warranty": {
+                        type: { field: "BplusWtyType", value: "L" },
+                        length: "BplusWtyLen",
+                        unit: "BplusWtyLenUnit",
+                        sku: "Bpsku"
+                    }
+                };
+
+                // Detect which warranty group this change belongs to
+                let warrantyKey = null;
+                if (change.field.includes("Standard Warranty")) warrantyKey = "Standard Warranty";
+                if (change.field.includes("Extended Warranty")) warrantyKey = "Extended Warranty";
+                if (change.field.includes("BrotherCare")) warrantyKey = "BrotherCare Warranty";
+                if (change.field.includes("BrotherPlus")) warrantyKey = "BrotherPlus Warranty";
+
+                if (warrantyKey && warrantyGroupMap[warrantyKey]) {
+                    const group = warrantyGroupMap[warrantyKey];
+
+                    // Always force the Type
+                    changepayload[group.type.field] = group.type.value;
+
+                    // Force Length + Unit from current UI value (or original if not changed)
+                    const lengthChange = changedFields.find(c => c.field === `${warrantyKey} Length`);
+                    const lengthValue = lengthChange ? lengthChange.after :
+                        (originalData[group.length] ? `${originalData[group.length]} ${originalData[group.unit] || "YR"}` : "0 YR");
+
+                    let len = "0";
+                    let uni = "YR";
+                    if (lengthValue && lengthValue !== "-") {
+                        const parts = lengthValue.trim().split(/\s+/);
+                        len = parts[0] || "0";
+                        uni = parts[1] || "YR";
+                    }
+                    if (len === "-" || isNaN(parseInt(len))) len = "0";
+                    if (uni === "-") uni = (warrantyKey.includes("Brother") ? "MO" : "YR");
+
+                    changepayload[group.length] = len;
+                    changepayload[group.unit] = uni;
+
+                    // Force SKU from current UI value (or original)
+                    const skuChange = changedFields.find(c => c.field === `${warrantyKey} SKU` || c.field === (warrantyKey === "BrotherCare Warranty" ? "BrotherCare SKU" : warrantyKey === "BrotherPlus Warranty" ? "BrotherPlus SKU" : `${warrantyKey} SKU`));
+                    const skuValue = skuChange ? skuChange.after : (originalData[group.sku] || "");
+
+                    changepayload[group.sku] = (skuValue === "-" ? "" : skuValue);
+                }
+                // -------------------------------------------------
+                // Order Type: always send flag + corresponding consumable together
+                // -------------------------------------------------
+                const orderGroupMap = {
+                    "Drum Order": {
+                        flagField: "Drum",
+                        consumableField: "Drconsumable",
+                        consumableLabel: "Drum Order Consumable"
+                    },
+                    "Waste Toner": {
+                        flagField: "WasteToner",
+                        consumableField: "Wtconsumable",
+                        consumableLabel: "Waste Toner Consumable"
+                    },
+                    "Belt Unit": {
+                        flagField: "BeltUnit",
+                        consumableField: "Buconsumable",
+                        consumableLabel: "Belt Unit Consumable"
+                    },
+                    "Backup Order": {
+                        flagField: "Claimorder",
+                        consumableField: "Coconsumable",
+                        consumableLabel: "Backup Order Consumable"
+                    }
+                };
+
+                // Detect which order group this change belongs to
+                let orderKey = null;
+                if (change.field === "Drum Order" || change.field === "Drum Order Consumable") orderKey = "Drum Order";
+                if (change.field === "Waste Toner" || change.field === "Waste Toner Consumable") orderKey = "Waste Toner";
+                if (change.field === "Belt Unit" || change.field === "Belt Unit Consumable") orderKey = "Belt Unit";
+                if (change.field === "Backup Order" || change.field === "Backup Order Consumable") orderKey = "Backup Order";
+
+                if (orderKey && orderGroupMap[orderKey]) {
+                    const group = orderGroupMap[orderKey];
+
+                    // ---- Flag (X or -) ----
+                    const flagChange = changedFields.find(c =>
+                        c.section === "Order Type" && c.field === orderKey
+                    );
+                    let flagValue;
+                    if (flagChange) {
+                        flagValue = flagChange.after === "Yes" ? "X" : "-";
+                    } else {
+                        // use original
+                        flagValue = originalData[group.flagField] === "X" ? "X" : "-";
+                    }
+                    changepayload[group.flagField] = flagValue;
+
+                    // ---- Consumable ----
+                    const consumableChange = changedFields.find(c =>
+                        c.section === "Order Type" && c.field === group.consumableLabel
+                    );
+                    let consumableValue;
+                    if (consumableChange) {
+                        consumableValue = consumableChange.after === "-" ? "" : consumableChange.after;
+                    } else {
+                        consumableValue = originalData[group.consumableField] || "";
+                    }
+
+                    // If flag is OFF, force consumable empty
+                    if (flagValue === "-") {
+                        consumableValue = "-";
+                    }
+
+                    changepayload[group.consumableField] = consumableValue;
+                }
+
+            });
+            // =====================================================
+            // Force related Pricing fields for Model Price Details
+            // =====================================================
+            const hasModelPriceChanges = changedFields.some(c =>
+                c.section === "Pricing Information" &&
+                c.subCategory === "Model Price Details"
+            );
+
+            if (hasModelPriceChanges) {
+
+                // Always send the toggle
+                const setupChange = changedFields.find(c =>
+                    c.section === "Pricing Information" &&
+                    c.subCategory === "Model Price Details" &&
+                    c.field === "Model Price Setup"
+                );
+                changepayload.Selkzb1 = setupChange
+                    ? (setupChange.after === "Yes" ? "X" : "")
+                    : (originalData.Selkzb1 === "X" ? "X" : "");
+
+                // Helper: get value from changedFields or fall back to original
+                const getModelValue = (fieldName, backendKey) => {
+                    const change = changedFields.find(c =>
+                        c.section === "Pricing Information" &&
+                        c.subCategory === "Model Price Details" &&
+                        c.field === fieldName
+                    );
+                    return change ? change.after : (originalData[backendKey] || "");
+                };
+
+                // Force these fields (even if they were not changed)
+                if (changepayload.B1konwa === undefined) {
+                    changepayload.B1konwa = getModelValue("Currency", "B1konwa");
+                }
+                if (changepayload.B1kpein === undefined) {
+                    changepayload.B1kpein = getModelValue("Pricing Unit", "B1kpein");
+                }
+                if (changepayload.B1kmein === undefined) {
+                    changepayload.B1kmein = getModelValue("Unit Of Measure", "B1kmein") ||
+                        getModelValue("Unit of Measure", "B1kmein");
+                }
+                if (changepayload.B1krech === undefined) {
+                    changepayload.B1krech = getModelValue("Calculation Type", "B1krech");
+                }
+                // if (changepayload.B1datab === undefined) {
+                //     const validFrom = getModelValue("Valid From", "B1datab");
+                //     changepayload.B1datab = (validFrom && validFrom !== "-")
+                //         ? convertToODataDate(validFrom)
+                //         : (originalData.B1datab || null);
+                // }
+                // Condition Type (shared field Kschl)
+                if (changepayload.Kschl === undefined) {
+                    changepayload.Kschl = getModelValue("Condition Type", "Kschl") || (originalData.Kschl || "");
+                }
             }
 
-          } else if (existingIndex > -1) {
+            // =====================================================
+            // Force related Pricing fields for Consumable Price Details
+            // =====================================================
+            const hasConsumablePriceChanges = changedFields.some(c =>
+                c.section === "Pricing Information" &&
+                c.subCategory === "Consumable Price Details"
+            );
 
-            changedFields.splice(existingIndex, 1);
-          }
+            if (hasConsumablePriceChanges) {
 
-        });
-      }
+                // Always send the toggle
+                const setupChange = changedFields.find(c =>
+                    c.section === "Pricing Information" &&
+                    c.subCategory === "Consumable Price Details" &&
+                    c.field === "Consumable Price Setup"
+                );
+                changepayload.Selkzbr = setupChange
+                    ? (setupChange.after === "Yes" ? "X" : "")
+                    : (originalData.Selkzbr === "X" ? "X" : "");
 
-      fields.forEach(field => {
+                // Helper
+                const getConsumableValue = (fieldName, backendKey) => {
+                    const change = changedFields.find(c =>
+                        c.section === "Pricing Information" &&
+                        c.subCategory === "Consumable Price Details" &&
+                        c.field === fieldName
+                    );
+                    return change ? change.after : (originalData[backendKey] || "");
+                };
 
-        const label =
-          field.querySelector("label")?.innerText?.trim();
+                // Force these fields
+                if (changepayload.Brkonwa === undefined) {
+                    changepayload.Brkonwa = getConsumableValue("Currency", "Brkonwa");
+                }
+                if (changepayload.Brkpein === undefined) {
+                    changepayload.Brkpein = getConsumableValue("Pricing Unit", "Brkpein");
+                }
+                if (changepayload.Brkmein === undefined) {
+                    changepayload.Brkmein = getConsumableValue("Unit Of Measure", "Brkmein") ||
+                        getConsumableValue("Unit of Measure", "Brkmein");
+                }
+                if (changepayload.Brkrech === undefined) {
+                    changepayload.Brkrech = getConsumableValue("Calculation Type", "Brkrech");
+                }
+                // if (changepayload.Brdatab === undefined) {
+                //     const validFrom = getConsumableValue("Valid From", "Brdatab");
+                //     changepayload.Brdatab = (validFrom && validFrom !== "-")
+                //         ? convertToODataDate(validFrom)
+                //         : (originalData.Brdatab || null);
+                // }
+                // Customer Price Group
+                if (changepayload.Konda === undefined) {
+                    changepayload.Konda = getConsumableValue("Customer Price Group", "Konda");
+                }
+                // Condition Type (shared)
+                if (changepayload.Kschl === undefined) {
+                    changepayload.Kschl = getConsumableValue("Condition Type", "Kschl") || (originalData.Kschl || "");
+                }
+            }
 
-        if (!label) return;
+            // Reset all flags
+            changepayload.MaterialFlag = "";
+            changepayload.PriceFlag = "";
+            changepayload.WarrantyFlag = "";
+            changepayload.OrdertypeFlag = "";
+            changepayload.CompatableFlag = "";
 
-        let currentValue = "-";
-
-        const valueField =
-          field.querySelector(".field-value");
-
-        const toggleField =
-          field.querySelector('input[type="checkbox"]');
-
-        if (toggleField) {
-
-          currentValue =
-            toggleField.checked
-              ? "Yes"
-              : "No";
-
-        } else if (valueField) {
-
-          currentValue =
-            valueField.innerText?.trim() || "-";
-        }
-
-        let subCategory = "-";
-
-        const subBlock =
-          field.closest(".pricing-sub-block");
-
-        if (subBlock) {
-
-          subCategory =
-            subBlock.querySelector(".pricing-sub-block-title")
-              ?.innerText?.trim() || "-";
-        }
-
-        const originalKeys =
-          JSON.parse(section.dataset.originalKeys || "[]");
-
-        const originalValues =
-          JSON.parse(section.dataset.originalValues || "[]");
-
-        let key =
-          subCategory + "||" + label;
-
-        if (sectionName === "Order Type") {
-          key = "-||" + label;
-        }
-
-        const keyIndex =
-          originalKeys.indexOf(key);
-
-        const originalValue =
-          keyIndex > -1
-            ? (originalValues[keyIndex] || "-")
-            : currentValue;
-
-        console.log({
-          sectionName,
-          label,
-          key,
-          keyIndex,
-          originalValue,
-          currentValue
-        });
-
-        const existingIndex =
-          changedFields.findIndex(x =>
-            x.section === sectionName &&
-            x.field === label &&
-            (x.subCategory || "-") === subCategory
-          );
-
-        if (originalValue !== currentValue) {
-
-          hasAnyChange = true;
-
-          if (existingIndex > -1) {
-
-            changedFields[
-              existingIndex
-            ].after = currentValue;
-
-          } else {
-
-            changedFields.push({
-              section: sectionName,
-              subCategory: subCategory,
-              field: label,
-              before: originalValue,
-              after: currentValue
+            // Set flag based on changed section
+            // Set flag based on changed section
+            changedFields.forEach(change => {
+                switch (change.section) {
+                    case "Material Information":
+                        changepayload.MaterialFlag = "X";
+                        break;
+                    case "Pricing Information":
+                        changepayload.PriceFlag = "X";
+                        break;
+                    case "Warranty Information":
+                        changepayload.WarrantyFlag = "X";
+                        break;
+                    case "Order Type":
+                        changepayload.OrdertypeFlag = "X";
+                        break;
+                    case "Model Compatibility":
+                        changepayload.CompatableFlag = "X";
+                        break;
+                }
             });
-          }
 
-        } else {
+            try {
 
-          if (existingIndex > -1) {
-            changedFields.splice(existingIndex, 1);
-          }
+                console.log("Sending payload:");
+                console.log(JSON.stringify(changepayload, null, 2));
+
+                console.log("B1standardwarr =", changepayload.B1standardwarr);
+                console.log("type =", typeof changepayload.B1standardwarr);
+
+                const response = await fetch(
+                    "/api/model/change",
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(changepayload)
+                    }
+                );
+
+                const responseText = await response.text();
+
+                console.log("Status:", response.status);
+                console.log("Response:", responseText);
+
+                if (!response.ok) {
+                    throw new Error(responseText);
+                }
+
+                showUpdateSuccessPopup();
+
+                changedFields = [];
+                hasChanges = false;
+
+                document.getElementById(
+                    "reviewChangesBtn"
+                )?.remove();
+
+                if (
+                    window.parent &&
+                    typeof window.parent.closeModelChangeReview === "function"
+                ) {
+
+                    window.parent.closeModelChangeReview();
+                }
+
+
+                // alert("Model updated successfully");
+
+                // changedFields = [];
+                // hasChanges = false;
+
+                const reviewBtn = document.getElementById("reviewChangesBtn");
+
+                if (reviewBtn) {
+                    reviewBtn.remove();
+                }
+
+
+
+            } catch (error) {
+
+                console.error("Update Failed", error);
+
+                alert(error.message);
+            }
+
         }
-      });
+        function formatODataDate(dateStr) {
 
-      if (hasAnyChange) {
-        markAsChanged();
-      }
+            if (!dateStr) return "-";
 
-      icon.innerHTML =
-        '<i class="fas fa-pen-to-square"></i>';
+            const timestamp = parseInt(
+                dateStr.match(/\d+/)[0]
+            );
 
-      icon.onclick = function () {
-        enableEdit(this);
-      };
+            const date = new Date(timestamp);
 
-      console.log("Section Saved");
-      console.log("changedFields =", changedFields);
-    }
+            return date.toLocaleDateString("en-GB");
+        }
 
-  </script>
+        function saveSection(icon) {
+
+            const section =
+                icon.closest(".change-section");
+
+            const sectionName =
+                section.querySelector("h3").innerText;
+
+            const toggle =
+                section.querySelector(".toggle-icon");
+
+            toggle.style.display = "flex";
+            // ===== Validate SW + EW total before accepting the section =====
+            if (sectionName === "Warranty Information") {
+                // Temporarily put the values back so validation can read them
+                // (or call validate while the inputs still exist – easiest is to call it before converting)
+
+                // Call validation BEFORE converting the groups to spans
+                if (!validateSwEwTotal()) {
+                    // Keep the section in edit mode – do not save
+                    alert("Please fix the Standard + Extended Warranty total (must be 3 years).");
+                    return;   // stop saveSection
+                }
+            }
+
+            const warrantyGroups =
+                section.querySelectorAll(".warranty-group");
+
+            warrantyGroups.forEach(group => {
+
+                const num =
+                    group.querySelector(".warranty-number")?.value;
+
+                const unit =
+                    group.querySelector(".warranty-unit")?.value;
+
+                const value =
+                    num
+                        ? `${num} ${unit}`
+                        : "-";
+
+                group.outerHTML =
+                    `<span class="field-value">${value}</span>`;
+            });
+
+            const controls =
+                section.querySelectorAll("input, select");
+
+            controls.forEach(control => {
+
+                if (control.type === "checkbox") {
+
+                    if (sectionName === "Warranty Information" ||
+                        sectionName === "Model Compatibility" ||
+                        sectionName === "Pricing Information" ||
+                        sectionName === "Order Type") {
+
+                        const checked = control.checked ? "checked" : "";
+                        const toggleLabel = control.dataset.toggleLabel || "";
+                        const isWarranty = sectionName === "Warranty Information";
+                        const isPricing = sectionName === "Pricing Information";
+
+                        const wrapper = control.closest(".switch-wrapper");
+
+                        if (wrapper) {
+                            // Keep data-toggle-label + onchange so the second edit still works
+                            const dataAttr = toggleLabel ? `data-toggle-label="${toggleLabel}"` : "";
+
+                            let onChangeAttr = "";
+                            if (isWarranty && toggleLabel) {
+                                onChangeAttr = `onchange="handleWarrantyToggle(this)"`;
+                            } else if (isPricing && toggleLabel) {
+                                onChangeAttr = `onchange="togglePricingBlock(this,'${toggleLabel}')"`;
+                            }
+
+                            wrapper.outerHTML = `
+      <div class="switch-wrapper">
+        <label class="switch">
+          <input type="checkbox"
+                 ${checked}
+                 disabled
+                 ${dataAttr}
+                 ${onChangeAttr}>
+          <span class="slider"></span>
+        </label>
+      </div>
+    `;
+                        }
+                    } else {
+
+                        const value =
+                            control.checked
+                                ? "Yes"
+                                : "No";
+
+                        const wrapper =
+                            control.closest(".switch-wrapper");
+
+                        if (wrapper) {
+                            wrapper.outerHTML =
+                                `<span class="field-value">${value}</span>`;
+                        }
+                    }
+
+                    return;
+                }
+
+                let value =
+                    (control.value || "").trim() || "-";
+
+                if (
+                    control.type === "date" &&
+                    value !== "-"
+                ) {
+
+                    const [year, month, day] =
+                        value.split("-");
+
+                    value =
+                        `${day}/${month}/${year}`;
+                }
+
+                control.outerHTML =
+                    `<span class="field-value">${value}</span>`;
+            });
+
+            const fields =
+                section.querySelectorAll(".info-field");
+
+            let hasAnyChange = false;
+
+            if (sectionName === "Model Compatibility") {
+
+                const compatibilityChecks = [
+                    { id: "basic", field: "Basic" },
+                    { id: "occasional", field: "Occasional" },
+                    { id: "moderate", field: "Moderate" },
+                    { id: "frequent", field: "Frequent" },
+                    { id: "high", field: "High" },
+                    { id: "power", field: "Power" }
+                ];
+
+                compatibilityChecks.forEach(item => {
+
+                    const checkbox =
+                        section.querySelector(`#${item.id}`);
+
+                    if (!checkbox) return;
+
+                    const currentValue =
+                        checkbox.checked ? "Yes" : "No";
+
+                    const backendField =
+                        fieldMap[item.field];
+
+                    const originalValue =
+                        originalData[backendField] === "X"
+                            ? "Yes"
+                            : "No";
+
+                    const existingIndex =
+                        changedFields.findIndex(x =>
+                            x.section === "Model Compatibility" &&
+                            x.field === item.field
+                        );
+
+                    if (originalValue !== currentValue) {
+
+                        hasAnyChange = true;
+
+                        if (existingIndex > -1) {
+
+                            changedFields[existingIndex].after =
+                                currentValue;
+
+                        } else {
+
+                            changedFields.push({
+                                section: "Model Compatibility",
+                                subCategory: "-",
+                                field: item.field,
+                                before: originalValue,
+                                after: currentValue
+                            });
+                        }
+
+                    } else if (existingIndex > -1) {
+
+                        changedFields.splice(existingIndex, 1);
+                    }
+
+                });
+            }
+
+            fields.forEach(field => {
+
+                const label =
+                    field.querySelector("label")?.innerText?.trim();
+
+                if (!label) return;
+
+                let currentValue = "-";
+
+                const valueField =
+                    field.querySelector(".field-value");
+
+                const toggleField =
+                    field.querySelector('input[type="checkbox"]');
+
+                if (toggleField) {
+
+                    currentValue =
+                        toggleField.checked
+                            ? "Yes"
+                            : "No";
+
+                } else if (valueField) {
+
+                    currentValue =
+                        valueField.innerText?.trim() || "-";
+                }
+
+                let subCategory = "-";
+
+                const subBlock =
+                    field.closest(".pricing-sub-block");
+
+                if (subBlock) {
+
+                    subCategory =
+                        subBlock.querySelector(".pricing-sub-block-title")
+                            ?.innerText?.trim() || "-";
+                }
+
+                const originalKeys =
+                    JSON.parse(section.dataset.originalKeys || "[]");
+
+                const originalValues =
+                    JSON.parse(section.dataset.originalValues || "[]");
+
+                let key =
+                    subCategory + "||" + label;
+
+                if (sectionName === "Order Type") {
+                    key = "-||" + label;
+                }
+
+                const keyIndex =
+                    originalKeys.indexOf(key);
+
+                const originalValue =
+                    keyIndex > -1
+                        ? (originalValues[keyIndex] || "-")
+                        : currentValue;
+
+                console.log({
+                    sectionName,
+                    label,
+                    key,
+                    keyIndex,
+                    originalValue,
+                    currentValue
+                });
+
+                const existingIndex =
+                    changedFields.findIndex(x =>
+                        x.section === sectionName &&
+                        x.field === label &&
+                        (x.subCategory || "-") === subCategory
+                    );
+
+                if (originalValue !== currentValue) {
+
+                    hasAnyChange = true;
+
+                    if (existingIndex > -1) {
+
+                        changedFields[
+                            existingIndex
+                        ].after = currentValue;
+
+                    } else {
+
+                        changedFields.push({
+                            section: sectionName,
+                            subCategory: subCategory,
+                            field: label,
+                            before: originalValue,
+                            after: currentValue
+                        });
+                    }
+
+                } else {
+
+                    if (existingIndex > -1) {
+                        changedFields.splice(existingIndex, 1);
+                    }
+                }
+            });
+
+            if (hasAnyChange) {
+                markAsChanged();
+            }
+
+            icon.innerHTML =
+                '<i class="fas fa-pen-to-square"></i>';
+
+            icon.onclick = function () {
+                enableEdit(this);
+            };
+
+            console.log("Section Saved");
+            console.log("changedFields =", changedFields);
+        }
+
+    </script>
 </body>
 
 </html>

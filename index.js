@@ -22,7 +22,10 @@ const PORT = 3000;
 // CONFIG
 // =============================
 
-const ODATA_URL = "https://vhbnubsdci.rise.brother.com:44300/sap/opu/odata/sap/ZTEST_OD_SRV/";
+// const ODATA_URL = "https://vhbnubsdci.rise.brother.com:44300/sap/opu/odata/sap/ZTEST_OD_SRV/";
+
+ const ODATA_URL =
+    "https://vhbnubsdci.rise.brother.com:44300/sap/opu/odata/sap/ZTEST_OD_SRV/";
 
 const ODATA_URL3 =
 
@@ -160,7 +163,7 @@ app.get("/api/model", async (req, res) => {
 
         const url =
 
-            `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
+            `${ODATA_URL}Model_setupSet(${requestedFields})?$format=json`;
 
 
         console.log("Calling:");
@@ -253,47 +256,68 @@ app.get("/api/models", async (req, res) => {
 
         let finalResults = [];
 
-        for (const model of models) {
+       for (const model of models) {
 
-            const filter =
+    const keys =
+        `Matnr='${model}',Country='${country}'`;
 
-                `$filter=Matnr eq '${model}' and Country eq '${country}'`;
+    const url =
+        `${ODATA_URL}Model_setupSet(${keys})?$format=json`;
 
-            const url =
+    console.log(
+        "MODEL REPORT URL:",
+        url
+    );
 
-                `${ODATA_URL}Model_detailsSet?${filter}&$format=json`;
+    const response =
+        await axios.get(
+            url,
+            {
+                headers: {
+                    Authorization:
+                        req.session.sapAuth,
+                    Accept:
+                        "application/json",
+                    "sap-client":
+                        "800"
+                }
+            }
+        );
 
-            console.log(url);
+    console.log(
+        "MODEL REPORT RESPONSE:"
+    );
 
-            const response =
+    console.log(
+        JSON.stringify(
+            response.data,
+            null,
+            2
+        )
+    );
 
-                await axios.get(
+    if (
+        response.data?.d
+    ) {
 
-                    url,
+        finalResults.push(
+            response.data.d
+        );
+    }
+}
 
-                    {
+    console.log(
+    "FINAL RESULTS COUNT:",
+    finalResults.length
+);
 
-                        headers: {
-
-                            Authorization: req.session.sapAuth,
-
-                            Accept: "application/json",
-
-                            "sap-client": "800"
-
-                        }
-
-                    }
-
-                );
-
-            const rows =
-
-                response.data?.d?.results || [];
-
-            finalResults.push(...rows);
-
-        }
+console.log(
+    JSON.stringify(
+        finalResults,
+        null,
+        2
+    )
+);
 
         res.json({
 
@@ -1876,6 +1900,305 @@ console.log(
 
     }
 
+);
+
+// =====================================================
+// CONSUMABLE PRICE UPDATE
+// =====================================================
+
+// app.put(
+//     "/api/consumable/updatePrice",
+//     async (req, res) => {
+
+//         try {
+
+//             if (!req.session.sapAuth) {
+
+//                 return res.status(401).json({
+//                     success: false,
+//                     message: "Please login first"
+//                 });
+//             }
+
+//             console.log(
+//                 "CONSUMABLE UPDATE REQUEST"
+//             );
+
+//             console.log(
+//                 JSON.stringify(
+//                     req.body,
+//                     null,
+//                     2
+//                 )
+//             );
+
+//             const payload =
+//                 req.body;
+
+//             const csrfResponse =
+//                 await axios.get(
+//                     ODATA_URL,
+//                     {
+//                         headers: {
+//                             Authorization:
+//                                 req.session.sapAuth,
+
+//                             "X-CSRF-Token":
+//                                 "Fetch",
+
+//                             Accept:
+//                                 "application/json",
+
+//                             "sap-client":
+//                                 "800"
+//                         }
+//                     }
+//                 );
+
+//             const token =
+//                 csrfResponse.headers[
+//                     "x-csrf-token"
+//                 ];
+
+//             const cookies =
+//                 csrfResponse.headers[
+//                     "set-cookie"
+//                 ] || [];
+
+//             const cookieHeader =
+//                 cookies
+//                     .map(
+//                         cookie =>
+//                             cookie.split(";")[0]
+//                     )
+//                     .join("; ");
+
+//             const sapUrl =
+//                 `${ODATA_URL}Conprice_detailsSet(` +
+//                 `Consumable='${payload.Consumable}',` +
+//                 `Country='${payload.Country}',` +
+//                 `Selkzb1='${payload.Selkzb1}',` +
+//                 `Selkzbr='${payload.Selkzbr}'` +
+//                 `)`;
+
+//             console.log(
+//                 "PRICE UPDATE URL:"
+//             );
+
+//             console.log(
+//                 sapUrl
+//             );
+
+//             const sapResponse =
+//                 await axios.put(
+//                     sapUrl,
+//                     payload,
+//                     {
+//                         headers: {
+
+//                             Authorization:
+//                                 req.session.sapAuth,
+
+//                             "X-CSRF-Token":
+//                                 token,
+
+//                             Cookie:
+//                                 cookieHeader,
+
+//                             Accept:
+//                                 "application/json",
+
+//                             "Content-Type":
+//                                 "application/json",
+
+//                             "sap-client":
+//                                 "800"
+//                         }
+//                     }
+//                 );
+
+//             console.log(
+//                 "PRICE UPDATE SUCCESS"
+//             );
+
+//             return res.json({
+//                 success: true,
+//                 data:
+//                     sapResponse.data
+//             });
+
+//         }
+//         catch (error) {
+
+//             console.error(
+//                 "PRICE UPDATE ERROR"
+//             );
+
+//             console.error(
+//                 error.response?.data ||
+//                 error.message
+//             );
+
+//             return res.status(500).json({
+//                 success: false,
+//                 message:
+//                     error.response?.data ||
+//                     error.message
+//             });
+//         }
+//     }
+// );
+
+// =====================================================
+// CONSUMABLE PRICE UPDATE
+// =====================================================
+
+app.put(
+    "/api/consumable/updatePrice",
+    async (req, res) => {
+
+        try {
+
+            if (!req.session.sapAuth) {
+
+                return res.status(401).json({
+                    success: false,
+                    message: "Please login first"
+                });
+            }
+
+            const payload =
+                req.body;
+
+            console.log(
+                "CONSUMABLE UPDATE PAYLOAD"
+            );
+
+            console.log(
+                JSON.stringify(
+                    payload,
+                    null,
+                    2
+                )
+            );
+
+            // =====================================
+            // FETCH CSRF TOKEN
+            // =====================================
+
+            const csrfResponse =
+                await axios.get(
+                    ODATA_URL,
+                    {
+                        headers: {
+                            Authorization:
+                                req.session.sapAuth,
+                            "X-CSRF-Token":
+                                "Fetch",
+                            Accept:
+                                "application/json",
+                            "sap-client":
+                                "800"
+                        }
+                    }
+                );
+
+            const token =
+                csrfResponse.headers[
+                    "x-csrf-token"
+                ];
+
+            const cookies =
+                csrfResponse.headers[
+                    "set-cookie"
+                ] || [];
+
+            const cookieHeader =
+                cookies
+                    .map(cookie =>
+                        cookie.split(";")[0]
+                    )
+                    .join("; ");
+
+            // =====================================
+            // BUILD SAP URL
+            // =====================================
+
+            const sapUrl =
+                `${ODATA_URL}Conprice_detailsSet(` +
+                `Consumable='${payload.Consumable}',` +
+                `Country='${payload.Country}',` +
+                `Selkzb1='${payload.Selkzb1}',` +
+                `Selkzbr='${payload.Selkzbr}'` +
+                `)`;
+
+            console.log(
+                "SAP UPDATE URL:"
+            );
+
+            console.log(
+                sapUrl
+            );
+
+            // =====================================
+            // CALL SAP UPDATE ENTITY
+            // =====================================
+
+            const sapResponse =
+                await axios.put(
+                    sapUrl,
+                    payload,
+                    {
+                        headers: {
+                            Authorization:
+                                req.session.sapAuth,
+                            "X-CSRF-Token":
+                                token,
+                            Cookie:
+                                cookieHeader,
+                            Accept:
+                                "application/json",
+                            "Content-Type":
+                                "application/json",
+                            "sap-client":
+                                "800"
+                        }
+                    }
+                );
+
+            console.log(
+                "PRICE UPDATE SUCCESS"
+            );
+
+            console.log(
+                sapResponse.data
+            );
+
+            return res.json({
+                success: true,
+                data:
+                    sapResponse.data
+            });
+
+        } catch (error) {
+
+            console.error(
+                "PRICE UPDATE FAILED"
+            );
+
+            console.error(
+                error.response?.data ||
+                error.message
+            );
+
+            return res.status(500).json({
+                success: false,
+                message:
+                    error.response?.data?.error?.message?.value ||
+                    error.message
+            });
+        }
+    }
 );
  
 ///=============================Model Change API(Save Changes)========================

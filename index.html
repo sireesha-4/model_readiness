@@ -442,7 +442,7 @@
             color: #e2e8f0;
         }
 
-             /* =========================================================
+        /* =========================================================
    MAIN APPLICATION CONTENT
 ========================================================= */
 
@@ -610,44 +610,45 @@
                 width: 100%;
             }
 
-           #dashboard,
-#modelReport,
-#newModel,
-#modelChange,
-#consumables {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-#consumables {
-    width: 100%;
-    height: calc(100vh - 48px);
+            #dashboard,
+            #modelReport,
+            #newModel,
+            #modelChange,
+            #consumables {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+            }
 
-    margin: 0;
-    padding: 0;
+            #consumables {
+                width: 100%;
+                height: calc(100vh - 48px);
 
-    overflow: hidden;
+                margin: 0;
+                padding: 0;
 
-    box-sizing: border-box;
-}
+                overflow: hidden;
 
-#consumablesFrame {
-    display: block;
+                box-sizing: border-box;
+            }
 
-    width: 100%;
-    height: 100%;
+            #consumablesFrame {
+                display: block;
 
-    margin: 0;
-    padding: 0;
+                width: 100%;
+                height: 100%;
 
-    border: none;
+                margin: 0;
+                padding: 0;
 
-    overflow: hidden;
+                border: none;
 
-    background: #061224;
+                overflow: hidden;
 
-    box-sizing: border-box;
-}
+                background: #061224;
+
+                box-sizing: border-box;
+            }
 
             .app-page-frame {
                 width: 100%;
@@ -1256,7 +1257,7 @@
                 transform 0.2s ease,
                 box-shadow 0.2s ease;
         }
-     
+
         .quick-reset-btn {
             width: 46px;
             height: 46px;
@@ -1835,22 +1836,23 @@
         }
 
         /* Sticky Model Column */
-.report-table th:nth-child(1),
-.report-table td:nth-child(1) {
-    position: sticky;
-    left: 0;
-    background: #162238;
-    z-index: 3;
-}
+        .report-table th:nth-child(1),
+        .report-table td:nth-child(1) {
+            position: sticky;
+            left: 0;
+            background: #162238;
+            z-index: 3;
+        }
 
-/* Sticky Country Column */
-.report-table th:nth-child(2),
-.report-table td:nth-child(2) {
-    position: sticky;
-    left: 110px; /* adjust based on Model column width */
-    background: #162238;
-    z-index: 3;
-}
+        /* Sticky Country Column */
+        .report-table th:nth-child(2),
+        .report-table td:nth-child(2) {
+            position: sticky;
+            left: 110px;
+            /* adjust based on Model column width */
+            background: #162238;
+            z-index: 3;
+        }
 
         .yes-icon {
             color: #2dd4bf;
@@ -2216,15 +2218,15 @@
         }
 
         .ai-message-content {
-    max-width: 240px;
-    padding: 10px 12px;
+            max-width: 240px;
+            padding: 10px 12px;
 
-    font-size: 12px;
-    line-height: 1.4;
+            font-size: 12px;
+            line-height: 1.4;
 
-    text-align: left;
-    white-space: pre-line;
-}
+            text-align: left;
+            white-space: pre-line;
+        }
 
         .ai-message-bot .ai-message-content {
             background:
@@ -2394,6 +2396,7 @@
 
             transform: rotate(30deg);
         }
+
         /* ========================================
    CLOSE BUTTON
 ======================================== */
@@ -2504,19 +2507,19 @@
         }
 
         .cards-toggle-btn {
-    background: #2563eb;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 600;
-}
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
 
-.cards-toggle-btn:hover {
-    background: #1d4ed8;
-}
+        .cards-toggle-btn:hover {
+            background: #1d4ed8;
+        }
     </style>
 </head>
 
@@ -2590,17 +2593,15 @@
             <div class="menu-item" onclick="showPage('modelChange', this)">
                 <i class="fas fa-sync-alt"></i> <span>Model Update</span>
             </div>
-            <div
-    class="menu-item"
-    onclick="showPage('consumables', this)">
+            <div class="menu-item" onclick="showPage('consumables', this)">
 
-    <i class="fas fa-droplet"></i>
+                <i class="fas fa-droplet"></i>
 
-    <span>
-        Consumables
-    </span>
+                <span>
+                    Consumables
+                </span>
 
-</div>
+            </div>
 
             <div class="sidebar-decoration">
                 <svg class="printer-svg" viewBox="0 0 160 130" fill="none">
@@ -2682,7 +2683,6 @@
 
                             </div>
 
-
                             <div class="hero-datetime" id="currentDateTime">
                             </div>
 
@@ -2701,7 +2701,6 @@
                             <!-- REAL BACKGROUND IMAGE -->
 
                             <img src="dashboard.png" alt="Brother printer workspace" class="landing-background-image">
-
 
                             <!-- DARK OVERLAY -->
 
@@ -2748,11 +2747,7 @@
                                     </label>
 
                                     <select id="country" class="quick-country-select">
-
-                                        <option value="">
-                                            Select country
-                                        </option>
-
+                                       
                                         <option value="US">
                                             United States
                                         </option>
@@ -2761,15 +2756,7 @@
                                             Canada
                                         </option>
 
-                                        <option value="UK">
-                                            United Kingdom
-                                        </option>
-
-                                        <option value="JP">
-                                            Japan
-                                        </option>
-
-                                    </select>
+                                         </select>
 
                                 </div>
 
@@ -2940,21 +2927,17 @@
                     <div class="form-field">
                         <label>Country</label>
                         <select id="reportCountrySearch" class="quick-country-select">
- 
-                            <option value="">
-                                Select country
-                            </option>
- 
+
                             <option value="US">
                                 United States
                             </option>
- 
+
                             <option value="CA">
                                 Canada
                             </option>
-                            
+
                         </select>
- 
+
                     </div>
                     <div class="report-search-actions">
                         <button class="btn-search" onclick="loadModelReport()">
@@ -2970,8 +2953,8 @@
                     <span id="modelCount">0 Models Found</span>
                 </div>
 
-<!-- Table Section -->
-<div id="reportTableSection">
+                <!-- Table Section -->
+                <div id="reportTableSection">
 
                     <div class="table-header">
                         <div>
@@ -3020,29 +3003,22 @@
                 </div>
 
                 <!-- Model Cards Toggle -->
-<div style="text-align:right;margin:15px 0;">
-    <button
-        id="cardsToggleBtn"
-        class="export-btn"
-        onclick="toggleModelCards()">
+                <div style="text-align:right;margin:15px 0;">
+                    <button id="cardsToggleBtn" class="export-btn" onclick="toggleModelCards()">
 
-        View Model Cards ▼
-    </button>
-</div>
+                        View Model Cards ▼
+                    </button>
+                </div>
 
-<div
-    id="modelCardsContainer"
-    style="display:none;">
+                <div id="modelCardsContainer" style="display:none;">
 
-    <div
-        id="modelCards"
-        class="model-cards">
-    </div>
+                    <div id="modelCards" class="model-cards">
+                    </div>
 
-</div>
+                </div>
 
             </div>
-            <!-- Model Setup Page (placeholder) -->
+           
             <!-- =====================================================
      MODEL SETUP
 ===================================================== -->
@@ -3053,7 +3029,7 @@
                 </iframe>
 
             </div>
-            <!-- Model Change  -->
+            
             <!-- =====================================================
      MODEL CHANGE
 ===================================================== -->
@@ -3069,16 +3045,12 @@
      CONSUMABLES PAGE
 ===================================================== -->
 
-<div id="consumables" class="page">
+            <div id="consumables" class="page">
 
-    <iframe
-        id="consumablesFrame"
-        class="app-page-frame"
-        src="consumables.html"
-        title="Consumables">
-    </iframe>
+                <iframe id="consumablesFrame" class="app-page-frame" src="consumables.html" title="Consumables">
+                </iframe>
 
-</div>
+            </div>
 
         </div>
     </div>
@@ -3086,8 +3058,7 @@
     <!-- =====================================================
      AI MODEL READINESS ASSISTANT
 ===================================================== -->
-    <!-- FLOATING AI LAUNCHER -->
-
+  
     <div id="aiLauncher" class="ai-launcher">
 
         <div class="ai-launcher-label">
@@ -3164,19 +3135,19 @@
                     <i class="fas fa-robot"></i>
                 </div>
 
-<div class="ai-message-content">
-Model Readiness AI
+                <div class="ai-message-content">
+                    Model Readiness AI
 
-Ask about:
-• Model Details
-• Pricing
-• Warranty
-• Compatibility
-• Order Types
+                    Ask about:
+                    • Model Details
+                    • Pricing
+                    • Warranty
+                    • Compatibility
+                    • Order Types
 
-Example:
-Show details for model DCPL2550DW US
-</div>
+                    Example:
+                    Show details for model DCPL2550DW US
+                </div>
 
                 <!-- <div class="ai-message-content">
                     Hi! I'm your Model Readiness Assistant.
@@ -3303,12 +3274,30 @@ Show details for model DCPL2550DW US
 
         function showAIForModelDetails() {
 
-            const aiLauncher =
-                document.getElementById("aiLauncher");
+            console.log(
+                "showAIForModelDetails called"
+            );
 
-            if (aiLauncher) {
-                aiLauncher.style.display = "flex";
+            const aiLauncher =
+                document.getElementById(
+                    "aiLauncher"
+                );
+
+            if (!aiLauncher) {
+
+                console.error(
+                    "AI Launcher not found"
+                );
+
+                return;
             }
+
+            aiLauncher.style.display =
+                "flex";
+
+            console.log(
+                "AI Button Displayed"
+            );
         }
 
         function hideAI() {
@@ -3589,38 +3578,38 @@ Show details for model DCPL2550DW US
         loadSearchValues();
 
         document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+            "DOMContentLoaded",
+            function () {
 
-        const modelInput =
-            document.getElementById("model");
+                const modelInput =
+                    document.getElementById("model");
 
-        if (modelInput) {
+                if (modelInput) {
 
-            modelInput.addEventListener(
-                "input",
-                function () {
+                    modelInput.addEventListener(
+                        "input",
+                        function () {
 
-                    modelInput.value =
-                        modelInput.value.toUpperCase();
+                            modelInput.value =
+                                modelInput.value.toUpperCase();
+                        }
+                    );
+
+                    modelInput.addEventListener(
+                        "keydown",
+                        function (event) {
+
+                            if (event.key === "Enter") {
+
+                                event.preventDefault();
+
+                                searchModel();
+                            }
+                        }
+                    );
                 }
-            );
-
-            modelInput.addEventListener(
-                "keydown",
-                function (event) {
-
-                    if (event.key === "Enter") {
-
-                        event.preventDefault();
-
-                        searchModel();
-                    }
-                }
-            );
-        }
-    }
-);
+            }
+        );
 
         async function searchModel() {
 
@@ -3676,7 +3665,7 @@ Show details for model DCPL2550DW US
 
                 const response =
                     await fetch(
-                        `/api/model?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
+                        `/api/model/get?model=${encodeURIComponent(model)}&country=${encodeURIComponent(country)}`
                     );
 
                 const data =
@@ -3718,7 +3707,7 @@ Show details for model DCPL2550DW US
                     record
                 );
 
-              
+
             }
             catch (error) {
 
@@ -3816,6 +3805,10 @@ Show details for model DCPL2550DW US
                     );
 
                 }
+            );
+
+            console.log(
+                "Showing AI button"
             );
 
             showAIForModelDetails();
@@ -3993,20 +3986,20 @@ Show details for model DCPL2550DW US
                 ).innerHTML =
                     `📋 Search Results : ${results.length} Models`;
                 buildCards(results);
-buildReportTable(results);
+                buildReportTable(results);
 
-document.getElementById(
-    "reportTableSection"
-).style.display = "block";
+                document.getElementById(
+                    "reportTableSection"
+                ).style.display = "block";
 
-document.getElementById(
-    "modelCardsContainer"
-).style.display = "none";
+                document.getElementById(
+                    "modelCardsContainer"
+                ).style.display = "none";
 
-document.getElementById(
-    "cardsToggleBtn"
-).innerHTML =
-    "View Model Cards ▼";
+                document.getElementById(
+                    "cardsToggleBtn"
+                ).innerHTML =
+                    "View Model Cards ▼";
 
             } catch (error) {
                 alert(error.message);
@@ -4017,8 +4010,16 @@ document.getElementById(
             document.getElementById("modelCards").innerHTML = results.map(r => {
                 const programs = [r.Amazondart, r.Brrefresh, r.Barracuda, r.Bplus].filter(x => x === "X").length;
                 const warranty = [r.StandardWarranty, r.ExtendedWarranty, r.BrothercareWarranty, r.BrotherplusWarranty].filter(x => x === "X").length;
-                const orders = [r.Claimorder, r.DrumOrder, r.WasteToner, r.BeltUnit].filter(x => x === "X").length;
-                const pricing = [r.B1priceSetup, r.BrpriceSetup].filter(x => x === "X").length;
+                const orders = [
+                    r.Claimorder,
+                    r.Drum,
+                    r.WasteToner,
+                    r.BeltUnit
+                ].filter(x => x === "X").length;
+                const pricing = [
+                    r.Selkzb1,
+                    r.Selkzbr
+                ].filter(x => x === "X").length;
 
                 const status = warranty >= 2 ? "Ready" : "Review";
 
@@ -4128,67 +4129,68 @@ document.getElementById(
                     <!-- STANDARD WARRANTY -->
 
                     <td>
-                        ${showWarranty(
-                        r.StandardWarranty,
-                        r.StandardwarrantyLength,
-                        r.StandardwarrantyUnit
-                    )}
+                        ${r.StdWtyLen
+                            ? `<span class="warranty-value">
+         ${r.StdWtyLen} ${r.StdWtyLenUnit}
+       </span>`
+                            : '<span class="no-icon">✖</span>'}
                     </td>
 
                     <!-- EXTENDED WARRANTY -->
 
                     <td>
-                        ${showWarranty(
-                        r.ExtendedWarranty,
-                        r.ExtendedwarrantyLength,
-                        r.ExtendedwarrantyUnit
-                    )}
+                        ${r.ExtdWtyLen
+                            ? `<span class="warranty-value">
+         ${r.ExtdWtyLen} ${r.ExtdWtyLenUnit}
+       </span>`
+                            : '<span class="no-icon">✖</span>'}
                     </td>
 
                     <!-- BROTHER CARE WARRANTY -->
 
                     <td>
-                        ${showWarranty(
-                        r.BrothercareWarranty,
-                        r.BrothercarewarrantyLength,
-                        r.BrothercarewarrantyUnit
-                    )}
+                        ${r.BcareWtyLen
+                            ? `<span class="warranty-value">
+         ${r.BcareWtyLen} ${r.BcareWtyLenUnit}
+       </span>`
+                            : '<span class="no-icon">✖</span>'}
                     </td>
 
                     <!-- BROTHER PLUS WARRANTY -->
 
                     <td>
-                        ${showWarranty(
-                        r.BrotherplusWarranty,
-                        r.BrotherpluswarrantyLength,
-                        r.BrotherpluswarrantyUnit
-                    )}
+                        ${r.BplusWtyLen
+                            ? `<span class="warranty-value">
+         ${r.BplusWtyLen} ${r.BplusWtyLenUnit}
+       </span>`
+                            : '<span class="no-icon">✖</span>'
+                        }
                     </td>
 
                     <!-- COMPATIBILITY -->
 
                     <td>
                         ${showStatus(
-                        r.Amazondart
-                    )}
+                            r.Amazondart
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.Brrefresh
-                    )}
+                            r.Brrefresh
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.Barracuda
-                    )}
+                            r.Barracuda
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.Bplus
-                    )}
+                            r.Bplus
+                        )}
                     </td>
 
                     <!-- MATERIAL STATUS -->
@@ -4199,54 +4201,54 @@ document.getElementById(
 
                     <td>
                         ${showStatus(
-                        r.XdistrchainStatus
-                    )}
+                            r.XdistrchainStatus
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.DchainStatus
-                    )}
+                            r.DchainStatus
+                        )}
                     </td>
 
                     <!-- PRICING -->
 
                     <td>
                         ${showStatus(
-                        r.B1priceSetup
-                    )}
+                            r.Selkzb1
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.BrpriceSetup
-                    )}
+                            r.Selkzbr
+                        )}
                     </td>
 
                     <!-- ORDER TYPES -->
 
                     <td>
                         ${showStatus(
-                        r.DrumOrder
-                    )}
+                            r.Drum
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.WasteToner
-                    )}
+                            r.WasteToner
+                        )}
                     </td>
 
                     <td>
                         ${showStatus(
-                        r.BeltUnit
-                    )}
+                            r.BeltUnit
+                        )}
                     </td>
 
                     <td>
     ${showStatus(
-                        r.Claimorder
-                    )}
+                            r.Claimorder
+                        )}
 </td>
 
                 </tr>
@@ -4277,13 +4279,13 @@ document.getElementById(
                 "modelCount"
             ).innerHTML = "0 Models Found";
 
-         document.getElementById(
-    "reportTableSection"
-).style.display = "none";
+            document.getElementById(
+                "reportTableSection"
+            ).style.display = "none";
 
-document.getElementById(
-    "modelCardsContainer"
-).style.display = "none";
+            document.getElementById(
+                "modelCardsContainer"
+            ).style.display = "none";
         }
 
         function exportModelReport() {
@@ -4511,44 +4513,41 @@ document.getElementById(
 
         function toggleModelCards() {
 
-    const cards =
-        document.getElementById(
-            "modelCardsContainer"
-        );
+            const cards =
+                document.getElementById(
+                    "modelCardsContainer"
+                );
 
-    const btn =
-        document.getElementById(
-            "cardsToggleBtn"
-        );
+            const btn =
+                document.getElementById(
+                    "cardsToggleBtn"
+                );
 
-    if (
-        cards.style.display === "none"
-    ) {
+            if (
+                cards.style.display === "none"
+            ) {
 
-        cards.style.display =
-            "block";
+                cards.style.display =
+                    "block";
 
-        btn.innerHTML =
-            "Hide Model Cards ▲";
+                btn.innerHTML =
+                    "Hide Model Cards ▲";
 
-    } else {
+            } else {
 
-        cards.style.display =
-            "none";
+                cards.style.display =
+                    "none";
 
-        btn.innerHTML =
-            "View Model Cards ▼";
-    }
-}
+                btn.innerHTML =
+                    "View Model Cards ▼";
+            }
+        }
 
         function showWarranty(
-            warrantyFlag,
             warrantyLength,
             warrantyUnit
         ) {
-
-            if (warrantyFlag !== "X") {
-
+            if (!warrantyLength) {
                 return `
             <span class="no-icon">
                 ✖
@@ -4556,26 +4555,10 @@ document.getElementById(
         `;
             }
 
-
-            const length =
-                warrantyLength || "";
-
-            const unit =
-                warrantyUnit || "";
-
-
-            if (!length && !unit) {
-
-                return `
-            <span class="yes-icon">
-                ✔
-            </span>
-        `;
-            }
-
             return `
         <span class="warranty-value">
-            ${length} ${unit}
+            ${warrantyLength}
+            ${warrantyUnit || ""}
         </span>
     `;
         }
@@ -5288,7 +5271,7 @@ Example:
             );
         }
 
-         function closeModelChangeReview() {
+        function closeModelChangeReview() {
             const modal = document.getElementById("modelChangeReviewModal");
             if (modal) modal.remove();
             document.body.style.overflow = "";
@@ -5307,33 +5290,33 @@ Example:
         // Letters change to uppercase
 
         document.addEventListener(
-    "input",
-    function (event) {
+            "input",
+            function (event) {
 
-        const target =
-            event.target;
+                const target =
+                    event.target;
 
-        if (!target) {
-            return;
-        }
+                if (!target) {
+                    return;
+                }
 
-        const upperCaseFields = [
+                const upperCaseFields = [
 
-            "model",
-            "reportModelSearch"
-        ];
+                    "model",
+                    "reportModelSearch"
+                ];
 
-        if (
-            upperCaseFields.includes(
-                target.id
-            )
-        ) {
+                if (
+                    upperCaseFields.includes(
+                        target.id
+                    )
+                ) {
 
-            target.value =
-                target.value.toUpperCase();
-        }
-    }
-);
+                    target.value =
+                        target.value.toUpperCase();
+                }
+            }
+        );
 
         // 
     </script>

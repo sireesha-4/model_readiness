@@ -206,8 +206,26 @@ module.exports = function createAIRouter(options) {
             `Matnr='${safeModel}',Country='${safeCountry}'`;
 
 
-        const sapUrl =
-            `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
+            const sapUrl =
+    `${process.env.ODATA_URL2}(${requestedFields})?$format=json`;
+
+    console.log(
+    "AI MODEL:",
+    model
+);
+
+console.log(
+    "AI COUNTRY:",
+    country
+);
+
+console.log(
+    "AI SAP URL:",
+    sapUrl
+);
+
+        // const sapUrl =
+        //     `${ODATA_URL}Model_detailsSet(${requestedFields})?$format=json`;
 
 
         console.log(
@@ -337,7 +355,7 @@ module.exports = function createAIRouter(options) {
 
             return (
                 `BR Pricing for model ${model} (${country}) is ` +
-                `${sapStatus(data.BrpriceSetup)}.`
+                `${sapStatus(data.Selkzbr)}.`
             );
         }
 
@@ -351,133 +369,56 @@ module.exports = function createAIRouter(options) {
 
             return (
                 `B1 Pricing for model ${model} (${country}) is ` +
-                `${sapStatus(data.B1priceSetup)}.`
+                `${sapStatus(data.Selkzb1)}.`
             );
         }
 
 
         // Standard Warranty
 
-        if (
-            q.includes(
-                "standard warranty"
-            )
-        ) {
+      if (q.includes("standard warranty")) {
 
-            let answer =
-                `Standard Warranty for model ${model} (${country}) is ` +
-                `${sapStatus(data.StandardWarranty)}.`;
-
-
-            if (
-                data.StandardWarranty === "X" &&
-                hasValue(
-                    data.StandardwarrantyLength
-                )
-            ) {
-
-                answer +=
-                    ` Duration: ` +
-                    `${data.StandardwarrantyLength} ` +
-                    `${data.StandardwarrantyUnit || ""}.`;
-            }
-
-
-            return answer;
-        }
+    return `Standard Warranty for model ${model} (${country}) is ${
+        data.StdWtyLen
+            ? `${data.StdWtyLen} ${data.StdWtyLenUnit}`
+            : "Not Configured"
+    }.`;
+}
 
 
         // Extended Warranty
 
-        if (
-            q.includes(
-                "extended warranty"
-            )
-        ) {
+       if (q.includes("extended warranty")) {
 
-            let answer =
-                `Extended Warranty for model ${model} (${country}) is ` +
-                `${sapStatus(data.ExtendedWarranty)}.`;
-
-
-            if (
-                data.ExtendedWarranty === "X" &&
-                hasValue(
-                    data.ExtendedwarrantyLength
-                )
-            ) {
-
-                answer +=
-                    ` Duration: ` +
-                    `${data.ExtendedwarrantyLength} ` +
-                    `${data.ExtendedwarrantyUnit || ""}.`;
-            }
-
-
-            return answer;
-        }
+    return `Extended Warranty for model ${model} (${country}) is ${
+        data.ExtdWtyLen
+            ? `${data.ExtdWtyLen} ${data.ExtdWtyLenUnit}`
+            : "Not Configured"
+    }.`;
+}
 
 
         // Brother Care
 
-        if (
-            q.includes(
-                "brother care"
-            )
-        ) {
+        if (q.includes("brother care")) {
 
-            let answer =
-                `Brother Care Warranty for model ${model} (${country}) is ` +
-                `${sapStatus(data.BrothercareWarranty)}.`;
-
-
-            if (
-                data.BrothercareWarranty === "X" &&
-                hasValue(
-                    data.BrothercarewarrantyLength
-                )
-            ) {
-
-                answer +=
-                    ` Duration: ` +
-                    `${data.BrothercarewarrantyLength} ` +
-                    `${data.BrothercarewarrantyUnit || ""}.`;
-            }
-
-
-            return answer;
-        }
-
-
-        // Barracuda Warranty
-
-        if (
-            q.includes(
-                "barracuda warranty"
-            )
-        ) {
-
-            return (
-                `Barracuda Warranty for model ${model} (${country}) is ` +
-                `${sapStatus(data.BarracudaWarranty)}.`
-            );
-        }
-
+    return `Brother Care Warranty for model ${model} (${country}) is ${
+        data.BcareWtyLen
+            ? `${data.BcareWtyLen} ${data.BcareWtyLenUnit}`
+            : "Not Configured"
+    }.`;
+}
 
         // Brother Plus Warranty
 
-        if (
-            q.includes(
-                "brother plus warranty"
-            )
-        ) {
+        if (q.includes("brother plus warranty")) {
 
-            return (
-                `Brother Plus Warranty for model ${model} (${country}) is ` +
-                `${sapStatus(data.BrotherplusWarranty)}.`
-            );
-        }
-
+    return `Brother Plus Warranty for model ${model} (${country}) is ${
+        data.BplusWtyLen
+            ? `${data.BplusWtyLen} ${data.BplusWtyLenUnit}`
+            : "Not Configured"
+    }.`;
+}
 
         // Amazon Dart
 
@@ -562,7 +503,7 @@ module.exports = function createAIRouter(options) {
 
             return (
                 `Drum Order for model ${model} (${country}) is ` +
-                `${sapStatus(data.DrumOrder)}.`
+                `${sapStatus(data.Drum)}.`
             );
         }
 
@@ -637,41 +578,38 @@ if (
     q.includes("pricing") ||
     q.includes("price")
 ) {
-
     return [
 
-        `Pricing Information for ${model} (${country})`,
+    `Pricing Information for ${model} (${country})`,
+    "",
 
-        "",
+    `B1 Pricing: ${
+        sapStatus(data.Selkzb1)
+    }`,
 
-        `B1 Pricing: ${
-            sapStatus(data.B1priceSetup)
-        }`,
+    `Amount: ${
+        data.B1kbetr || "N/A"
+    }`,
 
-        `Amount: ${
-            data.B1kbetr || "N/A"
-        }`,
+    `Currency: ${
+        data.B1konwa || "N/A"
+    }`,
 
-        `Currency: ${
-            data.B1konwa || "N/A"
-        }`,
+    "",
 
-        "",
+    `BR Pricing: ${
+        sapStatus(data.Selkzbr)
+    }`,
 
-        `BR Pricing: ${
-            sapStatus(data.BrpriceSetup)
-        }`,
+    `Amount: ${
+        data.Brkbetr || "N/A"
+    }`,
 
-        `Amount: ${
-            data.Brkbetr || "N/A"
-        }`,
+    `Currency: ${
+        data.Brkonwa || "N/A"
+    }`
 
-        `Currency: ${
-            data.Brkonwa || "N/A"
-        }`
-
-    ].join("\n");
-
+].join("\n");
 }
 
         // Full Warranty
@@ -684,47 +622,36 @@ if (
     return [
 
         `Warranty Information for ${model} (${country})`,
-
         "",
 
         `Standard Warranty: ${
-            sapStatus(data.StandardWarranty)
+            data.StdWtyLen
+                ? `${data.StdWtyLen} ${data.StdWtyLenUnit}`
+                : "Not Configured"
         }`,
-
-        `Length: ${
-            data.StandardwarrantyLength || "N/A"
-        } ${data.StandardwarrantyUnit || ""}`,
 
         "",
 
         `Extended Warranty: ${
-            sapStatus(data.ExtendedWarranty)
+            data.ExtdWtyLen
+                ? `${data.ExtdWtyLen} ${data.ExtdWtyLenUnit}`
+                : "Not Configured"
         }`,
-
-        `Length: ${
-            data.ExtendedwarrantyLength || "N/A"
-        } ${data.ExtendedwarrantyUnit || ""}`,
 
         "",
 
         `Brother Care: ${
-            sapStatus(data.BrothercareWarranty)
-        }`,
-
-        `Length: ${
-            data.BrothercarewarrantyLength || "N/A"
-        } ${data.BrothercarewarrantyUnit || ""}`,
-
-        "",
-
-        `Barracuda Warranty: ${
-            sapStatus(data.BarracudaWarranty)
+            data.BcareWtyLen
+                ? `${data.BcareWtyLen} ${data.BcareWtyLenUnit}`
+                : "Not Configured"
         }`,
 
         "",
 
         `Brother Plus Warranty: ${
-            sapStatus(data.BrotherplusWarranty)
+            data.BplusWtyLen
+                ? `${data.BplusWtyLen} ${data.BplusWtyLenUnit}`
+                : "Not Configured"
         }`
 
     ].join("\n");
@@ -764,30 +691,45 @@ if (
 }
 
         // Orders
-if (
-    q.includes("order")
-)
-{
+if (q.includes("order")) {
+
     return [
 
         `Order Configuration for ${model} (${country})`,
-
         "",
 
-        `Consumable Order: ${
-            sapStatus(data.Consumable)
+        `Drum Consumable: ${
+            data.Drconsumable || "N/A"
         }`,
 
         `Drum Order: ${
-            sapStatus(data.DrumOrder)
+            sapStatus(data.Drum)
+        }`,
+
+        "",
+
+        `Waste Toner Consumable: ${
+            data.Wtconsumable || "N/A"
         }`,
 
         `Waste Toner: ${
             sapStatus(data.WasteToner)
         }`,
 
+        "",
+
+        `Belt Unit Consumable: ${
+            data.Buconsumable || "N/A"
+        }`,
+
         `Belt Unit: ${
             sapStatus(data.BeltUnit)
+        }`,
+
+        "",
+
+        `Claim Consumable: ${
+            data.Coconsumable || "N/A"
         }`,
 
         `Claim Order: ${
@@ -818,15 +760,17 @@ EAN : ${data.Ean11 || "N/A"}
 
 PRICING
 
-B1 Pricing : ${sapStatus(data.B1priceSetup)}
+B1 Pricing : ${sapStatus(data.Selkzb1)}
 
-BR Pricing : ${sapStatus(data.BrpriceSetup)}
+BR Pricing : ${sapStatus(data.Selkzbr)}
 
 -------------------
 
 WARRANTY
 
-Standard Warranty : ${sapStatus(data.StandardWarranty)}
+Standard Warranty : ${hasValue(data.StdWtyLen)
+    ? "Configured"
+    : "Not Configured"}
 
 -------------------
 
@@ -844,75 +788,14 @@ Brother Plus : ${sapStatus(data.Bplus)}
 
 ORDER TYPES
 
-Drum Order : ${sapStatus(data.DrumOrder)}
+Drum Order : ${sapStatus(data.Drum)}
 
 Waste Toner : ${sapStatus(data.WasteToner)}
 
 Belt Unit : ${sapStatus(data.BeltUnit)}
 `;
 
-    // return [
-
-    //     `MODEL INFORMATION`,
-
-    //     "",
-
-    //     `Model: ${model}`,
-
-    //     `Country: ${country}`,
-
-    //     `EAN: ${data.Ean11 || "N/A"}`,
-
-    //     "",
-
-    //     `B1 Pricing: ${
-    //         sapStatus(data.B1priceSetup)
-    //     }`,
-
-    //     `BR Pricing: ${
-    //         sapStatus(data.BrpriceSetup)
-    //     }`,
-
-    //     "",
-
-    //     `Standard Warranty: ${
-    //         sapStatus(data.StandardWarranty)
-    //     } (${data.StandardwarrantyLength || "N/A"} ${data.StandardwarrantyUnit || ""})`,
-
-    //     "",
-
-    //     `Amazon Dart: ${
-    //         sapStatus(data.Amazondart)
-    //     }`,
-
-    //     `BR Refresh: ${
-    //         sapStatus(data.Brrefresh)
-    //     }`,
-
-    //     `Barracuda: ${
-    //         sapStatus(data.Barracuda)
-    //     }`,
-
-    //     `Brother Plus: ${
-    //         sapStatus(data.Bplus)
-    //     }`,
-
-    //     "",
-
-    //     `Drum Order: ${
-    //         sapStatus(data.DrumOrder)
-    //     }`,
-
-    //     `Waste Toner: ${
-    //         sapStatus(data.WasteToner)
-    //     }`,
-
-    //     `Belt Unit: ${
-    //         sapStatus(data.BeltUnit)
-    //     }`
-
-    // ].join("\n");
-
+    
 }
 
 
@@ -1053,13 +936,14 @@ Belt Unit : ${sapStatus(data.BeltUnit)}
                 if (
                     data.StandardWarranty === "X" &&
                     hasValue(
-                        data.StandardwarrantyLength
+                        data.StdWtyLen
+
                     )
                 ) {
 
                     value +=
-                        ` (${data.StandardwarrantyLength} ` +
-                        `${data.StandardwarrantyUnit || ""})`;
+                        ` (${data.StdWtyLen} ` +
+                        `${data.StdWtyLenUnit|| ""})`;
                 }
 
 
@@ -1080,20 +964,18 @@ Belt Unit : ${sapStatus(data.BeltUnit)}
                 let value =
                     `${model}: Extended Warranty - ` +
                     `${sapStatus(
-                        data.ExtendedWarranty
+                        data.ExtdWtyLen
                     )}`;
 
 
                 if (
                     data.ExtendedWarranty === "X" &&
-                    hasValue(
-                        data.ExtendedwarrantyLength
-                    )
+                    hasValue(data.ExtdWtyLen)
                 ) {
 
                     value +=
                         ` (${data.ExtendedwarrantyLength} ` +
-                        `${data.ExtendedwarrantyUnit || ""})`;
+                        `${data.ExtdWtyLenUnit || ""})`;
                 }
 
 
@@ -1112,7 +994,7 @@ Belt Unit : ${sapStatus(data.BeltUnit)}
                 lines.push(
                     `${model}: Drum Order - ` +
                     `${sapStatus(
-                        data.DrumOrder
+                        data.Drum
                     )}`
                 );
 
@@ -1186,78 +1068,43 @@ if (
     q.includes("warranty") ||
     q.includes("warranties")
 ) {
+    return [
 
-    const lines = [];
+    `Warranty Information for ${model} (${country})`,
+    "",
 
-    lines.push(
-        `Warranty Information for ${model} (${country})`
-    );
+    `Standard Warranty: ${
+        data.StdWtyLen
+            ? `${data.StdWtyLen} ${data.StdWtyLenUnit}`
+            : "Not Configured"
+    }`,
 
-    lines.push("");
+    "",
 
-    lines.push(
-        `Standard Warranty: ${sapStatus(data.StandardWarranty)}`
-    );
+    `Extended Warranty: ${
+        data.ExtdWtyLen
+            ? `${data.ExtdWtyLen} ${data.ExtdWtyLenUnit}`
+            : "Not Configured"
+    }`,
 
-    if (
-        data.StandardWarranty === "X"
-    ) {
-        lines.push(
-            `Length: ${
-                data.StandardwarrantyLength || "N/A"
-            } ${
-                data.StandardwarrantyUnit || ""
-            }`
-        );
-    }
+    "",
 
-    lines.push("");
+    `Brother Care: ${
+        data.BcareWtyLen
+            ? `${data.BcareWtyLen} ${data.BcareWtyLenUnit}`
+            : "Not Configured"
+    }`,
 
-    lines.push(
-        `Extended Warranty: ${sapStatus(data.ExtendedWarranty)}`
-    );
+    "",
 
-    if (
-        data.ExtendedWarranty === "X"
-    ) {
-        lines.push(
-            `Length: ${
-                data.ExtendedwarrantyLength || "N/A"
-            } ${
-                data.ExtendedwarrantyUnit || ""
-            }`
-        );
-    }
+    `Brother Plus Warranty: ${
+        data.BplusWtyLen
+            ? `${data.BplusWtyLen} ${data.BplusWtyLenUnit}`
+            : "Not Configured"
+    }`
 
-    lines.push("");
+].join("\n");
 
-    lines.push(
-        `Brother Care: ${sapStatus(data.BrothercareWarranty)}`
-    );
-
-    if (
-        data.BrothercareWarranty === "X"
-    ) {
-        lines.push(
-            `Length: ${
-                data.BrothercarewarrantyLength || "N/A"
-            } ${
-                data.BrothercarewarrantyUnit || ""
-            }`
-        );
-    }
-
-    lines.push("");
-
-    lines.push(
-        `Barracuda Warranty: ${sapStatus(data.BarracudaWarranty)}`
-    );
-
-    lines.push(
-        `Brother Plus Warranty: ${sapStatus(data.BrotherplusWarranty)}`
-    );
-
-    return lines.join("\n");
 }
 
 
@@ -1885,6 +1732,16 @@ if (
 
                         req.session.sapAuth
                     );
+
+                    console.log(
+    "AI SAP DATA:",
+    JSON.stringify(
+        sapData,
+        null,
+        2
+    )
+);
+
 
 
                 // ---------------------------------

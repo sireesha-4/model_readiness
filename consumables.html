@@ -49,9 +49,9 @@
  
                 <select id="consumableCountry">
  
-                    <option value="">
+                    <!-- <option value="">
                         Select Country
-                    </option>
+                    </option> -->
  
                     <option value="US">
                         Unites States
@@ -71,9 +71,9 @@
  
                 <select id="consumableProgram">
  
-                    <option value="">
+                    <!-- <option value="">
                         Select Program
-                    </option>
+                    </option> -->
  
                     <option value="B1">
                         Barracuda
@@ -318,8 +318,47 @@
  
                     <div class="pricing-details-group">
  
- 
                         <div class="pricing-row price-row">
+
+    <span class="pricing-label">
+        Price
+    </span>
+
+    <div class="editable-price-container">
+
+        <input
+            type="number"
+            id="pricingPrice"
+            class="pricing-price-input"
+            step="0.01"
+            readonly>
+
+        <button
+            type="button"
+            id="editPriceBtn"
+            class="price-action-btn"
+            onclick="enablePriceEdit()">
+
+            <i class="fas fa-pen"></i>
+
+        </button>
+
+        <button
+            type="button"
+            id="savePriceBtn"
+            class="price-action-btn save-btn"
+            onclick="savePrice()"
+            style="display:none;">
+
+            <i class="fas fa-save"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+                        <!-- <div class="pricing-row price-row">
  
                             <span class="pricing-label">
                                 Price
@@ -329,7 +368,7 @@
                                 -
                             </span>
  
-                        </div>
+                        </div> -->
  
                         <div class="pricing-row">
  
